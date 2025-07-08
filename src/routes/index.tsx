@@ -1,48 +1,54 @@
-import { createBrowserRouter, RouterProvider } from "react-router"
+import { createBrowserRouter, RouterProvider, Outlet, redirect } from "react-router";
+import { Paginas } from "./pages";
+
 
 const routes = createBrowserRouter([
     {
-        element: <></>,
-        errorElement: <>erro :/</>,
+        element: <Outlet />,
+        errorElement: <div>Erro :/</div>,
         children: [
             {
                 path: "*",
-                element: <>n encotrei</>
+                element: <div>Página não encontrada</div>,
             },
             {
                 path: "/",
-                element: <>deslogado</>,
+                element: <Outlet />,
                 children: [
                     {
+                        index: true,
+                        loader: async () => redirect("conheca-nexus")
+                    },
+                    {
                         path: "conheca-nexus",
-                        element: <></>
+                        element: <Paginas.LadingPage />,
                     },
                     {
                         path: "login",
-                        element: <></>
+                        element: <div>Página de Login</div>,
                     },
                     {
                         path: "cadastro",
-                        element: <></>
-                    }
-                ]
+                        element: <div>Página de Cadastro</div>,
+                    },
+                ],
             },
             {
-                element: <>logado</>,
                 path: "plataforma-nexus",
+                element: <Outlet />,
                 children: [
                     {
                         path: "inicio",
-                        element: <></>
+                        element: <div>Bem-vindo à plataforma Nexus (logado)</div>,
                     },
-                ]
-            }
-        ]
-    }
-])
+                ],
+            },
+        ],
+    },
+]);
 
 const Routes = () => {
-    return <RouterProvider router={routes} />
-}
+    return <RouterProvider router={routes} />;
+};
 
-export default Routes   
+export default Routes;

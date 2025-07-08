@@ -13,13 +13,14 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.2.0",
-    "lucide": "^0.525.0",
+    "lucide-react": "^0.525.0",
     "motion": "^12.23.0",
     "query": "^0.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.6.3",
     "router": "^2.2.0",
+    "vite-plugin-svgr": "^4.3.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {
