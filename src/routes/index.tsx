@@ -25,11 +25,11 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "login",
-                        element: <div>Página de Login</div>,
+                        element: <Paginas.Auth.LoginPage/>,
                     },
                     {
                         path: "cadastro",
-                        element: <div>Página de Cadastro</div>,
+                        element: <Paginas.Auth.CadastroPage/>,
                     },
                 ],
             },

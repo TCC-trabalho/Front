@@ -15,10 +15,16 @@ export const ButtonVariants = styled(ButtonBase)<{ tamanho: "sm" | "md" | "lg" |
         paddingInline: 2,
         fontSize,
 
+        fontFamily: '"Inter", sans-serif',
         borderRadius: 5,
+        fontWeight: 500,
         alignItems: "center",
         gap: 10,
         transition: "opacity 0.3s",
+
+
+        textDecoration: "none",
+        color: "inherit",
 
         "&:hover": {
             opacity: 0.8,
@@ -44,6 +50,7 @@ export const ButtonVariants = styled(ButtonBase)<{ tamanho: "sm" | "md" | "lg" |
         ...(className?.includes("ButtonLink") && {
             background: "transparent",
             color: "#05334A",
+            width: "auto",
 
             "&:hover": {
                 opacity: 0.5,
@@ -54,6 +61,7 @@ export const ButtonVariants = styled(ButtonBase)<{ tamanho: "sm" | "md" | "lg" |
         ...(className?.includes("ButtonLinkLight") && {
             background: "transparent",
             color: "#6B9EBD",
+            width: "auto",
 
             "&:hover": {
                 opacity: 0.5,

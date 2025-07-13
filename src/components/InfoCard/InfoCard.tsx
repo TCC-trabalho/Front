@@ -22,7 +22,7 @@ export const InfoCard = ({
             {header && (
                 <Stack className="Header">
 
-                    <Typography variant="h4" fontWeight="600" textAlign={"center"}>
+                    <Typography variant="h5" fontWeight="600" textAlign={"center"}>
                         {title}
                     </Typography>
 

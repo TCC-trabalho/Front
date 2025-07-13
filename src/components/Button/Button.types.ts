@@ -6,6 +6,7 @@ export interface ButtonProp extends ButtonBaseProps {
   tamanho: "sm" | "md" | "lg" | "xl";
   loading?: boolean;
   to?: string;
+    href?: string;
   viewTransition?: boolean;
   icon?: LucideIcon;
   somenteIcone?: boolean;

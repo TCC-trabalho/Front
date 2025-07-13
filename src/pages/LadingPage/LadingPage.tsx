@@ -17,24 +17,38 @@ export const LadingPage = () => {
                             xs: "column",
                             md: "row"
                         },
+                        gap: 2
                     }}
                 >
                     <Button
                         tamanho={"md"}
                         variante="ButtonLink"
+                        component={"a"}
+                        href="#sobre"
                     >
                         Sobre
                     </Button>
                     <Button
                         tamanho={"md"}
                         variante="ButtonLink"
-                        sx={{ width: 130 }}
+                        component={"a"}
+                        href="#pqNexus"
+                    >
+                        Por que Nexus?
+                    </Button>
+                    <Button
+                        tamanho={"md"}
+                        variante="ButtonLink"
+                        component={"a"}
+                        href="#comoFunciona"
                     >
                         Como funciona
                     </Button>
                     <Button
                         tamanho={"md"}
                         variante="ButtonLink"
+                        component={"a"}
+                        href="#equipe"
                     >
                         Equipe
                     </Button>
@@ -52,12 +66,16 @@ export const LadingPage = () => {
                     <Button
                         tamanho={"md"}
                         variante="ButtonOutlinedBlue"
+                        to="/login"
+                        viewTransition
                     >
                         Login
                     </Button>
                     <Button
                         tamanho={"md"}
                         variante="ButtonRed"
+                        to="/cadastro"
+                        viewTransition
                     >
                         Sign up
                     </Button>
@@ -105,6 +123,7 @@ export const LadingPage = () => {
             </Styled.Session>
 
             <Styled.Session
+                id="sobre"
                 sx={{
                     backgroundColor: "#B83229",
                     flexDirection: {
@@ -123,10 +142,10 @@ export const LadingPage = () => {
 
                 <Stack sx={{ alignItems: "center", flex: 1, }} gap={2}>
 
-                    <Typography variant="h2" fontWeight={600}>
+                    <Typography variant="h3" fontWeight={600}>
                         Sobre o Projeto
                     </Typography>
-                    <Typography variant="h4" fontWeight={100} textAlign={"center"}>
+                    <Typography variant="h5" fontWeight={100} textAlign={"center"}>
                         O Nexus é uma plataforma desenvolvida para conectar estudantes e suas criações acadêmicas a empresas e instituições interessadas em inovação. Com um ambiente intuitivo e acessível, o projeto busca valorizar o potencial dos jovens talentos, aproximando o universo educacional do mercado profissional.
                         Por meio da apresentação detalhada de projetos — com textos, imagens e vídeos — e de recursos que facilitam a comunicação direta, o Nexus transforma boas ideias em oportunidades reais de parceria, patrocínio e crescimento.
                     </Typography>
@@ -135,15 +154,15 @@ export const LadingPage = () => {
 
             </Styled.Session>
 
-            <Styled.Session gap={10}>
+            <Styled.Session gap={10} id="pqNexus">
 
                 <Stack textAlign={"center"} gap={2} color={"#05334A"}>
 
-                    <Typography variant="h2" fontWeight={600}>
+                    <Typography variant="h3" fontWeight={600}>
                         Por que escolher o Nexus?
                     </Typography>
 
-                    <Typography variant="h4" fontWeight={100}>
+                    <Typography variant="h5" fontWeight={100}>
                         Nossa plataforma oferece benefícios exclusivos para estudantes e empresas
                     </Typography>
 
@@ -158,7 +177,7 @@ export const LadingPage = () => {
                         title="Inovação"
                         sx={{ flex: 1, textAlign: "center" }}
                     >
-                        <Typography variant="h4" fontWeight={100}>
+                        <Typography variant="h5" fontWeight={100}>
                             Projetos estudantis ganham visibilidade e mostram seu potencial inovador com descrições, imagens e vídeos completos.
                         </Typography>
                     </InfoCard>
@@ -170,7 +189,7 @@ export const LadingPage = () => {
                         title="Encontre Talentos"
                         sx={{ flex: 1, textAlign: "center" }}
                     >
-                        <Typography variant="h4" fontWeight={100}>
+                        <Typography variant="h5" fontWeight={100}>
                             Empresas podem visualizar perfis detalhados de estudantes criativos e engajados em projetos de alto impacto.
                         </Typography>
                     </InfoCard>
@@ -182,7 +201,7 @@ export const LadingPage = () => {
                         title="Patrocínios Garantido"
                         sx={{ flex: 1, textAlign: "center" }}
                     >
-                        <Typography variant="h4" fontWeight={100}>
+                        <Typography variant="h5" fontWeight={100}>
                             Facilite o investimento em projetos promissores com apresentação clara e atrativa para patrocinadores.
                         </Typography>
                     </InfoCard>
@@ -192,6 +211,7 @@ export const LadingPage = () => {
             </Styled.Session>
 
             <Styled.Session
+                id="comoFunciona"
                 gap={10}
                 sx={{
                     position: "relative",
@@ -207,10 +227,10 @@ export const LadingPage = () => {
 
                 <Stack textAlign={"center"} gap={2} color="#FFFCF5" zIndex={1}>
 
-                    <Typography variant="h2" fontWeight={600}>
+                    <Typography variant="h3" fontWeight={600}>
                         Como funciona o Nexus
                     </Typography>
-                    <Typography variant="h4" fontWeight={100}>
+                    <Typography variant="h5" fontWeight={100}>
                         Um processo simples para conectar projetos inovadores com potenciais patrocinadores
                     </Typography>
 
@@ -325,10 +345,10 @@ export const LadingPage = () => {
 
             </Styled.Session>
 
-            <Styled.Session gap={10}>
+            <Styled.Session gap={10} id="equipe">
 
                 <Stack textAlign={"center"} gap={2} color={"#05334A"}>
-                    <Typography variant="h2" fontWeight={600}>
+                    <Typography variant="h3" fontWeight={600}>
                         Equipe de Desenvolvedores
                     </Typography>
                 </Stack>
@@ -363,10 +383,10 @@ export const LadingPage = () => {
                                 <Stack gap={2} alignItems={"center"}>
                                     <CircleUser size={100} />
                                     <Stack>
-                                        <Typography variant="h4" fontWeight={600} color="#B83229">
+                                        <Typography variant="h5" fontWeight={600} color="#B83229">
                                             {dev.nome}
                                         </Typography>
-                                        <Typography variant="h5" color="#064B72B2">
+                                        <Typography variant="h6" color="#064B72B2">
                                             {dev.funcao}
                                         </Typography>
                                     </Stack>
@@ -419,32 +439,32 @@ export const LadingPage = () => {
                     <Stack gap={2}>
                         <Typography variant="h3" color="#FFFCF5">Nexus</Typography>
                         <Typography
-                            variant="h4"
+                            variant="h6"
                             width={350}
                         >Conectando projetos escolares inovadores com empresas que buscam investir no próximo grande sucesso.
                         </Typography>
                     </Stack>
 
                     <Stack justifyContent={"space-between"} gap={2}>
-                        <Typography variant="h4" color="#FFFCF5">Links rápidos</Typography>
-                        <Typography variant="h5" >Inicio</Typography>
-                        <Typography variant="h5" >Plataforma Nexus</Typography>
-                        <Typography variant="h5" >Como Funciona</Typography>
-                        <Typography variant="h5" >Contato</Typography>
+                        <Typography variant="h5" color="#FFFCF5">Links rápidos</Typography>
+                        <Typography variant="h6" >Inicio</Typography>
+                        <Typography variant="h6" >Plataforma Nexus</Typography>
+                        <Typography variant="h6" >Como Funciona</Typography>
+                        <Typography variant="h6" >Contato</Typography>
                     </Stack>
 
                     <Stack justifyContent={"space-between"} gap={2}>
-                        <Typography variant="h4" color="#FFFCF5">Recursos</Typography>
-                        <Typography variant="h5" >Equipe</Typography>
-                        <Typography variant="h5" >Termos de Serviço</Typography>
-                        <Typography variant="h5" >Apoiar</Typography>
-                        <Typography variant="h5" >Política de Privacidade</Typography>
+                        <Typography variant="h5" color="#FFFCF5">Recursos</Typography>
+                        <Typography variant="h6" >Equipe</Typography>
+                        <Typography variant="h6" >Termos de Serviço</Typography>
+                        <Typography variant="h6" >Apoiar</Typography>
+                        <Typography variant="h6" >Política de Privacidade</Typography>
                     </Stack>
 
                     <Stack gap={2}>
-                        <Typography variant="h4" color="#FFFCF5">Inscrever-se</Typography>
+                        <Typography variant="h5" color="#FFFCF5">Inscrever-se</Typography>
                         <Typography
-                            variant="h5"
+                            variant="h6"
                             width={300}
                         >
                             Fique atualizado com os últimos projetos e oportunidades.
@@ -471,33 +491,34 @@ export const LadingPage = () => {
                         }}
                     >
 
-                        <Typography variant="h5">© 2025 Nexus. All rights reserved.</Typography>
+                        <Typography variant="h6">© 2025 Nexus. All rights reserved.</Typography>
 
                         <Stack
                             sx={{
                                 flexDirection: {
                                     xs: "column",
                                     sm: "row"
-                                }
+                                },
+                                gap: 3
                             }}
                         >
                             <Button
                                 tamanho={"md"}
                                 variante="ButtonLinkLight"
                             >
-                                <Typography variant="h5">Termos</Typography>
+                                Termos
                             </Button>
                             <Button
                                 tamanho={"md"}
                                 variante="ButtonLinkLight"
                             >
-                                <Typography variant="h5">Privacidade</Typography>
+                                Privacidade
                             </Button>
                             <Button
                                 tamanho={"md"}
                                 variante="ButtonLinkLight"
                             >
-                                <Typography variant="h5">Contato</Typography>
+                                Contato
                             </Button>
                         </Stack>
 
