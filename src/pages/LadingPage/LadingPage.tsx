@@ -390,7 +390,7 @@ export const LadingPage = () => {
                                             {dev.funcao}
                                         </Typography>
                                     </Stack>
-                                    <Stack direction={"row"}>
+                                    <Stack direction={"row"} gap={2}>
                                         <Button tamanho={"lg"} icon={Linkedin} somenteIcone variante="ButtonLink" />
                                         <Button tamanho={"lg"} icon={Github} somenteIcone variante="ButtonLink" />
                                         <Button tamanho={"lg"} icon={Instagram} somenteIcone variante="ButtonLink" />

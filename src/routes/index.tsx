@@ -5,11 +5,11 @@ import { Paginas } from "./pages";
 const routes = createBrowserRouter([
     {
         element: <Outlet />,
-        errorElement: <div>Erro :/</div>,
+        errorElement: <Paginas.TelaErro/>,
         children: [
             {
                 path: "*",
-                element: <div>Página não encontrada</div>,
+                element: <Paginas.PaginaNaoEncontrada/>,
             },
             {
                 path: "/",
