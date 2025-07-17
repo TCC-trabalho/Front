@@ -22,7 +22,7 @@ export const PaginaNaoEncontrada = () => {
                     </Typography>
                     <Button
                         tamanho={"md"}
-                        variante="ButtonBlue "
+                        variante="ButtonBlue"
                         sx={{ width: 125 }}
                         to="/conheca-nexus"
                         viewTransition

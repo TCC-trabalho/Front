@@ -22,7 +22,7 @@ export const TelaEmManutencao = () => {
                     </Typography>
                     <Button
                         tamanho={"md"}
-                        variante="ButtonBlue "
+                        variante="ButtonBlue"
                         sx={{ width: "auto", paddingInline: 1.5 }}
                         to="/plataforma-nexus"
                         viewTransition
