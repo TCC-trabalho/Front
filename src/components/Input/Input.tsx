@@ -1,6 +1,6 @@
 import { Controller, FieldValues } from "react-hook-form";
 import { EstiloInput, InputProps } from "./Input.type";
-import { Box, Stack, Typography } from "@mui/material";
+import { InputAdornment, Stack, Typography } from "@mui/material";
 import * as Styled from "./Input.styled"
 import { CircleAlert } from "lucide-react";
 import { mask } from "remask";
@@ -62,11 +62,6 @@ export const Input = <TFieldValues extends FieldValues>({
                             </Typography>
                         )}
 
-                        {Icon && (
-                            <Box position="absolute" left={12} top="50%" sx={{ transform: "translateY(-50%)" }}>
-                                <Icon size={20} color="#999" />
-                            </Box>
-                        )}
 
                         <Styled.Input
                             {...defaultProps}
@@ -77,6 +72,11 @@ export const Input = <TFieldValues extends FieldValues>({
                                     : rawValue;
                                 field.onChange(masked);
                             }}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    {Icon && <Icon size={20} color="grey" />}
+                                </InputAdornment>
+                            }
                         />
 
                         <Typography variant="body2" color="#A91208" mt={0.5}>

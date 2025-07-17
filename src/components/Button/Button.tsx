@@ -10,6 +10,7 @@ export const Button = (
         disabled,
         children,
         icon: Icon,
+        ladoIcon = "esquerda",
         somenteIcone = false,
         ...props
     }: ButtonProp) => {
@@ -32,8 +33,9 @@ export const Button = (
             somenteIcone={somenteIcone}
             {...props}
         >
+            {ladoIcon == "esquerda" && Icon && <Icon size={iconSize} />}
             {!somenteIcone && <span>{children}</span>}
-            {Icon && <Icon size={iconSize} />}
+            {ladoIcon == "direita" && Icon && <Icon size={iconSize} />}
         </Component.ButtonVariants>
     )
 }

@@ -41,10 +41,22 @@ export const ButtonVariants = styled(ButtonBase)<{ tamanho: "sm" | "md" | "lg" |
             color: "#FFFFFF"
         }),
 
+        ...(className?.includes("ButtonGrey") && {
+            background: "#D9D9D9",
+            color: "#000000"
+        }),
+
         ...(className?.includes("ButtonOutlinedBlue") && {
             background: "#FFFCF5",
             color: "#05334A",
             border: "3px #05334A solid"
+        }),
+
+        ...(className?.includes("ButtonOutlinedWhite") && {
+            background: "transparent",
+            color: "white",
+            border: "3px white solid"
+
         }),
 
         ...(className?.includes("ButtonLink") && {
@@ -68,5 +80,27 @@ export const ButtonVariants = styled(ButtonBase)<{ tamanho: "sm" | "md" | "lg" |
                 textDecoration: "underline",
             },
         }),
+
+        ...(className?.includes("ButtonLinkBlack") && {
+            background: "transparent",
+            color: "#3F3F3F",
+            width: "auto",
+
+            "&:hover": {
+                opacity: 0.5,
+            },
+        }),
+
+        ...(className?.includes("ButtonLinkWhite") && {
+            background: "transparent",
+            color: "white",
+            width: "auto",
+
+            "&:hover": {
+                opacity: 0.5,
+            },
+        }),
+
+
     };
 });

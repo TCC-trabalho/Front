@@ -34,7 +34,12 @@ export const FormALuno = () => {
             />
 
             <Stack alignItems={"center"}>
-                <Button tamanho={"lg"} onClick={onSubmit}>
+                <Button 
+                tamanho={"lg"} 
+                onClick={onSubmit}
+                to="plataforma-nexus"
+                viewTransition
+                >
                     Entrar
                 </Button>
             </Stack>

@@ -9,7 +9,7 @@ import { Header } from "../../components/Header/Header"
 export const LadingPage = () => {
     return (
         <Styled.Container>
-            <Header variante={"LigthHeader"} logo>
+            <Header variante={"LigthHeader"} logo >
                 <Stack
                     sx={{
                         alignItems: "center",
@@ -116,6 +116,9 @@ export const LadingPage = () => {
                         tamanho={"xl"}
                         variante="ButtonRed"
                         icon={LogIn}
+                        to="/login"
+                        viewTransition
+                        ladoIcon="direita"
                     >
                         Começar
                     </Button>

@@ -1,35 +1,35 @@
 import { Stack, Typography } from "@mui/material"
-import * as Styled from "./PaginaNaoEncontrada.styled"
+import * as Styled from "./TelaEmManutencao.styled"
 import { BackGroud } from "../../assets"
-import { CircleQuestionMark } from "lucide-react"
+import { TriangleAlert } from "lucide-react"
 import { Button } from "../../components/Button/Button"
 
-export const PaginaNaoEncontrada = () => {
+export const TelaEmManutencao = () => {
     return (
         <Styled.Container>
             <Styled.Content>
                 <Stack className="fundo">
                     <BackGroud width="90%" height="100%" preserveAspectRatio="xMidYMid slice" />
                 </Stack>
-                <Styled.NaoEncontradaBox>
-                    <Stack className="questionIcon">
-                        <CircleQuestionMark size={110} color={"white"} />
+                <Styled.EmManutencaoBox>
+                    <Stack className="errorIcon">
+                        <TriangleAlert size={110} color={"#064B72"} />
                     </Stack>
                     <Typography
                         variant="h5"
                     >
-                        Pagina Não encontrada! Verique a url do site.
+                        Tela em Manutenção! Estamos trabalhando para melhorar a sua experiência.
                     </Typography>
                     <Button
                         tamanho={"md"}
                         variante="ButtonBlue "
-                        sx={{ width: 125 }}
-                        to="/conheca-nexus"
+                        sx={{ width: "auto", paddingInline: 1.5 }}
+                        to="/plataforma-nexus"
                         viewTransition
                     >
-                        Voltar à home
+                        Voltar à plataforma
                     </Button>
-                </Styled.NaoEncontradaBox>
+                </Styled.EmManutencaoBox>
             </Styled.Content>
         </Styled.Container>
     )

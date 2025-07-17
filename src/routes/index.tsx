@@ -1,15 +1,20 @@
 import { createBrowserRouter, RouterProvider, Outlet, redirect } from "react-router";
 import { Paginas } from "./pages";
+import { ContainerPlataforma } from "../pages/PlataForma/components/ContainerPlataforma/ContainerPlataforma";
 
 
 const routes = createBrowserRouter([
     {
         element: <Outlet />,
-        errorElement: <Paginas.TelaErro/>,
+        errorElement: <Paginas.TelaErro />,
         children: [
             {
                 path: "*",
-                element: <Paginas.PaginaNaoEncontrada/>,
+                element: <Paginas.PaginaNaoEncontrada />,
+            },
+            {
+                path: "/manutencao",
+                element: <Paginas.TelaEmManutencao />,
             },
             {
                 path: "/",
@@ -25,21 +30,63 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "login",
-                        element: <Paginas.Auth.LoginPage/>,
+                        element: <Paginas.Auth.LoginPage />,
                     },
                     {
                         path: "cadastro",
-                        element: <Paginas.Auth.CadastroPage/>,
+                        element: <Paginas.Auth.CadastroPage />,
                     },
                 ],
             },
             {
                 path: "plataforma-nexus",
-                element: <Outlet />,
+                element: <ContainerPlataforma />,
                 children: [
                     {
-                        path: "inicio",
-                        element: <div>Bem-vindo à plataforma Nexus (logado)</div>,
+                        index: true,
+                        loader: async () => redirect("projetos")
+                    },
+                    {
+                        path: "projetos",
+                        element: <Paginas.Plataforma.Projetos />,
+                    },
+                    {
+                        path: "empresas",
+                        element: <Paginas.Plataforma.Empresas />,
+                    },
+                    {
+                        path: "apoio",
+                        element: <></>,
+                    },
+                    {
+                        path: "apoiar",
+                        element: <></>,
+                    },
+                    {
+                        path: "chat",
+                        element: <></>,
+                        children: [
+                            {
+                                index: true,
+                                loader: async () => redirect("/manutencao")
+                            }
+                        ]
+                    },
+                    {
+                        path: "meu-projeto",
+                        element: <></>,
+                    },
+                    {
+                        path: "projeto-patrocinados",
+                        element: <></>,
+                    },
+                    {
+                        path: "meu-perfil",
+                        element: <Paginas.Plataforma.Perfil />,
+                    },
+                    {
+                        path: "configuracoes",
+                        element: <></>,
                     },
                 ],
             },
