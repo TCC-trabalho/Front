@@ -2,14 +2,14 @@ import { Avatar, Drawer, Skeleton, Stack, Typography, useMediaQuery, useTheme } 
 import * as Styled from "./Menu.styled"
 import { Button } from "../Button/Button"
 import { LogoNexus } from "../../assets"
-import { Building2, FolderCog, HandHeart, Lightbulb, MenuIcon, MessageCircle, Settings } from "lucide-react"
+import { Building2, FolderCog, Lightbulb, LogOut, MenuIcon, MessageCircle, Settings, UserRound } from "lucide-react"
 import { useState } from "react"
 import { MenuProps } from "./Menu.type"
 import { useControleExibicao } from "../../lib/utils/controleExibicao"
 
 export const Menu = ({ variante, header, loading = false, ...props }: MenuProps) => {
 
-    const { exibirHeaderMenu } = useControleExibicao();
+    const { ocultarDetalhesMenu } = useControleExibicao();
 
     const theme = useTheme();
     const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
@@ -23,30 +23,34 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
 
                 <LogoNexus width={150} />
 
-                <Stack className="Usercontent">
-                    {loading ? (
-                        <Skeleton variant="circular" width={80} height={80} />
-                    ) : (
-                        <Avatar
-                            src={header?.[0]?.foto}
-                            alt="Foto do usuário"
-                            sx={{ width: 80, height: 80 }}
-                        />
-                    )}
-                    <Typography>{header?.[0]?.nomeUser ?? "Nome de Usuário"}</Typography>
-                </Stack>
+                {ocultarDetalhesMenu && (
+                    <>
+                        <Stack className="Usercontent">
+                            {loading ? (
+                                <Skeleton variant="circular" width={80} height={80} />
+                            ) : (
+                                <Avatar
+                                    src={header?.[0]?.foto}
+                                    alt="Foto do usuário"
+                                    sx={{ width: 80, height: 80 }}
+                                />
+                            )}
+                            <Typography>{header?.[0]?.nomeUser ?? "Nome de Usuário"}</Typography>
+                        </Stack>
 
-                {variante === "user" && header && exibirHeaderMenu ? (
-                    <Stack className="Projectcontent">
-                        {header[0].nomeProjeto && (
-                            <Typography variant="caption" color="#797979">
-                                Projeto em Destaque
-                            </Typography>
-                        )}
-                        <Typography variant="h6">{header[0].nomeProjeto}</Typography>
-                        <Typography variant="subtitle2">{header[0].area}</Typography>
-                    </Stack>
-                ) : null}
+                        {variante === "user" && header ? (
+                            <Stack className="Projectcontent">
+                                {header[0].nomeProjeto && (
+                                    <Typography variant="caption" color="#797979">
+                                        Projeto em Destaque
+                                    </Typography>
+                                )}
+                                <Typography variant="h6">{header[0].nomeProjeto}</Typography>
+                                <Typography variant="subtitle2">{header[0].area}</Typography>
+                            </Stack>
+                        ) : null}
+                    </>
+                )}
 
             </Stack>
 
@@ -74,29 +78,6 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     Empresas
                 </Button>
 
-                {variante === "user" ? (
-                    <Button
-                        tamanho={"sm"}
-                        variante="ButtonLinkBlack"
-                        icon={HandHeart}
-                        to="/plataforma-nexus/apoio"
-                        viewTransition
-                    >
-                        Apoio
-                    </Button>
-                ) : (
-                    <Button
-                        tamanho={"sm"}
-                        variante="ButtonLinkBlack"
-                        icon={HandHeart}
-                        to="/plataforma-nexus/apoiar"
-                        viewTransition
-                    >
-                        Apoiar
-                    </Button>
-                )}
-
-
                 <Button
                     tamanho={"sm"}
                     variante="ButtonLinkBlack"
@@ -115,7 +96,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                         to="/plataforma-nexus/meu-projeto"
                         viewTransition
                     >
-                        Meu Projeto
+                        Meus Projetos
                     </Button>
                 ) : (
                     <Button
@@ -129,41 +110,26 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     </Button>
                 )}
 
-                <Button
-                    tamanho={"sm"}
-                    variante="ButtonLinkBlack"
-                    icon={Settings}
-                    to="/plataforma-nexus/configuracoes"
-                    viewTransition
-                >
-                    Configurações
-                </Button>
+                {ocultarDetalhesMenu && (
+                    <Button
+                        tamanho={"sm"}
+                        variante="ButtonLinkBlack"
+                        icon={Settings}
+                        to="/plataforma-nexus/configuracoes"
+                        viewTransition
+                    >
+                        Configurações
+                    </Button>
+                )}
 
-                {!exibirHeaderMenu && (
+                {!ocultarDetalhesMenu && (
                     <Stack className="body">
 
                         <Typography variant="subtitle1" color="#797979">Pefil</Typography>
 
                         <Button
                             tamanho={"sm"}
-                            variante="ButtonLinkBlack"
-                        >
-                            Comunicar um Problema
-                        </Button>
-
-                        {variante === "user" ? (
-                            <Button
-                                tamanho={"sm"}
-                                variante="ButtonLinkBlack"
-                            >
-                                Editar Projeto
-                            </Button>
-                        ) : (
-                            <></>
-                        )}
-
-                        <Button
-                            tamanho={"sm"}
+                            icon={UserRound}
                             variante="ButtonLinkBlack"
                         >
                             Meu Perfil
@@ -172,10 +138,22 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                         <Button
                             tamanho={"sm"}
                             variante="ButtonLinkBlack"
+                            icon={Settings}
+                            to="/plataforma-nexus/configuracoes"
+                            viewTransition
+                        >
+                            Configurações
+                        </Button>
+
+                        <Button
+                            tamanho={"sm"}
+                            variante="ButtonLinkBlack"
+                            icon={LogOut}
                             to="/conheca-nexus"
                         >
                             Terminar Sessão
                         </Button>
+
                     </Stack>
                 )}
             </Stack>

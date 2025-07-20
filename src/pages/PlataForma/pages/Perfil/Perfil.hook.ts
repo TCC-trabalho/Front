@@ -1,7 +1,11 @@
 import { faker } from "@faker-js/faker";
-import { useEffect, useState } from "react";
+import { useMediaQuery, useTheme } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 
-export const useProjetos = () => {
+export const usePerfil = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
+  const isAboveMd = useMediaQuery(theme.breakpoints.up("md"));
   const [loading, setLoading] = useState(true);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [mockFeed, setMockFeed] = useState<any[]>([]);
@@ -28,7 +32,16 @@ export const useProjetos = () => {
     lg: mockFeed.length > 1 ? 10 : 0,
   };
 
+  const scroll = (offset: number) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
+    }
+  };
+
   return {
+    isAboveMd,
+    scroll,
+    scrollRef,
     loading,
     mockFeed,
     paddingTop,

@@ -3,7 +3,7 @@ import { useEmpresas } from "./Empresas.hook";
 import { FeedCard } from "../../../../components/FeedCard/FeedCard";
 
 export const Empresas = () => {
-    
+
     const { loading, mockFeed, paddingTop } = useEmpresas();
 
     return (
@@ -22,6 +22,8 @@ export const Empresas = () => {
                     descricao={item?.descricao || ""}
                     avaliacao={item?.avaliacao || 0}
                     loading={loading}
+                    idEmpresa={item?.idEmpresa || 0}
+                    vairante={"empresa"}
                 />
             ))}
         </Stack>

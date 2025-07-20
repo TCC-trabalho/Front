@@ -48,11 +48,23 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "projetos",
-                        element: <Paginas.Plataforma.Projetos />,
+                        element: <Paginas.Plataforma.ProjetosPage.Projetos />,
+                    },
+                    {
+                        path: "detalhes-projeto/:idProjeto",
+                        element: <Paginas.Plataforma.ProjetosPage.DetalhesProjeto/>,
+                    },
+                    {
+                        path: "meu-projeto",
+                        element: <Paginas.Plataforma.ProjetosPage.MeusProjetos/>,
                     },
                     {
                         path: "empresas",
-                        element: <Paginas.Plataforma.Empresas />,
+                        element: <Paginas.Plataforma.EmpresasPage.Empresas />,
+                    },
+                     {
+                        path: "detalhes-empresa/:idEmpresa",
+                        element: <></>,
                     },
                     {
                         path: "apoio",
@@ -71,10 +83,6 @@ const routes = createBrowserRouter([
                                 loader: async () => redirect("/manutencao")
                             }
                         ]
-                    },
-                    {
-                        path: "meu-projeto",
-                        element: <></>,
                     },
                     {
                         path: "projeto-patrocinados",

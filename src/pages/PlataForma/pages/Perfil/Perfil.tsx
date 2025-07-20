@@ -1,41 +1,44 @@
 import { Skeleton, Stack, Typography } from "@mui/material"
 import { Button } from "../../../../components/Button/Button"
 import { FeedCard } from "../../../../components/FeedCard/FeedCard"
-import { useProjetos } from "../Projetos/Projetos.hook"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { usePerfil } from "./Perfil.hook"
 
 export const Perfil = () => {
 
-    const { loading, mockFeed, paddingTop } = useProjetos();
+    const { isAboveMd, scroll, scrollRef, loading, mockFeed, paddingTop } = usePerfil()
 
     return (
         <Stack
-            gap={2}
-            justifyContent={"center"}
+            gap={4}
             minHeight={"100vh"}
             paddingTop={paddingTop}
             sx={{
                 scale: {
                     xs: "0.85",
-                    xl: "1"
-                }
+                    xl: "0.9"
+                },
+                pl: {
+                    xs: 0,
+                    md: "50%"
+                },
             }}
         >
+            {/* Header */}
             <Stack
                 gap={4}
                 direction={"row"}
-                justifyContent={"center"}
                 pt={4}
+                pl={5}
             >
                 <Skeleton variant="circular" width={160} height={160} />
 
-                <Stack
-                    gap={1}
-                    justifyContent={"center"}
-                >
-
+                <Stack gap={1} justifyContent={"center"}>
                     <Typography variant="h4" fontWeight={600}>Nome Usuario</Typography>
                     <Typography variant="caption">@teste@email</Typography>
 
+                    <Typography variant="subtitle2">Insituição</Typography>
+                          
                     <Button
                         tamanho="sm"
                         variante="ButtonGrey"
@@ -44,43 +47,87 @@ export const Perfil = () => {
                         Editar Perfil
                     </Button>
 
-                    <Typography variant="subtitle2">Insituição</Typography>
+                </Stack>
+            </Stack>
 
+            <Stack>
+                <Stack
+                    direction={"row"}
+                    pt={4}
+                    pl={5}
+                >
+                    <Typography variant="h5" color="#00000040">Meus Projetos</Typography>
                 </Stack>
 
-            </Stack>
+                <Stack direction="row" alignItems="center" position="relative">
 
-            <Stack
-                direction="row"
-                alignItems="flex-start"
-                sx={{
-                    overflowX: "auto",
-                    flexWrap: "nowrap",
-                    pl: {
-                        xs: 0,
-                        md: "20%"
-                    },
-                    width: "100%",
-                    height: 550,
-                    overflowY: "hidden",
-                    maxWidth: "100vw",
-                }}
-            >
-                {(loading ? Array.from({ length: 3 }) : mockFeed).map((item, index) => (
-                    <Stack key={index} justifyContent={"center"} alignItems={"center"}>
-                        <FeedCard
-                            imagemUrl={item?.imagemUrl || ""}
-                            titulo={item?.titulo || ""}
-                            area={item?.area || ""}
-                            organizacao={item?.organizacao || ""}
-                            integrantes={item?.integrantes || 0}
-                            descricao={item?.descricao || ""}
-                            loading={loading}
+                    {isAboveMd && (
+                        <Button
+                            tamanho="lg"
+                            variante="ButtonOutlinedBlue"
+                            icon={ChevronLeft}
+                            somenteIcone
+                            onClick={() => scroll(-600)}
+                            sx={{
+                                position: "absolute",
+                                zIndex: 2,
+                            }}
                         />
-                    </Stack>
-                ))}
-            </Stack>
+                    )}
 
+                    <Stack
+                        direction="row"
+                        ref={scrollRef}
+                        sx={{
+                            overflowY: "hidden",
+                            maxWidth: "110vw",
+                            cursor: "grab",
+                            overflowX: "auto",
+                            '&::-webkit-scrollbar': {
+                                height: 8,
+                            },
+                            '&::-webkit-scrollbar-thumb': {
+                                backgroundColor: "transparent",
+                                borderRadius: 4,
+                            },
+                            '&::-webkit-scrollbar-track': {
+                                backgroundColor: 'transparent',
+                            },
+                        }}
+                    >
+                        {(loading ? Array.from({ length: 3 }) : mockFeed).map((item, index) => (
+                            <Stack key={index}>
+                                <FeedCard
+                                    imagemUrl={item?.imagemUrl || ""}
+                                    titulo={item?.titulo || ""}
+                                    area={item?.area || ""}
+                                    organizacao={item?.organizacao || ""}
+                                    integrantes={item?.integrantes || 0}
+                                    descricao={item?.descricao || ""}
+                                    loading={loading}
+                                    idProjeto={item?.idProjeto || 0}
+                                    vairante={"projeto"}
+                                />
+                            </Stack>
+                        ))}
+                    </Stack>
+
+                    {isAboveMd && (
+                        <Button
+                            tamanho="lg"
+                            variante="ButtonOutlinedBlue"
+                            icon={ChevronRight}
+                            somenteIcone
+                            onClick={() => scroll(600)}
+                            sx={{
+                                position: "absolute",
+                                right: "25%",
+                                zIndex: 2,
+                            }}
+                        />
+                    )}
+                </Stack>
+            </Stack>
         </Stack>
-    )
-}
+    );
+};

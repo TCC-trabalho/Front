@@ -44,3 +44,25 @@ export const CardSugestao = styled(Stack)(({ theme }) => ({
     display: "none",
   },
 }));
+
+export const CardEquipe = styled(Stack)(({ theme }) => ({
+  width: 200,
+  position: "fixed",
+  top: "40%",
+  right: 32,
+  transform: "translateY(-50%)",
+  zIndex: 1000,
+  justifyContent: "center",
+  alignItems: "center",
+  gap: theme.spacing(3),
+
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+    right: 10
+  },
+
+  [theme.breakpoints.down("lg")]: {
+    right: 10,
+    scale: "0.85"
+  },
+}));

@@ -22,7 +22,9 @@ export const Projetos = () => {
                     organizacao={item?.organizacao || ""}
                     integrantes={item?.integrantes || 0}
                     descricao={item?.descricao || ""}
+                    idProjeto={item?.idProjeto || 0}
                     loading={loading}
+                    vairante={"projeto"}
                 />
             ))}
         </Stack>

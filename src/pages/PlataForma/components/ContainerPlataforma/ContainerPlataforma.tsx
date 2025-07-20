@@ -12,7 +12,7 @@ import { useControleExibicao } from "../../../../lib/utils/controleExibicao"
 export const ContainerPlataforma = () => {
 
     const { control } = useContainerPlataforma()
-    const { tituloPagina, exibirSugestao } = useControleExibicao()
+    const { tituloPagina, exibirSugestao, exibirEquipe } = useControleExibicao()
 
     return (
         <Styled.Container>
@@ -74,6 +74,7 @@ export const ContainerPlataforma = () => {
                         icon={CircleUserRound}
                         to="meu-perfil"
                         somenteIcone
+                        viewTransition
                     />
                 </Stack>
             </Header>
@@ -104,6 +105,23 @@ export const ContainerPlataforma = () => {
                 </Styled.CardSugestao>
             )}
 
+            {exibirEquipe && (
+                <Styled.CardEquipe>
+                    <Typography variant="h6" color="#797979">
+                        Equipe
+                    </Typography>
+
+                    {[...Array(4)].map((_, index) => (
+                        <Stack key={index} alignItems="center" direction="row" gap={2}>
+                            <Skeleton variant="circular" width={50} height={50} />
+                            <Stack>
+                                <Typography variant="subtitle1">Nome Integrante</Typography>
+                                <Typography variant="body2">Funcão</Typography>
+                            </Stack>
+                        </Stack>
+                    ))}
+                </Styled.CardEquipe>
+            )}
 
         </Styled.Container>
     )

@@ -1,35 +1,31 @@
 import { faker } from "@faker-js/faker";
 import { useEffect, useState } from "react";
 
-export const useEmpresas = () => {
+export const useDetalhesProjeto = () => {
   const [loading, setLoading] = useState(true);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [mockFeed, setMockFeed] = useState<any[]>([]);
 
   useEffect(() => {
     setTimeout(() => {
-      const fakeData = Array.from({ length: 6 }).map(() => ({
-        idEmpresa: faker.number.int({ min: 1 }),
+      const fakeData = Array.from({ length: 10 }).map(() => ({
         imagemUrl: faker.image.url(),
         titulo: faker.company.catchPhrase(),
         area: faker.commerce.department(),
-        avaliacao: faker.number.int({ min: 1, max: 5 }),
-        descricao: faker.lorem.paragraph(),
+        organizacao: faker.company.name(),
+        integrantes: faker.number.int({ min: 1, max: 10 }),
+        status: faker.helpers.arrayElement(["Inativo","Ativo"]),
+        resumo: faker.lorem.paragraph(),
+        objetivo: faker.lorem.paragraph(),
+        justificativa: faker.lorem.paragraph(),
       }));
       setMockFeed(fakeData);
       setLoading(false);
     }, 2000);
   }, []);
 
-  const paddingTop = {
-    xs: 4,
-    md: 0,
-    lg: mockFeed.length > 1 ? 10 : 0,
-  };
-
   return {
     loading,
     mockFeed,
-    paddingTop,
   };
 };
