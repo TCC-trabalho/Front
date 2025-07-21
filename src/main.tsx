@@ -8,12 +8,12 @@ import { nexusQueryClient } from './lib/config/axios'
 import { Toaster } from 'sonner'
 
 createRoot(document.getElementById('root')!).render(
-  // <StrictMode>
-  <QueryClientProvider client={nexusQueryClient}>
-    <ThemeProvider theme={theme}>
-      <Toaster richColors position="top-right" />
-      <Routes />
-    </ThemeProvider>
-  </QueryClientProvider>
-  // </StrictMode>,
+  <StrictMode>
+    <QueryClientProvider client={nexusQueryClient}>
+      <ThemeProvider theme={theme}>
+        <Toaster richColors position="top-right" />
+        <Routes />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </StrictMode>,
 )
