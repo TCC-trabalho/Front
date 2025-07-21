@@ -37,7 +37,9 @@ export const validacaoAluno = Yup.object({
   instituicao: Yup.number()
     .moreThan(0, INSITUICAO_ERROR)
     .required(INSITUICAO_ERROR),
-  senha: Yup.string().required(SENHA_ERROR),
+  senha: Yup.string()
+    .min(6, "A senha deve ter no mínimo 6 caracteres")
+    .required(SENHA_ERROR),
   confirmarSenha: Yup.string()
     .oneOf([Yup.ref("senha")], "As senhas não coincidem")
     .required("Confirmação de senha é obrigatória"),

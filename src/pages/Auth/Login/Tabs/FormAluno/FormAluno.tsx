@@ -37,7 +37,6 @@ export const FormALuno = () => {
                 <Button 
                 tamanho={"lg"} 
                 onClick={onSubmit}
-                to="plataforma-nexus"
                 viewTransition
                 >
                     Entrar

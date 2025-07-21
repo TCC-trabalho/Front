@@ -86,6 +86,15 @@ export const FormOrientador = () => {
 
             </Stack>
 
+            <Input
+                placeholder="Digite sua formação"
+                control={control}
+                name={"formacao"}
+                tamanho={"sm"}
+                label="Formação"
+                fullWidth
+            />
+
             <Stack
                 sx={{
                     display: "grid",

@@ -6,6 +6,7 @@ const TELEFONE_ERROR = "o telefone é obrigatório";
 const EMAIL_ERROR = "o email é obrigatório";
 const CPF_ERROR = "o CPF é obrigatório";
 const RG_ERROR = "o RG é obrigatório";
+const FOMACAO_ERROR = "a formação é obrigatória";
 const SENHA_ERROR = "a senha é obrigatório";
 
 export const validacaoOrientador = Yup.object({
@@ -27,7 +28,8 @@ export const validacaoOrientador = Yup.object({
     .matches(/^\d{1,2}\.?\d{3}\.?\d{3}-?\d{1}$/, "RG inválido")
     .typeError(RG_ERROR)
     .required(RG_ERROR),
-  senha: Yup.string().typeError(SENHA_ERROR).required(SENHA_ERROR),
+  formacao: Yup.string().typeError(FOMACAO_ERROR).required(FOMACAO_ERROR),
+  senha: Yup.string().min(6, "A senha deve ter no mínimo 6 caracteres").typeError(SENHA_ERROR).required(SENHA_ERROR),
   confirmarSenha: Yup.string()
     .oneOf([Yup.ref("senha")], "As senhas não coincidem")
     .required("Confirmação de senha é obrigatória"),

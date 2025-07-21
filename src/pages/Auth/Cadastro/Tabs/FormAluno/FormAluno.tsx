@@ -119,7 +119,7 @@ export const FormALuno = () => {
             />
 
             <Stack
-                   sx={{
+                sx={{
                     display: "grid",
                     gridTemplateColumns: {
                         xs: "repeat(1, 1fr)",
@@ -152,7 +152,12 @@ export const FormALuno = () => {
 
 
             <Stack alignItems={"center"}>
-                <Button tamanho={"lg"} onClick={onSubmit}>
+                <Button
+                    tamanho={"lg"}
+                    onClick={onSubmit}
+                    to="/login"
+                    viewTransition
+                >
                     Cadastrar
                 </Button>
             </Stack>

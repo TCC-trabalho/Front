@@ -86,8 +86,8 @@ export const FormEmpresa = () => {
                 placeholder="Selecione seu setor"
                 tamanho="md"
                 options={[
-                    { value: 2, label: "AGRO" },
-                    { value: 3, label: "TEC" },
+                    { value: "AGRO", label: "AGRO" },
+                    { value: "TEC", label: "TEC" },
                 ]}
             />
 
