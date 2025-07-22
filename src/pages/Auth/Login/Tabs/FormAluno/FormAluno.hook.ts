@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { validacaoAluno } from "./FormAluno.schemas";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
-import { useLoginAluno } from "../../../../../api/controllers/auth";
+import { useLogin } from "../../../../../api/controllers/auth";
 
 export const useFormAluno = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export const useFormAluno = () => {
     resolver: yupResolver(validacaoAluno),
   });
 
-  const { mutateAsync } = useLoginAluno();
+  const { mutateAsync } = useLogin();
 
   const onSubmit = handleSubmit(async () => {
     const valores = getValues();
@@ -20,7 +20,13 @@ export const useFormAluno = () => {
     const toastId = toast.loading("Validando credenciais...");
 
     try {
-      await mutateAsync(valores);
+      const response = await mutateAsync({
+        tipo: "aluno",
+        email: valores.email,
+        senha: valores.senha,
+      });
+
+      localStorage.setItem("usuarioLogado", JSON.stringify(response.user));
       toast.success("Login realizado com sucesso!", { id: toastId });
 
       navigate("/plataforma-nexus");

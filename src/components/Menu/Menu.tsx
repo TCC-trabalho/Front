@@ -6,14 +6,18 @@ import { Building2, FolderCog, Lightbulb, LogOut, MenuIcon, MessageCircle, Setti
 import { useState } from "react"
 import { MenuProps } from "./Menu.type"
 import { useControleExibicao } from "../../lib/utils/controleExibicao"
+import { useLogout } from "../../lib/hooks/useUser"
 
 export const Menu = ({ variante, header, loading = false, ...props }: MenuProps) => {
 
     const { ocultarDetalhesMenu } = useControleExibicao();
+    const { handleLogout } = useLogout()
 
     const theme = useTheme();
     const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
     const [open, setOpen] = useState(false);
+
+    const podeMostrarProjeto = (variante === "aluno" || variante === "orientador") && header;
 
     const menuContent = (
 
@@ -38,7 +42,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                             <Typography>{header?.[0]?.nomeUser ?? "Nome de Usuário"}</Typography>
                         </Stack>
 
-                        {variante === "user" && header ? (
+                        {podeMostrarProjeto ? (
                             <Stack className="Projectcontent">
                                 {header[0].nomeProjeto && (
                                     <Typography variant="caption" color="#797979">
@@ -88,7 +92,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     Chat
                 </Button>
 
-                {variante === "user" ? (
+                {(variante === "aluno" || variante === "orientador") ? (
                     <Button
                         tamanho={"sm"}
                         variante="ButtonLinkBlack"
@@ -122,6 +126,19 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     </Button>
                 )}
 
+                {variante === "orientador" && ocultarDetalhesMenu &&
+                    header &&
+                    (!header[0]?.nomeProjeto) && (
+                        <Button
+                            tamanho="md"
+                            sx={{ width: "80%" }}
+                            to="/plataforma-nexus/cadastrar-projeto"
+                            viewTransition
+                        >
+                            Cadastrar um projeto
+                        </Button>
+                    )}
+
                 {!ocultarDetalhesMenu && (
                     <Stack className="body">
 
@@ -149,7 +166,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                             tamanho={"sm"}
                             variante="ButtonLinkBlack"
                             icon={LogOut}
-                            to="/conheca-nexus"
+                            onClick={handleLogout}
                         >
                             Terminar Sessão
                         </Button>

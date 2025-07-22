@@ -11,20 +11,20 @@ import { useControleExibicao } from "../../../../lib/utils/controleExibicao"
 
 export const ContainerPlataforma = () => {
 
-    const { control } = useContainerPlataforma()
+    const { user, control } = useContainerPlataforma()
     const { tituloPagina, exibirSugestao, exibirEquipe } = useControleExibicao()
 
     return (
         <Styled.Container>
 
             <Menu
-                variante={"user"}
+                variante={user?.tipoUser ?? null}
                 header={
                     [{
-                        foto: "https://via.placeholder.com/80",
-                        nomeUser: "Usuário Exemplo",
-                        nomeProjeto: "Projeto Exemplo",
-                        area: "Área Exemplo"
+                        foto: user?.foto ?? "https://via.placeholder.com/80",
+                        nomeUser: user?.nomeUsuario ?? "Usuário",
+                        nomeProjeto: user?.nomeProjeto ?? null,
+                        area: user?.area ?? null,
                     }]
 
                 }

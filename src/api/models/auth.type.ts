@@ -1,17 +1,9 @@
 // Login
 
-export type LoginAluno = {
-  email: string;
-  senha: string;
-};
-
-export type LoginProfessor = {
-  email: string;
-  senha: string;
-};
-
-export type LoginEmpresa = {
-  cnpj: string;
+export type LoginPayload = {
+  tipo: "aluno" | "orientador" | "empresa";
+  email?: string;
+  cnpj?: string;
   senha: string;
 };
 

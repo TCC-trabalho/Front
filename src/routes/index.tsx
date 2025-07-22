@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet, redirect } from "react-router";
 import { Paginas } from "./pages";
 import { ContainerPlataforma } from "../pages/PlataForma/components/ContainerPlataforma/ContainerPlataforma";
+import { PrivateRoute, PublicRoute } from "./utils";
 
 
 const routes = createBrowserRouter([
@@ -18,7 +19,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: "/",
-                element: <Outlet />,
+                element: <PublicRoute />,
                 children: [
                     {
                         index: true,
@@ -40,62 +41,68 @@ const routes = createBrowserRouter([
             },
             {
                 path: "plataforma-nexus",
-                element: <ContainerPlataforma />,
+                element: <PrivateRoute />,
                 children: [
                     {
-                        index: true,
-                        loader: async () => redirect("projetos")
-                    },
-                    {
-                        path: "projetos",
-                        element: <Paginas.Plataforma.ProjetosPage.Projetos />,
-                    },
-                    {
-                        path: "detalhes-projeto/:idProjeto",
-                        element: <Paginas.Plataforma.ProjetosPage.DetalhesProjeto/>,
-                    },
-                    {
-                        path: "meu-projeto",
-                        element: <Paginas.Plataforma.ProjetosPage.MeusProjetos/>,
-                    },
-                    {
-                        path: "empresas",
-                        element: <Paginas.Plataforma.EmpresasPage.Empresas />,
-                    },
-                     {
-                        path: "detalhes-empresa/:idEmpresa",
-                        element: <></>,
-                    },
-                    {
-                        path: "apoio",
-                        element: <></>,
-                    },
-                    {
-                        path: "apoiar",
-                        element: <></>,
-                    },
-                    {
-                        path: "chat",
-                        element: <></>,
+                        path: "",
+                        element: <ContainerPlataforma />,
                         children: [
                             {
                                 index: true,
-                                loader: async () => redirect("/manutencao")
-                            }
+                                loader: async () => redirect("projetos")
+                            },
+                            {
+                                path: "projetos",
+                                element: <Paginas.Plataforma.ProjetosPage.Projetos />,
+                            },
+                            {
+                                path: "detalhes-projeto/:idProjeto",
+                                element: <Paginas.Plataforma.ProjetosPage.DetalhesProjeto />,
+                            },
+                            {
+                                path: "meu-projeto",
+                                element: <Paginas.Plataforma.ProjetosPage.MeusProjetos />,
+                            },
+                            {
+                                path: "empresas",
+                                element: <Paginas.Plataforma.EmpresasPage.Empresas />,
+                            },
+                            {
+                                path: "detalhes-empresa/:idEmpresa",
+                                element: <></>,
+                            },
+                            {
+                                path: "apoio",
+                                element: <></>,
+                            },
+                            {
+                                path: "apoiar",
+                                element: <></>,
+                            },
+                            {
+                                path: "chat",
+                                element: <></>,
+                                children: [
+                                    {
+                                        index: true,
+                                        loader: async () => redirect("/manutencao")
+                                    }
+                                ]
+                            },
+                            {
+                                path: "projeto-patrocinados",
+                                element: <></>,
+                            },
+                            {
+                                path: "meu-perfil",
+                                element: <Paginas.Plataforma.Perfil />,
+                            },
+                            {
+                                path: "configuracoes",
+                                element: <></>,
+                            },
                         ]
-                    },
-                    {
-                        path: "projeto-patrocinados",
-                        element: <></>,
-                    },
-                    {
-                        path: "meu-perfil",
-                        element: <Paginas.Plataforma.Perfil />,
-                    },
-                    {
-                        path: "configuracoes",
-                        element: <></>,
-                    },
+                    }
                 ],
             },
         ],
