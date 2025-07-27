@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider, Outlet, redirect } from "react-rou
 import { Paginas } from "./pages";
 import { ContainerPlataforma } from "../pages/PlataForma/components/ContainerPlataforma/ContainerPlataforma";
 import { PrivateRoute, PublicRoute } from "./utils";
+import { CadastrarProjeto } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/CadastrarProjeto";
 
 
 const routes = createBrowserRouter([
@@ -101,6 +102,20 @@ const routes = createBrowserRouter([
                                 path: "configuracoes",
                                 element: <></>,
                             },
+                        ]
+                    },
+                    {
+                        path: "cadastrar-projeto",
+                        element: <CadastrarProjeto />,
+                        children: [
+                            {
+                                index: true,
+                                element: <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroGrupo />,
+                            },
+                            {
+                                path: "cadastro-integrantes",
+                                element: <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroIntegrantes />,
+                            }
                         ]
                     }
                 ],

@@ -30,6 +30,12 @@ export const ButtonVariants = styled(ButtonBase)<{ tamanho: "sm" | "md" | "lg" |
             opacity: 0.8,
         },
 
+           "&:disabled": {
+            opacity: 0.4,
+            cursor: "not-allowed",
+            pointerEvents: "none",
+        },
+
 
         ...(className?.includes("ButtonRed") && {
             backgroundColor: "#B83229",

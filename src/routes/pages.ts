@@ -4,6 +4,8 @@ import { LadingPage } from "../pages/LadingPage/LadingPage";
 import { PaginaNaoEncontrada } from "../pages/PaginaNaoEncontrada/PaginaNaoEncontrada";
 import { Empresas } from "../pages/PlataForma/pages/Empresas/Empresas";
 import { Perfil } from "../pages/PlataForma/pages/Perfil/Perfil";
+import { CadastroGrupo } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/01_CadastroGrupo/CadastroGrupo";
+import { CadastroIntegrantes } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/02_CadastroIntegrantes/CadastroIntegrantes";
 import { DetalhesProjeto } from "../pages/PlataForma/pages/Projetos/pages/DetalhesProjeto/DetalhesProjeto";
 import { MeusProjetos } from "../pages/PlataForma/pages/Projetos/pages/MeusProjetos/MeusProjetos";
 import { Projetos } from "../pages/PlataForma/pages/Projetos/Projetos";
@@ -24,6 +26,12 @@ export const Paginas = {
       Projetos,
       DetalhesProjeto,
       MeusProjetos,
+      CadastrarProjeto: {
+        Etapas: {
+          CadastroGrupo,
+          CadastroIntegrantes
+        }
+      }
     },
     EmpresasPage:{
       Empresas
