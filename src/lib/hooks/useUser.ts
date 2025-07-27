@@ -9,7 +9,7 @@ type UsuarioLogado = {
   nomeUsuario?: string;
   email?: string;
   curso?: string;
-  instituicao?: string;
+  inst_ensino?: string;
   formacao?: string;
   tipoUser?: "aluno" | "orientador" | "empresa" | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

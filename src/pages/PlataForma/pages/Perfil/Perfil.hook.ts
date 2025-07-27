@@ -1,8 +1,10 @@
 import { faker } from "@faker-js/faker";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import { useUser } from "../../../../lib/hooks/useUser";
 
 export const usePerfil = () => {
+  const { user } = useUser();
   const scrollRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
   const isAboveMd = useMediaQuery(theme.breakpoints.up("md"));
@@ -45,5 +47,6 @@ export const usePerfil = () => {
     loading,
     mockFeed,
     paddingTop,
+    user
   };
 };

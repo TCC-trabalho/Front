@@ -6,7 +6,7 @@ import { usePerfil } from "./Perfil.hook"
 
 export const Perfil = () => {
 
-    const { isAboveMd, scroll, scrollRef, loading, mockFeed, paddingTop } = usePerfil()
+    const { isAboveMd, scroll, scrollRef, loading, mockFeed, paddingTop, user } = usePerfil()
 
     return (
         <Stack
@@ -34,11 +34,10 @@ export const Perfil = () => {
                 <Skeleton variant="circular" width={160} height={160} />
 
                 <Stack gap={1} justifyContent={"center"}>
-                    <Typography variant="h4" fontWeight={600}>Nome Usuario</Typography>
-                    <Typography variant="caption">@teste@email</Typography>
+                    <Typography variant="h4" fontWeight={600}>{user?.nomeUsuario}</Typography>
+                    <Typography variant="subtitle2">{user?.inst_ensino}</Typography>
+                    <Typography variant="subtitle2">@{user?.email}</Typography>
 
-                    <Typography variant="subtitle2">Insituição</Typography>
-                          
                     <Button
                         tamanho="sm"
                         variante="ButtonGrey"
