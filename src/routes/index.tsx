@@ -113,7 +113,7 @@ const routes = createBrowserRouter([
                                 element: <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroGrupo />,
                             },
                             {
-                                path: "cadastro-integrantes",
+                                path: "cadastro-integrantes/:idGrupo",
                                 element: <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroIntegrantes />,
                             }
                         ]

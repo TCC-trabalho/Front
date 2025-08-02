@@ -12,7 +12,6 @@ export const useCadastroIntegrantes = () => {
     control,
     handleSubmit,
     watch,
-    // getValues,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(validacaoIntegrantes),
@@ -39,7 +38,7 @@ export const useCadastroIntegrantes = () => {
 
   useEffect(() => {
     if (fields.length === 0) {
-      append(""); // cria o campo inicial
+      append("");
     }
   }, [append, fields]);
 

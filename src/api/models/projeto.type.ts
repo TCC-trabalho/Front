@@ -2,7 +2,7 @@ export type Grupo = {
     id?: string;
     nome: string;
     descricao: string;
-    data_criacao: Date;
+    data_criacao: string;
 }
 
 export type Projeto = {

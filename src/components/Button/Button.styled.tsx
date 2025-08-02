@@ -38,7 +38,7 @@ export const ButtonVariants = styled(ButtonBase)<{ tamanho: "sm" | "md" | "lg" |
 
 
         ...(className?.includes("ButtonRed") && {
-            backgroundColor: "#B83229",
+            backgroundImage: "linear-gradient( #A91208, #C4423A)",
             color: "#FFFFFF"
         }),
 
@@ -50,6 +50,12 @@ export const ButtonVariants = styled(ButtonBase)<{ tamanho: "sm" | "md" | "lg" |
         ...(className?.includes("ButtonGrey") && {
             background: "#D9D9D9",
             color: "#000000"
+        }),
+
+        ...(className?.includes("ButtonOutlinedRed") && {
+            background: "#FFFFFF",
+            color: "#B83229",
+            border: "3px #B83229 solid"
         }),
 
         ...(className?.includes("ButtonOutlinedBlue") && {
