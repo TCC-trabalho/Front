@@ -7,7 +7,18 @@ import { UserMinus } from "lucide-react"
 
 export const CadastroIntegrantes = () => {
 
-    const { control, onSubmit, append, fields, ultimoEmailValido } = useCadastroIntegrantes();
+    const {
+        idGrupo,
+        control,
+        onSubmit,
+        append,
+        remove,
+        fields,
+        desabilitarCampo,
+        ultimoEmailValido,
+        podeAvancar,
+        isPendingCadastrarIntegrantes
+    } = useCadastroIntegrantes();
 
     return (
         <>
@@ -39,14 +50,19 @@ export const CadastroIntegrantes = () => {
                             tamanho={"sm"}
                             label={`E-mail do Integrante ${index + 1}`}
                             sx={{ width: "100%" }}
+                            disabled={desabilitarCampo(index)}
                         />
-                        <Button
-                            variante="ButtonOutlinedRed"
-                            tamanho="xl"
-                            somenteIcone
-                            icon={UserMinus}
-                            sx={{ height: 45, width: 45, mt: 2.5 }}
-                        />
+                        {index > 0 && (
+                            <Button
+                                variante="ButtonOutlinedRed"
+                                tamanho="xl"
+                                somenteIcone
+                                icon={UserMinus}
+                                onClick={() => remove(index)}
+                                sx={{ height: 45, width: 45, mt: 2.5 }}
+                                disabled={desabilitarCampo(index)}
+                            />
+                        )}
                     </Stack>
                 ))}
 
@@ -56,12 +72,27 @@ export const CadastroIntegrantes = () => {
                         tamanho={"lg"}
                         disabled={!ultimoEmailValido}
                         onClick={() => append("")}
+                        type="button"
                     >
                         Adicionar
                     </Button>
-                    <Button tamanho={"lg"} type="submit">
-                        Cadastrar
-                    </Button>
+                    {podeAvancar ? (
+                        <Button
+                            tamanho={"lg"}
+                            to={`/plataforma-nexus/cadastrar-projeto/cadastro-projeto/${idGrupo}`}
+                            viewTransition
+                        >
+                            Avançar
+                        </Button>
+                    ) : (
+                        <Button
+                            tamanho={"lg"}
+                            type="submit"
+                            disabled={isPendingCadastrarIntegrantes}
+                        >
+                            Cadastrar
+                        </Button>
+                    )}
                 </Stack>
             </Stack>
         </>

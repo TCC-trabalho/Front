@@ -1,0 +1,71 @@
+import { Stack } from "@mui/material"
+import { ProgressHeader } from "../../../../../../../../components/ProgressHeader/ProgressHeader"
+import { Button } from "../../../../../../../../components/Button/Button"
+import { useCadastroProjeto } from "./CadastroProjeto.hook";
+import { Input } from "../../../../../../../../components/Input/Input";
+import { Select } from "../../../../../../../../components/select/Select";
+
+export const CadastroProjeto = () => {
+
+    const { control, onSubmit, isPendingCadastrarProjeto } = useCadastroProjeto();
+
+    return (
+        <>
+            <ProgressHeader
+                title="Cadastro seu Projeto"
+                subtitle="Cadastre seu projeto e consiga o apoio da nossa plataforma"
+                progress={80}
+            />
+            <Stack component="form" gap={3} p={3}>
+
+                <Stack gap={2}>
+
+                    <Input
+                        placeholder="Digite o título do seu projeto"
+                        control={control}
+                        name={"titulo"}
+                        tamanho={"sm"}
+                        label="Título"
+                        fullWidth
+                    />
+
+                    <Input
+                        placeholder="Digite a descrição do seu projeto"
+                        control={control}
+                        name={"descricao"}
+                        tamanho={"sm"}
+                        label="Descrição"
+                        fullWidth
+                        sx={{ minHeight: "100px" }}
+                    />
+
+                    <Select
+                        control={control}
+                        name={"area"}
+                        label="Área"
+                        placeholder="Selecione a área do seu projeto"
+                        options={[
+                            { value: "area1", label: "Área 1" },
+                            { value: "area2", label: "Área 2" },
+                        ]}
+                    />
+
+                </Stack>
+                <Stack
+                    alignItems={"center"}
+                    direction={"row"}
+                    gap={2}
+                    justifyContent={"center"}
+                >
+                    <Button
+                        tamanho={"lg"}
+                        onClick={onSubmit}
+                        disabled={isPendingCadastrarProjeto}
+                    >
+                        Cadastrar
+                    </Button>
+                </Stack>
+            </Stack>
+        </>
+    )
+}

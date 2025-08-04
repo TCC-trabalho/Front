@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { validacaoGrupo } from "./CadastroGrupo.schemas";
 import { toast } from "sonner";
-import { useCadastrarGrupo } from "../../../../../../../../api/controllers/projeto";
+import { useCadastrarGrupo } from "../../../../../../../../api/controllers/grupo";
 import { useNavigate } from "react-router";
 
 export const useCadastroGrupo = () => {

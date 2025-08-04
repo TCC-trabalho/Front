@@ -1,16 +1,14 @@
-export type Grupo = {
-    id?: string;
-    nome: string;
-    descricao: string;
-    data_criacao: string;
-}
-
 export type Projeto = {
-    id?: string;
-    nome: string;
-    descricao: string;
-    data_criacao: Date;
-    data_inicio: Date;
-    data_fim: Date;
-    grupo_id: string;
+    id?: number;
+    titulo?: string;
+    descricao?: string;
+    area?: string;
+    data_criacao?: string;
+    status?: string;
+    objetivo?: string;
+    justificativa?: string;
+    senha_acesso?: string;
+    id_grupo?: number;
+    id_orientador?: number;
+
 }
