@@ -76,8 +76,9 @@ export const LadingPage = () => {
                         variante="ButtonRed"
                         to="/cadastro"
                         viewTransition
+                        sx={{width: "auto", paddingInline: 1}}
                     >
-                        Sign up
+                        Cadastrar-se
                     </Button>
                 </Stack>
             </Header>
