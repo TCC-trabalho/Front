@@ -4,10 +4,11 @@ import { Button } from "../../../../../../../../components/Button/Button"
 import { useCadastroProjeto } from "./CadastroProjeto.hook";
 import { Input } from "../../../../../../../../components/Input/Input";
 import { Select } from "../../../../../../../../components/select/Select";
+import { ProjetoCadastrado } from "../../modais/projetoCadastrado/projetoCadastrado";
 
 export const CadastroProjeto = () => {
 
-    const { control, onSubmit, isPendingCadastrarProjeto } = useCadastroProjeto();
+    const { control, onSubmit, isPendingCadastrarProjeto, openModal } = useCadastroProjeto();
 
     return (
         <>
@@ -45,8 +46,13 @@ export const CadastroProjeto = () => {
                         label="Área"
                         placeholder="Selecione a área do seu projeto"
                         options={[
-                            { value: "area1", label: "Área 1" },
-                            { value: "area2", label: "Área 2" },
+                            { value: "tecnologia", label: "Tecnologia" },
+                            { value: "administracao", label: "Administração" },
+                            { value: "saude", label: "Saúde" },
+                            { value: "educacao", label: "Educação" },
+                            { value: "comunidade", label: "Comunidade" },
+                            { value: "sustentabilidade", label: "Sustentabilidade" },
+                            { value: "infraestrutura", label: "Infraestrutura" },
                         ]}
                     />
 
@@ -66,6 +72,9 @@ export const CadastroProjeto = () => {
                     </Button>
                 </Stack>
             </Stack>
+            <ProjetoCadastrado
+                open={openModal}
+            />
         </>
     )
 }

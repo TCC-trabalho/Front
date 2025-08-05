@@ -5,9 +5,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useCadastrarProjeto } from "../../../../../../../../api/controllers/projeto";
 import { useParams } from "react-router";
 import { useUser } from "../../../../../../../../lib/hooks/useUser";
+import { useSuccessModal } from "../../../../../../../../lib/hooks/useSuccessModal";
 
 export const useCadastroProjeto = () => {
-    const { user } = useUser();
+  const { user } = useUser();
   const { idGrupo } = useParams();
   const idGrupoNumber = Number(idGrupo);
 
@@ -17,8 +18,14 @@ export const useCadastroProjeto = () => {
 
   const {
     mutateAsync: cadastrarProjeto,
-    isPending: isPendingCadastrarProjeto,
   } = useCadastrarProjeto();
+
+  const {
+    open: openModal,
+    setOpen: setOpenModal,
+    isPending,
+    execute: cadastrarComModal,
+  } = useSuccessModal(cadastrarProjeto);
 
   const onSubmit = handleSubmit(async () => {
     const valores = getValues();
@@ -26,14 +33,14 @@ export const useCadastroProjeto = () => {
     const toastId = toast.loading("Criando projeto...");
 
     try {
-      const response = await cadastrarProjeto({
+      const response = await cadastrarComModal({
         titulo: valores.titulo,
         descricao: valores.descricao,
         area: valores.area,
         data_criacao: new Date().toISOString().slice(0, 19).replace("T", " "),
         status: "ativo",
         id_grupo: idGrupoNumber,
-        id_orientador: user?.id_orientador
+        id_orientador: user?.id_orientador,
       });
 
       toast.success("Projeto criado com sucesso!", { id: toastId });
@@ -48,6 +55,8 @@ export const useCadastroProjeto = () => {
   return {
     control,
     onSubmit,
-    isPendingCadastrarProjeto,
+    isPendingCadastrarProjeto: isPending,
+    openModal,
+    setOpenModal,
   };
 };
