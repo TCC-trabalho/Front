@@ -5,16 +5,13 @@ import { useFormAluno } from "./FormAluno.hook"
 import { Select } from "../../../../../components/select/Select"
 
 export const FormALuno = () => {
-
-    const {
-        control,
-        onSubmit
-    } = useFormAluno()
+    const { control, onSubmit } = useFormAluno()
 
     return (
-
-        <Stack component={"form"} gap={3}>
-
+        <Stack
+            component={"form"}
+            gap={3}
+        >
             <Input
                 placeholder="Digite seu nome completo"
                 control={control}
@@ -38,12 +35,11 @@ export const FormALuno = () => {
                     display: "grid",
                     gridTemplateColumns: {
                         xs: "repeat(1, 1fr)",
-                        sm: "repeat(2, 1fr)"
+                        sm: "repeat(2, 1fr)",
                     },
                     gap: 2,
                 }}
             >
-
                 <Input
                     placeholder="Digite seu telefone"
                     type="tel"
@@ -103,7 +99,6 @@ export const FormALuno = () => {
                     label="Curso"
                     fullWidth
                 />
-
             </Stack>
 
             <Select
@@ -123,7 +118,7 @@ export const FormALuno = () => {
                     display: "grid",
                     gridTemplateColumns: {
                         xs: "repeat(1, 1fr)",
-                        md: "repeat(2, 1fr)"
+                        md: "repeat(2, 1fr)",
                     },
                     gap: 2,
                 }}
@@ -147,9 +142,7 @@ export const FormALuno = () => {
                     label="Confirme sua senha"
                     fullWidth
                 />
-
             </Stack>
-
 
             <Stack alignItems={"center"}>
                 <Button
@@ -161,7 +154,6 @@ export const FormALuno = () => {
                     Cadastrar
                 </Button>
             </Stack>
-
         </Stack>
     )
 }

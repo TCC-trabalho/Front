@@ -12,7 +12,11 @@ export const LoginPage = () => {
         <Styled.Container>
             <Styled.Content>
                 <Stack className="fundo">
-                    <BackGroud width="90%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                    <BackGroud
+                        width="90%"
+                        height="100%"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
                 </Stack>
                 <Styled.FormBox>
                     <FormContainer
@@ -23,21 +27,22 @@ export const LoginPage = () => {
                                 icon: BookOpen,
                                 titulo: "Login do estudante",
                                 subtitulo: "Insira suas credenciais para acessar seu portal do aluno",
-                                content: <FormALuno/>,
+                                content: <FormALuno />,
                             },
                             {
                                 label: "Professor",
                                 icon: GraduationCap,
                                 titulo: "Login do orientador",
-                                subtitulo: "Insira suas credenciais para acessar seu portal do Orientador",
-                                content: <FormOrientador/>,
+                                subtitulo:
+                                    "Insira suas credenciais para acessar seu portal do Orientador",
+                                content: <FormOrientador />,
                             },
                             {
                                 label: "Empresa",
                                 icon: Building2,
                                 titulo: "Login da empresa",
                                 subtitulo: "Insira suas credenciais para acessar seu portal da Empresa",
-                                content: <FormEmpresa/>,
+                                content: <FormEmpresa />,
                             },
                         ]}
                     />

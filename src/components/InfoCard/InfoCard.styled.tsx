@@ -1,18 +1,13 @@
-import { Card, styled } from "@mui/material";
+import { Card, styled } from "@mui/material"
 
 export const InfoCardVariants = styled(Card)<{
-    variante: "Transparent" | "White";
-    header?: boolean;
-    cor: "vermelho" | "azul" | "branca";
+    variante: "Transparent" | "White"
+    header?: boolean
+    cor: "vermelho" | "azul" | "branca"
 }>(({ variante, header, cor, theme }) => {
-    const borderColor =
-        cor === "vermelho"
-            ? "#B83229"
-            : cor === "azul"
-            ? "#064B72"
-            : "#FFFCF5";
-    const bgColor = variante === "White" ? "#FFFFFF" : "transparent";
-    const headerColor = borderColor;
+    const borderColor = cor === "vermelho" ? "#B83229" : cor === "azul" ? "#064B72" : "#FFFCF5"
+    const bgColor = variante === "White" ? "#FFFFFF" : "transparent"
+    const headerColor = borderColor
 
     return {
         backgroundColor: bgColor,
@@ -24,11 +19,11 @@ export const InfoCardVariants = styled(Card)<{
         transition: "transform 0.2s ease-in-out",
 
         [theme.breakpoints.down("md")]: {
-            maxWidth: 350
+            maxWidth: 350,
         },
 
         "&:hover": {
-            transform: "scale(1.05, 1.05)"
+            transform: "scale(1.05, 1.05)",
         },
 
         ...(header && {
@@ -42,5 +37,5 @@ export const InfoCardVariants = styled(Card)<{
                 justifyContent: "center",
             },
         }),
-    };
-});
+    }
+})

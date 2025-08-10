@@ -5,16 +5,13 @@ import { useFormEmpresa } from "./FormEmpresa.hook"
 import { Select } from "../../../../../components/select/Select"
 
 export const FormEmpresa = () => {
-
-    const {
-        control,
-        onSubmit
-    } = useFormEmpresa()
+    const { control, onSubmit } = useFormEmpresa()
 
     return (
-
-        <Stack component={"form"} gap={3}>
-
+        <Stack
+            component={"form"}
+            gap={3}
+        >
             <Input
                 placeholder="Digite seu nome completo"
                 control={control}
@@ -24,18 +21,16 @@ export const FormEmpresa = () => {
                 fullWidth
             />
 
-
             <Stack
                 sx={{
                     display: "grid",
                     gridTemplateColumns: {
                         xs: "repeat(1, 1fr)",
-                        sm: "repeat(2, 1fr)"
+                        sm: "repeat(2, 1fr)",
                     },
                     gap: 2,
                 }}
             >
-
                 <Input
                     placeholder="Digite seu telefone"
                     type="tel"
@@ -76,7 +71,6 @@ export const FormEmpresa = () => {
                     mask="AA-AAAAAAAAAAAAAAA"
                     fullWidth
                 />
-
             </Stack>
 
             <Select
@@ -96,7 +90,7 @@ export const FormEmpresa = () => {
                     display: "grid",
                     gridTemplateColumns: {
                         xs: "repeat(1, 1fr)",
-                        md: "repeat(2, 1fr)"
+                        md: "repeat(2, 1fr)",
                     },
                     gap: 2,
                 }}
@@ -120,16 +114,16 @@ export const FormEmpresa = () => {
                     label="Confirme sua senha"
                     fullWidth
                 />
-
             </Stack>
 
-
             <Stack alignItems={"center"}>
-                <Button tamanho={"lg"} onClick={onSubmit}>
+                <Button
+                    tamanho={"lg"}
+                    onClick={onSubmit}
+                >
                     Cadastrar
                 </Button>
             </Stack>
-
         </Stack>
     )
 }

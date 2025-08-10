@@ -9,17 +9,20 @@ export const PaginaNaoEncontrada = () => {
         <Styled.Container>
             <Styled.Content>
                 <Stack className="fundo">
-                    <BackGroud width="90%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                    <BackGroud
+                        width="90%"
+                        height="100%"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
                 </Stack>
                 <Styled.NaoEncontradaBox>
                     <Stack className="questionIcon">
-                        <CircleQuestionMark size={110} color={"white"} />
+                        <CircleQuestionMark
+                            size={110}
+                            color={"white"}
+                        />
                     </Stack>
-                    <Typography
-                        variant="h5"
-                    >
-                        Pagina Não encontrada! Verique a url do site.
-                    </Typography>
+                    <Typography variant="h5">Pagina Não encontrada! Verique a url do site.</Typography>
                     <Button
                         tamanho={"md"}
                         variante="ButtonBlue"

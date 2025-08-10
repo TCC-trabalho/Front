@@ -1,9 +1,9 @@
-import { Controller, FieldValues } from "react-hook-form";
-import { EstiloInput, InputProps } from "./Input.type";
-import { InputAdornment, Stack, Typography } from "@mui/material";
+import { Controller, FieldValues } from "react-hook-form"
+import { EstiloInput, InputProps } from "./Input.type"
+import { InputAdornment, Stack, Typography } from "@mui/material"
 import * as Styled from "./Input.styled"
-import { CircleAlert } from "lucide-react";
-import { mask } from "remask";
+import { CircleAlert } from "lucide-react"
+import { mask } from "remask"
 
 export const Input = <TFieldValues extends FieldValues>({
     control,
@@ -32,7 +32,10 @@ export const Input = <TFieldValues extends FieldValues>({
                         endAdornment
                     ) : (
                         <Stack>
-                            <CircleAlert size={20} color="#A91208" />
+                            <CircleAlert
+                                size={20}
+                                color="#A91208"
+                            />
                         </Stack>
                     ),
                 }
@@ -62,28 +65,34 @@ export const Input = <TFieldValues extends FieldValues>({
                             </Typography>
                         )}
 
-
                         <Styled.Input
                             {...defaultProps}
                             onChange={(e) => {
-                                const rawValue = e.target.value;
-                                const masked = props.mask
-                                    ? mask(rawValue, [props.mask])
-                                    : rawValue;
-                                field.onChange(masked);
+                                const rawValue = e.target.value
+                                const masked = props.mask ? mask(rawValue, [props.mask]) : rawValue
+                                field.onChange(masked)
                             }}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    {Icon && <Icon size={20} color="grey" />}
+                                    {Icon && (
+                                        <Icon
+                                            size={20}
+                                            color="grey"
+                                        />
+                                    )}
                                 </InputAdornment>
                             }
                         />
 
-                        <Typography variant="body2" color="#A91208" mt={0.5}>
+                        <Typography
+                            variant="body2"
+                            color="#A91208"
+                            mt={0.5}
+                        >
                             {error?.message || " "}
                         </Typography>
                     </Stack>
-                );
+                )
             }}
         />
     )

@@ -1,15 +1,13 @@
-import { Stack, styled } from "@mui/material";
+import { Stack, styled } from "@mui/material"
 
 export const Container = styled(Stack)(() => ({
     minHeight: "100vh",
-    overflowX: "hidden"
+    overflowX: "hidden",
 }))
-
 
 export const Session = styled(Stack)(({ theme }) => ({
     minHeight: "80vh",
     padding: "80px 15%",
-
 
     ".indice": {
         alignItems: "center",
@@ -19,7 +17,7 @@ export const Session = styled(Stack)(({ theme }) => ({
         height: 45,
         borderRadius: "50%",
         border: "3px #B83229 solid",
-        color: "#B83229"
+        color: "#B83229",
     },
 
     ".fundo": {
@@ -37,8 +35,7 @@ export const Session = styled(Stack)(({ theme }) => ({
 
     [theme.breakpoints.down("lg")]: {
         padding: "80px 5%",
-
-    }
+    },
 }))
 
 export const Footer = styled(Stack)(() => ({
@@ -47,9 +44,7 @@ export const Footer = styled(Stack)(() => ({
     minHeight: "60vh",
     color: "#6B9EBD",
     justifyContent: "space-between",
-
 }))
-
 
 export const DevCardsContainer = styled(Stack)(() => ({
     flexDirection: "row",
@@ -69,4 +64,4 @@ export const DevCardsContainer = styled(Stack)(() => ({
         borderRadius: 20,
         border: "3px solid #FFFCF5",
     },
-}));
+}))

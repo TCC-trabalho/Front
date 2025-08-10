@@ -6,7 +6,6 @@ import { useCadastroIntegrantes } from "./CadastroIntegrantes.hook"
 import { UserMinus } from "lucide-react"
 
 export const CadastroIntegrantes = () => {
-
     const {
         idGrupo,
         control,
@@ -17,8 +16,8 @@ export const CadastroIntegrantes = () => {
         desabilitarCampo,
         ultimoEmailValido,
         podeAvancar,
-        isPendingCadastrarIntegrantes
-    } = useCadastroIntegrantes();
+        isPendingCadastrarIntegrantes,
+    } = useCadastroIntegrantes()
 
     return (
         <>
@@ -28,10 +27,15 @@ export const CadastroIntegrantes = () => {
                 progress={60}
             />
 
-            <Stack component="form" gap={3} p={3} onSubmit={(e) => {
-                e.preventDefault();
-                onSubmit();
-            }}>
+            <Stack
+                component="form"
+                gap={3}
+                p={3}
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    onSubmit()
+                }}
+            >
                 {fields.map((field, index) => (
                     <Stack
                         key={field.id}
@@ -66,7 +70,12 @@ export const CadastroIntegrantes = () => {
                     </Stack>
                 ))}
 
-                <Stack alignItems={"center"} direction={"row"} gap={2} justifyContent={"center"}>
+                <Stack
+                    alignItems={"center"}
+                    direction={"row"}
+                    gap={2}
+                    justifyContent={"center"}
+                >
                     <Button
                         variante="ButtonOutlinedBlue"
                         tamanho={"lg"}

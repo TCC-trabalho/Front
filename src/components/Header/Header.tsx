@@ -6,18 +6,27 @@ import { useState } from "react"
 import { Button } from "../Button/Button"
 import { Menu } from "lucide-react"
 
-export const Header = ({ MobileMenu = true, variante = "LigthHeader", logo = false, children, ...props }: headerProps) => {
-
+export const Header = ({
+    MobileMenu = true,
+    variante = "LigthHeader",
+    logo = false,
+    children,
+    ...props
+}: headerProps) => {
     const theme = useTheme()
     const isMobileScreen = useMediaQuery(theme.breakpoints.down("md"))
     const isMobile = MobileMenu && isMobileScreen
     const [menuOpen, setMenuOpen] = useState(false)
 
     return (
-        <Component.HeaderContainer {...props} className={variante}>
-
+        <Component.HeaderContainer
+            {...props}
+            className={variante}
+        >
             {logo ? (
-                <Stack direction={"row"}><LogoNexus /></Stack>
+                <Stack direction={"row"}>
+                    <LogoNexus />
+                </Stack>
             ) : (
                 <></>
             )}
@@ -57,14 +66,13 @@ export const Header = ({ MobileMenu = true, variante = "LigthHeader", logo = fal
                         justifyContent: "space-between",
                         gap: {
                             xs: 1,
-                            sm: 4
+                            sm: 4,
                         },
                     })}
                 >
                     {children}
                 </Stack>
             )}
-
         </Component.HeaderContainer>
     )
-} 
+}

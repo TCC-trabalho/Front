@@ -1,10 +1,9 @@
-import { Stack } from "@mui/material";
-import { useEmpresas } from "./Empresas.hook";
-import { FeedCard } from "../../../../components/FeedCard/FeedCard";
+import { Stack } from "@mui/material"
+import { useEmpresas } from "./Empresas.hook"
+import { FeedCard } from "../../../../components/FeedCard/FeedCard"
 
 export const Empresas = () => {
-
-    const { loading, mockFeed, paddingTop } = useEmpresas();
+    const { loading, mockFeed, paddingTop } = useEmpresas()
 
     return (
         <Stack
@@ -28,4 +27,4 @@ export const Empresas = () => {
             ))}
         </Stack>
     )
-} 
+}

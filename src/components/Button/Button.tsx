@@ -2,27 +2,25 @@ import { ButtonProp } from "./Button.types"
 import { Link } from "react-router"
 import * as Component from "./Button.styled"
 
-export const Button = (
-    {
-        variante = "ButtonRed",
-        tamanho,
-        loading,
-        disabled,
-        children,
-        icon: Icon,
-        ladoIcon = "esquerda",
-        somenteIcone = false,
-        ...props
-    }: ButtonProp) => {
-
+export const Button = ({
+    variante = "ButtonRed",
+    tamanho,
+    loading,
+    disabled,
+    children,
+    icon: Icon,
+    ladoIcon = "esquerda",
+    somenteIcone = false,
+    ...props
+}: ButtonProp) => {
     const iconSizeMap = {
         sm: 15,
         md: 20,
         lg: 25,
-        xl: 30
-    };
+        xl: 30,
+    }
 
-    const iconSize = iconSizeMap[tamanho] || 20;
+    const iconSize = iconSizeMap[tamanho] || 20
 
     return (
         <Component.ButtonVariants

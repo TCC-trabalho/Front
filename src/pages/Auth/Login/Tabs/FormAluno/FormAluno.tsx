@@ -4,16 +4,13 @@ import { useFormAluno } from "./FormAluno.hook"
 import { Button } from "../../../../../components/Button/Button"
 
 export const FormALuno = () => {
-
-    const {
-        control,
-        onSubmit
-    } = useFormAluno()
+    const { control, onSubmit } = useFormAluno()
 
     return (
-
-        <Stack component={"form"} gap={3}>
-
+        <Stack
+            component={"form"}
+            gap={3}
+        >
             <Input
                 placeholder="Digite seu email"
                 control={control}
@@ -34,15 +31,14 @@ export const FormALuno = () => {
             />
 
             <Stack alignItems={"center"}>
-                <Button 
-                tamanho={"lg"} 
-                onClick={onSubmit}
-                viewTransition
+                <Button
+                    tamanho={"lg"}
+                    onClick={onSubmit}
+                    viewTransition
                 >
                     Entrar
                 </Button>
             </Stack>
-
         </Stack>
     )
 }

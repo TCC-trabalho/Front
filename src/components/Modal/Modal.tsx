@@ -27,13 +27,25 @@ export const Wrapper = ({ open, onClose, disabledClose, sx, children }: ModalWra
     )
 }
 
-export const Header = ({ title, subtitle, onClose, disabledClose, sx, Icon, type = "normal" }: ModalHeaderProps) => {
+export const Header = ({
+    title,
+    subtitle,
+    onClose,
+    disabledClose,
+    sx,
+    Icon,
+    type = "normal",
+}: ModalHeaderProps) => {
     const { isSmallScreen } = useScreenSize()
 
     return (
         <Styled.Header sx={{ ...sx }}>
-
-            {Icon && <Icon size={75} className={type} />}
+            {Icon && (
+                <Icon
+                    size={75}
+                    className={type}
+                />
+            )}
 
             <Stack className="modal-texts-wrapper">
                 <Typography component="h1">{title}</Typography>

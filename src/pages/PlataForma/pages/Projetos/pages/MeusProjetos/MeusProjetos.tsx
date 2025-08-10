@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Stack } from "@mui/material"
 import { FeedCard } from "../../../../../../components/FeedCard/FeedCard"
 import { useMeusProjetos } from "./MeusProjetos.hook"
 
 export const MeusProjetos = () => {
-
-    const { loading, mockFeed } = useMeusProjetos()
+    const { isFetching, feed } = useMeusProjetos()
 
     return (
         <Stack
@@ -13,17 +13,16 @@ export const MeusProjetos = () => {
             gap={2}
             pb={2}
         >
-
             <Stack
                 sx={{
                     display: {
                         xs: "flex",
-                        lg: "grid"
+                        lg: "grid",
                     },
-                    gridTemplateColumns: "repeat(2, 1fr)"
+                    gridTemplateColumns: "repeat(2, 1fr)",
                 }}
             >
-                {(loading ? Array.from({ length: 6 }) : mockFeed).map((item, index) => (
+                {(isFetching ? Array.from({ length: 6 }) : feed).map((item: any, index: number) => (
                     <FeedCard
                         key={index}
                         imagemUrl={item?.imagemUrl || ""}
@@ -32,8 +31,8 @@ export const MeusProjetos = () => {
                         organizacao={item?.organizacao || ""}
                         integrantes={item?.integrantes || 0}
                         descricao={item?.descricao || ""}
-                        idProjeto={item?.idProjeto || 0}
-                        loading={loading}
+                        idProjeto={item?.id_projeto || 0}
+                        loading={isFetching}
                         vairante={"projeto"}
                     />
                 ))}

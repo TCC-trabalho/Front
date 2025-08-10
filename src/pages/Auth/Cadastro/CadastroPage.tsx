@@ -12,7 +12,11 @@ export const CadastroPage = () => {
         <Styled.Container>
             <Styled.Content>
                 <Stack className="fundo">
-                    <BackGroud width="90%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                    <BackGroud
+                        width="90%"
+                        height="100%"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
                 </Stack>
                 <Styled.FormBox>
                     <FormContainer
@@ -23,21 +27,21 @@ export const CadastroPage = () => {
                                 icon: BookOpen,
                                 titulo: "Cadastro do estudante",
                                 subtitulo: "Faça sua conta e comece a navegar",
-                                content: <FormALuno/>,
+                                content: <FormALuno />,
                             },
                             {
                                 label: "Professor",
                                 icon: GraduationCap,
                                 titulo: "Cadastro do orientador",
                                 subtitulo: "Faça sua conta e comece a navegar",
-                                content: <FormOrientador/>,
+                                content: <FormOrientador />,
                             },
                             {
                                 label: "Empresa",
                                 icon: Building2,
                                 titulo: "Cadastro da empresa",
                                 subtitulo: "Faça sua conta e comece a navegar",
-                                content: <FormEmpresa/>,
+                                content: <FormEmpresa />,
                             },
                         ]}
                     />

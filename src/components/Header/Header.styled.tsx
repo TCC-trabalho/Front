@@ -1,4 +1,4 @@
-import { AppBar, styled } from "@mui/material";
+import { AppBar, styled } from "@mui/material"
 
 export const HeaderContainer = styled(AppBar)(({ className }) => ({
     top: 0,
@@ -10,15 +10,13 @@ export const HeaderContainer = styled(AppBar)(({ className }) => ({
     alignItems: "center",
     justifyContent: "space-between",
 
-
     ...(className?.includes("LigthHeader") && {
         backgroundColor: "#FFFCF5",
-        color: "#05334A"
+        color: "#05334A",
     }),
 
     ...(className?.includes("BlueHeader") && {
         backgroundColor: "#064B72",
-        color: "white"
-    })
-
+        color: "white",
+    }),
 }))

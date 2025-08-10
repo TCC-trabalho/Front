@@ -9,15 +9,20 @@ export const TelaEmManutencao = () => {
         <Styled.Container>
             <Styled.Content>
                 <Stack className="fundo">
-                    <BackGroud width="90%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                    <BackGroud
+                        width="90%"
+                        height="100%"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
                 </Stack>
                 <Styled.EmManutencaoBox>
                     <Stack className="errorIcon">
-                        <TriangleAlert size={110} color={"#064B72"} />
+                        <TriangleAlert
+                            size={110}
+                            color={"#064B72"}
+                        />
                     </Stack>
-                    <Typography
-                        variant="h5"
-                    >
+                    <Typography variant="h5">
                         Tela em Manutenção! Estamos trabalhando para melhorar a sua experiência.
                     </Typography>
                     <Button

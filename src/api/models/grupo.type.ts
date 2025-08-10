@@ -1,13 +1,11 @@
 export type Grupo = {
-    id?: string;
-    nome: string;
-    descricao: string;
-    data_criacao: string;
+    id?: string
+    nome: string
+    descricao: string
+    data_criacao: string
 }
 
 export type Integrante = {
-    id?: string;
+    id?: string
     email: string[]
-
 }
-

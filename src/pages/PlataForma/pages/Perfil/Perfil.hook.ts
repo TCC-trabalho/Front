@@ -1,52 +1,46 @@
-import { faker } from "@faker-js/faker";
-import { useMediaQuery, useTheme } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-import { useUser } from "../../../../lib/hooks/useUser";
+import { useMediaQuery, useTheme } from "@mui/material"
+import { useRef } from "react"
+import { useUser } from "../../../../lib/hooks/useUser"
+import {
+    useObterProjetoPorIdAluno,
+    useObterProjetoPorIdOrientador,
+} from "../../../../api/controllers/projeto"
 
 export const usePerfil = () => {
-  const { user } = useUser();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const theme = useTheme();
-  const isAboveMd = useMediaQuery(theme.breakpoints.up("md"));
-  const [loading, setLoading] = useState(true);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [mockFeed, setMockFeed] = useState<any[]>([]);
+    const { user } = useUser()
+    const tipo = user?.tipoUser
+    const idAluno = tipo === "aluno" ? user?.id_aluno : undefined
+    const idOrientador = tipo === "orientador" ? user?.id_orientador : undefined
+    const scrollRef = useRef<HTMLDivElement>(null)
+    const theme = useTheme()
+    const isAboveMd = useMediaQuery(theme.breakpoints.up("md"))
 
-  useEffect(() => {
-    setTimeout(() => {
-      const fakeData = Array.from({ length: 10 }).map(() => ({
-        idProjeto: faker.number.int({ min: 1 }),
-        imagemUrl: faker.image.url(),
-        titulo: faker.company.catchPhrase(),
-        area: faker.commerce.department(),
-        organizacao: faker.company.name(),
-        integrantes: faker.number.int({ min: 1, max: 10 }),
-        descricao: faker.lorem.paragraph(),
-      }));
-      setMockFeed(fakeData);
-      setLoading(false);
-    }, 2000);
-  }, []);
+    const alunoQuery = useObterProjetoPorIdAluno(idAluno)
+    const orientadorQuery = useObterProjetoPorIdOrientador(idOrientador)
 
-  const paddingTop = {
-    xs: 4,
-    md: 0,
-    lg: mockFeed.length > 1 ? 10 : 0,
-  };
+    const data = tipo === "aluno" ? alunoQuery.data : orientadorQuery.data
+    const isFetching = (tipo === "aluno" ? alunoQuery.isFetching : orientadorQuery.isFetching) || false
+    const feed = Array.isArray(data?.projetos) ? data!.projetos : []
 
-  const scroll = (offset: number) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
+    const paddingTop = {
+        xs: 4,
+        md: 0,
+        lg: 10,
     }
-  };
 
-  return {
-    isAboveMd,
-    scroll,
-    scrollRef,
-    loading,
-    mockFeed,
-    paddingTop,
-    user
-  };
-};
+    const scroll = (offset: number) => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollBy({ left: offset, behavior: "smooth" })
+        }
+    }
+
+    return {
+        isAboveMd,
+        scroll,
+        scrollRef,
+        isFetching,
+        feed,
+        paddingTop,
+        user,
+    }
+}

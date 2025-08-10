@@ -10,10 +10,8 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     backgroundColor: getRandomSkeletonColor(),
-
-                }
-            }
-        }
-    }
-
+                },
+            },
+        },
+    },
 })

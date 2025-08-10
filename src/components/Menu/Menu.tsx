@@ -2,36 +2,48 @@ import { Avatar, Drawer, Skeleton, Stack, Typography, useMediaQuery, useTheme } 
 import * as Styled from "./Menu.styled"
 import { Button } from "../Button/Button"
 import { LogoNexus } from "../../assets"
-import { Building2, FolderCog, Lightbulb, LogOut, MenuIcon, MessageCircle, Settings, UserRound } from "lucide-react"
+import {
+    Building2,
+    FolderCog,
+    Lightbulb,
+    LogOut,
+    MenuIcon,
+    MessageCircle,
+    Settings,
+    UserRound,
+} from "lucide-react"
 import { useState } from "react"
 import { MenuProps } from "./Menu.type"
 import { useControleExibicao } from "../../lib/utils/controleExibicao"
 import { useLogout } from "../../lib/hooks/useUser"
 
 export const Menu = ({ variante, header, loading = false, ...props }: MenuProps) => {
-
-    const { ocultarDetalhesMenu } = useControleExibicao();
+    const { ocultarDetalhesMenu } = useControleExibicao()
     const { handleLogout } = useLogout()
 
-    const theme = useTheme();
-    const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-    const [open, setOpen] = useState(false);
+    const theme = useTheme()
+    const isDesktop = useMediaQuery(theme.breakpoints.up("md"))
+    const [open, setOpen] = useState(false)
 
-    const podeMostrarProjeto = (variante === "aluno" || variante === "orientador") && header;
+    const podeMostrarProjeto = (variante === "aluno" || variante === "orientador") && header
 
     const menuContent = (
-
         <Styled.Menu {...props}>
-
-            <Stack gap={2}>
-
+            <Stack
+                gap={2}
+                justifyContent={"start"}
+            >
                 <LogoNexus width={150} />
 
                 {ocultarDetalhesMenu && (
                     <>
                         <Stack className="Usercontent">
                             {loading ? (
-                                <Skeleton variant="circular" width={80} height={80} />
+                                <Skeleton
+                                    variant="circular"
+                                    width={80}
+                                    height={80}
+                                />
                             ) : (
                                 <Avatar
                                     src={header?.[0]?.foto}
@@ -44,23 +56,30 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
 
                         {podeMostrarProjeto ? (
                             <Stack className="Projectcontent">
-                                {header[0].nomeProjeto && (
-                                    <Typography variant="caption" color="#797979">
-                                        Projeto em Destaque
+                                {header[0].quatidadeProjetos && (
+                                    <Typography
+                                        variant="caption"
+                                        color="#797979"
+                                    >
+                                        Quantidade de projetos
                                     </Typography>
                                 )}
-                                <Typography variant="h6">{header[0].nomeProjeto}</Typography>
-                                <Typography variant="subtitle2">{header[0].area}</Typography>
+                                <Typography variant="h6">
+                                    {header[0].quatidadeProjetos} projetos
+                                </Typography>
                             </Stack>
                         ) : null}
                     </>
                 )}
-
             </Stack>
 
             <Stack className="body">
-
-                <Typography variant="subtitle1" color="#797979">Navegação</Typography>
+                <Typography
+                    variant="subtitle1"
+                    color="#797979"
+                >
+                    Navegação
+                </Typography>
 
                 <Button
                     tamanho={"sm"}
@@ -92,7 +111,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     Chat
                 </Button>
 
-                {(variante === "aluno" || variante === "orientador") ? (
+                {variante === "aluno" || variante === "orientador" ? (
                     <Button
                         tamanho={"sm"}
                         variante="ButtonLinkBlack"
@@ -126,12 +145,13 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     </Button>
                 )}
 
-                {variante === "orientador" && ocultarDetalhesMenu &&
+                {variante === "orientador" &&
+                    ocultarDetalhesMenu &&
                     header &&
-                    (!header[0]?.nomeProjeto) && (
+                    !header[0]?.quatidadeProjetos && (
                         <Button
-                            tamanho="md"
-                            sx={{ width: "80%" }}
+                            tamanho="sm"
+                            sx={{ width: "70%" }}
                             to="/plataforma-nexus/cadastrar-projeto"
                             viewTransition
                         >
@@ -141,8 +161,12 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
 
                 {!ocultarDetalhesMenu && (
                     <Stack className="body">
-
-                        <Typography variant="subtitle1" color="#797979">Pefil</Typography>
+                        <Typography
+                            variant="subtitle1"
+                            color="#797979"
+                        >
+                            Pefil
+                        </Typography>
 
                         <Button
                             tamanho={"sm"}
@@ -170,7 +194,6 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                         >
                             Terminar Sessão
                         </Button>
-
                     </Stack>
                 )}
             </Stack>
@@ -223,5 +246,5 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                 </Drawer>
             )}
         </>
-    );
+    )
 }

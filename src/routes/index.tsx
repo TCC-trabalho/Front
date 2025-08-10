@@ -1,9 +1,8 @@
-import { createBrowserRouter, RouterProvider, Outlet, redirect } from "react-router";
-import { Paginas } from "./pages";
-import { ContainerPlataforma } from "../pages/PlataForma/components/ContainerPlataforma/ContainerPlataforma";
-import { PrivateRoute, PublicRoute } from "./utils";
-import { CadastrarProjeto } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/CadastrarProjeto";
-
+import { createBrowserRouter, RouterProvider, Outlet, redirect } from "react-router"
+import { Paginas } from "./pages"
+import { ContainerPlataforma } from "../pages/PlataForma/components/ContainerPlataforma/ContainerPlataforma"
+import { PrivateRoute, PublicRoute } from "./utils"
+import { CadastrarProjeto } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/CadastrarProjeto"
 
 const routes = createBrowserRouter([
     {
@@ -24,7 +23,7 @@ const routes = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        loader: async () => redirect("conheca-nexus")
+                        loader: async () => redirect("conheca-nexus"),
                     },
                     {
                         path: "conheca-nexus",
@@ -50,7 +49,7 @@ const routes = createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                loader: async () => redirect("projetos")
+                                loader: async () => redirect("projetos"),
                             },
                             {
                                 path: "projetos",
@@ -86,9 +85,9 @@ const routes = createBrowserRouter([
                                 children: [
                                     {
                                         index: true,
-                                        loader: async () => redirect("/manutencao")
-                                    }
-                                ]
+                                        loader: async () => redirect("/manutencao"),
+                                    },
+                                ],
                             },
                             {
                                 path: "projeto-patrocinados",
@@ -102,7 +101,7 @@ const routes = createBrowserRouter([
                                 path: "configuracoes",
                                 element: <></>,
                             },
-                        ]
+                        ],
                     },
                     {
                         path: "cadastrar-projeto",
@@ -110,26 +109,32 @@ const routes = createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroGrupo />,
+                                element: (
+                                    <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroGrupo />
+                                ),
                             },
                             {
                                 path: "cadastro-integrantes/:idGrupo",
-                                element: <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroIntegrantes />,
+                                element: (
+                                    <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroIntegrantes />
+                                ),
                             },
                             {
                                 path: "cadastro-projeto/:idGrupo",
-                                element: <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroProjeto />,
-                            }
-                        ]
-                    }
+                                element: (
+                                    <Paginas.Plataforma.ProjetosPage.CadastrarProjeto.Etapas.CadastroProjeto />
+                                ),
+                            },
+                        ],
+                    },
                 ],
             },
         ],
     },
-]);
+])
 
 const Routes = () => {
-    return <RouterProvider router={routes} />;
-};
+    return <RouterProvider router={routes} />
+}
 
-export default Routes;
+export default Routes

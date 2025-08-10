@@ -8,15 +8,20 @@ export const TelaErro = () => {
         <Styled.Container>
             <Styled.Content>
                 <Stack className="fundo">
-                    <BackGroud width="90%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                    <BackGroud
+                        width="90%"
+                        height="100%"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
                 </Stack>
                 <Styled.ErrorBox>
                     <Stack className="errorIcon">
-                        <MonitorX size={110} color={"#FF4C4C"}/>
+                        <MonitorX
+                            size={110}
+                            color={"#FF4C4C"}
+                        />
                     </Stack>
-                    <Typography
-                        variant="h5"
-                    >
+                    <Typography variant="h5">
                         Parece que houve algum problema, estamos trabalhando para resolver isso!
                     </Typography>
                 </Styled.ErrorBox>

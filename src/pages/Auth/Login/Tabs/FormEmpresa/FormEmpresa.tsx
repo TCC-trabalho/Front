@@ -4,16 +4,13 @@ import { Button } from "../../../../../components/Button/Button"
 import { useFormEmpresa } from "./FormEmpresa.hook"
 
 export const FormEmpresa = () => {
-
-    const {
-        control,
-        onSubmit
-    } = useFormEmpresa()
+    const { control, onSubmit } = useFormEmpresa()
 
     return (
-
-        <Stack component={"form"} gap={3}>
-
+        <Stack
+            component={"form"}
+            gap={3}
+        >
             <Input
                 placeholder="Digite o CNPJ da sua empresa"
                 control={control}
@@ -34,11 +31,13 @@ export const FormEmpresa = () => {
             />
 
             <Stack alignItems={"center"}>
-                <Button tamanho={"lg"} onClick={onSubmit}>
+                <Button
+                    tamanho={"lg"}
+                    onClick={onSubmit}
+                >
                     Entrar
                 </Button>
             </Stack>
-
         </Stack>
     )
 }

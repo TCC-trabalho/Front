@@ -5,12 +5,7 @@ import { useCadastroGrupo } from "./CadastroGrupo.hook"
 import { ProgressHeader } from "../../../../../../../../components/ProgressHeader/ProgressHeader"
 
 export const CadastroGrupo = () => {
-
-    const {
-        control,
-        onSubmit
-    } = useCadastroGrupo()
-
+    const { control, onSubmit } = useCadastroGrupo()
 
     return (
         <>
@@ -20,8 +15,11 @@ export const CadastroGrupo = () => {
                 progress={20}
             />
 
-            <Stack component={"form"} gap={3} p={3}>
-
+            <Stack
+                component={"form"}
+                gap={3}
+                p={3}
+            >
                 <Input
                     placeholder="Digite o nome do seu grupo"
                     control={control}
@@ -50,7 +48,6 @@ export const CadastroGrupo = () => {
                         Cadastrar
                     </Button>
                 </Stack>
-
             </Stack>
         </>
     )

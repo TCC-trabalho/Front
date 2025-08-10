@@ -1,31 +1,22 @@
-import { faker } from "@faker-js/faker";
-import { useEffect, useState } from "react";
+import { useObterProjetoPorId } from "../../../../../../api/controllers/projeto"
+import { useParams } from "react-router"
+import { useUser } from "../../../../../../lib/hooks/useUser"
 
 export const useDetalhesProjeto = () => {
-  const [loading, setLoading] = useState(true);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [mockFeed, setMockFeed] = useState<any[]>([]);
+    const { idProjeto } = useParams()
+    const user = useUser()
 
-  useEffect(() => {
-    setTimeout(() => {
-      const fakeData = Array.from({ length: 10 }).map(() => ({
-        imagemUrl: faker.image.url(),
-        titulo: faker.company.catchPhrase(),
-        area: faker.commerce.department(),
-        organizacao: faker.company.name(),
-        integrantes: faker.number.int({ min: 1, max: 10 }),
-        status: faker.helpers.arrayElement(["Inativo","Ativo"]),
-        resumo: faker.lorem.paragraph(),
-        objetivo: faker.lorem.paragraph(),
-        justificativa: faker.lorem.paragraph(),
-      }));
-      setMockFeed(fakeData);
-      setLoading(false);
-    }, 2000);
-  }, []);
+    const tipoUser = user.user?.tipoUser
+    const idOrientador = user.user?.id_orientador
 
-  return {
-    loading,
-    mockFeed,
-  };
-};
+    const id = Number(idProjeto)
+
+    const { data, isFetching } = useObterProjetoPorId(id)
+
+    return {
+        tipoUser,
+        idOrientador,
+        isFetching,
+        detalhes: data,
+    }
+}

@@ -1,3 +1,3 @@
 export type projetoCadastradoType = {
-    open: boolean;
+    open: boolean
 }

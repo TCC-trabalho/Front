@@ -1,14 +1,13 @@
 import { Stack } from "@mui/material"
 import { ProgressHeader } from "../../../../../../../../components/ProgressHeader/ProgressHeader"
 import { Button } from "../../../../../../../../components/Button/Button"
-import { useCadastroProjeto } from "./CadastroProjeto.hook";
-import { Input } from "../../../../../../../../components/Input/Input";
-import { Select } from "../../../../../../../../components/select/Select";
-import { ProjetoCadastrado } from "../../modais/projetoCadastrado/projetoCadastrado";
+import { useCadastroProjeto } from "./CadastroProjeto.hook"
+import { Input } from "../../../../../../../../components/Input/Input"
+import { Select } from "../../../../../../../../components/select/Select"
+import { ProjetoCadastrado } from "../../modais/projetoCadastrado/projetoCadastrado"
 
 export const CadastroProjeto = () => {
-
-    const { control, onSubmit, isPendingCadastrarProjeto, openModal } = useCadastroProjeto();
+    const { control, onSubmit, isPendingCadastrarProjeto, openModal } = useCadastroProjeto()
 
     return (
         <>
@@ -17,10 +16,12 @@ export const CadastroProjeto = () => {
                 subtitle="Cadastre seu projeto e consiga o apoio da nossa plataforma"
                 progress={80}
             />
-            <Stack component="form" gap={3} p={3}>
-
+            <Stack
+                component="form"
+                gap={3}
+                p={3}
+            >
                 <Stack gap={2}>
-
                     <Input
                         placeholder="Digite o título do seu projeto"
                         control={control}
@@ -55,7 +56,6 @@ export const CadastroProjeto = () => {
                             { value: "infraestrutura", label: "Infraestrutura" },
                         ]}
                     />
-
                 </Stack>
                 <Stack
                     alignItems={"center"}
@@ -72,9 +72,7 @@ export const CadastroProjeto = () => {
                     </Button>
                 </Stack>
             </Stack>
-            <ProjetoCadastrado
-                open={openModal}
-            />
+            <ProjetoCadastrado open={openModal} />
         </>
     )
 }

@@ -4,16 +4,13 @@ import { Button } from "../../../../../components/Button/Button"
 import { useFormOrientador } from "./FormOrientador.hook"
 
 export const FormOrientador = () => {
-
-    const {
-        control,
-        onSubmit
-    } = useFormOrientador()
+    const { control, onSubmit } = useFormOrientador()
 
     return (
-
-        <Stack component={"form"} gap={3}>
-
+        <Stack
+            component={"form"}
+            gap={3}
+        >
             <Input
                 placeholder="Digite seu nome completo"
                 control={control}
@@ -37,12 +34,11 @@ export const FormOrientador = () => {
                     display: "grid",
                     gridTemplateColumns: {
                         xs: "repeat(1, 1fr)",
-                        sm: "repeat(2, 1fr)"
+                        sm: "repeat(2, 1fr)",
                     },
                     gap: 2,
                 }}
             >
-
                 <Input
                     placeholder="Digite seu telefone"
                     type="tel"
@@ -83,7 +79,6 @@ export const FormOrientador = () => {
                     mask="99.999.999-9"
                     fullWidth
                 />
-
             </Stack>
 
             <Input
@@ -100,7 +95,7 @@ export const FormOrientador = () => {
                     display: "grid",
                     gridTemplateColumns: {
                         xs: "repeat(1, 1fr)",
-                        md: "repeat(2, 1fr)"
+                        md: "repeat(2, 1fr)",
                     },
                     gap: 2,
                 }}
@@ -124,16 +119,16 @@ export const FormOrientador = () => {
                     label="Confirme sua senha"
                     fullWidth
                 />
-
             </Stack>
 
-
             <Stack alignItems={"center"}>
-                <Button tamanho={"lg"} onClick={onSubmit}>
+                <Button
+                    tamanho={"lg"}
+                    onClick={onSubmit}
+                >
                     Cadastrar
                 </Button>
             </Stack>
-
         </Stack>
     )
 }

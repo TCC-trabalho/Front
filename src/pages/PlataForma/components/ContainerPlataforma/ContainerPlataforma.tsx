@@ -10,27 +10,26 @@ import { useContainerPlataforma } from "./ContainerPlataforma.hook"
 import { useControleExibicao } from "../../../../lib/utils/controleExibicao"
 
 export const ContainerPlataforma = () => {
-
-    const { user, control } = useContainerPlataforma()
+    const { user, control, projeto, isFetching } = useContainerPlataforma()
     const { tituloPagina, exibirSugestao, exibirEquipe } = useControleExibicao()
 
     return (
         <Styled.Container>
-
             <Menu
                 variante={user?.tipoUser ?? null}
-                header={
-                    [{
+                header={[
+                    {
                         foto: user?.foto ?? "https://via.placeholder.com/80",
                         nomeUser: user?.nomeUsuario ?? "Usuário",
-                        nomeProjeto: user?.nomeProjeto ?? null,
-                        area: user?.area ?? null,
-                    }]
-
-                }
+                        quatidadeProjetos: user?.qtn_projetos ?? "",
+                    },
+                ]}
             />
 
-            <Header variante="BlueHeader" MobileMenu={false}>
+            <Header
+                variante="BlueHeader"
+                MobileMenu={false}
+            >
                 <Stack
                     sx={{
                         flexDirection: "row",
@@ -43,7 +42,12 @@ export const ContainerPlataforma = () => {
                         },
                     }}
                 >
-                    <Typography variant="h4" sx={{ fontSize: { xs: 24, md: 34 } }}>{tituloPagina()}</Typography>
+                    <Typography
+                        variant="h4"
+                        sx={{ fontSize: { xs: 24, md: 34 } }}
+                    >
+                        {tituloPagina()}
+                    </Typography>
                     <Input
                         Icon={Search}
                         placeholder="Pesquisar"
@@ -53,15 +57,18 @@ export const ContainerPlataforma = () => {
                         sx={{
                             width: {
                                 xs: 60,
-                                sm: 300
+                                sm: 300,
                             },
                             height: 35,
                             borderRadius: 10,
-                            p: 2
+                            p: 2,
                         }}
                     />
                 </Stack>
-                <Stack direction={"row"} gap={2}>
+                <Stack
+                    direction={"row"}
+                    gap={2}
+                >
                     <Button
                         tamanho={"lg"}
                         variante="ButtonLinkWhite"
@@ -85,13 +92,25 @@ export const ContainerPlataforma = () => {
 
             {exibirSugestao && (
                 <Styled.CardSugestao>
-                    <Typography variant="h6" color="#797979">
+                    <Typography
+                        variant="h6"
+                        color="#797979"
+                    >
                         Sugestões
                     </Typography>
 
                     {[...Array(5)].map((_, index) => (
-                        <Stack key={index} alignItems="center" direction="row" gap={2}>
-                            <Skeleton variant="circular" width={50} height={50} />
+                        <Stack
+                            key={index}
+                            alignItems="center"
+                            direction="row"
+                            gap={2}
+                        >
+                            <Skeleton
+                                variant="circular"
+                                width={50}
+                                height={50}
+                            />
                             <Stack>
                                 <Typography variant="subtitle1">Nome da Empresa</Typography>
                                 <Typography variant="body2">Área da Empresa</Typography>
@@ -99,30 +118,71 @@ export const ContainerPlataforma = () => {
                         </Stack>
                     ))}
 
-                    <Typography variant="caption" color="#797979" textAlign={"center"}>
+                    <Typography
+                        variant="caption"
+                        color="#797979"
+                        textAlign={"center"}
+                    >
                         Sobre • Ajuda • Privacidade • Termos • Dúvidas Frequentes • Acessibilidade
                     </Typography>
                 </Styled.CardSugestao>
             )}
-
             {exibirEquipe && (
                 <Styled.CardEquipe>
-                    <Typography variant="h6" color="#797979">
+                    <Typography
+                        variant="h6"
+                        color="#797979"
+                    >
                         Equipe
                     </Typography>
 
-                    {[...Array(4)].map((_, index) => (
-                        <Stack key={index} alignItems="center" direction="row" gap={2}>
-                            <Skeleton variant="circular" width={50} height={50} />
-                            <Stack>
-                                <Typography variant="subtitle1">Nome Integrante</Typography>
-                                <Typography variant="body2">Funcão</Typography>
-                            </Stack>
-                        </Stack>
-                    ))}
+                    {isFetching
+                        ? [...Array(4)].map((_, index) => (
+                              <Stack
+                                  key={index}
+                                  alignItems="center"
+                                  direction="row"
+                                  gap={2}
+                              >
+                                  <Skeleton
+                                      variant="circular"
+                                      width={50}
+                                      height={50}
+                                  />
+                                  <Stack>
+                                      <Skeleton
+                                          width={120}
+                                          height={20}
+                                      />
+                                      <Skeleton
+                                          width={180}
+                                          height={16}
+                                      />
+                                  </Stack>
+                              </Stack>
+                          ))
+                        : projeto?.grupo?.integrantes?.map((integrante, index) => (
+                              <Stack
+                                  key={index}
+                                  alignItems="center"
+                                  direction="row"
+                                  gap={2}
+                              >
+                                  <Skeleton
+                                      variant="circular"
+                                      width={50}
+                                      height={50}
+                                  />
+                                  <Stack maxWidth={100}>
+                                      <Typography variant="subtitle1">
+                                          {integrante.nomeUsuario || integrante.nome}
+                                      </Typography>
+                                      <Typography variant="body2">{integrante.email}</Typography>
+                                  </Stack>
+                              </Stack>
+                          ))}
                 </Styled.CardEquipe>
             )}
-
         </Styled.Container>
     )
 }
