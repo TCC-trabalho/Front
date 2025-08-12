@@ -171,6 +171,8 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                         <Button
                             tamanho={"sm"}
                             icon={UserRound}
+                            to="/plataforma-nexus/meu-perfil"
+                            viewTransition
                             variante="ButtonLinkBlack"
                         >
                             Meu Perfil

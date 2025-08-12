@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { usePerfil } from "./Perfil.hook"
 
 export const Perfil = () => {
-    const { isAboveMd, scroll, scrollRef, isFetching, feed, paddingTop, user } = usePerfil()
+    const { isAboveMd, scroll, scrollRef, isFetching, feed, paddingTop, user, userId } = usePerfil()
 
     return (
         <Stack
@@ -33,7 +33,7 @@ export const Perfil = () => {
             >
                 <Skeleton
                     variant="circular"
-                    width={160}
+                    width={190}
                     height={160}
                 />
 
@@ -47,13 +47,23 @@ export const Perfil = () => {
                     >
                         {user?.nomeUsuario}
                     </Typography>
+
                     <Typography variant="subtitle2">{user?.inst_ensino}</Typography>
                     <Typography variant="subtitle2">{user?.email}</Typography>
+
+                    <Typography
+                        variant="subtitle1"
+                        sx={{ width: "50%" }}
+                    >
+                        {user?.biografia}
+                    </Typography>
 
                     <Button
                         tamanho="sm"
                         variante="ButtonGrey"
                         sx={{ width: 120 }}
+                        to={`/plataforma-nexus/editar-perfil/${userId}`}
+                        viewTransition
                     >
                         Editar Perfil
                     </Button>

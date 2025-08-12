@@ -9,6 +9,15 @@ import {
 export const usePerfil = () => {
     const { user } = useUser()
     const tipo = user?.tipoUser
+
+    const getUserId  = () => {
+        if (tipo === "aluno") return user?.id_aluno
+        if (tipo === "orientador") return user?.id_orientador
+        if (tipo === "empresa") return user?.id_empresa
+        return undefined
+    }
+    const userId = getUserId()
+
     const idAluno = tipo === "aluno" ? user?.id_aluno : undefined
     const idOrientador = tipo === "orientador" ? user?.id_orientador : undefined
     const scrollRef = useRef<HTMLDivElement>(null)
@@ -42,5 +51,6 @@ export const usePerfil = () => {
         feed,
         paddingTop,
         user,
+        userId,
     }
 }

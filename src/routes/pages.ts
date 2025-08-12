@@ -3,6 +3,7 @@ import { LoginPage } from "../pages/Auth/Login/LoginPage"
 import { LadingPage } from "../pages/LadingPage/LadingPage"
 import { PaginaNaoEncontrada } from "../pages/PaginaNaoEncontrada/PaginaNaoEncontrada"
 import { Empresas } from "../pages/PlataForma/pages/Empresas/Empresas"
+import { EditarPerfil } from "../pages/PlataForma/pages/Perfil/pages/EditarPerfil/EditarPerfil"
 import { Perfil } from "../pages/PlataForma/pages/Perfil/Perfil"
 import { CadastroGrupo } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/01_CadastroGrupo/CadastroGrupo"
 import { CadastroIntegrantes } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/02_CadastroIntegrantes/CadastroIntegrantes"
@@ -39,5 +40,6 @@ export const Paginas = {
             Empresas,
         },
         Perfil,
+        EditarPerfil,
     },
 }

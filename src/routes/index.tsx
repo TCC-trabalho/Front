@@ -98,6 +98,10 @@ const routes = createBrowserRouter([
                                 element: <Paginas.Plataforma.Perfil />,
                             },
                             {
+                                path: "editar-perfil/:id",
+                                element: <Paginas.Plataforma.EditarPerfil/>,
+                            },
+                            {
                                 path: "configuracoes",
                                 element: <></>,
                             },

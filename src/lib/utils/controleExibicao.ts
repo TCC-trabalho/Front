@@ -14,6 +14,7 @@ export const useControleExibicao = () => {
         if (path.includes("/meu-projeto")) return "Meus Projetos"
         if (path.includes("/projeto-patrocinados")) return "Projetos Patrocinados"
         if (path.includes("/meu-perfil")) return "Meu Perfil"
+        if (path.includes("/editar-perfil")) return "Editar Perfil"
         if (path.includes("/configuracoes")) return "Configuracoes"
 
         return "Plataforma"
@@ -26,11 +27,12 @@ export const useControleExibicao = () => {
         "/meu-projeto",
         "/projeto-patrocinados",
         "/meu-perfil",
+        "/editar-perfil/",
         "/detalhes-projeto/",
         "/configuracoes",
     ]
 
-    const ocultarDetalhes = ["/meu-perfil", "/detalhes-projeto/"]
+    const ocultarDetalhes = ["/meu-perfil", "/detalhes-projeto/", "/editar-perfil/"]
 
     const exibirSugestao = !ocultarRotas.some((rota) => path.includes(rota))
     const exibirEquipe = path.includes("/detalhes-projeto/")

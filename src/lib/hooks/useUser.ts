@@ -8,6 +8,7 @@ type UsuarioLogado = {
     nome?: string
     nomeUsuario?: string
     email?: string
+    biografia?: string
     curso?: string
     inst_ensino?: string
     formacao?: string
