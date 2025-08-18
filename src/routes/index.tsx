@@ -60,6 +60,10 @@ const routes = createBrowserRouter([
                                 element: <Paginas.Plataforma.ProjetosPage.DetalhesProjeto />,
                             },
                             {
+                                path: "detalhes-projeto/:idProjeto/editar",
+                                element: <Paginas.Plataforma.ProjetosPage.EditarProjeto/>
+                            },
+                            {
                                 path: "meu-projeto",
                                 element: <Paginas.Plataforma.ProjetosPage.MeusProjetos />,
                             },
@@ -99,7 +103,7 @@ const routes = createBrowserRouter([
                             },
                             {
                                 path: "editar-perfil/:id",
-                                element: <Paginas.Plataforma.EditarPerfil/>,
+                                element: <Paginas.Plataforma.EditarPerfil />,
                             },
                             {
                                 path: "configuracoes",

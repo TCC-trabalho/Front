@@ -26,3 +26,15 @@ export type Projeto = {
 }
 
 export type ListaProjetosResponse = { total: number; projetos: Projeto[] }
+
+export namespace AtualizarProjeto {
+    export type Request = {
+        titulo: string
+        descricao: string
+        area: string
+        status: string
+        objetivo: string | null
+        justificativa: string | null
+    }
+    export type Response = Projeto
+}

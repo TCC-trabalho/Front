@@ -15,15 +15,15 @@ import {
 import { useState } from "react"
 import { MenuProps } from "./Menu.type"
 import { useControleExibicao } from "../../lib/utils/controleExibicao"
-import { useLogout } from "../../lib/hooks/useUser"
+import { EncerrarSessao } from "../../pages/PlataForma/pages/Perfil/modais/EncerrarSessao/EncerrarSessao"
 
 export const Menu = ({ variante, header, loading = false, ...props }: MenuProps) => {
     const { ocultarDetalhesMenu } = useControleExibicao()
-    const { handleLogout } = useLogout()
 
     const theme = useTheme()
     const isDesktop = useMediaQuery(theme.breakpoints.up("md"))
     const [open, setOpen] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
 
     const podeMostrarProjeto = (variante === "aluno" || variante === "orientador") && header
 
@@ -192,9 +192,9 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                             tamanho={"sm"}
                             variante="ButtonLinkBlack"
                             icon={LogOut}
-                            onClick={handleLogout}
+                            onClick={() => setOpenModal(true)}
                         >
-                            Terminar Sessão
+                            Encerrar Sessão
                         </Button>
                     </Stack>
                 )}
@@ -247,6 +247,10 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     {menuContent}
                 </Drawer>
             )}
+            <EncerrarSessao
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+            />
         </>
     )
 }

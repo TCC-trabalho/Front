@@ -18,5 +18,6 @@ export const useDetalhesProjeto = () => {
         idOrientador,
         isFetching,
         detalhes: data,
+        idProjeto
     }
 }

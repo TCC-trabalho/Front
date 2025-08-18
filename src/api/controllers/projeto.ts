@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { api, nexusQueryClient } from "../../lib/config/axios"
-import { ListaProjetosResponse, Projeto } from "../models/projeto.type"
+import { AtualizarProjeto, ListaProjetosResponse, Projeto } from "../models/projeto.type"
 
 export const useObterProjetos = () => {
     return useQuery<Projeto[], Error>({
@@ -53,7 +53,23 @@ export const useCadastrarProjeto = () => {
         onSuccess: () => {
             nexusQueryClient.invalidateQueries({ queryKey: ["projetos"] })
             nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-orientador"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-aluno"] })
             nexusQueryClient.invalidateQueries({ queryKey: ["projeto"] })
+        },
+    })
+}
+
+export const useAtualizarProjeto = (id: number) => {
+    return useMutation({
+        mutationFn: async (request: AtualizarProjeto.Request) => {
+            const { data } = await api.put(`projetos/${id}`, request)
+            return data
+        },
+        onSuccess: () => {
+            nexusQueryClient.invalidateQueries({ queryKey: ["projetos"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-orientador"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-aluno"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto", id] })
         },
     })
 }

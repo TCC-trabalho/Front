@@ -4,12 +4,12 @@ import { useDetalhesProjeto } from "./DetalhesProjeto.hook"
 import { Button } from "../../../../../../components/Button/Button"
 
 export const DetalhesProjeto = () => {
-    const { isFetching, detalhes, tipoUser, idOrientador } = useDetalhesProjeto()
+    const { isFetching, detalhes, tipoUser, idOrientador, idProjeto } = useDetalhesProjeto()
 
     return (
         <>
             <Stack
-                width={{ xs: "95%", md: "50%" }}
+                width={{ xs: "95%", md: "45%" }}
                 pt={{ xs: 10, md: 14 }}
                 gap={2}
                 pb={2}
@@ -176,6 +176,8 @@ export const DetalhesProjeto = () => {
                         transform: "translateX(-50%)",
                         zIndex: 1000,
                     }}
+                    to={`/plataforma-nexus/detalhes-projeto/${idProjeto}/editar`}
+                    viewTransition
                 >
                     Editar
                 </Button>

@@ -7,6 +7,7 @@ export const useControleExibicao = () => {
 
     const tituloPagina = () => {
         if (path.includes("/projetos")) return "Projetos"
+        if (path.includes("/editar")) return "Editar"
         if (path.includes("/empresas")) return "Empresas"
         if (path.includes("/apoio")) return "Apoio"
         if (path.includes("/apoiar")) return "Apoiar"

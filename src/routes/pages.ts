@@ -9,6 +9,7 @@ import { CadastroGrupo } from "../pages/PlataForma/pages/Projetos/pages/Cadastra
 import { CadastroIntegrantes } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/02_CadastroIntegrantes/CadastroIntegrantes"
 import { CadastroProjeto } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/03_CadastroProjeto/CadastroProjeto"
 import { DetalhesProjeto } from "../pages/PlataForma/pages/Projetos/pages/DetalhesProjeto/DetalhesProjeto"
+import { EditarProjeto } from "../pages/PlataForma/pages/Projetos/pages/DetalhesProjeto/pages/EditarProjeto/EditarProjeto"
 import { MeusProjetos } from "../pages/PlataForma/pages/Projetos/pages/MeusProjetos/MeusProjetos"
 import { Projetos } from "../pages/PlataForma/pages/Projetos/Projetos"
 import { TelaEmManutencao } from "../pages/TelaEmManutencao/TelaEmManutencao"
@@ -27,6 +28,7 @@ export const Paginas = {
         ProjetosPage: {
             Projetos,
             DetalhesProjeto,
+            EditarProjeto,
             MeusProjetos,
             CadastrarProjeto: {
                 Etapas: {

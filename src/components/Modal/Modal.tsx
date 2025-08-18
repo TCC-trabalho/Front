@@ -1,6 +1,6 @@
 import { ModalActionsProps, ModalHeaderProps, ModalWrapperProps } from "./Modal.type"
 import * as Styled from "./Modal.styled"
-import { Fade, Stack, Typography } from "@mui/material"
+import { Fade, Stack, Tooltip, Typography } from "@mui/material"
 import { useScreenSize } from "../../lib/hooks/useScreenSize"
 import { Button } from "../Button/Button"
 import { X } from "lucide-react"
@@ -53,17 +53,20 @@ export const Header = ({
             </Stack>
 
             {onClose && (
-                <Button
-                    somenteIcone
-                    tamanho={isSmallScreen ? "md" : "lg"}
-                    className="modal-close-button"
-                    variante="ButtonLinkWhite"
-                    onClick={onClose}
-                    disabled={disabledClose}
-                    aria-label="Fechar diálogo"
+                <Tooltip
+                    title={"Fechar"}
+                    arrow
+                    placement="top"
                 >
-                    <X />
-                </Button>
+                    <Button
+                        somenteIcone
+                        tamanho={isSmallScreen ? "md" : "lg"}
+                        className="modal-close-button"
+                        onClick={onClose}
+                        disabled={disabledClose}
+                        icon={X}
+                    />
+                </Tooltip>
             )}
         </Styled.Header>
     )
