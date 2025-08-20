@@ -3,14 +3,13 @@ import { useEmpresas } from "./Empresas.hook"
 import { FeedCard } from "../../../../components/FeedCard/FeedCard"
 
 export const Empresas = () => {
-    const { loading, mockFeed, paddingTop } = useEmpresas()
+    const { loading, mockFeed } = useEmpresas()
 
     return (
         <Stack
             justifyContent={"center"}
             minHeight={"100vh"}
             gap={4}
-            pt={paddingTop}
         >
             {(loading ? Array.from({ length: 3 }) : mockFeed).map((item, index) => (
                 <FeedCard

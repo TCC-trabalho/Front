@@ -4,7 +4,6 @@ import { Button } from "../Button/Button"
 import { LogoNexus } from "../../assets"
 import {
     Building2,
-    FolderCog,
     Lightbulb,
     LogOut,
     MenuIcon,
@@ -110,28 +109,6 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                 >
                     Chat
                 </Button>
-
-                {variante === "aluno" || variante === "orientador" ? (
-                    <Button
-                        tamanho={"sm"}
-                        variante="ButtonLinkBlack"
-                        icon={FolderCog}
-                        to="/plataforma-nexus/meu-projeto"
-                        viewTransition
-                    >
-                        Meus Projetos
-                    </Button>
-                ) : (
-                    <Button
-                        tamanho={"sm"}
-                        variante="ButtonLinkBlack"
-                        icon={FolderCog}
-                        to="/plataforma-nexus/projeto-patrocinados"
-                        viewTransition
-                    >
-                        Projetos apoiados
-                    </Button>
-                )}
 
                 {ocultarDetalhesMenu && (
                     <Button

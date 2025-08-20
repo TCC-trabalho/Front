@@ -47,7 +47,7 @@ export const Select = <TFieldValues extends FieldValues>({
                                 borderRadius: 2,
                                 border: `1px solid ${error ? "#A91208" : "#064B72"}`,
                                 backgroundColor: "#fff",
-                                padding: tamanho === "sm" ? "2px 10px" : "5px 16px",
+                                padding: tamanho === "sm" ? "2px 0px" : "5px 0px",
                                 fontSize: tamanho === "sm" ? 14 : 16,
                             }}
                             {...props}

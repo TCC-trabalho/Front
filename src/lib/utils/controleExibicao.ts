@@ -12,7 +12,6 @@ export const useControleExibicao = () => {
         if (path.includes("/apoio")) return "Apoio"
         if (path.includes("/apoiar")) return "Apoiar"
         if (path.includes("/chat")) return "Chat"
-        if (path.includes("/meu-projeto")) return "Meus Projetos"
         if (path.includes("/projeto-patrocinados")) return "Projetos Patrocinados"
         if (path.includes("/meu-perfil")) return "Meu Perfil"
         if (path.includes("/editar-perfil")) return "Editar Perfil"
@@ -25,7 +24,6 @@ export const useControleExibicao = () => {
         "/apoio",
         "/apoiar",
         "/chat",
-        "/meu-projeto",
         "/projeto-patrocinados",
         "/meu-perfil",
         "/editar-perfil/",

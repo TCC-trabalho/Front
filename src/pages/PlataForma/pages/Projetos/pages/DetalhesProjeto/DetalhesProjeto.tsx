@@ -10,7 +10,7 @@ export const DetalhesProjeto = () => {
         <>
             <Stack
                 width={{ xs: "95%", md: "45%" }}
-                pt={{ xs: 10, md: 14 }}
+                pt={4}
                 gap={2}
                 pb={2}
             >

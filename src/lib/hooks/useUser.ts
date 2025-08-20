@@ -12,6 +12,7 @@ type UsuarioLogado = {
     curso?: string
     inst_ensino?: string
     formacao?: string
+    telefone?: string
     tipoUser?: "aluno" | "orientador" | "empresa" | null
     qtn_projetos?: string
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -4,14 +4,13 @@ import { FeedCard } from "../../../../components/FeedCard/FeedCard"
 import { useProjetos } from "./Projetos.hook"
 
 export const Projetos = () => {
-    const { isFetching, feed, paddingTop } = useProjetos()
+    const { isFetching, feed } = useProjetos()
 
     return (
         <Stack
             justifyContent={"center"}
             minHeight={"100vh"}
             gap={4}
-            pt={paddingTop}
         >
             {(isFetching ? Array.from({ length: 3 }) : feed).map((item: any, index: number) => (
                 <FeedCard

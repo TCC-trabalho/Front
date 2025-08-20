@@ -21,15 +21,8 @@ export const useEmpresas = () => {
         }, 2000)
     }, [])
 
-    const paddingTop = {
-        xs: 4,
-        md: 0,
-        lg: mockFeed.length > 1 ? 10 : 0,
-    }
-
     return {
         loading,
         mockFeed,
-        paddingTop,
     }
 }

@@ -20,13 +20,26 @@ export const Container = styled(Stack)(({ theme }) => ({
     },
 }))
 
-export const Content = styled(Stack)(() => ({
+export const Content = styled(Stack)(({ theme }) => ({
     minHeight: "100vh",
     overflow: "hidden",
     backgroundColor: "transparent",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+
+    [theme.breakpoints.up("xs")]: {
+        paddingTop: theme.spacing(5),
+        paddingBottom: theme.spacing(5),
+    },
+
+    [theme.breakpoints.up("md")]: {
+        paddingTop: theme.spacing(0),
+    },
+
+    [theme.breakpoints.up("lg")]: {
+        paddingTop: theme.spacing(8),
+    },
 }))
 
 export const CardSugestao = styled(Stack)(({ theme }) => ({
