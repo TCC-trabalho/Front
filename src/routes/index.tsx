@@ -64,10 +64,6 @@ const routes = createBrowserRouter([
                                 element: <Paginas.Plataforma.ProjetosPage.EditarProjeto/>
                             },
                             {
-                                path: "meu-projeto",
-                                element: <Paginas.Plataforma.ProjetosPage.MeusProjetos />,
-                            },
-                            {
                                 path: "empresas",
                                 element: <Paginas.Plataforma.EmpresasPage.Empresas />,
                             },
