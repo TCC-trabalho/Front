@@ -12,9 +12,22 @@ export const useObterProjetos = () => {
     })
 }
 
+export const useObterProjetosLimit = (limit?: number) => {
+    return useQuery<Projeto[], Error>({
+        queryKey: ["projetos-limit", limit],
+        queryFn: async () => {
+            const { data } = await api.get<Projeto[]>("projetos-controlados",{
+                params: limit ? { limit } : {}
+            })
+            return data
+        },
+    })
+}
+
 export const useObterProjetoPorId = (id: number) => {
     return useQuery<Projeto, Error>({
         queryKey: ["projeto", id],
+        enabled: !!id,
         queryFn: async () => {
             const { data } = await api.get<Projeto>(`projetos/${id}`)
             return data

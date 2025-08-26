@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import { useUser } from "../../../../lib/hooks/useUser"
 import { useParams } from "react-router"
-import { useObterProjetoPorId } from "../../../../api/controllers/projeto"
+import { useObterProjetoPorId, useObterProjetosLimit } from "../../../../api/controllers/projeto"
 
 export const useContainerPlataforma = () => {
     const { idProjeto } = useParams()
@@ -9,11 +9,15 @@ export const useContainerPlataforma = () => {
     const { control } = useForm()
     const { user } = useUser()
 
-    const { data, isFetching } = useObterProjetoPorId(id)
+    const { data: obterProjetoPorId, isPending: obterProjetoPorIdIsPending } = useObterProjetoPorId(id)
+
+    const { data: obterProjetos, isPending: obterProjetosIsPending } = useObterProjetosLimit(4)
 
     return {
-        projeto: data,
-        isFetching,
+        obterProjetoPorId,
+        obterProjetoPorIdIsPending,
+        obterProjetos,
+        obterProjetosIsPending,
         control,
         user,
     }

@@ -10,7 +10,14 @@ import { useContainerPlataforma } from "./ContainerPlataforma.hook"
 import { useControleExibicao } from "../../../../lib/utils/controleExibicao"
 
 export const ContainerPlataforma = () => {
-    const { user, control, projeto, isFetching } = useContainerPlataforma()
+    const {
+        obterProjetoPorId,
+        obterProjetoPorIdIsPending,
+        obterProjetos,
+        obterProjetosIsPending,
+        control,
+        user,
+    } = useContainerPlataforma()
     const { tituloPagina, exibirSugestao, exibirEquipe } = useControleExibicao()
 
     return (
@@ -99,44 +106,7 @@ export const ContainerPlataforma = () => {
                         Sugestões
                     </Typography>
 
-                    {[...Array(5)].map((_, index) => (
-                        <Stack
-                            key={index}
-                            alignItems="center"
-                            direction="row"
-                            gap={2}
-                        >
-                            <Skeleton
-                                variant="circular"
-                                width={50}
-                                height={50}
-                            />
-                            <Stack>
-                                <Typography variant="subtitle1">Nome da Empresa</Typography>
-                                <Typography variant="body2">Área da Empresa</Typography>
-                            </Stack>
-                        </Stack>
-                    ))}
-
-                    <Typography
-                        variant="caption"
-                        color="#797979"
-                        textAlign={"center"}
-                    >
-                        Sobre • Ajuda • Privacidade • Termos • Dúvidas Frequentes • Acessibilidade
-                    </Typography>
-                </Styled.CardSugestao>
-            )}
-            {exibirEquipe && (
-                <Styled.CardEquipe>
-                    <Typography
-                        variant="h6"
-                        color="#797979"
-                    >
-                        Equipe
-                    </Typography>
-
-                    {isFetching
+                    {obterProjetosIsPending
                         ? [...Array(4)].map((_, index) => (
                               <Stack
                                   key={index}
@@ -161,7 +131,71 @@ export const ContainerPlataforma = () => {
                                   </Stack>
                               </Stack>
                           ))
-                        : projeto?.grupo?.integrantes?.map((integrante, index) => (
+                        : obterProjetos
+                              ?.filter((projeto) => projeto.id_projeto !== obterProjetoPorId?.id_projeto)
+                              .map((projeto, index) => (
+                                  <Stack
+                                      key={index}
+                                      alignItems="center"
+                                      direction="row"
+                                      gap={2}
+                                  >
+                                      <Skeleton
+                                          variant="circular"
+                                          width={50}
+                                          height={50}
+                                          sx={{ flexShrink: 0 }}
+                                      />
+                                      <Stack>
+                                          <Typography variant="subtitle1">{projeto.titulo}</Typography>
+                                          <Typography variant="body2">{projeto.area}</Typography>
+                                      </Stack>
+                                  </Stack>
+                              ))}
+                    <Typography
+                        variant="caption"
+                        color="#797979"
+                        textAlign={"center"}
+                    >
+                        Sobre • Ajuda • Privacidade • Termos • Dúvidas Frequentes • Acessibilidade
+                    </Typography>
+                </Styled.CardSugestao>
+            )}
+            {exibirEquipe && (
+                <Styled.CardEquipe>
+                    <Typography
+                        variant="h6"
+                        color="#797979"
+                    >
+                        Equipe
+                    </Typography>
+
+                    {obterProjetoPorIdIsPending
+                        ? [...Array(4)].map((_, index) => (
+                              <Stack
+                                  key={index}
+                                  alignItems="center"
+                                  direction="row"
+                                  gap={2}
+                              >
+                                  <Skeleton
+                                      variant="circular"
+                                      width={50}
+                                      height={50}
+                                  />
+                                  <Stack>
+                                      <Skeleton
+                                          width={120}
+                                          height={20}
+                                      />
+                                      <Skeleton
+                                          width={180}
+                                          height={16}
+                                      />
+                                  </Stack>
+                              </Stack>
+                          ))
+                        : obterProjetoPorId?.grupo?.integrantes?.map((integrante, index) => (
                               <Stack
                                   key={index}
                                   alignItems="center"

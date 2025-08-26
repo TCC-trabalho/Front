@@ -47,7 +47,7 @@ export const CardSugestao = styled(Stack)(({ theme }) => ({
     position: "fixed",
     top: "45%",
     right: "2rem",
-    transform: "translateY(-50%)",
+    transform: "translateY(-45%)",
     zIndex: 1000,
     justifyContent: "center",
     alignItems: "center",

@@ -4,10 +4,19 @@ import { Input } from "../../../../../../../../components/Input/Input"
 import { Select } from "../../../../../../../../components/select/Select"
 import { Button } from "../../../../../../../../components/Button/Button"
 import { ProjetoAtualizado } from "./modais/ProjetoAtualizado/ProjetoAtualizado"
+import { ChevronLeft } from "lucide-react"
 
 export const EditarProjeto = () => {
-    const { projetosIsloading, detalhes, control, onSubmit, openModal, setOpenModal, atualizarProjeto } =
-        useEditarProjeto()
+    const {
+        projetosIsloading,
+        detalhes,
+        control,
+        onSubmit,
+        openModal,
+        setOpenModal,
+        atualizarProjeto,
+        idProjeto,
+    } = useEditarProjeto()
 
     return (
         <>
@@ -138,22 +147,38 @@ export const EditarProjeto = () => {
                     </>
                 )}
             </Stack>
-            <Button
-                tamanho="lg"
+            <Stack
+                direction={"row"}
+                gap={4}
+                alignItems={"center"}
+                justifyContent={"center"}
                 sx={{
                     position: "fixed",
                     bottom: 16,
                     left: "50%",
                     transform: "translateX(-50%)",
                     zIndex: 1000,
-                    width: "auto",
-                    paddingInline: 2,
                 }}
-                loading={atualizarProjeto}
-                onClick={onSubmit}
             >
-                Salvas Alterações
-            </Button>
+                <Button
+                    tamanho="lg"
+                    icon={ChevronLeft}
+                    to={`/plataforma-nexus/detalhes-projeto/${idProjeto}`}
+                    viewTransition
+                >
+                    Voltar
+                </Button>
+
+                <Button
+                    tamanho="lg"
+                    loading={atualizarProjeto}
+                    onClick={onSubmit}
+                    sx={{ width: "auto", paddingInline: 1 }}
+                >
+                    Salvar Alterações
+                </Button>
+            </Stack>
+
             <ProjetoAtualizado
                 open={openModal}
                 onClose={() => setOpenModal(false)}

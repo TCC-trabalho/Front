@@ -58,6 +58,7 @@ export const useEditarProjeto = () => {
     })
 
     return {
+        idProjeto,
         projetosIsloading: isFetching || isLoading,
         atualizarProjeto: isPending,
         detalhes: data,
