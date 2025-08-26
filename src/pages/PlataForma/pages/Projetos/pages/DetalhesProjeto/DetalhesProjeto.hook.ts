@@ -11,12 +11,12 @@ export const useDetalhesProjeto = () => {
 
     const id = Number(idProjeto)
 
-    const { data, isFetching } = useObterProjetoPorId(id)
+    const { data, isPending } = useObterProjetoPorId(id)
 
     return {
         tipoUser,
         idOrientador,
-        isFetching,
+        isFetching: isPending,
         detalhes: data,
         idProjeto
     }

@@ -18,7 +18,7 @@ export const usePerfil = () => {
     const orientadorQuery = useObterProjetoPorIdOrientador(idOrientador)
 
     const data = tipo === "aluno" ? alunoQuery.data : orientadorQuery.data
-    const isFetching = (tipo === "aluno" ? alunoQuery.isFetching : orientadorQuery.isFetching) || false
+    const isFetching = (tipo === "aluno" ? alunoQuery.isPending : orientadorQuery.isPending) || false
     const feed = Array.isArray(data?.projetos) ? data!.projetos : []
 
     return {

@@ -1,10 +1,10 @@
 import { useObterProjetos } from "../../../../api/controllers/projeto"
 
 export const useProjetos = () => {
-    const { data, isFetching } = useObterProjetos()
+    const { data, isPending } = useObterProjetos()
 
     return {
-        isFetching,
+        isFetching: isPending,
         feed: data ?? [],
     }
 }

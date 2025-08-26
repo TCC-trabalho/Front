@@ -46,7 +46,7 @@ export const CardSugestao = styled(Stack)(({ theme }) => ({
     width: 200,
     position: "fixed",
     top: "45%",
-    right: "2rem",
+    right: 52,
     transform: "translateY(-45%)",
     zIndex: 1000,
     justifyContent: "center",
@@ -66,7 +66,7 @@ export const CardEquipe = styled(Stack)(({ theme }) => ({
     transform: "translateY(-50%)",
     zIndex: 1000,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "start",
     gap: theme.spacing(3),
 
     [theme.breakpoints.down("md")]: {

@@ -8,6 +8,7 @@ import { Button } from "../../../../components/Button/Button"
 import { Outlet } from "react-router"
 import { useContainerPlataforma } from "./ContainerPlataforma.hook"
 import { useControleExibicao } from "../../../../lib/utils/controleExibicao"
+import { truncateText } from "../../../../lib/utils/truncateText"
 
 export const ContainerPlataforma = () => {
     const {
@@ -147,8 +148,12 @@ export const ContainerPlataforma = () => {
                                           sx={{ flexShrink: 0 }}
                                       />
                                       <Stack>
-                                          <Typography variant="subtitle1">{projeto.titulo}</Typography>
-                                          <Typography variant="body2">{projeto.area}</Typography>
+                                          <Typography variant="subtitle1">
+                                              {truncateText(projeto.titulo, 15)}
+                                          </Typography>
+                                          <Typography variant="body2">
+                                              {truncateText(projeto.area, 20)}
+                                          </Typography>
                                       </Stack>
                                   </Stack>
                               ))}
@@ -166,6 +171,8 @@ export const ContainerPlataforma = () => {
                     <Typography
                         variant="h6"
                         color="#797979"
+                        width={"100%"}
+                        textAlign={"center"}
                     >
                         Equipe
                     </Typography>
@@ -206,15 +213,19 @@ export const ContainerPlataforma = () => {
                                       variant="circular"
                                       width={50}
                                       height={50}
+                                      sx={{ flexShrink: 0 }}
                                   />
-                                  <Stack maxWidth={100}>
+                                  <Stack>
                                       <Typography variant="subtitle1">
-                                          {integrante.nomeUsuario || integrante.nome}
+                                          {truncateText(integrante.nome, 15)}
                                       </Typography>
-                                      <Typography variant="body2">{integrante.email}</Typography>
+                                      <Typography variant="body2">
+                                          {truncateText(integrante.email, 20)}
+                                      </Typography>
                                   </Stack>
                               </Stack>
                           ))}
+                          
                 </Styled.CardEquipe>
             )}
         </Styled.Container>
