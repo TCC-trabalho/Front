@@ -490,7 +490,7 @@ export const LadingPage = () => {
                         fontWeight={600}
                     >
                         Equipe de Desenvolvedores
-                    </Typography>
+                    </Typography>''
                 </Stack>
 
                 <Stack
@@ -512,11 +512,11 @@ export const LadingPage = () => {
 
                     <Styled.DevCardsContainer id="dev-cards-container">
                         {[
-                            { nome: "Camila Trentino", funcao: "UI/UX Designer" },
-                            { nome: "Giulia Pontelli", funcao: "Sla" },
+                            { nome: "Camila Trentino", funcao: "Documentadora" },
+                            { nome: "Giulia Pontelli", funcao: "Documentadora" },
                             { nome: "Enzo Caetano", funcao: "Desenvolvedor Full Stack" },
                             { nome: "Aline Dantas", funcao: "UI/UX Designer" },
-                            { nome: "Kevin Marques", funcao: "Desenvolvedor Backend" },
+                            { nome: "Kevin Marques", funcao: "Documentador" },
                         ].map((dev, index) => (
                             <InfoCard
                                 key={index}

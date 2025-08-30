@@ -3,6 +3,7 @@ import { Skeleton, Stack, Typography } from "@mui/material"
 import { Button } from "../../../../components/Button/Button"
 import { usePerfil } from "./Perfil.hook"
 import { FeedCard } from "../../../../components/FeedCard/FeedCard"
+import { Plus } from "lucide-react"
 
 export const Perfil = () => {
     const { isFetching, feed, user, userId } = usePerfil()
@@ -49,7 +50,7 @@ export const Perfil = () => {
 
                 <Stack
                     gap={1}
-                    sx={{ flex: 1 }}       
+                    sx={{ flex: 1 }}
                     justifyContent={{
                         xs: "center",
                         sm: "initial",
@@ -83,16 +84,31 @@ export const Perfil = () => {
                     >
                         {user?.biografia}
                     </Typography>
-
-                    <Button
-                        tamanho="sm"
-                        variante="ButtonGrey"
-                        sx={{ width: 120 }}
-                        to={`/plataforma-nexus/editar-perfil/${userId}`}
-                        viewTransition
+                    <Stack
+                        direction={"row"}
+                        gap={2}
                     >
-                        Editar Perfil
-                    </Button>
+                        <Button
+                            tamanho="sm"
+                            variante="ButtonGrey"
+                            sx={{ width: 120 }}
+                            to={`/plataforma-nexus/editar-perfil/${userId}`}
+                            viewTransition
+                        >
+                            Editar Perfil
+                        </Button>
+                        {user?.tipoUser == "orientador" && (
+                            <Button
+                                tamanho="sm"
+                                icon={Plus}
+                                sx={{ width: "auto", paddingInline: 2 }}
+                                to="/plataforma-nexus/cadastrar-projeto"
+                                viewTransition
+                            >
+                                Novo Projeto
+                            </Button>
+                        )}
+                    </Stack>
                 </Stack>
             </Stack>
 
