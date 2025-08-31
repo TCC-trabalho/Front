@@ -12,7 +12,7 @@ export const useFormEmpresa = () => {
         resolver: yupResolver(validacaoEmpresa),
     })
 
-    const { mutateAsync } = useLogin()
+    const { mutateAsync, isPending } = useLogin()
 
     const onSubmit = handleSubmit(async () => {
         const valores = getValues()
@@ -37,5 +37,6 @@ export const useFormEmpresa = () => {
     return {
         control,
         onSubmit,
+        isPending
     }
 }

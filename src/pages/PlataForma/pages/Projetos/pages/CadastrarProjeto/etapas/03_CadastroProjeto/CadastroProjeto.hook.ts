@@ -1,19 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { toast } from "sonner"
 import { CadastroProjetoSchema } from "./CadastroProjeto.schema"
-import { useForm } from "react-hook-form"
+import { Resolver, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useCadastrarProjeto } from "../../../../../../../../api/controllers/projeto"
 import { useParams } from "react-router"
 import { useUser } from "../../../../../../../../lib/hooks/useUser"
 import { useSuccessModal } from "../../../../../../../../lib/hooks/useSuccessModal"
+import { useRef, useState } from "react"
+import { FormValues } from "./CadastroProjeto.types"
 
 export const useCadastroProjeto = () => {
     const { user } = useUser()
     const { idGrupo } = useParams()
     const idGrupoNumber = Number(idGrupo)
 
-    const { control, handleSubmit, getValues } = useForm({
-        resolver: yupResolver(CadastroProjetoSchema),
+    const [preview, setPreview] = useState<string | null>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
+    const [dragOver, setDragOver] = useState(false)
+
+    const { control, handleSubmit, getValues, setValue } = useForm<FormValues>({
+        resolver: yupResolver(CadastroProjetoSchema) as unknown as Resolver<FormValues, any, FormValues>,
+        defaultValues: {
+            titulo: "",
+            descricao: "",
+            area: "",
+            foto: null,
+        },
     })
 
     const { mutateAsync: cadastrarProjeto } = useCadastrarProjeto()
@@ -31,26 +44,27 @@ export const useCadastroProjeto = () => {
         const toastId = toast.loading("Criando projeto...")
 
         try {
-            const response = await cadastrarComModal({
-                titulo: valores.titulo,
-                descricao: valores.descricao,
-                area: valores.area,
-                data_criacao: new Date().toISOString().slice(0, 19).replace("T", " "),
-                status: "ativo",
-                id_grupo: idGrupoNumber,
-                id_orientador: user?.id_orientador || 0,
-                objetivo: null,
-                justificativa: null,
-                senha_acesso: "",
-                qnt_empresas_patrocinam: 0,
-            })
+            const form = new FormData()
+            form.append("titulo", valores.titulo)
+            form.append("descricao", valores.descricao)
+            form.append("area", valores.area)
+
+            form.append("data_criacao", new Date().toISOString().slice(0, 19).replace("T", " "))
+            form.append("status", "ativo")
+            form.append("id_grupo", String(idGrupoNumber))
+            form.append("id_orientador", String(user?.id_orientador || 0))
+            form.append("objetivo", "")
+            form.append("justificativa", "") 
+            form.append("qnt_empresas_patrocinam", String(0))
+
+            if (valores.foto) form.append("foto", valores.foto)
+
+            const response = await cadastrarComModal(form)
 
             toast.success("Projeto criado com sucesso!", { id: toastId })
             return response
         } catch {
-            toast.error("Falha ao criar projeto. Verifique os dados.", {
-                id: toastId,
-            })
+            toast.error("Falha ao criar projeto. Verifique os dados.", { id: toastId })
         }
     })
 
@@ -60,5 +74,11 @@ export const useCadastroProjeto = () => {
         isPendingCadastrarProjeto: isPending,
         openModal,
         setOpenModal,
+        preview,
+        setPreview,
+        inputRef,
+        dragOver,
+        setDragOver,
+        setValue,
     }
 }

@@ -20,7 +20,7 @@ export const useEditarProjeto = () => {
             descricao: data?.descricao || "",
             objetivo: data?.objetivo || "",
             justificativa: data?.justificativa || "",
-            imagemUrl: data?.imagemUrl || "",
+            imagemUrl: data?.foto || "",
         },
     })
 

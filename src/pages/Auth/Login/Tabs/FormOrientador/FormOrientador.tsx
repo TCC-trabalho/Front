@@ -4,16 +4,13 @@ import { Button } from "../../../../../components/Button/Button"
 import { useFormOrientador } from "./FormOrientador.hook"
 
 export const FormOrientador = () => {
-
-    const {
-        control,
-        onSubmit
-    } = useFormOrientador()
+    const { control, onSubmit, isPending } = useFormOrientador()
 
     return (
-
-        <Stack component={"form"} gap={3}>
-
+        <Stack
+            component={"form"}
+            gap={3}
+        >
             <Input
                 placeholder="Digite seu email"
                 control={control}
@@ -21,6 +18,7 @@ export const FormOrientador = () => {
                 tamanho={"sm"}
                 label="Email"
                 fullWidth
+                disabled={isPending}
             />
 
             <Input
@@ -31,14 +29,18 @@ export const FormOrientador = () => {
                 tamanho={"sm"}
                 label="Senha"
                 fullWidth
+                disabled={isPending}
             />
 
             <Stack alignItems={"center"}>
-                <Button tamanho={"lg"} onClick={onSubmit}>
+                <Button
+                    tamanho={"lg"}
+                    onClick={onSubmit}
+                    loading={isPending}
+                >
                     Entrar
                 </Button>
             </Stack>
-
         </Stack>
     )
 }

@@ -5,7 +5,7 @@ import { useFormEmpresa } from "./FormEmpresa.hook"
 import { Select } from "../../../../../components/select/Select"
 
 export const FormEmpresa = () => {
-    const { control, onSubmit } = useFormEmpresa()
+    const { control, onSubmit, isPending } = useFormEmpresa()
 
     return (
         <Stack
@@ -19,6 +19,7 @@ export const FormEmpresa = () => {
                 tamanho={"sm"}
                 label="Nome completo"
                 fullWidth
+                disabled={isPending}
             />
 
             <Stack
@@ -40,6 +41,7 @@ export const FormEmpresa = () => {
                     label="Telefone"
                     mask="(99) 99999-9999"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -50,6 +52,7 @@ export const FormEmpresa = () => {
                     tamanho={"sm"}
                     label="Email"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -60,6 +63,7 @@ export const FormEmpresa = () => {
                     label="CNPJ"
                     mask="99.999.999/9999-99"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -70,6 +74,7 @@ export const FormEmpresa = () => {
                     label="Endereço"
                     mask="AA-AAAAAAAAAAAAAAA"
                     fullWidth
+                    disabled={isPending}
                 />
             </Stack>
 
@@ -83,6 +88,7 @@ export const FormEmpresa = () => {
                     { value: "AGRO", label: "AGRO" },
                     { value: "TEC", label: "TEC" },
                 ]}
+                disabled={isPending}
             />
 
             <Stack
@@ -103,6 +109,7 @@ export const FormEmpresa = () => {
                     tamanho={"sm"}
                     label="Senha"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -113,6 +120,7 @@ export const FormEmpresa = () => {
                     tamanho={"sm"}
                     label="Confirme sua senha"
                     fullWidth
+                    disabled={isPending}
                 />
             </Stack>
 
@@ -120,6 +128,7 @@ export const FormEmpresa = () => {
                 <Button
                     tamanho={"lg"}
                     onClick={onSubmit}
+                    loading={isPending}
                 >
                     Cadastrar
                 </Button>

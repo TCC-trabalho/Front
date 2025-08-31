@@ -12,7 +12,7 @@ export const useFormAluno = () => {
         resolver: yupResolver(validacaoAluno),
     })
 
-    const { mutateAsync } = useCadastroAluno()
+    const { mutateAsync, isPending } = useCadastroAluno()
 
     const onSubmit = handleSubmit(async () => {
         const valores = getValues()
@@ -20,8 +20,7 @@ export const useFormAluno = () => {
         const payload = {
             nome: valores.nome,
             nomeUsuario: valores.nomeUser,
-            cpf: valores.cpf.replace(/\D/g, ""),
-            rg: valores.rg.replace(/\D/g, ""),
+            biografia: "",
             email: valores.email,
             nascimento: valores.dataNascimento,
             telefone: valores.telefone.replace(/\D/g, ""),
@@ -46,5 +45,6 @@ export const useFormAluno = () => {
     return {
         control,
         onSubmit,
+        isPending
     }
 }

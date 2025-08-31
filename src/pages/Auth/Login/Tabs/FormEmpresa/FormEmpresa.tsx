@@ -4,7 +4,7 @@ import { Button } from "../../../../../components/Button/Button"
 import { useFormEmpresa } from "./FormEmpresa.hook"
 
 export const FormEmpresa = () => {
-    const { control, onSubmit } = useFormEmpresa()
+    const { control, onSubmit, isPending } = useFormEmpresa()
 
     return (
         <Stack
@@ -18,6 +18,7 @@ export const FormEmpresa = () => {
                 tamanho={"sm"}
                 label="Cnpj"
                 fullWidth
+                disabled={isPending}
             />
 
             <Input
@@ -28,12 +29,14 @@ export const FormEmpresa = () => {
                 tamanho={"sm"}
                 label="Senha"
                 fullWidth
+                disabled={isPending}
             />
 
             <Stack alignItems={"center"}>
                 <Button
                     tamanho={"lg"}
                     onClick={onSubmit}
+                    loading={isPending}
                 >
                     Entrar
                 </Button>

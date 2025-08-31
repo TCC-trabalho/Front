@@ -12,7 +12,7 @@ export const useCadastroGrupo = () => {
 
     const navigate = useNavigate()
 
-    const { mutateAsync } = useCadastrarGrupo()
+    const { mutateAsync, isPending } = useCadastrarGrupo()
 
     const onSubmit = handleSubmit(async () => {
         const valores = getValues()
@@ -36,5 +36,6 @@ export const useCadastroGrupo = () => {
     return {
         control,
         onSubmit,
+        isPending
     }
 }

@@ -1,6 +1,6 @@
 export type Projeto = {
     id_projeto?: number
-    imagemUrl?: string
+    foto?: string
     organizacao?: string
     integrantes?: number
     titulo: string

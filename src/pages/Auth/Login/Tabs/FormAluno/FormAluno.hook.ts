@@ -12,7 +12,7 @@ export const useFormAluno = () => {
         resolver: yupResolver(validacaoAluno),
     })
 
-    const { mutateAsync } = useLogin()
+    const { mutateAsync, isPending } = useLogin()
 
     const onSubmit = handleSubmit(async () => {
         const valores = getValues()
@@ -38,5 +38,6 @@ export const useFormAluno = () => {
     return {
         control,
         onSubmit,
+        isPending
     }
 }

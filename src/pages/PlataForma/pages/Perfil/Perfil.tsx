@@ -137,7 +137,7 @@ export const Perfil = () => {
                     {(isFetching ? Array.from({ length: 6 }) : feed).map((item: any, index: number) => (
                         <FeedCard
                             key={index}
-                            imagemUrl={item?.imagemUrl || ""}
+                            imagemUrl={item?.foto || ""}
                             titulo={item?.titulo || ""}
                             area={item?.area || ""}
                             organizacao={item?.organizacao || ""}

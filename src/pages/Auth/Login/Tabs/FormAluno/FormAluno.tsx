@@ -4,7 +4,7 @@ import { useFormAluno } from "./FormAluno.hook"
 import { Button } from "../../../../../components/Button/Button"
 
 export const FormALuno = () => {
-    const { control, onSubmit } = useFormAluno()
+    const { control, onSubmit, isPending } = useFormAluno()
 
     return (
         <Stack
@@ -18,6 +18,7 @@ export const FormALuno = () => {
                 tamanho={"sm"}
                 label="Email"
                 fullWidth
+                disabled={isPending}
             />
 
             <Input
@@ -28,13 +29,14 @@ export const FormALuno = () => {
                 tamanho={"sm"}
                 label="Senha"
                 fullWidth
+                disabled={isPending}
             />
 
             <Stack alignItems={"center"}>
                 <Button
                     tamanho={"lg"}
                     onClick={onSubmit}
-                    viewTransition
+                    loading={isPending}
                 >
                     Entrar
                 </Button>

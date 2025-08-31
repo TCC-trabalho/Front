@@ -4,7 +4,7 @@ import { Button } from "../../../../../components/Button/Button"
 import { useFormOrientador } from "./FormOrientador.hook"
 
 export const FormOrientador = () => {
-    const { control, onSubmit } = useFormOrientador()
+    const { control, onSubmit, isPending } = useFormOrientador()
 
     return (
         <Stack
@@ -18,6 +18,7 @@ export const FormOrientador = () => {
                 tamanho={"sm"}
                 label="Nome completo"
                 fullWidth
+                disabled={isPending}
             />
 
             <Input
@@ -27,6 +28,7 @@ export const FormOrientador = () => {
                 tamanho={"sm"}
                 label="Nome de usuário"
                 fullWidth
+                disabled={isPending}
             />
 
             <Stack
@@ -48,6 +50,7 @@ export const FormOrientador = () => {
                     label="Telefone"
                     mask="(99) 99999-9999"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -58,6 +61,7 @@ export const FormOrientador = () => {
                     tamanho={"sm"}
                     label="Email"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -68,6 +72,7 @@ export const FormOrientador = () => {
                     label="CPF"
                     mask="999.999.999-99"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -78,6 +83,7 @@ export const FormOrientador = () => {
                     label="RG"
                     mask="99.999.999-9"
                     fullWidth
+                    disabled={isPending}
                 />
             </Stack>
 
@@ -88,6 +94,7 @@ export const FormOrientador = () => {
                 tamanho={"sm"}
                 label="Formação"
                 fullWidth
+                disabled={isPending}
             />
 
             <Stack
@@ -108,6 +115,7 @@ export const FormOrientador = () => {
                     tamanho={"sm"}
                     label="Senha"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -118,6 +126,7 @@ export const FormOrientador = () => {
                     tamanho={"sm"}
                     label="Confirme sua senha"
                     fullWidth
+                    disabled={isPending}
                 />
             </Stack>
 
@@ -125,6 +134,7 @@ export const FormOrientador = () => {
                 <Button
                     tamanho={"lg"}
                     onClick={onSubmit}
+                    loading={isPending}
                 >
                     Cadastrar
                 </Button>

@@ -8,6 +8,7 @@ export const Container = styled(Stack)(({ theme }) => ({
 
     [theme.breakpoints.up("xs")]: {
         padding: 0,
+        paddingTop: theme.spacing(8),
     },
 
     [theme.breakpoints.up("md")]: {

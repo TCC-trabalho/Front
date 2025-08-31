@@ -15,7 +15,7 @@ export const Projetos = () => {
             {(isFetching ? Array.from({ length: 3 }) : feed).map((item: any, index: number) => (
                 <FeedCard
                     key={index}
-                    imagemUrl={item?.imagemUrl || ""}
+                    imagemUrl={item?.foto || ""}
                     titulo={item?.titulo || ""}
                     area={item?.area || ""}
                     organizacao={item?.organizacao || ""}

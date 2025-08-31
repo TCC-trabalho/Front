@@ -5,7 +5,7 @@ import { useCadastroGrupo } from "./CadastroGrupo.hook"
 import { ProgressHeader } from "../../../../../../../../components/ProgressHeader/ProgressHeader"
 
 export const CadastroGrupo = () => {
-    const { control, onSubmit } = useCadastroGrupo()
+    const { control, onSubmit, isPending } = useCadastroGrupo()
 
     return (
         <>
@@ -27,6 +27,7 @@ export const CadastroGrupo = () => {
                     tamanho={"sm"}
                     label="Nome"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -35,15 +36,31 @@ export const CadastroGrupo = () => {
                     name={"descricao"}
                     tamanho={"sm"}
                     label="Descrição"
+                    multiline
+                    rows={3}
                     fullWidth
-                    sx={{ minHeight: "150px" }}
+                    disabled={isPending}
                 />
 
-                <Stack alignItems={"center"}>
+                <Stack
+                    alignItems={"center"}
+                    direction={"row"}
+                    justifyContent={"center"}
+                    gap={2}
+                >
+                    <Button
+                        variante="ButtonGrey"
+                        tamanho={"lg"}
+                        to="/plataforma-nexus/"
+                        viewTransition
+                    >
+                        Voltar
+                    </Button>
                     <Button
                         tamanho={"lg"}
                         onClick={onSubmit}
                         viewTransition
+                        loading={isPending}
                     >
                         Cadastrar
                     </Button>

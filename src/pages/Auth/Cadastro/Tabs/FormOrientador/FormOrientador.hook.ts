@@ -12,7 +12,7 @@ export const useFormOrientador = () => {
         resolver: yupResolver(validacaoOrientador),
     })
 
-    const { mutateAsync } = useCadastroProfessor()
+    const { mutateAsync, isPending } = useCadastroProfessor()
 
     const onSubmit = handleSubmit(async () => {
         const valores = getValues()
@@ -20,6 +20,7 @@ export const useFormOrientador = () => {
         const payload = {
             nome: valores.nome,
             nomeUsuario: valores.nomeUser,
+            biografia: "",
             cpf: valores.cpf.replace(/\D/g, ""),
             rg: valores.rg.replace(/\D/g, ""),
             email: valores.email,
@@ -43,5 +44,6 @@ export const useFormOrientador = () => {
     return {
         control,
         onSubmit,
+        isPending
     }
 }

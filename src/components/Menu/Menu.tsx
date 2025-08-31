@@ -2,15 +2,7 @@ import { Avatar, Drawer, Skeleton, Stack, Typography, useMediaQuery, useTheme } 
 import * as Styled from "./Menu.styled"
 import { Button } from "../Button/Button"
 import { LogoNexus } from "../../assets"
-import {
-    Building2,
-    Lightbulb,
-    LogOut,
-    MenuIcon,
-    MessageCircle,
-    Settings,
-    UserRound,
-} from "lucide-react"
+import { Building2, Lightbulb, LogOut, MenuIcon, MessageCircle, Settings, UserRound } from "lucide-react"
 import { useState } from "react"
 import { MenuProps } from "./Menu.type"
 import { useControleExibicao } from "../../lib/utils/controleExibicao"
@@ -27,48 +19,38 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
     const podeMostrarProjeto = (variante === "aluno" || variante === "orientador") && header
 
     const menuContent = (
-        <Styled.Menu {...props}>
+        <Styled.Menu {...props} ocultarDetalhesMenu={ocultarDetalhesMenu}>
             <Stack
-                gap={2}
-                justifyContent={"start"}
+                gap={5}
+                justifyContent={"center"}
+                alignItems={"center"}
             >
                 <LogoNexus width={150} />
 
                 {ocultarDetalhesMenu && (
-                    <>
-                        <Stack className="Usercontent">
-                            {loading ? (
-                                <Skeleton
-                                    variant="circular"
-                                    width={80}
-                                    height={80}
-                                />
-                            ) : (
-                                <Avatar
-                                    src={header?.[0]?.foto}
-                                    alt="Foto do usuário"
-                                    sx={{ width: 80, height: 80 }}
-                                />
-                            )}
-                            <Typography>{header?.[0]?.nomeUser ?? "Nome de Usuário"}</Typography>
-                        </Stack>
-
+                    <Stack className="Usercontent">
+                        {loading ? (
+                            <Skeleton
+                                variant="circular"
+                                width={80}
+                                height={80}
+                            />
+                        ) : (
+                            <Avatar
+                                src={header?.[0]?.foto}
+                                alt="Foto do usuário"
+                                sx={{ width: 80, height: 80 }}
+                            />
+                        )}
+                        <Typography>{header?.[0]?.nomeUser ?? "Nome de Usuário"}</Typography>
                         {podeMostrarProjeto ? (
                             <Stack className="Projectcontent">
-                                {header[0].quatidadeProjetos && (
-                                    <Typography
-                                        variant="caption"
-                                        color="#797979"
-                                    >
-                                        Quantidade de projetos
-                                    </Typography>
-                                )}
                                 <Typography variant="h6">
                                     {header[0].quatidadeProjetos} projetos
                                 </Typography>
                             </Stack>
                         ) : null}
-                    </>
+                    </Stack>
                 )}
             </Stack>
 
@@ -86,6 +68,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     icon={Lightbulb}
                     to="/plataforma-nexus/projetos"
                     viewTransition
+                    ladoIcon="direita"
                 >
                     Projetos
                 </Button>
@@ -96,6 +79,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     icon={Building2}
                     to="/plataforma-nexus/empresas"
                     viewTransition
+                    ladoIcon="direita"
                 >
                     Empresas
                 </Button>
@@ -106,6 +90,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     icon={MessageCircle}
                     to="/plataforma-nexus/chat"
                     viewTransition
+                    ladoIcon="direita"
                 >
                     Chat
                 </Button>
@@ -117,6 +102,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                         icon={Settings}
                         to="/plataforma-nexus/configuracoes"
                         viewTransition
+                        ladoIcon="direita"
                     >
                         Configurações
                     </Button>
@@ -138,19 +124,13 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
 
                 {!ocultarDetalhesMenu && (
                     <Stack className="body">
-                        <Typography
-                            variant="subtitle1"
-                            color="#797979"
-                        >
-                            Pefil
-                        </Typography>
-
                         <Button
                             tamanho={"sm"}
                             icon={UserRound}
                             to="/plataforma-nexus/meu-perfil"
                             viewTransition
                             variante="ButtonLinkBlack"
+                            ladoIcon="direita"
                         >
                             Meu Perfil
                         </Button>
@@ -161,6 +141,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                             icon={Settings}
                             to="/plataforma-nexus/configuracoes"
                             viewTransition
+                            ladoIcon="direita"
                         >
                             Configurações
                         </Button>
@@ -169,6 +150,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                             tamanho={"sm"}
                             variante="ButtonLinkBlack"
                             icon={LogOut}
+                            ladoIcon="direita"
                             onClick={() => setOpenModal(true)}
                         >
                             Encerrar Sessão
@@ -197,10 +179,10 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     open
                     PaperProps={{
                         sx: {
-                            width: 250,
+                            width: 150,
                             borderRight: "1px solid #B3B3B3",
                             backgroundColor: "#FFFCF5",
-                            padding: "0px 0px 0px 40px",
+                            paddingInline: 5,
                             color: "#3F3F3F",
                         },
                     }}
@@ -214,9 +196,9 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     onClose={() => setOpen(false)}
                     PaperProps={{
                         sx: {
-                            width: 230,
+                            width: 150,
                             backgroundColor: "#FFFCF5",
-                            padding: "0px 0px 0px 40px",
+                            paddingInline: 5,
                             color: "#3F3F3F",
                         },
                     }}

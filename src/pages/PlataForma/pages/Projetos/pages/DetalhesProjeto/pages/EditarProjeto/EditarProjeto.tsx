@@ -38,7 +38,7 @@ export const EditarProjeto = () => {
                     />
                 ) : (
                     <img
-                        src={detalhes?.imagemUrl}
+                        src={detalhes?.foto}
                         alt=""
                         width={"100%"}
                         height={400}

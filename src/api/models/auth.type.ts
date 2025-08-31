@@ -12,8 +12,7 @@ export type LoginPayload = {
 export type CadastroAluno = {
     nome: string
     nomeUsuario: string
-    cpf: string
-    rg: string
+    biografia: string
     email: string
     nascimento: Date
     telefone: string
@@ -25,6 +24,7 @@ export type CadastroAluno = {
 export type CadastroProfessor = {
     nome: string
     nomeUsuario: string
+    biografia: string
     cpf: string
     rg: string
     email: string

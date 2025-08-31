@@ -59,18 +59,23 @@ export const useObterProjetoPorIdAluno = (id?: number) => {
 
 export const useCadastrarProjeto = () => {
     return useMutation({
-        mutationFn: async (request: Projeto) => {
-            const { data } = await api.post("projetos", request)
-            return data
-        },
-        onSuccess: () => {
-            nexusQueryClient.invalidateQueries({ queryKey: ["projetos"] })
-            nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-orientador"] })
-            nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-aluno"] })
-            nexusQueryClient.invalidateQueries({ queryKey: ["projeto"] })
-        },
+      mutationFn: async (request: FormData | Projeto) => {
+        const isForm = typeof FormData !== "undefined" && request instanceof FormData
+        const { data } = await api.post(
+          "projetos",
+          request,
+          isForm ? { headers: { "Content-Type": "multipart/form-data" } } : undefined
+        )
+        return data
+      },
+      onSuccess: () => {
+        nexusQueryClient.invalidateQueries({ queryKey: ["projetos"] })
+        nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-orientador"] })
+        nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-aluno"] })
+        nexusQueryClient.invalidateQueries({ queryKey: ["projeto"] })
+      },
     })
-}
+  }
 
 export const useAtualizarProjeto = (id: number) => {
     return useMutation({

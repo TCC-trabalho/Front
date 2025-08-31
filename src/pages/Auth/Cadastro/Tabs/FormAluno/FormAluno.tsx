@@ -5,7 +5,7 @@ import { useFormAluno } from "./FormAluno.hook"
 import { Select } from "../../../../../components/select/Select"
 
 export const FormALuno = () => {
-    const { control, onSubmit } = useFormAluno()
+    const { control, onSubmit, isPending } = useFormAluno()
 
     return (
         <Stack
@@ -19,6 +19,7 @@ export const FormALuno = () => {
                 tamanho={"sm"}
                 label="Nome completo"
                 fullWidth
+                disabled={isPending}
             />
 
             <Input
@@ -28,6 +29,7 @@ export const FormALuno = () => {
                 tamanho={"sm"}
                 label="Nome de usuário"
                 fullWidth
+                disabled={isPending}
             />
 
             <Stack
@@ -49,6 +51,7 @@ export const FormALuno = () => {
                     label="Telefone"
                     mask="(99) 99999-9999"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -59,28 +62,8 @@ export const FormALuno = () => {
                     tamanho={"sm"}
                     label="Email"
                     fullWidth
+                    disabled={isPending}
                 />
-
-                <Input
-                    placeholder="Digite seu CPF"
-                    control={control}
-                    name={"cpf"}
-                    tamanho={"sm"}
-                    label="CPF"
-                    mask="999.999.999-99"
-                    fullWidth
-                />
-
-                <Input
-                    placeholder="Digite seu RG"
-                    control={control}
-                    name={"rg"}
-                    tamanho={"sm"}
-                    label="RG"
-                    mask="99.999.999-9"
-                    fullWidth
-                />
-
                 <Input
                     placeholder="Digite sua data de nascimento"
                     type="date"
@@ -89,6 +72,7 @@ export const FormALuno = () => {
                     tamanho={"sm"}
                     label="Data de nascimento"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -98,6 +82,7 @@ export const FormALuno = () => {
                     tamanho={"sm"}
                     label="Curso"
                     fullWidth
+                    disabled={isPending}
                 />
             </Stack>
 
@@ -111,6 +96,7 @@ export const FormALuno = () => {
                     { value: 2, label: "ETEC" },
                     { value: 3, label: "FATEC" },
                 ]}
+                disabled={isPending}
             />
 
             <Stack
@@ -131,6 +117,7 @@ export const FormALuno = () => {
                     tamanho={"sm"}
                     label="Senha"
                     fullWidth
+                    disabled={isPending}
                 />
 
                 <Input
@@ -141,6 +128,7 @@ export const FormALuno = () => {
                     tamanho={"sm"}
                     label="Confirme sua senha"
                     fullWidth
+                    disabled={isPending}
                 />
             </Stack>
 
@@ -150,6 +138,7 @@ export const FormALuno = () => {
                     onClick={onSubmit}
                     to="/login"
                     viewTransition
+                    loading={isPending}
                 >
                     Cadastrar
                 </Button>
