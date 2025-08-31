@@ -101,8 +101,10 @@ export const ContainerPlataforma = () => {
             {exibirSugestao && (
                 <Styled.CardSugestao>
                     <Typography
-                        variant="h6"
-                        color="#797979"
+                       variant="h6"
+                       color="#797979"
+                       width={"100%"}
+                       textAlign={"center"}
                     >
                         Sugestões
                     </Typography>

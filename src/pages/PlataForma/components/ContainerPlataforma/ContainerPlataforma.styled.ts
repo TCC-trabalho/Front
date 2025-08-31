@@ -46,16 +46,22 @@ export const Content = styled(Stack)(({ theme }) => ({
 export const CardSugestao = styled(Stack)(({ theme }) => ({
     width: 200,
     position: "fixed",
-    top: "45%",
+    top: "40%",
     right: 52,
-    transform: "translateY(-45%)",
+    transform: "translateY(-40%)",
     zIndex: 1000,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "start",
     gap: theme.spacing(3),
 
-    [theme.breakpoints.down("lg")]: {
+    [theme.breakpoints.down("md")]: {
         display: "none",
+        right: 10,
+    },
+
+    [theme.breakpoints.down("lg")]: {
+        right: 10,
+        scale: "0.85",
     },
 }))
 
