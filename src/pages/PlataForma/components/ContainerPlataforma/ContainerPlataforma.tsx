@@ -101,10 +101,10 @@ export const ContainerPlataforma = () => {
             {exibirSugestao && (
                 <Styled.CardSugestao>
                     <Typography
-                       variant="h6"
-                       color="#797979"
-                       width={"100%"}
-                       textAlign={"center"}
+                        variant="h6"
+                        color="#797979"
+                        width={"100%"}
+                        textAlign={"center"}
                     >
                         Sugestões
                     </Typography>
@@ -143,12 +143,23 @@ export const ContainerPlataforma = () => {
                                       direction="row"
                                       gap={2}
                                   >
-                                      <Skeleton
-                                          variant="circular"
+                                      <Stack
                                           width={50}
                                           height={50}
-                                          sx={{ flexShrink: 0 }}
-                                      />
+                                          sx={{
+                                              flexShrink: 0,
+                                              borderRadius: "50%",
+                                              overflow: "hidden",
+                                          }}
+                                      >
+                                          <img
+                                              src={projeto.foto}
+                                              alt={projeto.titulo}
+                                              width="100%"
+                                              height="100%"
+                                              style={{ objectFit: "cover" }}
+                                          />
+                                      </Stack>
                                       <Stack>
                                           <Typography variant="subtitle1">
                                               {truncateText(projeto.titulo, 15)}
@@ -227,7 +238,6 @@ export const ContainerPlataforma = () => {
                                   </Stack>
                               </Stack>
                           ))}
-                          
                 </Styled.CardEquipe>
             )}
         </Styled.Container>

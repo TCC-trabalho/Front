@@ -8,8 +8,8 @@ export const CadastroProjetoSchema = Yup.object().shape({
         .nullable()
         .test(
             "fileSize",
-            "A imagem deve ter no máximo 5MB",
-            (file) => !file || (file && file.size <= 5 * 1024 * 1024)
+            "A imagem deve ter no máximo 2MB",
+            (file) => !file || (file && file.size <= 2 * 1024 * 1024)
         )
         .test(
             "fileType",

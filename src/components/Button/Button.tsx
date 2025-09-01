@@ -1,6 +1,7 @@
 import { ButtonProp } from "./Button.types"
 import { Link } from "react-router"
 import * as Component from "./Button.styled"
+import { LoaderCircle } from "lucide-react"
 
 export const Button = ({
     variante = "ButtonRed",
@@ -31,9 +32,20 @@ export const Button = ({
             somenteIcone={somenteIcone}
             {...props}
         >
-            {ladoIcon == "esquerda" && Icon && <Icon size={iconSize} />}
-            {!somenteIcone && <span>{children}</span>}
-            {ladoIcon == "direita" && Icon && <Icon size={iconSize} />}
+           {loading ? (
+                <LoaderCircle
+                    size={iconSize}
+                    style={{
+                        animation: "spin 1s linear infinite",
+                    }}
+                />
+            ) : (
+                <>
+                    {ladoIcon == "esquerda" && Icon && <Icon size={iconSize} />}
+                    {!somenteIcone && <span>{children}</span>}
+                    {ladoIcon == "direita" && Icon && <Icon size={iconSize} />}
+                </>
+            )}
         </Component.ButtonVariants>
     )
 }

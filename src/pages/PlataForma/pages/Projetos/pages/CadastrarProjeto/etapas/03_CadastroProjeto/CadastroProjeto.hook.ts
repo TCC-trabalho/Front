@@ -54,12 +54,19 @@ export const useCadastroProjeto = () => {
             form.append("id_grupo", String(idGrupoNumber))
             form.append("id_orientador", String(user?.id_orientador || 0))
             form.append("objetivo", "")
-            form.append("justificativa", "") 
+            form.append("justificativa", "")
             form.append("qnt_empresas_patrocinam", String(0))
 
             if (valores.foto) form.append("foto", valores.foto)
 
             const response = await cadastrarComModal(form)
+
+            const userDataRaw = localStorage.getItem("usuarioLogado")
+            if (userDataRaw) {
+                const userData = JSON.parse(userDataRaw)
+                userData.qtn_projetos = (userData.qtn_projetos || 0) + 1
+                localStorage.setItem("usuarioLogado", JSON.stringify(userData))
+            }
 
             toast.success("Projeto criado com sucesso!", { id: toastId })
             return response

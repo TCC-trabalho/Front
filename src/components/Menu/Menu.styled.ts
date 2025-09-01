@@ -4,9 +4,10 @@ export const Menu = styled(Stack, {
     shouldForwardProp: (prop) => prop !== "ocultarDetalhesMenu",
 })<{ ocultarDetalhesMenu: boolean }>(({ theme, ocultarDetalhesMenu }) => ({
     backgroundColor: "#FFFCF5",
-    minHeight: "100vh",
+    minHeight: "100%",
     gap: theme.spacing(4),
     color: "#3F3F3F",
+    alignItems: "center",
 
     [theme.breakpoints.down("lg")]: {
         maxHeight: "500px",

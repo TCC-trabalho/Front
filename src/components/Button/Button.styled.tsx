@@ -112,5 +112,10 @@ export const ButtonVariants = styled(ButtonBase)<{
                 opacity: 0.5,
             },
         }),
+
+        "@keyframes spin": {
+            from: { transform: "rotate(0deg)" },
+            to: { transform: "rotate(360deg)" },
+        },
     }
 })
