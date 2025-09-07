@@ -52,7 +52,7 @@ export const useCadastroProjeto = () => {
             form.append("data_criacao", new Date().toISOString().slice(0, 19).replace("T", " "))
             form.append("status", "ativo")
             form.append("id_grupo", String(idGrupoNumber))
-            form.append("id_orientador", String(user?.id_orientador || 0))
+            form.append("id_orientador", String(user?.orientador?.id_orientador || 0))
             form.append("objetivo", "")
             form.append("justificativa", "")
             form.append("qnt_empresas_patrocinam", String(0))

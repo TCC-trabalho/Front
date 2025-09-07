@@ -17,7 +17,7 @@ export const FormEmpresa = () => {
                 control={control}
                 name={"nome"}
                 tamanho={"sm"}
-                label="Nome completo"
+                label="Nome da empresa"
                 fullWidth
                 disabled={isPending}
             />
@@ -83,10 +83,20 @@ export const FormEmpresa = () => {
                 name="setor"
                 label="Setor"
                 placeholder="Selecione seu setor"
-                tamanho="md"
                 options={[
-                    { value: "AGRO", label: "AGRO" },
-                    { value: "TEC", label: "TEC" },
+                    { value: "Agropecuario", label: "Agropecuário" },
+                    { value: "Tecnologia", label: "Tecnologia" },
+                    { value: "Educacao", label: "Educação" },
+                    { value: "Saude", label: "Saúde" },
+                    { value: "Financeiro", label: "Financeiro" },
+                    { value: "Industria", label: "Indústria" },
+                    { value: "Comercio", label: "Comércio" },
+                    { value: "Logistica", label: "Logística" },
+                    { value: "AdministracaoPublica", label: "Administração Pública" },
+                    { value: "ConstrucaoCivil", label: "Construção Civil" },
+                    { value: "Energia", label: "Energia" },
+                    { value: "Transportes", label: "Transportes" },
+                    { value: "TurismoEHotelaria", label: "Turismo e Hotelaria" },
                 ]}
                 disabled={isPending}
             />
@@ -129,6 +139,7 @@ export const FormEmpresa = () => {
                     tamanho={"lg"}
                     onClick={onSubmit}
                     loading={isPending}
+                    espacamento={40}
                 >
                     Cadastrar
                 </Button>

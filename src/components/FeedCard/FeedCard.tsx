@@ -15,7 +15,7 @@ export const FeedCard = ({
     loading = false,
     idProjeto,
     idEmpresa,
-    vairante = "projeto",
+    variante = "projeto",
     ...props
 }: FeedCardProps) => {
     return (
@@ -27,7 +27,7 @@ export const FeedCard = ({
                 height: "auto",
             }}
             to={
-                vairante == "projeto"
+                variante == "projeto"
                     ? `/plataforma-nexus/detalhes-projeto/${idProjeto}`
                     : `/plataforma-nexus/detalhes-empresa/${idEmpresa}`
             }

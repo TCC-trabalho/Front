@@ -1,7 +1,8 @@
 import { DrawerProps } from "@mui/material"
+import { Enum } from "../../api/enum/enum"
 
 export interface MenuProps extends DrawerProps {
-    variante: "aluno" | "orientador" | "empresa" | null
+    variante: Enum.TipoUsuario | null
     header?: MenuHeader[]
     loading?: boolean
 }

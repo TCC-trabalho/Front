@@ -53,6 +53,8 @@ export const CadastroGrupo = () => {
                         tamanho={"lg"}
                         to="/plataforma-nexus/"
                         viewTransition
+                        espacamento={20}
+                        disabled={isPending}
                     >
                         Voltar
                     </Button>
@@ -61,6 +63,7 @@ export const CadastroGrupo = () => {
                         onClick={onSubmit}
                         viewTransition
                         loading={isPending}
+                        espacamento={20}
                     >
                         Cadastrar
                     </Button>

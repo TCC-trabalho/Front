@@ -14,6 +14,7 @@ export interface ButtonProp extends ButtonBaseProps {
         | "ButtonLinkBlack"
         | "ButtonLinkWhite"
     tamanho: "sm" | "md" | "lg" | "xl"
+    espacamento?: number
     loading?: boolean
     to?: string
     href?: string

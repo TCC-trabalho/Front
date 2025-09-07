@@ -4,6 +4,8 @@ import { validacaoAluno } from "./FormAluno.schemas"
 import { toast } from "sonner"
 import { useCadastroAluno } from "../../../../../api/controllers/auth"
 import { useNavigate } from "react-router"
+import { useObterInstituicoes } from "../../../../../api/controllers/instituicao"
+import { useMemo } from "react"
 
 export const useFormAluno = () => {
     const navigate = useNavigate()
@@ -13,6 +15,24 @@ export const useFormAluno = () => {
     })
 
     const { mutateAsync, isPending } = useCadastroAluno()
+    const { data: instituicoes, isPending: isLoadingInstituicoes } = useObterInstituicoes({
+        limit: 5000,
+        name: null,
+        page: null,
+        type: null,
+    })
+
+    const instituicoesOptions = useMemo(
+        () => ({
+            instituicoes:
+                instituicoes?.response.map((inst) => ({
+                    id: `${inst.classification}-${inst.name_institution}`,
+                    tipo: inst.classification,
+                    nome: inst.name_institution,
+                })) || [],
+        }),
+        [instituicoes]
+    )
 
     const onSubmit = handleSubmit(async () => {
         const valores = getValues()
@@ -25,7 +45,7 @@ export const useFormAluno = () => {
             nascimento: valores.dataNascimento,
             telefone: valores.telefone.replace(/\D/g, ""),
             curso: valores.curso,
-            inst_ensino: valores.instituicao === 2 ? "ETEC São Paulo" : "FATEC São Paulo",
+            inst_ensino: valores.instituicao,
             senha: valores.senha,
         }
 
@@ -45,6 +65,8 @@ export const useFormAluno = () => {
     return {
         control,
         onSubmit,
-        isPending
+        isPending,
+        isLoadingInstituicoes,
+        instituicoesOptions,
     }
 }

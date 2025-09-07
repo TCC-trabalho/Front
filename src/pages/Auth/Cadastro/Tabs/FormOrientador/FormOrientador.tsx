@@ -135,6 +135,7 @@ export const FormOrientador = () => {
                     tamanho={"lg"}
                     onClick={onSubmit}
                     loading={isPending}
+                    espacamento={40}
                 >
                     Cadastrar
                 </Button>

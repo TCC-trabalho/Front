@@ -2,7 +2,10 @@ import { CadastroPage } from "../pages/Auth/Cadastro/CadastroPage"
 import { LoginPage } from "../pages/Auth/Login/LoginPage"
 import { LadingPage } from "../pages/LadingPage/LadingPage"
 import { PaginaNaoEncontrada } from "../pages/PaginaNaoEncontrada/PaginaNaoEncontrada"
+import { ApoiarProjeto } from "../pages/PlataForma/pages/ApoiarProjeto/ApoiarProjeto"
+import { Configuracoes } from "../pages/PlataForma/pages/Configuracoes/Configuracoes"
 import { Empresas } from "../pages/PlataForma/pages/Empresas/Empresas"
+import { DetalhesEmpresa } from "../pages/PlataForma/pages/Empresas/pages/DetalhesEmpresa/DetalhesEmpresa"
 import { EditarPerfil } from "../pages/PlataForma/pages/Perfil/pages/EditarPerfil/EditarPerfil"
 import { Perfil } from "../pages/PlataForma/pages/Perfil/Perfil"
 import { CadastroGrupo } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/01_CadastroGrupo/CadastroGrupo"
@@ -24,7 +27,7 @@ export const Paginas = {
         CadastroPage,
     },
     Plataforma: {
-        ProjetosPage: {
+        ProjetosPage: { 
             Projetos,
             DetalhesProjeto,
             EditarProjeto,
@@ -38,8 +41,11 @@ export const Paginas = {
         },
         EmpresasPage: {
             Empresas,
+            DetalhesEmpresa,
+            ApoiarProjeto,
         },
         Perfil,
         EditarPerfil,
+        Configuracoes
     },
 }

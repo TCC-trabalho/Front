@@ -83,6 +83,7 @@ export const LadingPage = () => {
                         variante="ButtonOutlinedBlue"
                         to="/login"
                         viewTransition
+                        espacamento={10}
                     >
                         Login
                     </Button>
@@ -91,7 +92,7 @@ export const LadingPage = () => {
                         variante="ButtonRed"
                         to="/cadastro"
                         viewTransition
-                        sx={{ width: "auto", paddingInline: 1 }}
+                        espacamento={10}
                     >
                         Cadastrar-se
                     </Button>
@@ -144,6 +145,7 @@ export const LadingPage = () => {
                         to="/login"
                         viewTransition
                         ladoIcon="direita"
+                        sx={{ width: 200 }}
                     >
                         Começar
                     </Button>

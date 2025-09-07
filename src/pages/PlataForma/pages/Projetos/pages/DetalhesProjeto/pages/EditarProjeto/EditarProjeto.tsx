@@ -165,6 +165,7 @@ export const EditarProjeto = () => {
                     icon={ChevronLeft}
                     to={`/plataforma-nexus/detalhes-projeto/${idProjeto}`}
                     viewTransition
+                    espacamento={20}
                 >
                     Voltar
                 </Button>
@@ -173,7 +174,7 @@ export const EditarProjeto = () => {
                     tamanho="lg"
                     loading={atualizarProjeto}
                     onClick={onSubmit}
-                    sx={{ width: "auto", paddingInline: 1 }}
+                    espacamento={20}
                 >
                     Salvar Alterações
                 </Button>

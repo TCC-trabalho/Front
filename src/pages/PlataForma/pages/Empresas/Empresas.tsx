@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Stack } from "@mui/material"
 import { useEmpresas } from "./Empresas.hook"
 import { FeedCard } from "../../../../components/FeedCard/FeedCard"
 
 export const Empresas = () => {
-    const { loading, mockFeed } = useEmpresas()
+    const { feed, isFetching } = useEmpresas()
 
     return (
         <Stack
@@ -11,17 +12,17 @@ export const Empresas = () => {
             minHeight={"100vh"}
             gap={4}
         >
-            {(loading ? Array.from({ length: 3 }) : mockFeed).map((item, index) => (
+            {(isFetching ? Array.from({ length: 3 }) : feed).map((item: any, index: number) => (
                 <FeedCard
                     key={index}
-                    imagemUrl={item?.imagemUrl || ""}
-                    titulo={item?.titulo || ""}
-                    area={item?.area || ""}
+                    imagemUrl={item?.foto || ""}
+                    titulo={item?.nome || ""}
+                    area={item?.setor || ""}
                     descricao={item?.descricao || ""}
                     avaliacao={item?.avaliacao || 0}
-                    loading={loading}
-                    idEmpresa={item?.idEmpresa || 0}
-                    vairante={"empresa"}
+                    loading={isFetching}
+                    idEmpresa={item?.id_empresa || 0}
+                    variante={"empresa"}
                 />
             ))}
         </Stack>

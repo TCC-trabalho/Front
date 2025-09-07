@@ -19,7 +19,10 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
     const podeMostrarProjeto = (variante === "aluno" || variante === "orientador") && header
 
     const menuContent = (
-        <Styled.Menu {...props} ocultarDetalhesMenu={ocultarDetalhesMenu}>
+        <Styled.Menu
+            {...props}
+            ocultarDetalhesMenu={ocultarDetalhesMenu}
+        >
             <Stack
                 gap={5}
                 justifyContent={"center"}
@@ -36,11 +39,19 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                                 height={80}
                             />
                         ) : (
-                            <Avatar
-                                src={header?.[0]?.foto}
-                                alt="Foto do usuário"
-                                sx={{ width: 80, height: 80 }}
-                            />
+                            <Button
+                                tamanho="lg"
+                                variante="ButtonLinkBlack"
+                                sx={{ width: "auto", height: "auto" }}
+                                to="meu-perfil"
+                                viewTransition
+                            >
+                                <Avatar
+                                    src={header?.[0]?.foto}
+                                    alt="Foto do usuário"
+                                    sx={{ width: 80, height: 80 }}
+                                />
+                            </Button>
                         )}
                         <Typography>{header?.[0]?.nomeUser ?? "Nome de Usuário"}</Typography>
                         {podeMostrarProjeto ? (

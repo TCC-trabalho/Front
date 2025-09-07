@@ -1,6 +1,6 @@
 export type Projeto = {
-    id_projeto?: number
-    foto?: string
+    id_projeto: number
+    foto: string
     organizacao?: string
     integrantes?: number
     titulo: string
@@ -11,7 +11,7 @@ export type Projeto = {
     justificativa: string | null
     senha_acesso: string
     id_grupo: number
-    grupo?: {
+    grupo: {
         id_grupo: number
         integrantes: {
             id_aluno: number

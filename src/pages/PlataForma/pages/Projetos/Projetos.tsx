@@ -23,7 +23,7 @@ export const Projetos = () => {
                     descricao={item?.descricao || ""}
                     idProjeto={item?.id_projeto || 0}
                     loading={isFetching}
-                    vairante={"projeto"}
+                    variante={"projeto"}
                 />
             ))}
         </Stack>

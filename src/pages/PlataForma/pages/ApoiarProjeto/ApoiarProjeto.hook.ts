@@ -1,0 +1,63 @@
+import { Resolver, useForm } from "react-hook-form"
+import { ApoiarProjetoForm, apoiarProjetoSchema } from "./ApoiarProjeto.schema"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { useParams } from "react-router"
+import { useObterProjetoPorId } from "../../../../api/controllers/projeto"
+import { usePatrocinar } from "../../../../api/controllers/patrocinio"
+import { useUser } from "../../../../lib/hooks/useUser"
+import { Enum } from "../../../../api/enum/enum"
+import { toast } from "sonner"
+
+export const useApoiarProjeto = () => {
+    const { idProjeto } = useParams()
+    const { user } = useUser()
+
+    const { data, isPending } = useObterProjetoPorId(Number(idProjeto))
+    const { mutateAsync: patrocinar, isPending: isPatrocinarPending } = usePatrocinar()
+
+    type ApoiarProjetoFormResolved = ApoiarProjetoForm & { mensagemApoio: string | undefined }
+
+    const { control, handleSubmit } = useForm<ApoiarProjetoFormResolved>({
+        resolver: yupResolver(apoiarProjetoSchema) as Resolver<ApoiarProjetoFormResolved>,
+        defaultValues: {
+            tipoApoio: undefined,
+            valorApoio: undefined,
+            mensagemApoio: undefined,
+        },
+    })
+
+    const onSubmit = handleSubmit(async (data) => {
+        const payload = {
+            id_projeto: Number(idProjeto),
+            id_empresa: user?.empresa?.id_empresa || 0,
+            data_patrocinio: new Date().toISOString().slice(0, 19).replace("T", " "),
+            tipo_apoio: data.tipoApoio as Enum.TipoApoio,
+            valorPatrocinio: Number(data.valorApoio),
+            mensagem: data.mensagemApoio || "",
+        }
+
+        await patrocinar(payload, {
+            onSuccess: () => {
+                const userDataRaw = localStorage.getItem("usuarioLogado")
+                if (userDataRaw) {
+                    const userData = JSON.parse(userDataRaw)
+                    userData.qnt_projetos_patrocinados = (userData.qnt_projetos_patrocinados || 0) + 1
+                    localStorage.setItem("usuarioLogado", JSON.stringify(userData))
+                }
+
+                toast.success("Apoio registrado com sucesso!")
+            },
+            onError: () => {
+                toast.error("Não foi possível registrar o apoio. Tente novamente.")
+            },
+        })
+    })
+
+    return {
+        control,
+        onSubmit,
+        projeto: data,
+        isPending,
+        isPatrocinarPending,
+    }
+}

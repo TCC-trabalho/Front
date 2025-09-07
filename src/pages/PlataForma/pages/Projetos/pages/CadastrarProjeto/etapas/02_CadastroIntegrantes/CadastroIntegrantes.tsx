@@ -82,6 +82,7 @@ export const CadastroIntegrantes = () => {
                         disabled={!ultimoEmailValido}
                         onClick={() => append("")}
                         type="button"
+                        espacamento={20}
                     >
                         Adicionar
                     </Button>
@@ -90,6 +91,7 @@ export const CadastroIntegrantes = () => {
                             tamanho={"lg"}
                             to={`/plataforma-nexus/cadastrar-projeto/cadastro-projeto/${idGrupo}`}
                             viewTransition
+                            espacamento={20}
                         >
                             Avançar
                         </Button>
@@ -98,6 +100,7 @@ export const CadastroIntegrantes = () => {
                             tamanho={"lg"}
                             type="submit"
                             disabled={isPendingCadastrarIntegrantes}
+                            espacamento={20}
                         >
                             Cadastrar
                         </Button>

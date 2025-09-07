@@ -12,6 +12,7 @@ export const Button = ({
     icon: Icon,
     ladoIcon = "esquerda",
     somenteIcone = false,
+    espacamento,
     ...props
 }: ButtonProp) => {
     const iconSizeMap = {
@@ -30,6 +31,7 @@ export const Button = ({
             className={variante}
             tamanho={tamanho}
             somenteIcone={somenteIcone}
+            espacamento={espacamento || 0}
             {...props}
         >
            {loading ? (

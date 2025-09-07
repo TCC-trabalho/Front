@@ -37,6 +37,7 @@ export const FormEmpresa = () => {
                     tamanho={"lg"}
                     onClick={onSubmit}
                     loading={isPending}
+                    espacamento={50}
                 >
                     Entrar
                 </Button>

@@ -19,7 +19,7 @@ export const validacaoAluno = Yup.object({
     email: Yup.string().email("Email inválido").typeError(EMAIL_ERROR).required(EMAIL_ERROR),
     dataNascimento: Yup.date().typeError(DATA_NASCIMENTO_ERROR).required(DATA_NASCIMENTO_ERROR),
     curso: Yup.string().typeError(CURSO_ERROR).required(CURSO_ERROR),
-    instituicao: Yup.number().moreThan(0, INSITUICAO_ERROR).required(INSITUICAO_ERROR),
+    instituicao: Yup.string().typeError(INSITUICAO_ERROR).required(INSITUICAO_ERROR),
     senha: Yup.string().min(6, "A senha deve ter no mínimo 6 caracteres").required(SENHA_ERROR),
     confirmarSenha: Yup.string()
         .oneOf([Yup.ref("senha")], "As senhas não coincidem")

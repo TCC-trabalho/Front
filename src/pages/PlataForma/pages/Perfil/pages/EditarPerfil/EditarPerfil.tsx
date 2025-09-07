@@ -1,11 +1,12 @@
-import { Skeleton, Stack, Typography } from "@mui/material"
+import { Avatar, Skeleton, Stack, Typography } from "@mui/material"
 import { useEditarPerfil } from "./EditarPerfil.hook"
 import { Input } from "../../../../../../components/Input/Input"
 import { Select } from "../../../../../../components/select/Select"
 import { Button } from "../../../../../../components/Button/Button"
 
 export const EditarPerfil = () => {
-    const { control, user, onSubmit, isPending } = useEditarPerfil()
+    const { control, user, onSubmit, isPending, obterFotoUser, obterFotoUserIsPending } =
+        useEditarPerfil()
 
     return (
         <>
@@ -24,25 +25,34 @@ export const EditarPerfil = () => {
                     direction={"row"}
                     gap={3}
                 >
-                    <Skeleton
-                        variant="circular"
-                        width={80}
-                        height={80}
-                    />
+                    {obterFotoUserIsPending ? (
+                        <Skeleton
+                            variant="circular"
+                            width={80}
+                            height={80}
+                            sx={{ flexShrink: 0 }}
+                        />
+                    ) : (
+                        <Avatar
+                            src={obterFotoUser}
+                            alt="Foto do usuário"
+                            sx={{ flexShrink: 0, width: 80, height: 80 }}
+                        />
+                    )}
 
                     <Stack justifyContent={"center"}>
                         <Typography
                             variant="subtitle1"
                             fontWeight={600}
                         >
-                            {user?.nomeUsuario}
+                            {user?.aluno?.nome || user?.orientador?.nome || <Skeleton width={100} />}
                         </Typography>
 
                         <Typography
                             variant="subtitle2"
                             fontWeight={600}
                         >
-                            {user?.email}
+                            {user?.aluno?.email || user?.orientador?.email || <Skeleton width={150} />}
                         </Typography>
                     </Stack>
                 </Stack>
@@ -74,7 +84,7 @@ export const EditarPerfil = () => {
                     disabled={isPending}
                 />
 
-                {user?.tipoUser === "orientador" && (
+                {user?.orientador && (
                     <Input
                         tamanho="sm"
                         control={control}
@@ -83,7 +93,7 @@ export const EditarPerfil = () => {
                         disabled={isPending}
                     />
                 )}
-                
+
                 <Input
                     tamanho="md"
                     control={control}
@@ -93,7 +103,7 @@ export const EditarPerfil = () => {
                     rows={4}
                     disabled={isPending}
                 />
-                {user?.tipoUser === "aluno" && (
+                {user?.aluno && (
                     <Select
                         control={control}
                         name="curso"

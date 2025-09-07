@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { useUser } from "../../../../lib/hooks/useUser"
 import { useParams } from "react-router"
 import { useObterProjetoPorId, useObterProjetosLimit } from "../../../../api/controllers/projeto"
+import { useObterFotoIntegrantes, useObterFotoUser } from "../../../../api/controllers/fotoUser"
 
 export const useContainerPlataforma = () => {
     const { idProjeto } = useParams()
@@ -13,11 +14,23 @@ export const useContainerPlataforma = () => {
 
     const { data: obterProjetos, isPending: obterProjetosIsPending } = useObterProjetosLimit(4)
 
+    const { data: obterFotoUser, isPending: obterFotoUserIsPending } = useObterFotoUser({
+        nomeUser: user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || "",
+    })
+
+    const { data: avatares, isPending: avataresIsPending } = useObterFotoIntegrantes(
+        obterProjetoPorId?.grupo?.integrantes || []
+    )
+
     return {
         obterProjetoPorId,
         obterProjetoPorIdIsPending,
         obterProjetos,
+        obterFotoUser,
+        obterFotoUserIsPending,
         obterProjetosIsPending,
+        avatares,
+        avataresIsPending,
         control,
         user,
     }

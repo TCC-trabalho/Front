@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Skeleton, Stack, Typography } from "@mui/material"
+import { Avatar, Skeleton, Stack, Typography } from "@mui/material"
 import { Button } from "../../../../components/Button/Button"
 import { usePerfil } from "./Perfil.hook"
 import { FeedCard } from "../../../../components/FeedCard/FeedCard"
-import { Plus } from "lucide-react"
+import { Plus, Star } from "lucide-react"
 
 export const Perfil = () => {
-    const { isFetching, feed, user, userId } = usePerfil()
+    const { isFetching, feed, user, userId, obterFotoUser, obterFotoUserIsPending } = usePerfil()
 
     return (
         <Stack
@@ -41,12 +41,20 @@ export const Perfil = () => {
                     sm: "initial",
                 }}
             >
-                <Skeleton
-                    variant="circular"
-                    width={190}
-                    height={190}
-                    sx={{ flexShrink: 0 }}
-                />
+                {obterFotoUserIsPending ? (
+                    <Skeleton
+                        variant="circular"
+                        width={190}
+                        height={190}
+                        sx={{ flexShrink: 0 }}
+                    />
+                ) : (
+                    <Avatar
+                        src={obterFotoUser}
+                        alt="Foto do usuário"
+                        sx={{ flexShrink: 0, width: 190, height: 190 }}
+                    />
+                )}
 
                 <Stack
                     gap={1}
@@ -64,25 +72,47 @@ export const Perfil = () => {
                         variant="h4"
                         fontWeight={600}
                     >
-                        {user?.nomeUsuario}
+                        {user?.aluno?.nomeUsuario ||
+                            user?.orientador?.nomeUsuario ||
+                            user?.empresa?.nome || <Skeleton width={200} />}
                     </Typography>
 
                     <Typography variant="subtitle2">
-                        {user?.tipoUser === "aluno"
-                            ? user?.inst_ensino
-                            : user?.tipoUser === "orientador"
-                            ? user?.formacao
-                            : user?.tipoUser === "empresa"
-                            ? ""
-                            : ""}
+                        {user.aluno?.inst_ensino ??
+                            user.orientador?.formacao ??
+                            user.empresa?.setor ??
+                            ""}
                     </Typography>
-                    <Typography variant="subtitle2">{user?.email}</Typography>
+                    {user.empresa && (
+                        <Stack
+                            direction={"row"}
+                            gap={2}
+                        >
+                            <Typography variant="subtitle2">
+                                {user.empresa?.qnt_projetos_patrocinados || "0"} Projetos Patrocinados
+                            </Typography>
+                            <Typography variant="subtitle2">
+                                {user.empresa?.avaliacao || "0"}{" "}
+                                <Star
+                                    size={14}
+                                    color="#FFD700"
+                                />
+                            </Typography>
+                        </Stack>
+                    )}
+
+                    <Typography variant="subtitle2">
+                        {user?.aluno?.email || user?.orientador?.email || user?.empresa?.email || ""}
+                    </Typography>
 
                     <Typography
                         variant="subtitle1"
                         sx={{ width: "90%" }}
                     >
-                        {user?.biografia}
+                        {user?.aluno?.biografia ||
+                            user?.orientador?.biografia ||
+                            user?.empresa?.descricao ||
+                            ""}
                     </Typography>
                     <Stack
                         direction={"row"}
@@ -97,7 +127,7 @@ export const Perfil = () => {
                         >
                             Editar Perfil
                         </Button>
-                        {user?.tipoUser == "orientador" && (
+                        {user?.orientador && (
                             <Button
                                 tamanho="sm"
                                 icon={Plus}
@@ -118,12 +148,16 @@ export const Perfil = () => {
                     pt={4}
                     pl={5}
                 >
-                    <Typography
-                        variant="h5"
-                        color="#00000040"
-                    >
-                        Meus Projetos
-                    </Typography>
+                    {(Number(user.empresa?.qnt_projetos_patrocinados ?? 0) > 0 ||
+                        Number(user.aluno?.qtn_projetos ?? 0) > 0 ||
+                        Number(user.orientador?.qtn_projetos ?? 0) > 0) && (
+                        <Typography
+                            variant="h5"
+                            color="#00000040"
+                        >
+                            {user.empresa ? "Projetos Patrocinados" : "Meus Projetos"}
+                        </Typography>
+                    )}
                 </Stack>
                 <Stack
                     sx={{
@@ -145,7 +179,7 @@ export const Perfil = () => {
                             descricao={item?.descricao || ""}
                             idProjeto={item?.id_projeto || 0}
                             loading={isFetching}
-                            vairante={"projeto"}
+                            variante={"projeto"}
                         />
                     ))}
                 </Stack>

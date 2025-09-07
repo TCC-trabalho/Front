@@ -1,7 +1,5 @@
 import * as Yup from "yup"
-
-const ignoreVazio = (v: unknown, orig: unknown) =>
-    typeof orig === "string" && orig.trim() === "" ? undefined : v
+import { ignoreVazio } from "../../../../../../lib/utils/yup"
 
 export const EditarPerfilSchema = Yup.object().shape({
     senha: Yup.string().transform(ignoreVazio).min(6, "Mínimo 6 caracteres").notRequired(),

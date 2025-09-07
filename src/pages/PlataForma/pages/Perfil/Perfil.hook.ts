@@ -4,21 +4,27 @@ import {
     useObterProjetoPorIdOrientador,
 } from "../../../../api/controllers/projeto"
 import { useUserId } from "../../../../lib/hooks/useGetId"
+import { useObterFotoUser } from "../../../../api/controllers/fotoUser"
 
 export const usePerfil = () => {
     const { user } = useUser()
-    const tipo = user?.tipoUser
-
     const userId = useUserId()
 
-    const idAluno = tipo === "aluno" ? user?.id_aluno : undefined
-    const idOrientador = tipo === "orientador" ? user?.id_orientador : undefined
+    const idAluno = user.aluno?.id_aluno
+    const idOrientador = user.orientador?.id_orientador
 
     const alunoQuery = useObterProjetoPorIdAluno(idAluno)
     const orientadorQuery = useObterProjetoPorIdOrientador(idOrientador)
+    const { data: obterFotoUser, isPending: obterFotoUserIsPending } = useObterFotoUser({
+        nomeUser: user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || "",
+    })
 
-    const data = tipo === "aluno" ? alunoQuery.data : orientadorQuery.data
-    const isFetching = (tipo === "aluno" ? alunoQuery.isPending : orientadorQuery.isPending) || false
+    const data = user.aluno ? alunoQuery.data : user.orientador ? orientadorQuery.data : undefined
+
+    const isFetching =
+        (user.aluno ? alunoQuery.isPending : user.orientador ? orientadorQuery.isPending : false) ||
+        false
+
     const feed = Array.isArray(data?.projetos) ? data!.projetos : []
 
     return {
@@ -26,5 +32,7 @@ export const usePerfil = () => {
         feed,
         user,
         userId,
+        obterFotoUser,
+        obterFotoUserIsPending,
     }
 }

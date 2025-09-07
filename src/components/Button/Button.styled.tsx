@@ -2,20 +2,21 @@ import { ButtonBase, styled } from "@mui/material"
 export const ButtonVariants = styled(ButtonBase)<{
     tamanho: "sm" | "md" | "lg" | "xl"
     somenteIcone?: boolean
-}>(({ tamanho, className, somenteIcone }) => {
+    espacamento: number
+}>(({ tamanho, className, somenteIcone, espacamento }) => {
     const sizeMap = {
-        sm: { width: 80, height: 25, fontSize: 15 },
-        md: { width: 110, height: 32, fontSize: 18 },
-        lg: { width: 140, height: 39, fontSize: 21.6 },
-        xl: { width: 170, height: 46, fontSize: 25.2 },
+        sm: { height: 25, fontSize: 15 },
+        md: { height: 32, fontSize: 18 },
+        lg: { height: 39, fontSize: 21.6 },
+        xl: { height: 46, fontSize: 25.2 },
     }
 
-    const { width, height, fontSize } = sizeMap[tamanho] || sizeMap["md"]
+    const { height, fontSize } = sizeMap[tamanho] || sizeMap["md"]
 
     return {
-        width: somenteIcone ? "auto" : width,
+        width: "auto",
         height: somenteIcone ? "auto" : height,
-        paddingInline: 2,
+        paddingInline: somenteIcone ? 0 : espacamento,
         fontSize,
 
         fontFamily: '"Inter", sans-serif',

@@ -61,7 +61,7 @@ const routes = createBrowserRouter([
                             },
                             {
                                 path: "detalhes-projeto/:idProjeto/editar",
-                                element: <Paginas.Plataforma.ProjetosPage.EditarProjeto/>
+                                element: <Paginas.Plataforma.ProjetosPage.EditarProjeto />,
                             },
                             {
                                 path: "empresas",
@@ -69,15 +69,11 @@ const routes = createBrowserRouter([
                             },
                             {
                                 path: "detalhes-empresa/:idEmpresa",
-                                element: <></>,
+                                element: <Paginas.Plataforma.EmpresasPage.DetalhesEmpresa />,
                             },
                             {
-                                path: "apoio",
-                                element: <></>,
-                            },
-                            {
-                                path: "apoiar",
-                                element: <></>,
+                                path: "apoiar-projeto/:idProjeto",
+                                element: <Paginas.Plataforma.EmpresasPage.ApoiarProjeto />,
                             },
                             {
                                 path: "chat",
@@ -103,7 +99,7 @@ const routes = createBrowserRouter([
                             },
                             {
                                 path: "configuracoes",
-                                element: <></>,
+                                element: <Paginas.Plataforma.Configuracoes/>,
                             },
                         ],
                     },

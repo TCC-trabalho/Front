@@ -9,3 +9,10 @@ export type Integrante = {
     id?: string
     email: string[]
 }
+
+export type IntegranteCompleto = {
+    id_aluno: number
+    nomeUsuario?: string
+    nome: string
+    email: string
+}

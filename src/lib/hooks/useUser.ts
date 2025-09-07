@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
-
-type UsuarioLogado = {
-    id_orientador?: number
-    id_aluno?: number
-    id_empresa?: number
-    nome?: string
-    nomeUsuario?: string
-    email?: string
-    biografia?: string
-    curso?: string
-    inst_ensino?: string
-    formacao?: string
-    telefone?: string
-    tipoUser?: "aluno" | "orientador" | "empresa" | null
-    qtn_projetos?: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any
-}
+import { UsuarioGenerico } from "../../api/models/usuarioLogado.types"
+import { Enum } from "../../api/enum/enum"
 
 export const useUser = () => {
-    const [user, setUser] = useState<UsuarioLogado | null>(null)
+    const [user, setUser] = useState<UsuarioGenerico>({})
 
     useEffect(() => {
         const raw = localStorage.getItem("usuarioLogado")
-        if (raw) setUser(JSON.parse(raw))
+        if (raw) {
+            const parsed = JSON.parse(raw)
+
+            switch (parsed.tipoUser) {
+                case Enum.TipoUsuario.Aluno:
+                    setUser({ aluno: parsed })
+                    break
+                case Enum.TipoUsuario.Orientador:
+                    setUser({ orientador: parsed })
+                    break
+                case Enum.TipoUsuario.Empresa:
+                    setUser({ empresa: parsed })
+                    break
+                default:
+                    setUser({})
+            }
+        }
     }, [])
 
     return { user }

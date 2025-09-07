@@ -22,7 +22,7 @@ export const useFormEmpresa = () => {
         try {
             const response = await mutateAsync({
                 tipo: "empresa",
-                cnpj: valores.cnpj,
+                cnpj: valores.cnpj.replace(/\D/g, ""),
                 senha: valores.senha,
             })
             localStorage.setItem("usuarioLogado", JSON.stringify(response.user))

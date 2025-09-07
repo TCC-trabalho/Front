@@ -1,7 +1,7 @@
 import { StackProps } from "@mui/material"
 
 export interface FeedCardProps extends StackProps {
-    vairante: "projeto" | "empresa"
+    variante: "projeto" | "empresa"
     imagemUrl: string
     titulo: string
     area: string

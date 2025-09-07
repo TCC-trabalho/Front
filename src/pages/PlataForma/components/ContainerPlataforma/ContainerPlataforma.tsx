@@ -1,9 +1,9 @@
-import { Skeleton, Stack, Typography } from "@mui/material"
+import { Avatar, Skeleton, Stack, Typography } from "@mui/material"
 import { Header } from "../../../../components/Header/Header"
 import { Menu } from "../../../../components/Menu/Menu"
 import * as Styled from "./ContainerPlataforma.styled"
 import { Input } from "../../../../components/Input/Input"
-import { Bell, CircleUserRound, Search } from "lucide-react"
+import { Search, UserRound } from "lucide-react"
 import { Button } from "../../../../components/Button/Button"
 import { Outlet } from "react-router"
 import { useContainerPlataforma } from "./ContainerPlataforma.hook"
@@ -18,20 +18,36 @@ export const ContainerPlataforma = () => {
         obterProjetosIsPending,
         control,
         user,
+        obterFotoUser,
+        obterFotoUserIsPending,
+        avatares,
+        avataresIsPending,
     } = useContainerPlataforma()
+
     const { tituloPagina, exibirSugestao, exibirEquipe } = useControleExibicao()
 
     return (
         <Styled.Container>
             <Menu
-                variante={user?.tipoUser ?? null}
+                variante={
+                    user.aluno?.tipoUser || user.orientador?.tipoUser || user.empresa?.tipoUser || null
+                }
                 header={[
                     {
-                        foto: user?.foto ?? "https://via.placeholder.com/80",
-                        nomeUser: user?.nomeUsuario ?? "Usuário",
-                        quatidadeProjetos: user?.qtn_projetos ?? "",
+                        foto: user?.empresa?.foto ?? obterFotoUser,
+                        nomeUser:
+                            user.aluno?.nomeUsuario ??
+                            user.orientador?.nomeUsuario ??
+                            user.empresa?.nome ??
+                            "Usuário",
+                        quatidadeProjetos:
+                            user.aluno?.qtn_projetos ??
+                            user.orientador?.qtn_projetos ??
+                            user.empresa?.qnt_projetos_patrocinados ??
+                            "",
                     },
                 ]}
+                loading={obterFotoUserIsPending}
             />
 
             <Header
@@ -73,25 +89,14 @@ export const ContainerPlataforma = () => {
                         }}
                     />
                 </Stack>
-                <Stack
-                    direction={"row"}
-                    gap={2}
-                >
-                    <Button
-                        tamanho={"lg"}
-                        variante="ButtonLinkWhite"
-                        icon={Bell}
-                        somenteIcone
-                    />
-                    <Button
-                        tamanho={"lg"}
-                        variante="ButtonLinkWhite"
-                        icon={CircleUserRound}
-                        to="meu-perfil"
-                        somenteIcone
-                        viewTransition
-                    />
-                </Stack>
+                <Button
+                    tamanho={"lg"}
+                    variante="ButtonLinkWhite"
+                    icon={UserRound}
+                    to="meu-perfil"
+                    somenteIcone
+                    viewTransition
+                />
             </Header>
 
             <Styled.Content>
@@ -161,12 +166,23 @@ export const ContainerPlataforma = () => {
                                           />
                                       </Stack>
                                       <Stack>
-                                          <Typography variant="subtitle1">
-                                              {truncateText(projeto.titulo, 15)}
-                                          </Typography>
-                                          <Typography variant="body2">
-                                              {truncateText(projeto.area, 20)}
-                                          </Typography>
+                                          <Button
+                                              variante="ButtonLinkBlack"
+                                              tamanho="lg"
+                                              sx={{
+                                                  width: "auto",
+                                                  height: "auto",
+                                              }}
+                                              to={`/plataforma-nexus/detalhes-projeto/${projeto.id_projeto}`}
+                                              viewTransition
+                                          >
+                                              <Typography variant="subtitle1">
+                                                  {truncateText(projeto.titulo, 15)}
+                                              </Typography>
+                                              <Typography variant="body2">
+                                                  {truncateText(projeto.area, 20)}
+                                              </Typography>
+                                          </Button>
                                       </Stack>
                                   </Stack>
                               ))}
@@ -190,7 +206,7 @@ export const ContainerPlataforma = () => {
                         Equipe
                     </Typography>
 
-                    {obterProjetoPorIdIsPending
+                    {avataresIsPending || obterProjetoPorIdIsPending
                         ? [...Array(4)].map((_, index) => (
                               <Stack
                                   key={index}
@@ -215,18 +231,16 @@ export const ContainerPlataforma = () => {
                                   </Stack>
                               </Stack>
                           ))
-                        : obterProjetoPorId?.grupo?.integrantes?.map((integrante, index) => (
+                        : avatares?.map((integrante, index) => (
                               <Stack
                                   key={index}
                                   alignItems="center"
                                   direction="row"
                                   gap={2}
                               >
-                                  <Skeleton
-                                      variant="circular"
-                                      width={50}
-                                      height={50}
-                                      sx={{ flexShrink: 0 }}
+                                  <Avatar
+                                      src={integrante.src}
+                                      sx={{ flexShrink: 0, width: 50, height: 50 }}
                                   />
                                   <Stack>
                                       <Typography variant="subtitle1">

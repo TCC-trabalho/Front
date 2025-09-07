@@ -4,10 +4,11 @@ import { useUser } from "../../../../../../lib/hooks/useUser"
 
 export const useDetalhesProjeto = () => {
     const { idProjeto } = useParams()
-    const user = useUser()
+    const { user } = useUser()
 
-    const tipoUser = user.user?.tipoUser
-    const idOrientador = user.user?.id_orientador
+    const tipoUser = user.aluno?.tipoUser ?? user.orientador?.tipoUser ?? user.empresa?.tipoUser ?? null
+
+    const idOrientador = user.orientador?.id_orientador
 
     const id = Number(idProjeto)
 
@@ -18,6 +19,6 @@ export const useDetalhesProjeto = () => {
         idOrientador,
         isFetching: isPending,
         detalhes: data,
-        idProjeto
+        idProjeto,
     }
 }

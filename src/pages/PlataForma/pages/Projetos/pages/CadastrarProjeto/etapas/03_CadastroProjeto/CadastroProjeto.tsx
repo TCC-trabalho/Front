@@ -197,6 +197,7 @@ export const CadastroProjeto = () => {
                         tamanho={"lg"}
                         onClick={onSubmit}
                         loading={isPendingCadastrarProjeto}
+                        espacamento={20}
                     >
                         Cadastrar
                     </Button>

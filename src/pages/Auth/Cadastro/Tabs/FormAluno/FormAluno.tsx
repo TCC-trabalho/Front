@@ -2,10 +2,10 @@ import { Stack } from "@mui/material"
 import { Input } from "../../../../../components/Input/Input"
 import { Button } from "../../../../../components/Button/Button"
 import { useFormAluno } from "./FormAluno.hook"
-import { Select } from "../../../../../components/select/Select"
+import { InputDropdown } from "../../../../../components/InputDropdown"
 
 export const FormALuno = () => {
-    const { control, onSubmit, isPending } = useFormAluno()
+    const { control, onSubmit, isPending, instituicoesOptions, isLoadingInstituicoes } = useFormAluno()
 
     return (
         <Stack
@@ -86,17 +86,18 @@ export const FormALuno = () => {
                 />
             </Stack>
 
-            <Select
+            <InputDropdown.Controlado
                 control={control}
                 name="instituicao"
-                label="Instituição"
+                retornarSomenteId
+                opcoes={instituicoesOptions.instituicoes}
+                renderizarLabel={(inst) =>
+                    inst.tipo + " - " + inst.nome ? inst.tipo + " - " + inst.nome : "-"
+                }
+                isCarregandoDados={isLoadingInstituicoes}
                 placeholder="Selecione sua instituição"
-                tamanho="md"
-                options={[
-                    { value: 2, label: "ETEC" },
-                    { value: 3, label: "FATEC" },
-                ]}
                 disabled={isPending}
+                label="Instituição de ensino"
             />
 
             <Stack
@@ -139,6 +140,7 @@ export const FormALuno = () => {
                     to="/login"
                     viewTransition
                     loading={isPending}
+                    espacamento={40}
                 >
                     Cadastrar
                 </Button>

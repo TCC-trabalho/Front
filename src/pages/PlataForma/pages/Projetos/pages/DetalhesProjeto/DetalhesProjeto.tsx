@@ -178,6 +178,7 @@ export const DetalhesProjeto = () => {
                     }}
                     to={`/plataforma-nexus/detalhes-projeto/${idProjeto}/editar`}
                     viewTransition
+                    espacamento={20}
                 >
                     Editar
                 </Button>
@@ -194,6 +195,9 @@ export const DetalhesProjeto = () => {
                         transform: "translateX(-50%)",
                         zIndex: 1000,
                     }}
+                    to={`/plataforma-nexus/apoiar-projeto/${idProjeto}`}
+                    viewTransition
+                    espacamento={20}
                 >
                     Apoiar
                 </Button>
