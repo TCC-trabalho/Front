@@ -7,6 +7,7 @@ import { useState } from "react"
 import { MenuProps } from "./Menu.type"
 import { useControleExibicao } from "../../lib/utils/controleExibicao"
 import { EncerrarSessao } from "../../pages/PlataForma/pages/Perfil/modais/EncerrarSessao/EncerrarSessao"
+import { useUser } from "../../lib/hooks/useUser"
 
 export const Menu = ({ variante, header, loading = false, ...props }: MenuProps) => {
     const { ocultarDetalhesMenu } = useControleExibicao()
@@ -16,7 +17,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
     const [open, setOpen] = useState(false)
     const [openModal, setOpenModal] = useState(false)
 
-    const podeMostrarProjeto = (variante === "aluno" || variante === "orientador") && header
+    const { user } = useUser()
 
     const menuContent = (
         <Styled.Menu
@@ -54,13 +55,12 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                             </Button>
                         )}
                         <Typography>{header?.[0]?.nomeUser ?? "Nome de Usuário"}</Typography>
-                        {podeMostrarProjeto ? (
-                            <Stack className="Projectcontent">
-                                <Typography variant="h6">
-                                    {header[0].quatidadeProjetos} projetos
-                                </Typography>
-                            </Stack>
-                        ) : null}
+
+                        <Stack className="Projectcontent">
+                            <Typography variant="h6">
+                                {header?.[0].quatidadeProjetos} Projetos {user.empresa ? "Patrocinados" : ""}
+                            </Typography>
+                        </Stack>
                     </Stack>
                 )}
             </Stack>
@@ -137,13 +137,13 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     <Stack className="body">
                         <Button
                             tamanho={"sm"}
-                            icon={UserRound}
+                            icon={user.aluno ? UserRound : user.orientador ? UserRound : Building2}
                             to="/plataforma-nexus/meu-perfil"
                             viewTransition
                             variante="ButtonLinkBlack"
                             ladoIcon="direita"
                         >
-                            Meu Perfil
+                            {user.aluno ? "Meu Perfil" : user.orientador ? "Meu Perfil" : "Minha Empresa"}
                         </Button>
 
                         <Button

@@ -7,7 +7,6 @@ import { useCadastrarProjeto } from "../../../../../../../../api/controllers/pro
 import { useParams } from "react-router"
 import { useUser } from "../../../../../../../../lib/hooks/useUser"
 import { useSuccessModal } from "../../../../../../../../lib/hooks/useSuccessModal"
-import { useRef, useState } from "react"
 import { FormValues } from "./CadastroProjeto.types"
 
 export const useCadastroProjeto = () => {
@@ -15,11 +14,7 @@ export const useCadastroProjeto = () => {
     const { idGrupo } = useParams()
     const idGrupoNumber = Number(idGrupo)
 
-    const [preview, setPreview] = useState<string | null>(null)
-    const inputRef = useRef<HTMLInputElement | null>(null)
-    const [dragOver, setDragOver] = useState(false)
-
-    const { control, handleSubmit, getValues, setValue } = useForm<FormValues>({
+    const { control, handleSubmit, getValues } = useForm<FormValues>({
         resolver: yupResolver(CadastroProjetoSchema) as unknown as Resolver<FormValues, any, FormValues>,
         defaultValues: {
             titulo: "",
@@ -81,11 +76,5 @@ export const useCadastroProjeto = () => {
         isPendingCadastrarProjeto: isPending,
         openModal,
         setOpenModal,
-        preview,
-        setPreview,
-        inputRef,
-        dragOver,
-        setDragOver,
-        setValue,
     }
 }

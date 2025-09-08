@@ -5,6 +5,7 @@ import { Select } from "../../../../../../../../components/select/Select"
 import { Button } from "../../../../../../../../components/Button/Button"
 import { ProjetoAtualizado } from "./modais/ProjetoAtualizado/ProjetoAtualizado"
 import { ChevronLeft } from "lucide-react"
+import { InputFoto } from "../../../../../../../../components/InputFoto/InputFoto"
 
 export const EditarProjeto = () => {
     const {
@@ -14,7 +15,7 @@ export const EditarProjeto = () => {
         onSubmit,
         openModal,
         setOpenModal,
-        atualizarProjeto,
+        atualizarProjetoLoading,
         idProjeto,
     } = useEditarProjeto()
 
@@ -37,11 +38,12 @@ export const EditarProjeto = () => {
                         }}
                     />
                 ) : (
-                    <img
-                        src={detalhes?.foto}
-                        alt=""
-                        width={"100%"}
-                        height={400}
+                    <InputFoto
+                        label="Foto do projeto"
+                        name="foto"
+                        control={control}
+                        disabled={atualizarProjetoLoading}
+                        initialUrl={detalhes?.foto}
                     />
                 )}
 
@@ -63,14 +65,14 @@ export const EditarProjeto = () => {
                                 name="titulo"
                                 tamanho="sm"
                                 label="Título"
-                                disabled={atualizarProjeto}
+                                disabled={atualizarProjetoLoading}
                             />
                             <Input
                                 control={control}
                                 name="area"
                                 tamanho="sm"
                                 label="Area"
-                                disabled={atualizarProjeto}
+                                disabled={atualizarProjetoLoading}
                             />
                         </>
                     )}
@@ -95,7 +97,7 @@ export const EditarProjeto = () => {
                                 { value: "ativo", label: "Ativo" },
                                 { value: "inativo", label: "Inativo" },
                             ]}
-                            disabled={atualizarProjeto}
+                            disabled={atualizarProjetoLoading}
                         />
                     </>
                 )}
@@ -124,7 +126,7 @@ export const EditarProjeto = () => {
                             label="Descrição"
                             multiline
                             rows={4}
-                            disabled={atualizarProjeto}
+                            disabled={atualizarProjetoLoading}
                         />
                         <Input
                             control={control}
@@ -133,7 +135,7 @@ export const EditarProjeto = () => {
                             label="Objetivo"
                             multiline
                             rows={4}
-                            disabled={atualizarProjeto}
+                            disabled={atualizarProjetoLoading}
                         />
                         <Input
                             control={control}
@@ -142,7 +144,7 @@ export const EditarProjeto = () => {
                             label="Justificativa"
                             multiline
                             rows={4}
-                            disabled={atualizarProjeto}
+                            disabled={atualizarProjetoLoading}
                         />
                     </>
                 )}
@@ -172,7 +174,7 @@ export const EditarProjeto = () => {
 
                 <Button
                     tamanho="lg"
-                    loading={atualizarProjeto}
+                    loading={atualizarProjetoLoading}
                     onClick={onSubmit}
                     espacamento={20}
                 >

@@ -125,9 +125,9 @@ export const EditarPerfil = () => {
                     <Button
                         variante="ButtonOutlinedBlue"
                         tamanho="md"
-                        sx={{ paddingInline: 1, width: "auto" }}
                         onClick={onSubmit}
                         loading={isPending}
+                        espacamento={10}
                     >
                         Salvar Alterações
                     </Button>

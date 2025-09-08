@@ -6,6 +6,7 @@ import { ApoiarProjeto } from "../pages/PlataForma/pages/ApoiarProjeto/ApoiarPro
 import { Configuracoes } from "../pages/PlataForma/pages/Configuracoes/Configuracoes"
 import { Empresas } from "../pages/PlataForma/pages/Empresas/Empresas"
 import { DetalhesEmpresa } from "../pages/PlataForma/pages/Empresas/pages/DetalhesEmpresa/DetalhesEmpresa"
+import { EditarEmpresa } from "../pages/PlataForma/pages/Perfil/pages/EditarEmpresa/EditarEmpresa"
 import { EditarPerfil } from "../pages/PlataForma/pages/Perfil/pages/EditarPerfil/EditarPerfil"
 import { Perfil } from "../pages/PlataForma/pages/Perfil/Perfil"
 import { CadastroGrupo } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/01_CadastroGrupo/CadastroGrupo"
@@ -42,6 +43,7 @@ export const Paginas = {
         EmpresasPage: {
             Empresas,
             DetalhesEmpresa,
+            EditarEmpresa,
             ApoiarProjeto,
         },
         Perfil,

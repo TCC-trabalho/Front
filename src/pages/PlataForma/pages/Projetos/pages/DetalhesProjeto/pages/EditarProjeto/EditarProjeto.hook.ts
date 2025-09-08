@@ -1,70 +1,87 @@
+import { useForm } from "react-hook-form"
+import { useEffect, useState } from "react"
+import { toast } from "sonner"
 import { useParams } from "react-router"
 import {
     useAtualizarProjeto,
     useObterProjetoPorId,
 } from "../../../../../../../../api/controllers/projeto"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
-import { useSuccessModal } from "../../../../../../../../lib/hooks/useSuccessModal"
+
+type FormValues = {
+    titulo: string
+    status: string
+    area: string
+    descricao: string
+    objetivo: string | null
+    justificativa: string | null
+    foto: File | null
+}
 
 export const useEditarProjeto = () => {
     const { idProjeto } = useParams()
-
     const { data, isFetching, isLoading } = useObterProjetoPorId(Number(idProjeto))
 
-    const { control, getValues, handleSubmit } = useForm({
-        values: {
-            titulo: data?.titulo || "",
-            status: data?.status || "",
-            area: data?.area || "",
-            descricao: data?.descricao || "",
-            objetivo: data?.objetivo || "",
-            justificativa: data?.justificativa || "",
-            imagemUrl: data?.foto || "",
+    const [openModal, setOpenModal] = useState(false)
+
+    const { control, getValues, handleSubmit, reset } = useForm<FormValues>({
+        defaultValues: {
+            titulo: "",
+            status: "",
+            area: "",
+            descricao: "",
+            objetivo: "",
+            justificativa: "",
+            foto: null,
         },
     })
 
-    const { mutateAsync: atualizarProjeto } = useAtualizarProjeto(Number(idProjeto))
+    useEffect(() => {
+        if (!data) return
+        reset({
+            titulo: data.titulo,
+            status: data.status,
+            area: data.area,
+            descricao: data.descricao,
+            objetivo: data.objetivo,
+            justificativa: data.justificativa,
+            foto: null,
+        })
+    }, [data, reset])
 
-    const {
-        open: openModal,
-        setOpen: setOpenModal,
-        isPending,
-        execute: AtualizarComModal,
-    } = useSuccessModal(atualizarProjeto)
+    const { mutateAsync: atualizarProjeto, isPending: atualizarProjetoLoading } = useAtualizarProjeto(
+        Number(idProjeto)
+    )
 
     const onSubmit = handleSubmit(async () => {
-        const valores = getValues()
-
+        const v = getValues()
         const toastId = toast.loading("Editando projeto...")
 
         try {
-            const response = await AtualizarComModal({
-                titulo: valores.titulo,
-                descricao: valores.descricao,
-                area: valores.area,
-                status: valores.status,
-                objetivo: valores.objetivo,
-                justificativa: valores.justificativa,
-            })
+            const form = new FormData()
+            form.append("_method", "PUT")
+            form.append("titulo", v.titulo)
+            form.append("descricao", v.descricao)
+            form.append("area", v.area)
+            form.append("status", v.status)
+            form.append("objetivo", v.objetivo ?? "")
+            form.append("justificativa", v.justificativa ?? "")
+            if (v.foto) form.append("foto", v.foto)
 
-            toast.success("Projeto editado com sucesso!", { id: toastId })
-            return response
+            await atualizarProjeto(form)
+            setOpenModal(true)
         } catch {
-            toast.error("Falha ao editar projeto. Verifique os dados.", {
-                id: toastId,
-            })
+            toast.error("Falha ao editar projeto. Verifique os dados.", { id: toastId })
         }
     })
 
     return {
         idProjeto,
         projetosIsloading: isFetching || isLoading,
-        atualizarProjeto: isPending,
-        detalhes: data,
         control,
+        onSubmit,
+        detalhes: data,
         openModal,
         setOpenModal,
-        onSubmit
+        atualizarProjetoLoading,
     }
 }

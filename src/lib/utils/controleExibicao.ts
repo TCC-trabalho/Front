@@ -25,12 +25,19 @@ export const useControleExibicao = () => {
         "/projeto-patrocinados",
         "/meu-perfil",
         "/editar-perfil/",
+        "/editar-empresa/",
         "/detalhes-projeto/",
         "/detalhes-empresa/",
         "/configuracoes",
     ]
 
-    const ocultarDetalhes = ["/meu-perfil", "/detalhes-projeto/", "/editar-perfil/", "/apoiar-projeto/"]
+    const ocultarDetalhes = [
+        "/meu-perfil",
+        "/detalhes-projeto/",
+        "/editar-perfil/",
+        "/editar-empresa/",
+        "/apoiar-projeto/",
+    ]
 
     const exibirSugestao = !ocultarRotas.some((rota) => path.includes(rota))
     const exibirEquipe = path.includes("/detalhes-projeto/")

@@ -1,6 +1,6 @@
 export type Projeto = {
     id_projeto: number
-    foto: string
+    foto: string 
     organizacao?: string
     integrantes?: number
     titulo: string
@@ -29,6 +29,7 @@ export type ListaProjetosResponse = { total: number; projetos: Projeto[] }
 
 export namespace AtualizarProjeto {
     export type Request = {
+        foto: File | null
         titulo: string
         descricao: string
         area: string

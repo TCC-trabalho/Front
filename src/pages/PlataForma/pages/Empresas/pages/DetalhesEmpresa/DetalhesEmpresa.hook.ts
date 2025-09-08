@@ -1,5 +1,5 @@
 import { useParams } from "react-router"
-import { useObterEmpresasPorId } from "../../../../../../api/controllers/empresa"
+import { useObterEmpresasProjetos } from "../../../../../../api/controllers/empresa"
 import { useState } from "react"
 
 export const useDetalhesEmpresa = () => {
@@ -7,7 +7,7 @@ export const useDetalhesEmpresa = () => {
 
     const { idEmpresa } = useParams()
 
-    const { data: empresa, isPending } = useObterEmpresasPorId({ id_empresa: Number(idEmpresa) })
+    const { data: empresa, isPending } = useObterEmpresasProjetos({ id_empresa: Number(idEmpresa) })
 
     const feed = Array.isArray(empresa?.projetos_patrocinados) ? empresa!.projetos_patrocinados : []
 

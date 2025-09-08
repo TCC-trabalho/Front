@@ -16,8 +16,8 @@ export const useObterProjetosLimit = (limit?: number) => {
     return useQuery<Projeto[], Error>({
         queryKey: ["projetos-limit", limit],
         queryFn: async () => {
-            const { data } = await api.get<Projeto[]>("projetos-controlados",{
-                params: limit ? { limit } : {}
+            const { data } = await api.get<Projeto[]>("projetos-controlados", {
+                params: limit ? { limit } : {},
             })
             return data
         },
@@ -59,35 +59,47 @@ export const useObterProjetoPorIdAluno = (id?: number) => {
 
 export const useCadastrarProjeto = () => {
     return useMutation({
-      mutationFn: async (request: FormData | Projeto) => {
-        const isForm = typeof FormData !== "undefined" && request instanceof FormData
-        const { data } = await api.post(
-          "projetos",
-          request,
-          isForm ? { headers: { "Content-Type": "multipart/form-data" } } : undefined
-        )
-        return data
-      },
-      onSuccess: () => {
-        nexusQueryClient.invalidateQueries({ queryKey: ["projetos"] })
-        nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-orientador"] })
-        nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-aluno"] })
-        nexusQueryClient.invalidateQueries({ queryKey: ["projeto"] })
-      },
-    })
-  }
-
-export const useAtualizarProjeto = (id: number) => {
-    return useMutation({
-        mutationFn: async (request: AtualizarProjeto.Request) => {
-            const { data } = await api.put(`projetos/${id}`, request)
+        mutationFn: async (request: FormData | Projeto) => {
+            const isForm = typeof FormData !== "undefined" && request instanceof FormData
+            const { data } = await api.post(
+                "projetos",
+                request,
+                isForm ? { headers: { "Content-Type": "multipart/form-data" } } : undefined
+            )
             return data
         },
         onSuccess: () => {
             nexusQueryClient.invalidateQueries({ queryKey: ["projetos"] })
             nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-orientador"] })
             nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-aluno"] })
-            nexusQueryClient.invalidateQueries({ queryKey: ["projeto", id] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto"] })
         },
     })
 }
+
+export const useAtualizarProjeto = (id: number) => {
+    return useMutation({
+      mutationFn: async (request: FormData | AtualizarProjeto.Request) => {
+        const isForm = typeof FormData !== "undefined" && request instanceof FormData
+  
+        if (isForm) {
+          request.append('_method', 'PUT')
+          const { data } = await api.post(
+            `projetos/${id}`,
+            request,
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+          )
+          return data
+        } else {
+          const { data } = await api.put(`projetos/${id}`, request)
+          return data
+        }
+      },
+      onSuccess: () => {
+        nexusQueryClient.invalidateQueries({ queryKey: ['projetos'] })
+        nexusQueryClient.invalidateQueries({ queryKey: ['projeto-por-orientador'] })
+        nexusQueryClient.invalidateQueries({ queryKey: ['projeto-por-aluno'] })
+        nexusQueryClient.invalidateQueries({ queryKey: ['projeto', id] })
+      },
+    })
+  }

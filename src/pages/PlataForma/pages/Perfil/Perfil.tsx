@@ -3,7 +3,7 @@ import { Avatar, Skeleton, Stack, Typography } from "@mui/material"
 import { Button } from "../../../../components/Button/Button"
 import { usePerfil } from "./Perfil.hook"
 import { FeedCard } from "../../../../components/FeedCard/FeedCard"
-import { Plus, Star } from "lucide-react"
+import { Pen, Plus, Star } from "lucide-react"
 
 export const Perfil = () => {
     const { isFetching, feed, user, userId, obterFotoUser, obterFotoUserIsPending } = usePerfil()
@@ -41,19 +41,29 @@ export const Perfil = () => {
                     sm: "initial",
                 }}
             >
-                {obterFotoUserIsPending ? (
-                    <Skeleton
-                        variant="circular"
-                        width={190}
-                        height={190}
-                        sx={{ flexShrink: 0 }}
-                    />
-                ) : (
+                {user?.empresa ? (
                     <Avatar
-                        src={obterFotoUser}
-                        alt="Foto do usuário"
+                        src={user.empresa?.foto}
+                        alt="Foto da empresa"
                         sx={{ flexShrink: 0, width: 190, height: 190 }}
                     />
+                ) : (
+                    <>
+                        {obterFotoUserIsPending ? (
+                            <Skeleton
+                                variant="circular"
+                                width={190}
+                                height={190}
+                                sx={{ flexShrink: 0 }}
+                            />
+                        ) : (
+                            <Avatar
+                                src={obterFotoUser}
+                                alt="Foto do usuário"
+                                sx={{ flexShrink: 0, width: 190, height: 190 }}
+                            />
+                        )}
+                    </>
                 )}
 
                 <Stack
@@ -118,15 +128,32 @@ export const Perfil = () => {
                         direction={"row"}
                         gap={2}
                     >
-                        <Button
-                            tamanho="sm"
-                            variante="ButtonGrey"
-                            sx={{ width: 120 }}
-                            to={`/plataforma-nexus/editar-perfil/${userId}`}
-                            viewTransition
-                        >
-                            Editar Perfil
-                        </Button>
+                        {user.aluno || user.orientador ? (
+                            <Button
+                                tamanho="sm"
+                                variante="ButtonGrey"
+                                icon={Pen}
+                                ladoIcon="direita"
+                                to={`/plataforma-nexus/editar-perfil/${userId}`}
+                                viewTransition
+                                espacamento={15}
+                            >
+                                Editar Perfil
+                            </Button>
+                        ) : (
+                            <Button
+                                tamanho="sm"
+                                icon={Pen}
+                                ladoIcon="direita"
+                                variante="ButtonGrey"
+                                to={`/plataforma-nexus/editar-empresa/${userId}`}
+                                viewTransition
+                                espacamento={15}
+                            >
+                                Editar Empresa
+                            </Button>
+                        )}
+
                         {user?.orientador && (
                             <Button
                                 tamanho="sm"

@@ -23,7 +23,8 @@ export const Menu = styled(Stack, {
     ".Projectcontent": {
         width: "100%",
         alignItems: "center",
-        gap: theme.spacing(1),
+        gap: theme.spacing(1), 
+        textAlign: "center",
     },
 
     ".body": {

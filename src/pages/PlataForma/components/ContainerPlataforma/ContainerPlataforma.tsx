@@ -39,15 +39,15 @@ export const ContainerPlataforma = () => {
                             user.aluno?.nomeUsuario ??
                             user.orientador?.nomeUsuario ??
                             user.empresa?.nome ??
-                            "Usuário",
+                            "-",
                         quatidadeProjetos:
                             user.aluno?.qtn_projetos ??
                             user.orientador?.qtn_projetos ??
                             user.empresa?.qnt_projetos_patrocinados ??
-                            "",
+                            "-",
                     },
                 ]}
-                loading={obterFotoUserIsPending}
+                loading={user.empresa ? false : obterFotoUserIsPending}
             />
 
             <Header

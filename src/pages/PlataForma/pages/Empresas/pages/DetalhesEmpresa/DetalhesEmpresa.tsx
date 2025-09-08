@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Skeleton, Stack, Typography } from "@mui/material"
+import { Avatar, Skeleton, Stack, Typography } from "@mui/material"
 import { MessageCircleHeart, Star } from "lucide-react"
 import { useDetalhesEmpresa } from "./DetalhesEmpresa.hook"
 import { FeedCard } from "../../../../../../components/FeedCard/FeedCard"
@@ -43,11 +43,10 @@ export const DetalhesEmpresa = () => {
                         sm: "initial",
                     }}
                 >
-                    <Skeleton
-                        variant="circular"
-                        width={190}
-                        height={190}
-                        sx={{ flexShrink: 0 }}
+                    <Avatar
+                        src={user?.empresa.foto}
+                        alt="Foto do usuário"
+                        sx={{ flexShrink: 0, width: 190, height: 190 }}
                     />
 
                     <Stack
@@ -89,22 +88,24 @@ export const DetalhesEmpresa = () => {
 
                         <Typography variant="subtitle2">{user?.empresa?.email || ""}</Typography>
 
-                        <Button
-                            tamanho="md"
-                            icon={MessageCircleHeart}
-                            ladoIcon="direita"
-                            variante="ButtonBlue"
-                            sx={{
-                                width: {
-                                    xs: "100%",
-                                    sm: "50%",
-                                    md: "30%",
-                                },
-                            }}
-                            onClick={() => setModal(true)}
-                        >
-                            Avaliar Empresa
-                        </Button>
+                        {!user?.empresa && (
+                            <Button
+                                tamanho="md"
+                                icon={MessageCircleHeart}
+                                ladoIcon="direita"
+                                variante="ButtonBlue"
+                                sx={{
+                                    width: {
+                                        xs: "100%",
+                                        sm: "50%",
+                                        md: "30%",
+                                    },
+                                }}
+                                onClick={() => setModal(true)}
+                            >
+                                Avaliar Empresa
+                            </Button>
+                        )}
 
                         <Typography
                             variant="subtitle1"
@@ -162,7 +163,6 @@ export const DetalhesEmpresa = () => {
                 open={modal}
                 onClose={() => setModal(false)}
             />
-           
         </>
     )
 }
