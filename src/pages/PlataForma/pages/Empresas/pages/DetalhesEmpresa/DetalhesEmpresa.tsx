@@ -7,7 +7,7 @@ import { Button } from "../../../../../../components/Button/Button"
 import { AvaliarEmpresa } from "./modais/AvaliarEmpresa/AvaliarEmpresa"
 
 export const DetalhesEmpresa = () => {
-    const { isFetching, feed, user, modal, setModal } = useDetalhesEmpresa()
+    const { isFetching, feed, empresa, modal, setModal, user } = useDetalhesEmpresa()
 
     return (
         <>
@@ -44,7 +44,7 @@ export const DetalhesEmpresa = () => {
                     }}
                 >
                     <Avatar
-                        src={user?.empresa.foto}
+                        src={empresa?.empresa.foto}
                         alt="Foto do usuário"
                         sx={{ flexShrink: 0, width: 190, height: 190 }}
                     />
@@ -65,20 +65,21 @@ export const DetalhesEmpresa = () => {
                             variant="h4"
                             fontWeight={600}
                         >
-                            {user?.empresa?.nome || <Skeleton width={200} />}
+                            {empresa?.empresa?.nome || <Skeleton width={200} />}
                         </Typography>
 
-                        <Typography variant="subtitle2">{user?.empresa.setor ?? ""}</Typography>
+                        <Typography variant="subtitle2">{empresa?.empresa.setor ?? ""}</Typography>
 
                         <Stack
                             direction={"row"}
                             gap={2}
                         >
                             <Typography variant="subtitle2">
-                                {user?.empresa?.qnt_projetos_patrocinados || "0"} Projetos Patrocinados
+                                {empresa?.empresa?.qnt_projetos_patrocinados || "0"} Projetos
+                                Patrocinados
                             </Typography>
                             <Typography variant="subtitle2">
-                                {user?.empresa?.avaliacao || "0"}{" "}
+                                {empresa?.empresa?.avaliacao || "0"}{" "}
                                 <Star
                                     size={14}
                                     color="#FFD700"
@@ -86,7 +87,14 @@ export const DetalhesEmpresa = () => {
                             </Typography>
                         </Stack>
 
-                        <Typography variant="subtitle2">{user?.empresa?.email || ""}</Typography>
+                        <Typography variant="subtitle2">{empresa?.empresa?.email || ""}</Typography>
+                        
+                        <Typography
+                            variant="subtitle1"
+                            sx={{ width: "90%" }}
+                        >
+                            {empresa?.empresa?.descricao || ""}
+                        </Typography>
 
                         {!user?.empresa && (
                             <Button
@@ -106,13 +114,6 @@ export const DetalhesEmpresa = () => {
                                 Avaliar Empresa
                             </Button>
                         )}
-
-                        <Typography
-                            variant="subtitle1"
-                            sx={{ width: "90%" }}
-                        >
-                            {user?.empresa?.descricao || ""}
-                        </Typography>
                     </Stack>
                 </Stack>
 
@@ -122,7 +123,7 @@ export const DetalhesEmpresa = () => {
                         pt={4}
                         pl={5}
                     >
-                        {Number(user?.empresa?.qnt_projetos_patrocinados ?? 0) > 0 && (
+                        {Number(empresa?.empresa?.qnt_projetos_patrocinados ?? 0) > 0 && (
                             <Typography
                                 variant="h5"
                                 color="#00000040"

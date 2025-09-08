@@ -1,9 +1,11 @@
 import { useParams } from "react-router"
 import { useObterEmpresasProjetos } from "../../../../../../api/controllers/empresa"
 import { useState } from "react"
+import { useUser } from "../../../../../../lib/hooks/useUser"
 
 export const useDetalhesEmpresa = () => {
     const [modal, setModal] = useState(false)
+    const {user} = useUser()
 
     const { idEmpresa } = useParams()
 
@@ -14,8 +16,9 @@ export const useDetalhesEmpresa = () => {
     return {
         isFetching: isPending,
         feed,
-        user: empresa,
+        empresa,
         modal,
-        setModal
+        setModal,
+        user
     }
 }
