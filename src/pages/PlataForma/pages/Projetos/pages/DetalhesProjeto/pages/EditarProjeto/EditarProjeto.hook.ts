@@ -68,6 +68,7 @@ export const useEditarProjeto = () => {
             if (v.foto) form.append("foto", v.foto)
 
             await atualizarProjeto(form)
+            toast.success("Projeto editado com sucesso!", { id: toastId })
             setOpenModal(true)
         } catch {
             toast.error("Falha ao editar projeto. Verifique os dados.", { id: toastId })
