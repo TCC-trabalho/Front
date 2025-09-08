@@ -59,7 +59,7 @@ export const ApoiarProjeto = () => {
                     label="Selecione a quantia para cotribuir"
                     tamanho="md"
                     placeholder="R$ 0,00"
-                    mask="R$ 99.999.999,99"
+                    mask="R$ 999.999.999,99"
                     disabled={isPending || isPatrocinarPending}
                 />
 
