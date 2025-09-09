@@ -7,7 +7,7 @@ export const useObterInstituicoes = (request: ObterInsituicoes.Request) => {
         queryKey: [QueryKeys.ObterInstituicoes, request],
         queryFn: async () => {
             const { data } = await axios.get<ObterInsituicoes.Response>(
-                `https://app.feteps.cpscetec.com.br/appfeteps/pages/Institution/get.php?&limit=${request.limit}`,
+                `https://app.feteps.cpscetec.com.br/appfeteps/pages/Institution/get.php`,
                 {
                     params: {
                         type: request.type,

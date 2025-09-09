@@ -75,7 +75,7 @@ export const DetalhesEmpresa = () => {
                             gap={2}
                         >
                             <Typography variant="subtitle2">
-                                {empresa?.empresa?.qnt_projetos_patrocinados || "0"} Projetos
+                                {empresa?.total_projetos || "0"} Projetos
                                 Patrocinados
                             </Typography>
                             <Typography variant="subtitle2">

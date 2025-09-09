@@ -5,7 +5,19 @@ import { InputDropdown } from "../../../../components/InputDropdown"
 import { useConfiguracoes } from "./Configuracoes.hook"
 
 export const Configuracoes = () => {
-    const { user, opcoes, isFetching } = useConfiguracoes()
+    const {
+        user,
+        opcoes,
+        isFetching,
+        control,
+        // projetoSelecionado,
+        temProjetoSelecionado,
+        valorExibido,
+        isLoadingValor,
+    } = useConfiguracoes()
+
+    const formatarBR = (v: number) =>
+        (v ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
     return (
         <Stack
@@ -47,14 +59,24 @@ export const Configuracoes = () => {
                 </Stack>
 
                 <Stack gap={2}>
-                    <Typography variant="h4">Saldo total</Typography>
-                    <Typography variant="h3">R$ 0,00</Typography>
+                    <Typography variant="h4">
+                        {temProjetoSelecionado ? "Saldo do projeto" : "Saldo total"}
+                    </Typography>
 
-                    <InputDropdown.Normal
+                    {isLoadingValor ? (
+                        <Typography variant="h3">Carregando...</Typography>
+                    ) : (
+                        <Typography variant="h3">R$ {formatarBR(valorExibido)}</Typography>
+                    )}
+
+                    <InputDropdown.Controlado
+                        control={control}
+                        name="projeto"
                         isCarregandoDados={isFetching}
                         placeholder="Veja o saldo respectivo de cada projeto"
                         opcoes={opcoes.projetos}
                         renderizarLabel={(opcao) => opcao.nome}
+                        retornarSomenteId
                     />
                 </Stack>
             </Card>

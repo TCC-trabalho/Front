@@ -106,7 +106,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     Chat
                 </Button>
 
-                {ocultarDetalhesMenu && (
+                {ocultarDetalhesMenu && !user.empresa && (
                     <Button
                         tamanho={"sm"}
                         variante="ButtonLinkBlack"

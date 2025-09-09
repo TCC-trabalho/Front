@@ -1,5 +1,12 @@
 import { Enum } from "../enum/enum"
 
+export const enum QueryKeys {
+    obterPatrociniosPorProjetoAluno = "obterPatrociniosPorProjetoAluno",
+    obterPatrociniosPorProjetoOrientador = "obterPatrociniosPorProjetoOrientador",
+    obterValorTotalPatrocinioAluno = "obterValorTotalPatrocinioAluno",
+    obterValorTotalPatrocinioOrientador = "obterValorTotalPatrocinioOrientador",
+}
+
 export type Patrocinio = {
     id_empresa: number
     id_projeto: number
@@ -13,4 +20,37 @@ export namespace Patrocinar {
     export type Request = Patrocinio
 
     export type Response = Patrocinio
+}
+
+export namespace ObterPatrociniosPorProjetoAluno {
+    export type Request = {
+        id_projeto: number
+        id_aluno: number
+    }
+
+    export type Response = { id_projeto: number; valor: number }
+}
+
+export namespace ObterPatrociniosPorProjetoOrientador {
+    export type Request = {
+        id_projeto: number
+        id_orientador: number
+    }
+
+    export type Response = { id_projeto: number; valor: number }
+}
+
+export namespace ObterValorTotalPatrocinioAluno {
+    export type Request = {
+        id_aluno: number
+    }
+
+    export type Response = { id_aluno: number; valor: number }
+}
+
+export namespace ObterValorTotalPatrocinioOrientador {
+    export type Request = {
+        id_orientador: number
+    }
+    export type Response = { id_orientador: number; valor: number }
 }

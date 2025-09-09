@@ -14,11 +14,12 @@ export const AvaliacaoEnviada = ({ onClose, open }: AvaliacaoEnviadaProps) => {
                 onClose={onClose}
                 sx={{ pb: "0px !important" }}
             />
-            <Modal.Actions>
+            <Modal.Actions sx={{ justifyContent: "center" }}>
                 <Button
                     tamanho="md"
                     variante="ButtonBlue"
                     onClick={onClose}
+                    espacamento={20}
                 >
                     Fechar
                 </Button>
