@@ -1,22 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
 import { ObterInsituicoes, QueryKeys } from "../models/instituicao.types"
-import axios from "axios"
+import { api } from "../../lib/config/axios"
 
-export const useObterInstituicoes = (request: ObterInsituicoes.Request) => {
+export const useObterInstituicoes = () => {
     return useQuery({
-        queryKey: [QueryKeys.ObterInstituicoes, request],
+        queryKey: [QueryKeys.ObterInstituicoes],
         queryFn: async () => {
-            const { data } = await axios.get<ObterInsituicoes.Response>(
-                `https://app.feteps.cpscetec.com.br/appfeteps/pages/Institution/get.php`,
-                {
-                    params: {
-                        type: request.type,
-                        name: request.name,
-                        page: request.page,
-                        limit: request.limit,
-                    },
-                }
-            )
+            const { data } = await api.get<ObterInsituicoes.Response>("instituicoes")
             return data
         },
     })

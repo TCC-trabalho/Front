@@ -15,20 +15,15 @@ export const useFormAluno = () => {
     })
 
     const { mutateAsync, isPending } = useCadastroAluno()
-    const { data: instituicoes, isPending: isLoadingInstituicoes } = useObterInstituicoes({
-        limit: 5000,
-        name: null,
-        page: null,
-        type: null,
-    })
+    const { data: instituicoes, isPending: isLoadingInstituicoes } = useObterInstituicoes()
 
     const instituicoesOptions = useMemo(
         () => ({
             instituicoes:
-                instituicoes?.response.map((inst) => ({
-                    id: `${inst.classification}-${inst.name_institution}`,
-                    tipo: inst.classification,
-                    nome: inst.name_institution,
+                instituicoes?.data.map((inst) => ({
+                    id: `${inst.classificacao}-${inst.nome_instituicao}`,
+                    tipo: inst.classificacao,
+                    nome: inst.nome_instituicao,
                 })) || [],
         }),
         [instituicoes]
