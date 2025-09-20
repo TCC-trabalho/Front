@@ -14,9 +14,11 @@ import {
     Linkedin,
     LogIn,
 } from "lucide-react"
+import { motion } from "framer-motion"
 import { InfoCard } from "../../components/InfoCard/InfoCard"
 import { AboutProject, BackGroud } from "../../assets"
 import { Header } from "../../components/Header/Header"
+import { MotionAnimation } from "../../lib/utils/motion"
 
 export const LadingPage = () => {
     return (
@@ -118,6 +120,10 @@ export const LadingPage = () => {
                     gap={5}
                     justifyContent={"center"}
                     sx={{ flex: 1, zIndex: 1, position: "relative" }}
+                    component={motion.section}
+                    initial={MotionAnimation.fadeInVariant.hidden}
+                    whileInView={MotionAnimation.fadeInVariant.visible}
+                    viewport={MotionAnimation.defaultViewport}
                 >
                     <Stack gap={2}>
                         <Typography
@@ -166,13 +172,23 @@ export const LadingPage = () => {
                     gap: 10,
                 }}
             >
-                <Box sx={{ width: { xs: 400, sm: 500 } }}>
+                <Box
+                    sx={{ width: { xs: 400, sm: 500 } }}
+                    component={motion.div}
+                    initial={MotionAnimation.fadeUpVariant.hidden}
+                    whileInView={MotionAnimation.fadeUpVariant.visible}
+                    viewport={MotionAnimation.defaultViewport}
+                >
                     <AboutProject width="100%" />
                 </Box>
 
                 <Stack
                     sx={{ alignItems: "center", flex: 1 }}
                     gap={2}
+                    component={motion.section}
+                    initial={MotionAnimation.fadeInVariant.hidden}
+                    whileInView={MotionAnimation.fadeInVariant.visible}
+                    viewport={MotionAnimation.defaultViewport}
                 >
                     <Typography
                         variant="h3"
@@ -204,6 +220,10 @@ export const LadingPage = () => {
                     textAlign={"center"}
                     gap={2}
                     color={"#05334A"}
+                    component={motion.section}
+                    initial={MotionAnimation.fadeInVariant.hidden}
+                    whileInView={MotionAnimation.fadeInVariant.visible}
+                    viewport={MotionAnimation.defaultViewport}
                 >
                     <Typography
                         variant="h3"
@@ -224,6 +244,10 @@ export const LadingPage = () => {
                     direction={{ xs: "column", md: "row" }}
                     gap={5}
                     alignItems={"center"}
+                    component={motion.section}
+                    initial={MotionAnimation.sobeDesceVariant.initial}
+                    whileInView={MotionAnimation.sobeDesceVariant.animate}
+                    viewport={MotionAnimation.defaultViewport}
                 >
                     <InfoCard
                         variante={"White"}
@@ -298,6 +322,10 @@ export const LadingPage = () => {
                     gap={2}
                     color="#FFFCF5"
                     zIndex={1}
+                    component={motion.section}
+                    initial={MotionAnimation.fadeInVariant.hidden}
+                    whileInView={MotionAnimation.fadeInVariant.visible}
+                    viewport={MotionAnimation.defaultViewport}
                 >
                     <Typography
                         variant="h3"
@@ -325,6 +353,10 @@ export const LadingPage = () => {
                         justifyItems: "center",
                         zIndex: 1,
                     }}
+                    component={motion.section}
+                    initial={MotionAnimation.fadeJumpVariant.hidden}
+                    whileInView={MotionAnimation.fadeJumpVariant.visible}
+                    viewport={MotionAnimation.defaultViewport}
                 >
                     <InfoCard
                         variante={"Transparent"}
@@ -387,6 +419,7 @@ export const LadingPage = () => {
                                     Empresas descobrem projetos
                                 </Typography>
                             </Stack>
+
                             <Stack>
                                 <Typography
                                     variant="h5"
@@ -486,19 +519,27 @@ export const LadingPage = () => {
                     textAlign={"center"}
                     gap={2}
                     color={"#05334A"}
+                    component={motion.section}
+                    initial={MotionAnimation.fadeInVariant.hidden}
+                    whileInView={MotionAnimation.fadeInVariant.visible}
+                    viewport={MotionAnimation.defaultViewport}
                 >
                     <Typography
                         variant="h3"
                         fontWeight={600}
                     >
                         Equipe de Desenvolvedores
-                    </Typography>''
+                    </Typography>
                 </Stack>
 
                 <Stack
                     direction="row"
                     alignItems="center"
                     gap={{ xs: 0, sm: 2 }}
+                    component={motion.section}
+                    initial={MotionAnimation.slideInVariant.hidden}
+                    whileInView={MotionAnimation.slideInVariant.visible}
+                    viewport={MotionAnimation.defaultViewport}
                 >
                     <Button
                         tamanho={"md"}
@@ -593,7 +634,11 @@ export const LadingPage = () => {
                 </Stack>
             </Styled.Session>
 
-            <Styled.Footer>
+            <Styled.Footer
+                initial={MotionAnimation.fadeDownVariant.hidden}
+                whileInView={MotionAnimation.fadeDownVariant.visible}
+                viewport={MotionAnimation.defaultViewport}
+            >
                 <Stack
                     sx={{
                         justifyContent: "space-between",

@@ -1,4 +1,5 @@
 import { Stack, styled } from "@mui/material"
+import { motion } from "framer-motion"
 
 export const Container = styled(Stack)(() => ({
     minHeight: "100vh",
@@ -38,12 +39,14 @@ export const Session = styled(Stack)(({ theme }) => ({
     },
 }))
 
-export const Footer = styled(Stack)(() => ({
+export const Footer = styled(motion.div)(() => ({
     padding: "80px 5% 15px",
     backgroundColor: "#064B72",
     minHeight: "60vh",
     color: "#6B9EBD",
     justifyContent: "space-between",
+    display: "flex",
+    flexDirection: "column",
 }))
 
 export const DevCardsContainer = styled(Stack)(() => ({
