@@ -3,4 +3,5 @@ export type FormValues = {
     descricao: string
     area: string
     foto?: File | null
+    orientador: number | null
 }

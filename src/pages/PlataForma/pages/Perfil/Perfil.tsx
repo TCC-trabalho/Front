@@ -154,7 +154,7 @@ export const Perfil = () => {
                             </Button>
                         )}
 
-                        {user?.orientador && (
+                        {!user?.empresa && (
                             <Button
                                 tamanho="sm"
                                 icon={Plus}

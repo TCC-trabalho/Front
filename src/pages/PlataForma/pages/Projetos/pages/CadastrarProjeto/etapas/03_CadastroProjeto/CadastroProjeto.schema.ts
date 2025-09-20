@@ -1,6 +1,7 @@
 import * as Yup from "yup"
 
-export const CadastroProjetoSchema = Yup.object().shape({
+export const CadastroProjetoSchema = (isAluno: boolean) =>
+ Yup.object().shape({
     titulo: Yup.string().required("Título é obrigatório"),
     descricao: Yup.string().required("Descrição é obrigatória"),
     area: Yup.string().required("Área é obrigatória"),
@@ -18,4 +19,9 @@ export const CadastroProjetoSchema = Yup.object().shape({
                 !file ||
                 (file && ["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.type))
         ),
+        orientador: isAluno
+        ? Yup.number()
+              .nullable()
+              .required("Selecione o orientador do projeto")
+        : Yup.mixed().nullable(),
 })

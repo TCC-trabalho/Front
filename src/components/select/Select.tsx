@@ -56,6 +56,7 @@ export const Select = <TFieldValues extends FieldValues>({
                                 <MenuItem
                                     key={option.value}
                                     value={option.value}
+                                    disabled={option.disabled}
                                 >
                                     {option.label}
                                 </MenuItem>

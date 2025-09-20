@@ -58,7 +58,8 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
 
                         <Stack className="Projectcontent">
                             <Typography variant="h6">
-                                {header?.[0].quatidadeProjetos} Projetos {user.empresa ? "Patrocinados" : ""}
+                                {header?.[0].quatidadeProjetos} Projetos{" "}
+                                {user.empresa ? "Patrocinados" : ""}
                             </Typography>
                         </Stack>
                     </Stack>
@@ -143,19 +144,25 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                             variante="ButtonLinkBlack"
                             ladoIcon="direita"
                         >
-                            {user.aluno ? "Meu Perfil" : user.orientador ? "Meu Perfil" : "Minha Empresa"}
+                            {user.aluno
+                                ? "Meu Perfil"
+                                : user.orientador
+                                ? "Meu Perfil"
+                                : "Minha Empresa"}
                         </Button>
 
-                        <Button
-                            tamanho={"sm"}
-                            variante="ButtonLinkBlack"
-                            icon={Settings}
-                            to="/plataforma-nexus/configuracoes"
-                            viewTransition
-                            ladoIcon="direita"
-                        >
-                            Configurações
-                        </Button>
+                        {!user.empresa && (
+                            <Button
+                                tamanho={"sm"}
+                                variante="ButtonLinkBlack"
+                                icon={Settings}
+                                to="/plataforma-nexus/configuracoes"
+                                viewTransition
+                                ladoIcon="direita"
+                            >
+                                Configurações
+                            </Button>
+                        )}
 
                         <Button
                             tamanho={"sm"}

@@ -31,9 +31,9 @@ export const ApoiarProjeto = () => {
                 placeholder="Selecione o tipo de apoio"
                 options={[
                     { label: "Dinheiro", value: "dinheiro" },
-                    { label: "Divulgação", value: "divulgacao" },
-                    { label: "Equipamentos", value: "equipamentos" },
-                    { label: "Capacitação", value: "capacitacao" },
+                    { label: "Divulgação", value: "divulgacao", disabled: true },
+                    { label: "Equipamentos", value: "equipamentos", disabled: true },
+                    { label: "Capacitação", value: "capacitacao", disabled: true },
                 ]}
             />
 
@@ -46,9 +46,9 @@ export const ApoiarProjeto = () => {
 
             <Typography variant="h6">{projeto?.area}</Typography>
 
-            <Typography variant="subtitle1">Status: {projeto?.status}</Typography>
+            <Typography variant="subtitle1">Status: <strong>{projeto?.status}</strong></Typography>
 
-            <Typography variant="subtitle1">Professor Orientador: {projeto?.id_orientador}</Typography>
+            <Typography variant="subtitle1">Professor Orientador: <strong>{projeto?.nome_orientador}</strong></Typography>
 
             <Typography sx={{ width: "90%" }}>{truncateText(projeto?.descricao || "", 460)}</Typography>
 
@@ -56,7 +56,7 @@ export const ApoiarProjeto = () => {
                 <Input
                     control={control}
                     name="valorApoio"
-                    label="Selecione a quantia para cotribuir"
+                    label="Selecione uma quantia para contribuir"
                     tamanho="md"
                     placeholder="R$ 0,00"
                     mask="R$ 999.999.999,99"

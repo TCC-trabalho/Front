@@ -21,6 +21,7 @@ export type Projeto = {
         }[]
     }
     id_orientador: number
+    nome_orientador?: string
     qnt_empresas_patrocinam: number
     status: string
 }

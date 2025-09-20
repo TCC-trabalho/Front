@@ -8,19 +8,36 @@ import { useParams } from "react-router"
 import { useUser } from "../../../../../../../../lib/hooks/useUser"
 import { useSuccessModal } from "../../../../../../../../lib/hooks/useSuccessModal"
 import { FormValues } from "./CadastroProjeto.types"
+import { useListagemOrientadores } from "../../../../../../../../api/controllers/orientador"
+import { useMemo } from "react"
 
 export const useCadastroProjeto = () => {
     const { user } = useUser()
     const { idGrupo } = useParams()
     const idGrupoNumber = Number(idGrupo)
 
+    const { data: orientadores, isPending: isLoadingOrientadores } = useListagemOrientadores()
+
+    const opcoes = useMemo(
+        () => ({
+            orientadores:
+                orientadores?.data.map((orientador) => ({
+                    id: orientador.id_orientador,
+                    nome: orientador.email,
+                })) || [],
+        }),
+        [orientadores]
+    )
+    const schema = useMemo(() => CadastroProjetoSchema(user.aluno ? true : false), [user.aluno])
+
     const { control, handleSubmit, getValues } = useForm<FormValues>({
-        resolver: yupResolver(CadastroProjetoSchema) as unknown as Resolver<FormValues, any, FormValues>,
+        resolver: yupResolver(schema) as unknown as Resolver<FormValues, any, FormValues>,
         defaultValues: {
             titulo: "",
             descricao: "",
             area: "",
             foto: null,
+            orientador: null,
         },
     })
 
@@ -47,7 +64,7 @@ export const useCadastroProjeto = () => {
             form.append("data_criacao", new Date().toISOString().slice(0, 19).replace("T", " "))
             form.append("status", "ativo")
             form.append("id_grupo", String(idGrupoNumber))
-            form.append("id_orientador", String(user?.orientador?.id_orientador || 0))
+            form.append("id_orientador", String(user?.orientador?.id_orientador || valores.orientador))
             form.append("objetivo", "")
             form.append("justificativa", "")
             form.append("qnt_empresas_patrocinam", String(0))
@@ -76,5 +93,8 @@ export const useCadastroProjeto = () => {
         isPendingCadastrarProjeto: isPending,
         openModal,
         setOpenModal,
+        isLoadingOrientadores,
+        opcoes,
+        user
     }
 }

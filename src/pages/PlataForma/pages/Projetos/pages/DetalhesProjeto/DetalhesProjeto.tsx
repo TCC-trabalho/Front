@@ -4,7 +4,8 @@ import { useDetalhesProjeto } from "./DetalhesProjeto.hook"
 import { Button } from "../../../../../../components/Button/Button"
 
 export const DetalhesProjeto = () => {
-    const { isFetching, detalhes, tipoUser, idOrientador, idProjeto } = useDetalhesProjeto()
+    const { isFetching, detalhes, tipoUser, alunoEhIntegrante, projetoEhDoOrientador, idProjeto } =
+        useDetalhesProjeto()
 
     return (
         <>
@@ -165,7 +166,7 @@ export const DetalhesProjeto = () => {
                 })}
             </Stack>
 
-            {tipoUser === "orientador" && idOrientador === detalhes?.id_orientador && (
+            {projetoEhDoOrientador || alunoEhIntegrante ? (
                 <Button
                     tamanho="lg"
                     icon={Pen}
@@ -182,7 +183,7 @@ export const DetalhesProjeto = () => {
                 >
                     Editar
                 </Button>
-            )}
+            ) : null}
 
             {tipoUser === "empresa" && (
                 <Button

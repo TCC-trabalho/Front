@@ -6,6 +6,7 @@ import { Input } from "../../../../../../../../components/Input/Input"
 import { Select } from "../../../../../../../../components/select/Select"
 import { ProjetoCadastrado } from "../../modais/projetoCadastrado/projetoCadastrado"
 import { InputFoto } from "../../../../../../../../components/InputFoto/InputFoto"
+import { InputDropdown } from "../../../../../../../../components/InputDropdown"
 
 export const CadastroProjeto = () => {
     const {
@@ -13,6 +14,9 @@ export const CadastroProjeto = () => {
         onSubmit,
         isPendingCadastrarProjeto,
         openModal,
+        opcoes,
+        isLoadingOrientadores,
+        user,
     } = useCadastroProjeto()
 
     return (
@@ -72,6 +76,20 @@ export const CadastroProjeto = () => {
                             { value: "infraestrutura", label: "Infraestrutura" },
                         ]}
                     />
+
+                    {user.aluno && (
+                        <InputDropdown.Controlado
+                            control={control}
+                            name="orientador"
+                            label="Orientador"
+                            placeholder="Selecione o orientador do seu projeto"
+                            opcoes={opcoes.orientadores}
+                            renderizarLabel={(item) => item.nome}
+                            retornarSomenteId
+                            isCarregandoDados={isLoadingOrientadores}
+                            disabled={isPendingCadastrarProjeto}
+                        />
+                    )}
                 </Stack>
                 <Stack
                     alignItems={"center"}
