@@ -12,6 +12,10 @@ export const Content = styled(Stack)(({ theme }) => ({
     backgroundImage: "linear-gradient(#6B9EBD, #0C79B0)",
     overflow: "hidden",
 
+    [theme.breakpoints.down("xl")]: {
+        minHeight: "100vh",
+    },
+
     [theme.breakpoints.down("lg")]: {
         padding: "40px 25%",
     },
@@ -37,7 +41,22 @@ export const Content = styled(Stack)(({ theme }) => ({
     },
 }))
 
-export const FormBox = styled(Stack)(() => ({
+export const FormBoxLogin = styled(Stack)(({ theme }) => ({
+    zIndex: 1,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    width: "550px",
+    maxWidth: "600px",
+    transform: "translate(-50%, -50%)",
+    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.5)",
+
+    [theme.breakpoints.down("xl")]: {
+        width: "90%",
+    },
+}))
+
+export const FormBoxCadastro = styled(Stack)(() => ({
     zIndex: 1,
     position: "relative",
     boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.5)",

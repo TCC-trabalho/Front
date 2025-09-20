@@ -18,7 +18,7 @@ export const CadastroPage = () => {
                         preserveAspectRatio="xMidYMid slice"
                     />
                 </Stack>
-                <Styled.FormBox>
+                <Styled.FormBoxCadastro>
                     <FormContainer
                         variante={"cadastro"}
                         tabs={[
@@ -45,7 +45,7 @@ export const CadastroPage = () => {
                             },
                         ]}
                     />
-                </Styled.FormBox>
+                </Styled.FormBoxCadastro>
             </Styled.Content>
         </Styled.Container>
     )

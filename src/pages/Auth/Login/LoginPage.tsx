@@ -18,7 +18,7 @@ export const LoginPage = () => {
                         preserveAspectRatio="xMidYMid slice"
                     />
                 </Stack>
-                <Styled.FormBox>
+                <Styled.FormBoxLogin>
                     <FormContainer
                         variante={"login"}
                         tabs={[
@@ -46,7 +46,7 @@ export const LoginPage = () => {
                             },
                         ]}
                     />
-                </Styled.FormBox>
+                </Styled.FormBoxLogin>
             </Styled.Content>
         </Styled.Container>
     )
