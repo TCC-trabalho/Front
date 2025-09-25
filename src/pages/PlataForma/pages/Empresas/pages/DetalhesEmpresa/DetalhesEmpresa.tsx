@@ -96,7 +96,7 @@ export const DetalhesEmpresa = () => {
                             {empresa?.empresa?.descricao || ""}
                         </Typography>
 
-                        {!user?.empresa && (
+                        {!user?.empresa && !user?.visitante && (
                             <Button
                                 tamanho="md"
                                 icon={MessageCircleHeart}

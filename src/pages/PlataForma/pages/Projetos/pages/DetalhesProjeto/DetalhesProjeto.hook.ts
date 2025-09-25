@@ -6,7 +6,12 @@ export const useDetalhesProjeto = () => {
     const { idProjeto } = useParams()
     const { user } = useUser()
 
-    const tipoUser = user.aluno?.tipoUser ?? user.orientador?.tipoUser ?? user.empresa?.tipoUser ?? null
+    const tipoUser =
+        user.aluno?.tipoUser ??
+        user.orientador?.tipoUser ??
+        user.empresa?.tipoUser ??
+        user.visitante?.tipoUser ??
+        null
 
     const idOrientador = user.orientador?.id_orientador
     const idAluno = user.aluno?.id_aluno

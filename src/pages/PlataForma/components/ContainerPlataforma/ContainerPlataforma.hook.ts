@@ -15,7 +15,7 @@ export const useContainerPlataforma = () => {
     const { data: obterProjetos, isPending: obterProjetosIsPending } = useObterProjetosLimit(4)
 
     const { data: obterFotoUser, isPending: obterFotoUserIsPending } = useObterFotoUser({
-        nomeUser: user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || "",
+        nomeUser: user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || user.visitante?.nomeUsuario || "",
     })
 
     const { data: avatares, isPending: avataresIsPending } = useObterFotoIntegrantes(

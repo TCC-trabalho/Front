@@ -39,12 +39,13 @@ export const ContainerPlataforma = () => {
                             user.aluno?.nomeUsuario ??
                             user.orientador?.nomeUsuario ??
                             user.empresa?.nome ??
+                            user.visitante?.nome ??
                             "-",
                         quatidadeProjetos:
                             user.aluno?.qtn_projetos ??
                             user.orientador?.qtn_projetos ??
                             user.empresa?.qnt_projetos_patrocinados ??
-                            "-",
+                            user.visitante?.qnt_projetos_patrocinados ?? "-",
                     },
                 ]}
                 loading={user.empresa ? false : obterFotoUserIsPending}

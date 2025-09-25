@@ -21,6 +21,9 @@ export const useUser = () => {
                 case Enum.TipoUsuario.Empresa:
                     setUser({ empresa: parsed })
                     break
+                case Enum.TipoUsuario.Visitante:
+                    setUser({ visitante: parsed })
+                    break
                 default:
                     setUser({})
             }

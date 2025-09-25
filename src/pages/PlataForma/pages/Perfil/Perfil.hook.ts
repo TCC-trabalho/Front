@@ -25,7 +25,8 @@ export const usePerfil = () => {
         })
 
     const { data: obterFotoUser, isPending: obterFotoUserIsPending } = useObterFotoUser({
-        nomeUser: user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || "",
+        nomeUser:
+            user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || user.visitante?.nomeUsuario || "",
     })
 
     const papel = user.aluno
@@ -34,6 +35,8 @@ export const usePerfil = () => {
         ? "orientador"
         : user.empresa
         ? "empresa"
+        : user.visitante
+        ? "visitante"
         : "nenhum"
 
     const isFetching =

@@ -84,7 +84,8 @@ export const Perfil = () => {
                     >
                         {user?.aluno?.nomeUsuario ||
                             user?.orientador?.nomeUsuario ||
-                            user?.empresa?.nome || <Skeleton width={200} />}
+                            user?.empresa?.nome ||
+                            user?.visitante?.nome || <Skeleton width={200} />}
                     </Typography>
 
                     <Typography variant="subtitle2">
@@ -93,6 +94,7 @@ export const Perfil = () => {
                             user.empresa?.setor ??
                             ""}
                     </Typography>
+
                     {user.empresa && (
                         <Stack
                             direction={"row"}
@@ -111,8 +113,22 @@ export const Perfil = () => {
                         </Stack>
                     )}
 
+                    {user.visitante && (
+                        <Stack
+                            direction={"row"}
+                            gap={2}
+                        >
+                            <Typography variant="subtitle2">
+                                {user.visitante?.qnt_projetos_patrocinados || "0"} Projetos Patrocinados
+                            </Typography>
+                        </Stack>
+                    )}
+
                     <Typography variant="subtitle2">
-                        {user?.aluno?.email || user?.orientador?.email || user?.empresa?.email || ""}
+                        {user?.aluno?.email ||
+                            user?.orientador?.email ||
+                            user?.empresa?.email ||
+                            user?.visitante?.email || <Skeleton width={200} />}
                     </Typography>
 
                     <Typography
@@ -122,13 +138,14 @@ export const Perfil = () => {
                         {user?.aluno?.biografia ||
                             user?.orientador?.biografia ||
                             user?.empresa?.descricao ||
+                            user?.visitante?.biografia ||
                             ""}
                     </Typography>
                     <Stack
                         direction={"row"}
                         gap={2}
                     >
-                        {user.aluno || user.orientador ? (
+                        {user.aluno || user.orientador || user.visitante ? (
                             <Button
                                 tamanho="sm"
                                 variante="ButtonGrey"
@@ -154,7 +171,7 @@ export const Perfil = () => {
                             </Button>
                         )}
 
-                        {!user?.empresa && (
+                        {!user?.empresa && !user?.visitante && (
                             <Button
                                 tamanho="sm"
                                 icon={Plus}
@@ -176,13 +193,18 @@ export const Perfil = () => {
                     pl={5}
                 >
                     {(Number(user.empresa?.qnt_projetos_patrocinados ?? 0) > 0 ||
+                        Number(user.visitante?.qnt_projetos_patrocinados ?? 0) > 0 ||
                         Number(user.aluno?.qtn_projetos ?? 0) > 0 ||
                         Number(user.orientador?.qtn_projetos ?? 0) > 0) && (
                         <Typography
                             variant="h5"
                             color="#00000040"
                         >
-                            {user.empresa ? "Projetos Patrocinados" : "Meus Projetos"}
+                            {user.empresa
+                                ? "Projetos Patrocinados"
+                                : user.visitante
+                                ? "Projetos Apoiados"
+                                : "Meus Projetos"}
                         </Typography>
                     )}
                 </Stack>

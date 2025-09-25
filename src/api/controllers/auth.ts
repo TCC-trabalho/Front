@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import { CadastroAluno, CadastroEmpresa, CadastroProfessor, LoginPayload } from "../models/auth.type"
+import { CadastroAluno, CadastroEmpresa, CadastroProfessor, CadastroVisitante, LoginPayload } from "../models/auth.type"
 import { api } from "../../lib/config/axios"
 
 // Login da plataforma
@@ -37,6 +37,15 @@ export const useCadastroEmpresa = () => {
     return useMutation({
         mutationFn: async (request: CadastroEmpresa) => {
             const { data } = await api.post("empresas", request)
+            return data
+        },
+    })
+}
+
+export const useCadastroVisitante = () => {
+    return useMutation({
+        mutationFn: async (request: CadastroVisitante) => {
+            const { data } = await api.post("visitantes", request)
             return data
         },
     })

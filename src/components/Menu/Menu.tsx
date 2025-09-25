@@ -107,7 +107,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     Chat
                 </Button>
 
-                {ocultarDetalhesMenu && !user.empresa && (
+                {ocultarDetalhesMenu && !user.empresa && !user.visitante && (
                     <Button
                         tamanho={"sm"}
                         variante="ButtonLinkBlack"
@@ -138,7 +138,15 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     <Stack className="body">
                         <Button
                             tamanho={"sm"}
-                            icon={user.aluno ? UserRound : user.orientador ? UserRound : Building2}
+                            icon={
+                                user.aluno
+                                    ? UserRound
+                                    : user.orientador
+                                    ? UserRound
+                                    : user.visitante
+                                    ? UserRound
+                                    : Building2
+                            }
                             to="/plataforma-nexus/meu-perfil"
                             viewTransition
                             variante="ButtonLinkBlack"
@@ -148,10 +156,12 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                                 ? "Meu Perfil"
                                 : user.orientador
                                 ? "Meu Perfil"
+                                : user.visitante
+                                ? "Meu Perfil"
                                 : "Minha Empresa"}
                         </Button>
 
-                        {!user.empresa && (
+                        {!user.empresa && !user.visitante && (
                             <Button
                                 tamanho={"sm"}
                                 variante="ButtonLinkBlack"

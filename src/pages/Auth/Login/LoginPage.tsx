@@ -2,10 +2,11 @@ import { Stack } from "@mui/material"
 import * as Styled from "../AuthPage.styled"
 import { BackGroud } from "../../../assets"
 import { FormContainer } from "../../../components/FormContainer/FormContainer"
-import { BookOpen, Building2, GraduationCap } from "lucide-react"
+import { BookOpen, Building2, GraduationCap, HandHelping } from "lucide-react"
 import { FormALuno } from "./Tabs/FormAluno/FormAluno"
 import { FormOrientador } from "./Tabs/FormOrientador/FormOrientador"
 import { FormEmpresa } from "./Tabs/FormEmpresa/FormEmpresa"
+import { FormVisitante } from "./Tabs/FormVisitante/FormVisitante"
 
 export const LoginPage = () => {
     return (
@@ -44,6 +45,13 @@ export const LoginPage = () => {
                                 subtitulo: "Insira suas credenciais para acessar seu portal da Empresa",
                                 content: <FormEmpresa />,
                             },
+                            {
+                                label: "Visitante",
+                                icon: HandHelping,
+                                titulo: "Login do visitante",
+                                subtitulo: "Insira suas credenciais para acessar seu portal do Visitante",
+                                content: <FormVisitante />,
+                            }
                         ]}
                     />
                 </Styled.FormBoxLogin>

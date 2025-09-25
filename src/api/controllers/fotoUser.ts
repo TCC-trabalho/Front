@@ -7,7 +7,7 @@ export const useObterFotoUser = (request: FotoUser.Request) => {
     const { user } = useUser()
 
     return useQuery({
-        enabled: !!request.nomeUser && (!!user.aluno || !!user.orientador),
+        enabled: !!request.nomeUser && (!!user.aluno || !!user.orientador || !!user.visitante),
         queryKey: [QueryKey.ObterFotoUser, request],
         queryFn: async () => {
             const { data } = await axios.get<string>(

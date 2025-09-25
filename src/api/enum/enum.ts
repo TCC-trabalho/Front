@@ -8,6 +8,7 @@ export namespace Enum {
         Aluno = "aluno",
         Orientador = "orientador",
         Empresa = "empresa",
+        Visitante = "visitante",
     }
 
     export enum TipoApoio {

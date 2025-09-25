@@ -1,7 +1,7 @@
 // Login
 
 export type LoginPayload = {
-    tipo: "aluno" | "orientador" | "empresa"
+    tipo: "aluno" | "orientador" | "empresa" | "visitante"
     email?: string
     cnpj?: string
     senha: string
@@ -41,5 +41,12 @@ export type CadastroEmpresa = {
     endereco: string
     email: string
     telefone: string
+    senha: string
+}
+
+export type CadastroVisitante = {
+    nome: string
+    nomeUsuario: string
+    email: string
     senha: string
 }

@@ -2,10 +2,11 @@ import { Stack } from "@mui/material"
 import * as Styled from "../AuthPage.styled"
 import { BackGroud } from "../../../assets"
 import { FormContainer } from "../../../components/FormContainer/FormContainer"
-import { BookOpen, Building2, GraduationCap } from "lucide-react"
+import { BookOpen, Building2, GraduationCap, HandHelping } from "lucide-react"
 import { FormALuno } from "./Tabs/FormAluno/FormAluno"
 import { FormOrientador } from "./Tabs/FormOrientador/FormOrientador"
 import { FormEmpresa } from "./Tabs/FormEmpresa/FormEmpresa"
+import { FormVisitante } from "./Tabs/FormVisitante/FormVisitante"
 
 export const CadastroPage = () => {
     return (
@@ -42,6 +43,13 @@ export const CadastroPage = () => {
                                 titulo: "Cadastro da empresa",
                                 subtitulo: "Faça sua conta e comece a navegar",
                                 content: <FormEmpresa />,
+                            },
+                            {
+                                label: "Visitante",
+                                icon: HandHelping,
+                                titulo: "Cadastro do visitante",
+                                subtitulo: "Faça sua conta e comece a navegar",
+                                content: <FormVisitante />,
                             },
                         ]}
                     />

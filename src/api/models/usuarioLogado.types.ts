@@ -46,10 +46,22 @@ export namespace UsuarioLogado {
         avaliacao: string
         qnt_projetos_patrocinados: string
     }
+
+    export interface Visitante {
+        id_visitante: number
+        nome: string
+        nomeUsuario: string
+        biografia: string
+        email: string
+        senha: string
+        tipoUser: Enum.TipoUsuario
+        qnt_projetos_patrocinados: string
+    }
 }
 
 export type UsuarioGenerico = {
     aluno?: UsuarioLogado.Aluno
     orientador?: UsuarioLogado.Orientador
     empresa?: UsuarioLogado.Empresa
+    visitante?: UsuarioLogado.Visitante
 }
