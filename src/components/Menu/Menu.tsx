@@ -59,7 +59,7 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                         <Stack className="Projectcontent">
                             <Typography variant="h6">
                                 {header?.[0].quatidadeProjetos} Projetos{" "}
-                                {user.empresa ? "Patrocinados" : ""}
+                                {user.empresa ? "Patrocinados" : user.visitante ? "Apoiados" : ""}
                             </Typography>
                         </Stack>
                     </Stack>

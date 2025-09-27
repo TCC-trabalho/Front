@@ -45,7 +45,7 @@ export const ContainerPlataforma = () => {
                             user.aluno?.qtn_projetos ??
                             user.orientador?.qtn_projetos ??
                             user.empresa?.qnt_projetos_patrocinados ??
-                            user.visitante?.qnt_projetos_patrocinados ?? "-",
+                            user.visitante?.qnt_projetos_patrocinados ?? "0",
                     },
                 ]}
                 loading={user.empresa ? false : obterFotoUserIsPending}

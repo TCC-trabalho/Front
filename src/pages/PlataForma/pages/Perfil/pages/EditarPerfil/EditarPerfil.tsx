@@ -45,14 +45,18 @@ export const EditarPerfil = () => {
                             variant="subtitle1"
                             fontWeight={600}
                         >
-                            {user?.aluno?.nome || user?.orientador?.nome || <Skeleton width={100} />}
+                            {user?.aluno?.nome || user?.orientador?.nome || user?.visitante?.nome || (
+                                <Skeleton width={100} />
+                            )}
                         </Typography>
 
                         <Typography
                             variant="subtitle2"
                             fontWeight={600}
                         >
-                            {user?.aluno?.email || user?.orientador?.email || <Skeleton width={150} />}
+                            {user?.aluno?.email || user?.orientador?.email || user?.visitante?.email || (
+                                <Skeleton width={150} />
+                            )}
                         </Typography>
                     </Stack>
                 </Stack>
@@ -73,16 +77,18 @@ export const EditarPerfil = () => {
                     disabled={isPending}
                 />
 
-                <Input
-                    type="tel"
-                    control={control}
-                    name={"telefone"}
-                    tamanho={"sm"}
-                    label="Telefone"
-                    mask="(99) 99999-9999"
-                    fullWidth
-                    disabled={isPending}
-                />
+                {!user.visitante && (
+                    <Input
+                        type="tel"
+                        control={control}
+                        name={"telefone"}
+                        tamanho={"sm"}
+                        label="Telefone"
+                        mask="(99) 99999-9999"
+                        fullWidth
+                        disabled={isPending}
+                    />
+                )}
 
                 {user?.orientador && (
                     <Input
@@ -121,9 +127,20 @@ export const EditarPerfil = () => {
                 <Stack
                     alignItems={"start"}
                     direction={"row"}
+                    gap={2}
                 >
                     <Button
                         variante="ButtonOutlinedBlue"
+                        tamanho="md"
+                        disabled={isPending}
+                        espacamento={10}
+                        to="/plataforma-nexus/meu-perfil"
+                        viewTransition
+                    >
+                        Voltar
+                    </Button>
+                    <Button
+                        variante="ButtonBlue"
                         tamanho="md"
                         onClick={onSubmit}
                         loading={isPending}

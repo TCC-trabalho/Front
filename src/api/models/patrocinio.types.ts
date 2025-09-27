@@ -16,10 +16,25 @@ export type Patrocinio = {
     valorPatrocinio: number | null
 }
 
+export type Apoio = {
+    id_visitante: number
+    id_projeto: number
+    data_apoio: string
+    tipo_apoio: Enum.TipoApoio
+    mensagem: string | null
+    valorApoio: number | null
+}
+
 export namespace Patrocinar {
     export type Request = Patrocinio
 
     export type Response = Patrocinio
+}
+
+export namespace Apoiar {
+    export type Request = Apoio
+
+    export type Response = Apoio
 }
 
 export namespace ObterPatrociniosPorProjetoAluno {

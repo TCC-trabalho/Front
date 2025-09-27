@@ -6,4 +6,4 @@ export type Atualizaruser = {
     curso?: string | null
     formacao?: string | null
     inst_ensino?: string | null
-  }
+}

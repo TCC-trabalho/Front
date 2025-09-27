@@ -224,7 +224,7 @@ export const Perfil = () => {
                             titulo={item?.titulo || ""}
                             area={item?.area || ""}
                             organizacao={item?.organizacao || ""}
-                            integrantes={item?.integrantes || 0}
+                            integrantes={item?.integrantes || null}
                             descricao={item?.descricao || ""}
                             idProjeto={item?.id_projeto || 0}
                             loading={isFetching}

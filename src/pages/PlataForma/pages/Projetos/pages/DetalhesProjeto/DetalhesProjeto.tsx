@@ -185,7 +185,7 @@ export const DetalhesProjeto = () => {
                 </Button>
             ) : null}
 
-            {tipoUser === "empresa" || tipoUser === "visitante" && (
+            {(tipoUser === "empresa" || tipoUser === "visitante") && (
                 <Button
                     tamanho="lg"
                     icon={HandHeart}

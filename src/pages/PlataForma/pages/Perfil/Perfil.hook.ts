@@ -7,6 +7,7 @@ import {
 import { useUserId } from "../../../../lib/hooks/useGetId"
 import { useObterFotoUser } from "../../../../api/controllers/fotoUser"
 import { useObterProjetosPatrocinadosPorEmpresa } from "../../../../api/controllers/empresa"
+import { useObterProjetosApoiadosPorVisitante } from "../../../../api/controllers/visitante"
 
 export const usePerfil = () => {
     const { user } = useUser()
@@ -22,6 +23,11 @@ export const usePerfil = () => {
     const { data: obterProjetosPatrocinados, isPending: obterProjetosPatrocinadosIsPending } =
         useObterProjetosPatrocinadosPorEmpresa({
             id_empresa: user.empresa?.id_empresa || 0,
+        })
+
+    const { data: obterProjetosApoiados, isPending: obterProjetosApoiadosIsPending } =
+        useObterProjetosApoiadosPorVisitante({
+            id_visitante: user.visitante?.id_visitante || 0,
         })
 
     const { data: obterFotoUser, isPending: obterFotoUserIsPending } = useObterFotoUser({
@@ -46,12 +52,16 @@ export const usePerfil = () => {
             ? !!orientadorQuery.isPending
             : papel === "empresa"
             ? !!obterProjetosPatrocinadosIsPending
+            : papel === "visitante"
+            ? !!obterProjetosApoiadosIsPending
             : false
 
     let feed: any[] = []
 
     if (papel === "empresa") {
         feed = obterProjetosPatrocinados?.projetos_patrocinados ?? []
+    } else if (papel === "visitante") {
+        feed = obterProjetosApoiados?.projetos_apoiados ?? []
     } else if (papel === "aluno") {
         const d = alunoQuery.data as { projetos?: any[] } | any[] | undefined
         feed = Array.isArray(d) ? d : Array.isArray(d?.projetos) ? d!.projetos! : []

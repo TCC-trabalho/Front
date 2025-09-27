@@ -3,7 +3,7 @@ import { ApoiarProjetoForm, apoiarProjetoSchema } from "./ApoiarProjeto.schema"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useParams } from "react-router"
 import { useObterProjetoPorId } from "../../../../api/controllers/projeto"
-import { usePatrocinar } from "../../../../api/controllers/patrocinio"
+import { useApoiar, usePatrocinar } from "../../../../api/controllers/patrocinio"
 import { useUser } from "../../../../lib/hooks/useUser"
 import { Enum } from "../../../../api/enum/enum"
 import { toast } from "sonner"
@@ -14,10 +14,11 @@ export const useApoiarProjeto = () => {
 
     const { data, isPending } = useObterProjetoPorId(Number(idProjeto))
     const { mutateAsync: patrocinar, isPending: isPatrocinarPending } = usePatrocinar()
+    const { mutateAsync: apoiar, isPending: isApoiarPending } = useApoiar()
 
     type ApoiarProjetoFormResolved = ApoiarProjetoForm & { mensagemApoio: string | undefined }
 
-    const { control, handleSubmit } = useForm<ApoiarProjetoFormResolved>({
+    const { control, handleSubmit, reset } = useForm<ApoiarProjetoFormResolved>({
         resolver: yupResolver(apoiarProjetoSchema) as Resolver<ApoiarProjetoFormResolved>,
         defaultValues: {
             tipoApoio: undefined,
@@ -27,30 +28,54 @@ export const useApoiarProjeto = () => {
     })
 
     const onSubmit = handleSubmit(async (data) => {
-        const payload = {
-            id_projeto: Number(idProjeto),
-            id_empresa: user?.empresa?.id_empresa || 0,
-            data_patrocinio: new Date().toISOString().slice(0, 19).replace("T", " "),
-            tipo_apoio: data.tipoApoio as Enum.TipoApoio,
-            valorPatrocinio: Number(data.valorApoio),
-            mensagem: data.mensagemApoio || "",
+        const isEmpresa = !!user?.empresa?.id_empresa
+
+        if (isEmpresa) {
+            const payload = {
+                id_projeto: Number(idProjeto),
+                id_empresa: user?.empresa?.id_empresa || 0,
+                data_patrocinio: new Date().toISOString().slice(0, 19).replace("T", " "),
+                tipo_apoio: data.tipoApoio as Enum.TipoApoio,
+                valorPatrocinio: Number(data.valorApoio),
+                mensagem: data.mensagemApoio || "",
+            }
+
+            await patrocinar(payload, {
+                onSuccess: () => {
+                    const userDataRaw = localStorage.getItem("usuarioLogado")
+                    if (userDataRaw) {
+                        const userData = JSON.parse(userDataRaw)
+                        userData.qnt_projetos_patrocinados =
+                            (userData.qnt_projetos_patrocinados || 0) + 1
+                        localStorage.setItem("usuarioLogado", JSON.stringify(userData))
+                    }
+                    toast.success("Patrocínio registrado com sucesso!")
+                    reset()
+                },
+                onError: () => {
+                    toast.error("Não foi possível registrar o patrocínio. Tente novamente.")
+                },
+            })
+        } else {
+            const payload = {
+                id_projeto: Number(idProjeto),
+                id_visitante: user?.visitante?.id_visitante || 0,
+                data_apoio: new Date().toISOString().slice(0, 19).replace("T", " "),
+                tipo_apoio: data.tipoApoio as Enum.TipoApoio,
+                valorApoio: Number(data.valorApoio),
+                mensagem: data.mensagemApoio || "",
+            }
+
+            await apoiar(payload, {
+                onSuccess: () => {
+                    toast.success("Apoio registrado com sucesso!")
+                    reset()
+                },
+                onError: () => {
+                    toast.error("Não foi possível registrar o apoio. Tente novamente.")
+                },
+            })
         }
-
-        await patrocinar(payload, {
-            onSuccess: () => {
-                const userDataRaw = localStorage.getItem("usuarioLogado")
-                if (userDataRaw) {
-                    const userData = JSON.parse(userDataRaw)
-                    userData.qnt_projetos_patrocinados = (userData.qnt_projetos_patrocinados || 0) + 1
-                    localStorage.setItem("usuarioLogado", JSON.stringify(userData))
-                }
-
-                toast.success("Apoio registrado com sucesso!")
-            },
-            onError: () => {
-                toast.error("Não foi possível registrar o apoio. Tente novamente.")
-            },
-        })
     })
 
     return {
@@ -58,6 +83,6 @@ export const useApoiarProjeto = () => {
         onSubmit,
         projeto: data,
         isPending,
-        isPatrocinarPending,
+        isPatrocinarPending: isPatrocinarPending || isApoiarPending,
     }
 }

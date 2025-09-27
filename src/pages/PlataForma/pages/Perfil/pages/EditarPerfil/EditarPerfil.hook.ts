@@ -11,17 +11,23 @@ export const useEditarPerfil = () => {
     const userId = useUserId()
     const { user } = useUser()
 
-       const { data: obterFotoUser, isPending: obterFotoUserIsPending } = useObterFotoUser({
-                nomeUser: user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || "",
-            })
+    const { data: obterFotoUser, isPending: obterFotoUserIsPending } = useObterFotoUser({
+        nomeUser:
+            user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || user.visitante?.nomeUsuario || "",
+    })
 
-    const tipoUser = user.aluno?.tipoUser ?? user.orientador?.tipoUser ?? user.empresa?.tipoUser ?? ""
+    const tipoUser = user.aluno?.tipoUser ?? user.orientador?.tipoUser ?? user.visitante?.tipoUser ?? ""
 
-    const nomeUsuario = user.aluno?.nomeUsuario ?? user.orientador?.nomeUsuario ?? undefined
+    const nomeUsuario =
+        user.aluno?.nomeUsuario ??
+        user.orientador?.nomeUsuario ??
+        user.visitante?.nomeUsuario ??
+        undefined
 
     const telefone = user.aluno?.telefone ?? user.orientador?.telefone ?? undefined
 
-    const biografia = user.aluno?.biografia ?? user.orientador?.biografia ?? undefined
+    const biografia =
+        user.aluno?.biografia ?? user.orientador?.biografia ?? user.visitante?.biografia ?? undefined
 
     const curso = user.aluno?.curso ?? undefined
     const formacao = user.orientador?.formacao ?? undefined

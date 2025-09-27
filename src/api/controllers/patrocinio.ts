@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { api, nexusQueryClient } from "../../lib/config/axios"
 import {
+    Apoiar,
     ObterPatrociniosPorProjetoAluno,
     ObterPatrociniosPorProjetoOrientador,
     ObterValorTotalPatrocinioAluno,
@@ -27,7 +28,11 @@ export const useObterPatrociniosPorProjetoOrientador = (
     request: ObterPatrociniosPorProjetoOrientador.Request
 ) => {
     return useQuery({
-        queryKey: [QueryKeys.obterPatrociniosPorProjetoOrientador, request.id_orientador, request.id_projeto],
+        queryKey: [
+            QueryKeys.obterPatrociniosPorProjetoOrientador,
+            request.id_orientador,
+            request.id_projeto,
+        ],
         enabled: !!request.id_orientador && !!request.id_projeto,
         queryFn: async () => {
             const response = await api.get<ObterPatrociniosPorProjetoOrientador.Response>(
@@ -79,6 +84,15 @@ export const usePatrocinar = () => {
             nexusQueryClient.invalidateQueries({
                 queryKey: [EmpresaKey.obterProjetosPatrocinadosPorEmpresa],
             })
+        },
+    })
+}
+
+export const useApoiar = () => {
+    return useMutation({
+        mutationFn: async (request: Apoiar.Request) => {
+            const response = await api.post<Apoiar.Response>("apoios", request)
+            return response.data
         },
     })
 }
