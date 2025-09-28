@@ -1,6 +1,6 @@
-import { StackProps } from "@mui/material"
+import { ButtonBaseProps } from "@mui/material"
 
-export interface FeedCardProps extends StackProps {
+export interface FeedCardProps extends ButtonBaseProps {
     variante: "projeto" | "empresa"
     imagemUrl: string
     titulo: string
@@ -10,6 +10,6 @@ export interface FeedCardProps extends StackProps {
     descricao: string
     avaliacao?: number
     loading?: boolean
-    idProjeto?: number
-    idEmpresa?: number
+    to?: string
+    viewTransition?: boolean
 }

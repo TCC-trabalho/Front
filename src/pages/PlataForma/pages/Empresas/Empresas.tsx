@@ -21,8 +21,8 @@ export const Empresas = () => {
                     descricao={item?.descricao || ""}
                     avaliacao={item?.avaliacao || 0}
                     loading={isFetching}
-                    idEmpresa={item?.id_empresa || 0}
                     variante={"empresa"}
+                    to={`/plataforma-nexus/detalhes-empresa/${item?.id_empresa}`}
                 />
             ))}
         </Stack>

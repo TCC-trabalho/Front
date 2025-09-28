@@ -45,7 +45,8 @@ export const ContainerPlataforma = () => {
                             user.aluno?.qtn_projetos ??
                             user.orientador?.qtn_projetos ??
                             user.empresa?.qnt_projetos_patrocinados ??
-                            user.visitante?.qnt_projetos_patrocinados ?? "0",
+                            user.visitante?.qnt_projetos_patrocinados ??
+                            "0",
                     },
                 ]}
                 loading={user.empresa ? false : obterFotoUserIsPending}
@@ -58,13 +59,10 @@ export const ContainerPlataforma = () => {
                 <Stack
                     sx={{
                         flexDirection: "row",
-                        justifyContent: "end",
+                        justifyContent: "center",
                         alignItems: "center",
                         gap: 2,
-                        width: {
-                            xs: "90%",
-                            lg: "60%",
-                        },
+                        width: "100%",
                     }}
                 >
                     <Typography
@@ -73,22 +71,24 @@ export const ContainerPlataforma = () => {
                     >
                         {tituloPagina()}
                     </Typography>
-                    <Input
-                        Icon={Search}
-                        placeholder="Pesquisar"
-                        control={control}
-                        name={""}
-                        tamanho={"sm"}
-                        sx={{
-                            width: {
-                                xs: 60,
-                                sm: 300,
-                            },
-                            height: 35,
-                            borderRadius: 10,
-                            p: 2,
-                        }}
-                    />
+                    {exibirSugestao && (
+                        <Input
+                            Icon={Search}
+                            placeholder="Pesquisar"
+                            control={control}
+                            name={""}
+                            tamanho={"sm"}
+                            sx={{
+                                width: {
+                                    xs: 130,
+                                    sm: 300,
+                                },
+                                height: 35,
+                                borderRadius: 10,
+                                p: 2,
+                            }}
+                        />
+                    )}
                 </Stack>
                 <Button
                     tamanho={"lg"}
@@ -134,7 +134,7 @@ export const ContainerPlataforma = () => {
                                           height={20}
                                       />
                                       <Skeleton
-                                          width={180}
+                                          width={90}
                                           height={16}
                                       />
                                   </Stack>
@@ -222,11 +222,11 @@ export const ContainerPlataforma = () => {
                                   />
                                   <Stack>
                                       <Skeleton
-                                          width={120}
+                                          width={90}
                                           height={20}
                                       />
                                       <Skeleton
-                                          width={180}
+                                          width={110}
                                           height={16}
                                       />
                                   </Stack>

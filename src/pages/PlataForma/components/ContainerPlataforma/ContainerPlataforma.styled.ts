@@ -1,24 +1,10 @@
 import { Stack, styled } from "@mui/material"
 
-export const Container = styled(Stack)(({ theme }) => ({
+export const Container = styled(Stack)(() => ({
     minHeight: "100vh",
     overflowX: "hidden",
     justifyContent: "center",
     alignItems: "center",
-
-    [theme.breakpoints.up("xs")]: {
-        padding: 0,
-        paddingTop: theme.spacing(8),
-    },
-
-    [theme.breakpoints.up("md")]: {
-        paddingLeft: theme.spacing(16),
-        paddingTop: theme.spacing(5),
-    },
-
-    [theme.breakpoints.up("lg")]: {
-        padding: 0,
-    },
 }))
 
 export const Content = styled(Stack)(({ theme }) => ({
@@ -28,26 +14,20 @@ export const Content = styled(Stack)(({ theme }) => ({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-
-    [theme.breakpoints.up("xs")]: {
-        paddingTop: theme.spacing(5),
-        paddingBottom: theme.spacing(5),
-    },
-
-    [theme.breakpoints.up("md")]: {
-        paddingTop: theme.spacing(0),
-    },
-
-    [theme.breakpoints.up("lg")]: {
-        paddingTop: theme.spacing(8),
-    },
+    paddingTop: theme.spacing(12),
+    paddingBottom: theme.spacing(6),
 }))
 
 export const CardSugestao = styled(Stack)(({ theme }) => ({
     width: 200,
     position: "fixed",
     top: "40%",
-    right: 52,
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    paddingInline: theme.spacing(4),
+    paddingBlock: theme.spacing(1),
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+    right: 30,
     transform: "translateY(-40%)",
     zIndex: 1000,
     justifyContent: "center",
@@ -60,13 +40,17 @@ export const CardSugestao = styled(Stack)(({ theme }) => ({
     },
 
     [theme.breakpoints.down("lg")]: {
-        right: 10,
+        right: 0,
         scale: "0.85",
     },
 }))
 
 export const CardEquipe = styled(Stack)(({ theme }) => ({
     width: 200,
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    padding: theme.spacing(2),
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     position: "fixed",
     top: "40%",
     right: 52,

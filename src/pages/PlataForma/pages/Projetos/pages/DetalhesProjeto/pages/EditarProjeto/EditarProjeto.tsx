@@ -23,9 +23,14 @@ export const EditarProjeto = () => {
         <>
             <Stack
                 width={{ xs: "95%", md: "45%" }}
-                pt={4}
                 gap={2}
-                pb={2}
+                sx={{
+                    gap: 2,
+                    bgcolor: "#FFF",
+                    padding: 4,
+                    borderRadius: 2,
+                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                }}
             >
                 {projetosIsloading ? (
                     <Skeleton
@@ -148,38 +153,31 @@ export const EditarProjeto = () => {
                         />
                     </>
                 )}
-            </Stack>
-            <Stack
-                direction={"row"}
-                gap={4}
-                alignItems={"center"}
-                justifyContent={"center"}
-                sx={{
-                    position: "fixed",
-                    bottom: 16,
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    zIndex: 1000,
-                }}
-            >
-                <Button
-                    tamanho="lg"
-                    icon={ChevronLeft}
-                    to={`/plataforma-nexus/detalhes-projeto/${idProjeto}`}
-                    viewTransition
-                    espacamento={20}
+                <Stack
+                    direction={"row"}
+                    gap={2}
                 >
-                    Voltar
-                </Button>
+                    <Button
+                        variante="ButtonOutlinedBlue"
+                        tamanho="md"
+                        icon={ChevronLeft}
+                        to={`/plataforma-nexus/detalhes-projeto/${idProjeto}`}
+                        viewTransition
+                        espacamento={20}
+                    >
+                        Voltar
+                    </Button>
 
-                <Button
-                    tamanho="lg"
-                    loading={atualizarProjetoLoading}
-                    onClick={onSubmit}
-                    espacamento={20}
-                >
-                    Salvar Alterações
-                </Button>
+                    <Button
+                        variante="ButtonBlue"
+                        tamanho="md"
+                        loading={atualizarProjetoLoading}
+                        onClick={onSubmit}
+                        espacamento={20}
+                    >
+                        Salvar Alterações
+                    </Button>
+                </Stack>
             </Stack>
 
             <ProjetoAtualizado

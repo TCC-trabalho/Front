@@ -2,7 +2,16 @@ import { Avatar, Drawer, Skeleton, Stack, Typography, useMediaQuery, useTheme } 
 import * as Styled from "./Menu.styled"
 import { Button } from "../Button/Button"
 import { LogoNexus } from "../../assets"
-import { Building2, Lightbulb, LogOut, MenuIcon, MessageCircle, Settings, UserRound } from "lucide-react"
+import {
+    Building2,
+    Clover,
+    Lightbulb,
+    LogOut,
+    MenuIcon,
+    MessageCircle,
+    Settings,
+    UserRound,
+} from "lucide-react"
 import { useState } from "react"
 import { MenuProps } from "./Menu.type"
 import { useControleExibicao } from "../../lib/utils/controleExibicao"
@@ -95,6 +104,19 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                 >
                     Empresas
                 </Button>
+
+                {ocultarDetalhesMenu && (user?.empresa || user?.visitante) && (
+                    <Button
+                        tamanho={"sm"}
+                        variante="ButtonLinkBlack"
+                        icon={Clover}
+                        to="/plataforma-nexus/apoio-da-sorte"
+                        viewTransition
+                        ladoIcon="direita"
+                    >
+                        Apoio da sorte
+                    </Button>
+                )}
 
                 <Button
                     tamanho={"sm"}

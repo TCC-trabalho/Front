@@ -1,6 +1,6 @@
 import { Controller, FieldValues } from "react-hook-form"
 import { InputFotoProps } from "./InputFoto.types"
-import { Box, Stack, Typography } from "@mui/material"
+import { Box, Stack, Tooltip, Typography } from "@mui/material"
 import { Button } from "../Button/Button"
 import { X } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
@@ -69,16 +69,25 @@ export const InputFoto = <TFieldValues extends FieldValues>({
                                     boxShadow: 1,
                                 }}
                             />
-                            <Button
-                                disabled={disabled}
-                                somenteIcone
-                                icon={X}
-                                variante="ButtonLinkWhite"
-                                tamanho="md"
-                                onClick={() => handleSelectFile(null, onChange)}
-                                sx={{ position: "absolute", top: 6, right: 6 }}
-                                aria-label="Remover foto"
-                            />
+                            <Tooltip title="Remover foto">
+                                <Button
+                                    disabled={disabled}
+                                    somenteIcone
+                                    icon={X}
+                                    variante="ButtonLinkWhite"
+                                    tamanho="md"
+                                    onClick={() => handleSelectFile(null, onChange)}
+                                    sx={{
+                                        position: "absolute",
+                                        top: 6,
+                                        right: 6,
+                                        "& svg": {
+                                            bgcolor: "white",
+                                            borderRadius: "50%", 
+                                        },
+                                    }}
+                                />
+                            </Tooltip>
                         </Box>
                     ) : (
                         <Box
@@ -109,7 +118,8 @@ export const InputFoto = <TFieldValues extends FieldValues>({
                                 sx={{ mb: 1 }}
                                 paddingInline={10}
                             >
-                                Arraste e solte a imagem que deseja aqui, ou clique no botão para selecionar o arquivo em seu dispositivo.
+                                Arraste e solte a imagem que deseja aqui, ou clique no botão para
+                                selecionar o arquivo em seu dispositivo.
                             </Typography>
 
                             <Button

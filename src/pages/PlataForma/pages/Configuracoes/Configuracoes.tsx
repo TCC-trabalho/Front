@@ -1,20 +1,12 @@
-import { Card, Divider, Stack, Typography } from "@mui/material"
+import { Card, Stack, Typography } from "@mui/material"
 import { Button } from "../../../../components/Button/Button"
-import { ArrowRightLeft, BanknoteArrowDown, ChevronRight } from "lucide-react"
+import { ArrowRightLeft, BanknoteArrowDown, ChevronRight, Handshake } from "lucide-react"
 import { InputDropdown } from "../../../../components/InputDropdown"
 import { useConfiguracoes } from "./Configuracoes.hook"
 
 export const Configuracoes = () => {
-    const {
-        user,
-        opcoes,
-        isFetching,
-        control,
-        // projetoSelecionado,
-        temProjetoSelecionado,
-        valorExibido,
-        isLoadingValor,
-    } = useConfiguracoes()
+    const { user, opcoes, isFetching, control, temProjetoSelecionado, valorExibido, isLoadingValor } =
+        useConfiguracoes()
 
     const formatarBR = (v: number) =>
         (v ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -33,13 +25,12 @@ export const Configuracoes = () => {
             <Card
                 sx={{
                     bgcolor: "#B83229",
-                    paddingInline: 4,
-                    pb: 4,
-                    pt: 2,
+                    p: 4,
                     display: "flex",
                     flexDirection: "column",
                     gap: 5,
                     color: "white",
+                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                 }}
             >
                 <Stack
@@ -79,22 +70,13 @@ export const Configuracoes = () => {
                         retornarSomenteId
                     />
                 </Stack>
-            </Card>
-
-            <Stack
-                width={"100%"}
-                gap={2}
-            >
-                <Typography variant="h6">Ações</Typography>
-
-                <Divider sx={{ height: 1, bgcolor: "black" }} />
 
                 <Stack
                     direction={"row"}
                     gap={1.5}
                 >
                     <Button
-                        variante="ButtonBlue"
+                        variante="ButtonGrey"
                         tamanho="lg"
                         icon={ArrowRightLeft}
                         ladoIcon="direita"
@@ -104,7 +86,7 @@ export const Configuracoes = () => {
                         Transferir
                     </Button>
                     <Button
-                        variante="ButtonBlue"
+                        variante="ButtonGrey"
                         tamanho="lg"
                         icon={BanknoteArrowDown}
                         ladoIcon="direita"
@@ -114,11 +96,50 @@ export const Configuracoes = () => {
                         Sacar
                     </Button>
                 </Stack>
+            </Card>
+
+            <Stack
+                gap={1.5}
+                sx={{
+                    bgcolor: "#fff",
+                    p: 2,
+                    borderRadius: 1,
+                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                }}
+            >
+                <Typography
+                    variant="h6"
+                    color="#064B72"
+                >
+                    Vincular Conta Bancária
+                </Typography>
+
+                <Typography>Vincule sua conta Mercado Pago para receber pagamentos.</Typography>
+
+                <Button
+                    tamanho="md"
+                    variante="ButtonBlue"
+                    ladoIcon="direita"
+                    icon={Handshake}
+                    sx={{
+                        width: {
+                            xs: "100%",
+                            md: "25%",
+                        },
+                    }}
+                >
+                    Vincular Conta
+                </Button>
             </Stack>
 
             <Stack
-                width={"100%"}
                 gap={1.5}
+                sx={{
+                    bgcolor: "#000000d8",
+                    p: 2,
+                    borderRadius: 1,
+                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                }}
             >
                 <Typography
                     variant="h6"
@@ -127,9 +148,9 @@ export const Configuracoes = () => {
                     Deletar Conta
                 </Typography>
 
-                <Divider sx={{ height: 1, bgcolor: "black" }} />
-
-                <Typography>Depois de excluir sua conta, não há como voltar atrás.</Typography>
+                <Typography color="#B83229">
+                    Depois de excluir sua conta, não há como voltar atrás.
+                </Typography>
 
                 <Button
                     tamanho="md"

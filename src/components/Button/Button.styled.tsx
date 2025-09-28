@@ -34,7 +34,9 @@ export const ButtonVariants = styled(ButtonBase)<{
         },
 
         "&:disabled": {
-            opacity: 0.4,
+            opacity: 0.8,
+            background: "grey !important",
+            color: "white !important",
             cursor: "not-allowed",
             pointerEvents: "none",
         },

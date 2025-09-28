@@ -76,7 +76,21 @@ const routes = createBrowserRouter([
                                 element: <Paginas.Plataforma.EmpresasPage.ApoiarProjeto />,
                             },
                             {
+                                path: "solicitar-apoio",
+                                element: <Paginas.Plataforma.ProjetosPage.SolicitarApoio />,
+                            },
+                            {
                                 path: "chat",
+                                element: <></>,
+                                children: [
+                                    {
+                                        index: true,
+                                        loader: async () => redirect("/manutencao"),
+                                    },
+                                ],
+                            },
+                            {
+                                path: "apoio-da-sorte",
                                 element: <></>,
                                 children: [
                                     {
@@ -103,7 +117,7 @@ const routes = createBrowserRouter([
                             },
                             {
                                 path: "configuracoes",
-                                element: <Paginas.Plataforma.Configuracoes/>,
+                                element: <Paginas.Plataforma.Configuracoes />,
                             },
                         ],
                     },

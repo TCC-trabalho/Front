@@ -4,6 +4,7 @@ import { useApoiarProjeto } from "./ApoiarProjeto.hook"
 import { Button } from "../../../../components/Button/Button"
 import { Stack, Typography } from "@mui/material"
 import { truncateText } from "../../../../lib/utils/truncateText"
+import { HandHelping } from "lucide-react"
 
 export const ApoiarProjeto = () => {
     const { control, onSubmit, projeto, isPending, isPatrocinarPending } = useApoiarProjeto()
@@ -18,10 +19,27 @@ export const ApoiarProjeto = () => {
                     xs: "90%",
                     md: "55%",
                 },
-                pt: 2,
+                pl: {
+                    xs: 0,
+                    md: 20,
+                    lg: 0,
+                },
                 gap: 2,
             }}
         >
+            <Stack
+                direction={"row"}
+                alignItems={"center"}
+                gap={1.5}
+            >
+                <Typography
+                    variant="h3"
+                    fontWeight={500}
+                >
+                    Apoiar Projeto
+                </Typography>
+                <HandHelping size={50} />
+            </Stack>
             <Select
                 control={control}
                 disabled={isPending || isPatrocinarPending}
@@ -46,9 +64,13 @@ export const ApoiarProjeto = () => {
 
             <Typography variant="h6">{projeto?.area}</Typography>
 
-            <Typography variant="subtitle1">Status: <strong>{projeto?.status}</strong></Typography>
+            <Typography variant="subtitle1">
+                Status: <strong>{projeto?.status}</strong>
+            </Typography>
 
-            <Typography variant="subtitle1">Professor Orientador: <strong>{projeto?.nome_orientador}</strong></Typography>
+            <Typography variant="subtitle1">
+                Professor Orientador: <strong>{projeto?.nome_orientador}</strong>
+            </Typography>
 
             <Typography sx={{ width: "90%" }}>{truncateText(projeto?.descricao || "", 460)}</Typography>
 
@@ -74,19 +96,40 @@ export const ApoiarProjeto = () => {
                     disabled={isPending || isPatrocinarPending}
                 />
 
-                <Button
-                    type="submit"
-                    tamanho="lg"
-                    loading={isPatrocinarPending}
-                    sx={{
-                        width: {
-                            xs: "100%",
-                            md: "25%",
-                        },
-                    }}
+                <Stack
+                    direction={"row"}
+                    gap={2}
                 >
-                    Apoiar Projeto
-                </Button>
+                    <Button
+                        variante="ButtonOutlinedRed"
+                        type="submit"
+                        tamanho="lg"
+                        disabled={isPatrocinarPending}
+                        to={`/plataforma-nexus/detalhes-projeto/${projeto?.id_projeto}`}
+                        viewTransition
+                        sx={{
+                            width: {
+                                xs: "100%",
+                                md: "25%",
+                            },
+                        }}
+                    >
+                        Voltar
+                    </Button>
+                    <Button
+                        type="submit"
+                        tamanho="lg"
+                        loading={isPatrocinarPending}
+                        sx={{
+                            width: {
+                                xs: "100%",
+                                md: "25%",
+                            },
+                        }}
+                    >
+                        Enviar apoio
+                    </Button>
+                </Stack>
             </Stack>
         </Stack>
     )

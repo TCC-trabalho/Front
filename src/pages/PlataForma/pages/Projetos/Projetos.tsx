@@ -7,11 +7,7 @@ export const Projetos = () => {
     const { isFetching, feed } = useProjetos()
 
     return (
-        <Stack
-            justifyContent={"center"}
-            minHeight={"100vh"}
-            gap={4}
-        >
+        <Stack gap={4}>
             {(isFetching ? Array.from({ length: 3 }) : feed).map((item: any, index: number) => (
                 <FeedCard
                     key={index}
@@ -21,9 +17,9 @@ export const Projetos = () => {
                     organizacao={item?.organizacao || ""}
                     integrantes={item?.integrantes || 0}
                     descricao={item?.descricao || ""}
-                    idProjeto={item?.id_projeto || 0}
                     loading={isFetching}
                     variante={"projeto"}
+                    to={`/plataforma-nexus/detalhes-projeto/${item?.id_projeto}`}
                 />
             ))}
         </Stack>

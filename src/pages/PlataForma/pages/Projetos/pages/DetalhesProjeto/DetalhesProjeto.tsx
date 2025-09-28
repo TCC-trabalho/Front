@@ -1,4 +1,4 @@
-import { Divider, Skeleton, Stack, Typography } from "@mui/material"
+import { Chip, Skeleton, Stack, Typography } from "@mui/material"
 import { HandHeart, Pen, UsersRound } from "lucide-react"
 import { useDetalhesProjeto } from "./DetalhesProjeto.hook"
 import { Button } from "../../../../../../components/Button/Button"
@@ -11,9 +11,13 @@ export const DetalhesProjeto = () => {
         <>
             <Stack
                 width={{ xs: "95%", md: "45%" }}
-                pt={4}
                 gap={2}
-                pb={2}
+                sx={{
+                    bgcolor: "#FFFFFF",
+                    p: 4,
+                    borderRadius: 5,
+                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                }}
             >
                 {isFetching ? (
                     <Skeleton
@@ -26,12 +30,18 @@ export const DetalhesProjeto = () => {
                         }}
                     />
                 ) : (
-                    <img
-                        src={detalhes?.foto}
-                        alt=""
-                        width={"100%"}
-                        height={400}
-                    />
+                    <Stack
+                        borderRadius={2}
+                        overflow={"hidden"}
+                        boxShadow={2}
+                    >
+                        <img
+                            src={detalhes?.foto}
+                            alt=""
+                            width={"100%"}
+                            height={400}
+                        />
+                    </Stack>
                 )}
 
                 <Stack
@@ -114,7 +124,10 @@ export const DetalhesProjeto = () => {
                                 variant="body1"
                                 color="#064B72"
                             >
-                                <strong>Status:</strong> {detalhes?.status}
+                                <Chip
+                                    label={detalhes?.status}
+                                    sx={{ bgcolor: "#064B72", color: "#FFFFFF" }}
+                                />
                             </Typography>
                         </>
                     )}
@@ -156,53 +169,64 @@ export const DetalhesProjeto = () => {
                                     variant="body1"
                                     color="#3F3F3F"
                                     textAlign={"justify"}
+                                    bgcolor={"#F5F5F5"}
+                                    p={2}
+                                    borderRadius={2}
                                 >
                                     {conteudo}
                                 </Typography>
                             )}
-                            <Divider sx={{ bgcolor: "#797979", height: 1.2 }} />
                         </Stack>
                     )
                 })}
+                <Stack
+                    direction={"row"}
+                    gap={1}
+                >
+                    <Button
+                        variante="ButtonOutlinedBlue"
+                        tamanho="lg"
+                        to={`/plataforma-nexus/projetos`}
+                        viewTransition
+                        sx={{
+                            width: {
+                                xs: "100%",
+                                md: "25%",
+                            },
+                        }}
+                    >
+                        Voltar
+                    </Button>
+                    {projetoEhDoOrientador || alunoEhIntegrante ? (
+                        <Button
+                            tamanho="lg"
+                            icon={Pen}
+                            to={`/plataforma-nexus/detalhes-projeto/${idProjeto}/editar`}
+                            viewTransition
+                            espacamento={20}
+                        >
+                            Editar
+                        </Button>
+                    ) : null}
+
+                    {(tipoUser === "empresa" || tipoUser === "visitante") && (
+                        <Button
+                            tamanho="lg"
+                            icon={HandHeart}
+                            to={`/plataforma-nexus/apoiar-projeto/${idProjeto}`}
+                            viewTransition
+                            sx={{
+                                width: {
+                                    xs: "100%",
+                                    md: "25%",
+                                },
+                            }}
+                        >
+                            Apoiar
+                        </Button>
+                    )}
+                </Stack>
             </Stack>
-
-            {projetoEhDoOrientador || alunoEhIntegrante ? (
-                <Button
-                    tamanho="lg"
-                    icon={Pen}
-                    sx={{
-                        position: "fixed",
-                        bottom: 16,
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        zIndex: 1000,
-                    }}
-                    to={`/plataforma-nexus/detalhes-projeto/${idProjeto}/editar`}
-                    viewTransition
-                    espacamento={20}
-                >
-                    Editar
-                </Button>
-            ) : null}
-
-            {(tipoUser === "empresa" || tipoUser === "visitante") && (
-                <Button
-                    tamanho="lg"
-                    icon={HandHeart}
-                    sx={{
-                        position: "fixed",
-                        bottom: 16,
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        zIndex: 1000,
-                    }}
-                    to={`/plataforma-nexus/apoiar-projeto/${idProjeto}`}
-                    viewTransition
-                    espacamento={20}
-                >
-                    Apoiar
-                </Button>
-            )}
         </>
     )
 }

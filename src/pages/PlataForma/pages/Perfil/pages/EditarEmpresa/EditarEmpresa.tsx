@@ -13,9 +13,14 @@ export const EditarEmpresa = () => {
         <>
             <Stack
                 width={{ xs: "95%", md: "45%" }}
-                pt={4}
                 gap={2}
-                pb={2}
+                sx={{
+                    gap: 2,
+                    bgcolor: "#FFF",
+                    padding: 4,
+                    borderRadius: 2,
+                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                }}
             >
                 {isEmpresaLoading ? (
                     <Skeleton
@@ -134,6 +139,7 @@ export const EditarEmpresa = () => {
                     gap={2}
                 >
                     <Button
+                        variante="ButtonOutlinedBlue"
                         tamanho="md"
                         icon={ChevronLeft}
                         to={`/plataforma-nexus/meu-perfil`}
@@ -143,7 +149,7 @@ export const EditarEmpresa = () => {
                         Voltar
                     </Button>
                     <Button
-                        variante="ButtonOutlinedBlue"
+                        variante="ButtonBlue"
                         tamanho="md"
                         onClick={onSubmit}
                         loading={atualizarEmpresaLoading}

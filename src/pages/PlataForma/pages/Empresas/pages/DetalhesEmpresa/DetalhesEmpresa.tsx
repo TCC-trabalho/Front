@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Avatar, Skeleton, Stack, Typography } from "@mui/material"
-import { MessageCircleHeart, Star } from "lucide-react"
+import { HandHelping, MessageCircleHeart, Star } from "lucide-react"
 import { useDetalhesEmpresa } from "./DetalhesEmpresa.hook"
 import { FeedCard } from "../../../../../../components/FeedCard/FeedCard"
 import { Button } from "../../../../../../components/Button/Button"
@@ -13,10 +13,6 @@ export const DetalhesEmpresa = () => {
         <>
             <Stack
                 width={{ xs: "95%", md: "60%" }}
-                pt={{
-                    xs: 0,
-                    md: 8,
-                }}
                 gap={2}
                 pb={2}
             >
@@ -75,8 +71,7 @@ export const DetalhesEmpresa = () => {
                             gap={2}
                         >
                             <Typography variant="subtitle2">
-                                {empresa?.total_projetos || "0"} Projetos
-                                Patrocinados
+                                {empresa?.total_projetos || "0"} Projetos Patrocinados
                             </Typography>
                             <Typography variant="subtitle2">
                                 {empresa?.empresa?.avaliacao || "0"}{" "}
@@ -88,7 +83,7 @@ export const DetalhesEmpresa = () => {
                         </Stack>
 
                         <Typography variant="subtitle2">{empresa?.empresa?.email || ""}</Typography>
-                        
+
                         <Typography
                             variant="subtitle1"
                             sx={{ width: "90%" }}
@@ -97,32 +92,37 @@ export const DetalhesEmpresa = () => {
                         </Typography>
 
                         {!user?.empresa && !user?.visitante && (
-                            <Button
-                                tamanho="md"
-                                icon={MessageCircleHeart}
-                                ladoIcon="direita"
-                                variante="ButtonBlue"
-                                sx={{
-                                    width: {
-                                        xs: "100%",
-                                        sm: "50%",
-                                        md: "30%",
-                                    },
-                                }}
-                                onClick={() => setModal(true)}
+                            <Stack
+                                direction={"row"}
+                                gap={1.5}
                             >
-                                Avaliar Empresa
-                            </Button>
+                                <Button
+                                    tamanho="md"
+                                    icon={MessageCircleHeart}
+                                    ladoIcon="direita"
+                                    variante="ButtonBlue"
+                                    espacamento={20}
+                                    onClick={() => setModal(true)}
+                                >
+                                    Avaliar Empresa
+                                </Button>
+                                <Button
+                                    tamanho="md"
+                                    icon={HandHelping}
+                                    ladoIcon="direita"
+                                    espacamento={20}
+                                    to="/plataforma-nexus/solicitar-apoio"
+                                    viewTransition
+                                >
+                                    Solicitar Apoio
+                                </Button>
+                            </Stack>
                         )}
                     </Stack>
                 </Stack>
 
                 <Stack>
-                    <Stack
-                        direction={"row"}
-                        pt={4}
-                        pl={5}
-                    >
+                    <Stack p={4}>
                         {Number(empresa?.empresa?.qnt_projetos_patrocinados ?? 0) > 0 && (
                             <Typography
                                 variant="h5"
@@ -138,7 +138,9 @@ export const DetalhesEmpresa = () => {
                                 xs: "flex",
                                 lg: "grid",
                             },
+                            alignItems: "center",
                             gridTemplateColumns: "repeat(2, 1fr)",
+                            gap: 4,
                         }}
                     >
                         {(isFetching ? Array.from({ length: 6 }) : feed).map(
@@ -151,9 +153,9 @@ export const DetalhesEmpresa = () => {
                                     organizacao={item?.organizacao || ""}
                                     integrantes={item?.integrantes || 0}
                                     descricao={item?.descricao || ""}
-                                    idProjeto={item?.id_projeto || 0}
                                     loading={isFetching}
                                     variante={"projeto"}
+                                    to={`/plataforma-nexus/detalhes-projeto/${item?.id_projeto}`}
                                 />
                             )
                         )}

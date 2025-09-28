@@ -1,16 +1,22 @@
-import { Stack, styled } from "@mui/material"
+import { styled, ButtonBase } from "@mui/material"
 
-export const FeedCardWrapper = styled(Stack)(({ theme }) => ({
-    backgroundColor: "transparent",
-    width: 600,
-    scale: 0.85,
+export const FeedCardWrapper = styled(ButtonBase)(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "stretch",
 
-    gap: theme.spacing(3),
-
-    [theme.breakpoints.down("sm")]: {
-        scale: 0.65,
-        height: 450,
+    "&:hover": {
+        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+        transition: "all 0.3s ease-in-out",
     },
+
+    backgroundColor: "#FFFFFF",
+    width: 510,
+    height: 457,
+    padding: theme.spacing(2),
+    borderRadius: 10,
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+    gap: theme.spacing(3),
 
     ".header": {
         height: 350,
@@ -21,5 +27,18 @@ export const FeedCardWrapper = styled(Stack)(({ theme }) => ({
 
     ".content": {
         gap: theme.spacing(1),
+    },
+
+    [theme.breakpoints.down("sm")]: {
+        width: 310,
+        height: "auto",
+        ".header": {
+            overflow: "unset",
+            height: 180,
+            img: {
+                width: "100%",
+                height: 180,
+            },
+        },
     },
 }))

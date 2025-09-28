@@ -11,10 +11,6 @@ export const Perfil = () => {
     return (
         <Stack
             width={{ xs: "95%", md: "60%" }}
-            pt={{
-                xs: 0,
-                md: 8,
-            }}
             gap={2}
             pb={2}
         >
@@ -188,9 +184,7 @@ export const Perfil = () => {
 
             <Stack>
                 <Stack
-                    direction={"row"}
-                    pt={4}
-                    pl={5}
+                    p={4}
                 >
                     {(Number(user.empresa?.qnt_projetos_patrocinados ?? 0) > 0 ||
                         Number(user.visitante?.qnt_projetos_patrocinados ?? 0) > 0 ||
@@ -214,7 +208,9 @@ export const Perfil = () => {
                             xs: "flex",
                             lg: "grid",
                         },
+                        alignItems: "center",
                         gridTemplateColumns: "repeat(2, 1fr)",
+                        gap: 4,
                     }}
                 >
                     {(isFetching ? Array.from({ length: 6 }) : feed).map((item: any, index: number) => (
@@ -226,9 +222,9 @@ export const Perfil = () => {
                             organizacao={item?.organizacao || ""}
                             integrantes={item?.integrantes || null}
                             descricao={item?.descricao || ""}
-                            idProjeto={item?.id_projeto || 0}
                             loading={isFetching}
                             variante={"projeto"}
+                            to={`/plataforma-nexus/detalhes-projeto/${item?.id_projeto}`}
                         />
                     ))}
                 </Stack>
