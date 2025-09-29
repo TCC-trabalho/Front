@@ -8,6 +8,7 @@ import {
     ObterValorTotalPatrocinioOrientador,
     Patrocinar,
     QueryKeys,
+    SolicitarApoio,
 } from "../models/patrocinio.types"
 import { QueryKeys as EmpresaKey } from "../models/empresa.types"
 
@@ -92,6 +93,15 @@ export const useApoiar = () => {
     return useMutation({
         mutationFn: async (request: Apoiar.Request) => {
             const response = await api.post<Apoiar.Response>("apoios", request)
+            return response.data
+        },
+    })
+}
+
+export const useSolicitarAjuda = () => {
+    return useMutation({
+        mutationFn: async (request: SolicitarApoio.Request) => {
+            const response = await api.post<SolicitarApoio.Response>("solicitar-apoio", request)
             return response.data
         },
     })

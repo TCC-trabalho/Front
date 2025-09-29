@@ -4,9 +4,14 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { solicitarApoioSchema } from "./SolicitarApoio.schema"
 import { useObterEmpresaPorId } from "../../../../api/controllers/empresa"
+import { useSolicitarAjuda } from "../../../../api/controllers/patrocinio"
+import { toast } from "sonner"
+import { useUser } from "../../../../lib/hooks/useUser"
+import { Enum } from "../../../../api/enum/enum"
 
 export const useSolicitarApoio = () => {
     const { idEmpresa } = useParams()
+    const { user } = useUser()
 
     const { opcoes, isFetching } = useConfiguracoes()
 
@@ -14,7 +19,9 @@ export const useSolicitarApoio = () => {
         id_empresa: Number(idEmpresa),
     })
 
-    const { control, handleSubmit } = useForm({
+    const { mutateAsync: solicitarApoio, isPending: isSolicitarApoioPending } = useSolicitarAjuda()
+
+    const { control, handleSubmit, reset } = useForm({
         resolver: yupResolver(solicitarApoioSchema),
         defaultValues: {
             tipoApoio: undefined,
@@ -23,8 +30,29 @@ export const useSolicitarApoio = () => {
         },
     })
 
-    const onSubmit = handleSubmit((data) => {
-        console.log(data)
+    const onSubmit = handleSubmit(async (data) => {
+        if (!idEmpresa) return
+
+        const request = {
+            nome_usuario: user?.aluno?.nome || user?.orientador?.nome || "",
+            tipo_usuario: user?.aluno?.tipoUser || user?.orientador?.tipoUser || null,
+            id_projeto: data.projeto.id,
+            projeto: data.projeto.nome,
+            tipo_apoio: data.tipoApoio as Enum.TipoApoio,
+            mensagem: data.mensagemApoio,
+            email_empresa: empresa?.email || "",
+        }
+
+        const toastId = toast.loading("Enviando solicitação...")
+
+        try {
+            await solicitarApoio(request)
+            toast.success("Apoio solicitado com sucesso!", { id: toastId })
+            reset()
+        } catch (error) {
+            toast.error("Erro ao enviar solicitação", { id: toastId })
+            console.error(error)
+        }
     })
 
     return {
@@ -35,5 +63,6 @@ export const useSolicitarApoio = () => {
         onSubmit,
         isFetchingEmpresa,
         empresa,
+        isSolicitarApoioPending,
     }
 }

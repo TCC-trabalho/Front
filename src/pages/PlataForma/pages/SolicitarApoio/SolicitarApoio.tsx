@@ -7,8 +7,16 @@ import { Button } from "../../../../components/Button/Button"
 import { useSolicitarApoio } from "./SolicitarApoio.hook"
 
 export const SolicitarApoio = () => {
-    const { control, onSubmit, opcoes, isFetching, id_empresa, empresa, isFetchingEmpresa } =
-        useSolicitarApoio()
+    const {
+        control,
+        onSubmit,
+        opcoes,
+        isFetching,
+        id_empresa,
+        empresa,
+        isFetchingEmpresa,
+        isSolicitarApoioPending,
+    } = useSolicitarApoio()
 
     return (
         <Stack
@@ -82,6 +90,7 @@ export const SolicitarApoio = () => {
                 name="tipoApoio"
                 label="Tipo de Apoio"
                 tamanho="sm"
+                disabled={isSolicitarApoioPending}
                 placeholder="Selecione o tipo de apoio"
                 options={[
                     { label: "Dinheiro", value: "dinheiro" },
@@ -96,13 +105,14 @@ export const SolicitarApoio = () => {
                 isCarregandoDados={isFetching}
                 placeholder="Escolha um projeto para pedir apoio"
                 label="Projeto"
+                disabled={isSolicitarApoioPending}
                 opcoes={opcoes.projetos}
                 renderizarLabel={(opcao) => opcao.nome}
-                retornarSomenteNome
             />
 
             <Input
                 control={control}
+                disabled={isSolicitarApoioPending}
                 name="mensagemApoio"
                 label="Escreva uma mensagem para a empresa"
                 tamanho="md"
@@ -119,6 +129,7 @@ export const SolicitarApoio = () => {
                     type="submit"
                     tamanho="md"
                     icon={ChevronLeft}
+                    disabled={isSolicitarApoioPending}
                     to={`/plataforma-nexus/detalhes-empresa/${id_empresa}`}
                     viewTransition
                     espacamento={10}
@@ -129,6 +140,7 @@ export const SolicitarApoio = () => {
                     type="submit"
                     tamanho="md"
                     espacamento={10}
+                    loading={isSolicitarApoioPending}
                 >
                     Enviar solicitação
                 </Button>

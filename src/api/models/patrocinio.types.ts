@@ -69,3 +69,17 @@ export namespace ObterValorTotalPatrocinioOrientador {
     }
     export type Response = { id_orientador: number; valor: number }
 }
+
+export namespace SolicitarApoio {
+    export type Request = {
+        nome_usuario: string
+        tipo_usuario: Enum.TipoUsuario | null
+        id_projeto: number
+        projeto: string
+        tipo_apoio: Enum.TipoApoio
+        mensagem: string
+        email_empresa: string
+    }
+
+    export type Response = { sucesso: boolean; mensagem: string }
+}
