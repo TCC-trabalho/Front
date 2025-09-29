@@ -76,7 +76,7 @@ const routes = createBrowserRouter([
                                 element: <Paginas.Plataforma.EmpresasPage.ApoiarProjeto />,
                             },
                             {
-                                path: "solicitar-apoio",
+                                path: "solicitar-apoio/:idEmpresa",
                                 element: <Paginas.Plataforma.ProjetosPage.SolicitarApoio />,
                             },
                             {

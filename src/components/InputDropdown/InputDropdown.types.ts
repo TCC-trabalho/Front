@@ -36,6 +36,7 @@ export namespace InputDropdownProps {
         control: Control<TFieldValues>
         name: Path<TFieldValues>
         retornarSomenteId?: boolean
+        retornarSomenteNome?: boolean
     }
 }
 

@@ -3,6 +3,7 @@ import { useEditarPerfil } from "./EditarPerfil.hook"
 import { Input } from "../../../../../../components/Input/Input"
 import { Select } from "../../../../../../components/select/Select"
 import { Button } from "../../../../../../components/Button/Button"
+import { ChevronLeft } from "lucide-react"
 
 export const EditarPerfil = () => {
     const { control, user, onSubmit, isPending, obterFotoUser, obterFotoUserIsPending } =
@@ -138,6 +139,7 @@ export const EditarPerfil = () => {
                 <Button
                     variante="ButtonOutlinedBlue"
                     tamanho="md"
+                    icon={ChevronLeft}
                     disabled={isPending}
                     espacamento={10}
                     to="/plataforma-nexus/meu-perfil"

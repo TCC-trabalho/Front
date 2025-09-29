@@ -4,7 +4,7 @@ import { useApoiarProjeto } from "./ApoiarProjeto.hook"
 import { Button } from "../../../../components/Button/Button"
 import { Stack, Typography } from "@mui/material"
 import { truncateText } from "../../../../lib/utils/truncateText"
-import { HandHelping } from "lucide-react"
+import { ChevronLeft, HandHelping } from "lucide-react"
 
 export const ApoiarProjeto = () => {
     const { control, onSubmit, projeto, isPending, isPatrocinarPending } = useApoiarProjeto()
@@ -19,11 +19,15 @@ export const ApoiarProjeto = () => {
                     xs: "90%",
                     md: "55%",
                 },
-                pl: {
+                ml: {
                     xs: 0,
                     md: 20,
                     lg: 0,
                 },
+                bgcolor: "#FFF",
+                padding: 4,
+                borderRadius: 2,
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
                 gap: 2,
             }}
         >
@@ -103,29 +107,20 @@ export const ApoiarProjeto = () => {
                     <Button
                         variante="ButtonOutlinedRed"
                         type="submit"
-                        tamanho="lg"
+                        tamanho="md"
+                        icon={ChevronLeft}
                         disabled={isPatrocinarPending}
                         to={`/plataforma-nexus/detalhes-projeto/${projeto?.id_projeto}`}
                         viewTransition
-                        sx={{
-                            width: {
-                                xs: "100%",
-                                md: "25%",
-                            },
-                        }}
+                        espacamento={10}
                     >
                         Voltar
                     </Button>
                     <Button
                         type="submit"
-                        tamanho="lg"
+                        tamanho="md"
                         loading={isPatrocinarPending}
-                        sx={{
-                            width: {
-                                xs: "100%",
-                                md: "25%",
-                            },
-                        }}
+                        espacamento={10}
                     >
                         Enviar apoio
                     </Button>

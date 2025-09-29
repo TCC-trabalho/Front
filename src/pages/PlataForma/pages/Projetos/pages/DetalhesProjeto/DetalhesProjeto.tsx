@@ -1,5 +1,5 @@
 import { Chip, Skeleton, Stack, Typography } from "@mui/material"
-import { HandHeart, Pen, UsersRound } from "lucide-react"
+import { ChevronLeft, HandHeart, Pen, UsersRound } from "lucide-react"
 import { useDetalhesProjeto } from "./DetalhesProjeto.hook"
 import { Button } from "../../../../../../components/Button/Button"
 
@@ -120,15 +120,10 @@ export const DetalhesProjeto = () => {
                             >
                                 {detalhes?.organizacao}
                             </Typography>
-                            <Typography
-                                variant="body1"
-                                color="#064B72"
-                            >
-                                <Chip
-                                    label={detalhes?.status}
-                                    sx={{ bgcolor: "#064B72", color: "#FFFFFF" }}
-                                />
-                            </Typography>
+                            <Chip
+                                label={detalhes?.status}
+                                sx={{ bgcolor: "#064B72", color: "#FFFFFF" }}
+                            />
                         </>
                     )}
                 </Stack>
@@ -185,21 +180,17 @@ export const DetalhesProjeto = () => {
                 >
                     <Button
                         variante="ButtonOutlinedBlue"
-                        tamanho="lg"
+                        tamanho="md"
+                        icon={ChevronLeft}
                         to={`/plataforma-nexus/projetos`}
                         viewTransition
-                        sx={{
-                            width: {
-                                xs: "100%",
-                                md: "25%",
-                            },
-                        }}
+                        espacamento={20}
                     >
                         Voltar
                     </Button>
                     {projetoEhDoOrientador || alunoEhIntegrante ? (
                         <Button
-                            tamanho="lg"
+                            tamanho="md"
                             icon={Pen}
                             to={`/plataforma-nexus/detalhes-projeto/${idProjeto}/editar`}
                             viewTransition
@@ -211,16 +202,11 @@ export const DetalhesProjeto = () => {
 
                     {(tipoUser === "empresa" || tipoUser === "visitante") && (
                         <Button
-                            tamanho="lg"
+                            tamanho="md"
                             icon={HandHeart}
                             to={`/plataforma-nexus/apoiar-projeto/${idProjeto}`}
                             viewTransition
-                            sx={{
-                                width: {
-                                    xs: "100%",
-                                    md: "25%",
-                                },
-                            }}
+                            espacamento={20}
                         >
                             Apoiar
                         </Button>

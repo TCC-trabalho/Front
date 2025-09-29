@@ -111,7 +111,7 @@ export const DetalhesEmpresa = () => {
                                     icon={HandHelping}
                                     ladoIcon="direita"
                                     espacamento={20}
-                                    to="/plataforma-nexus/solicitar-apoio"
+                                    to={`/plataforma-nexus/solicitar-apoio/${empresa?.empresa?.id_empresa}`}
                                     viewTransition
                                 >
                                     Solicitar Apoio

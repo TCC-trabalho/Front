@@ -9,6 +9,7 @@ import { Outlet } from "react-router"
 import { useContainerPlataforma } from "./ContainerPlataforma.hook"
 import { useControleExibicao } from "../../../../lib/utils/controleExibicao"
 import { truncateText } from "../../../../lib/utils/truncateText"
+import { useRotasSemPadding } from "../../../../lib/utils/rotasSemPadding"
 
 export const ContainerPlataforma = () => {
     const {
@@ -100,7 +101,7 @@ export const ContainerPlataforma = () => {
                 />
             </Header>
 
-            <Styled.Content>
+            <Styled.Content className={useRotasSemPadding() ? "no-padding" : ""}>
                 <Outlet />
             </Styled.Content>
 

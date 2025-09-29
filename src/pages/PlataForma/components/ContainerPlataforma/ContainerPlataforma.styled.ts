@@ -15,7 +15,12 @@ export const Content = styled(Stack)(({ theme }) => ({
     alignItems: "center",
     width: "100%",
     paddingTop: theme.spacing(12),
-    paddingBottom: theme.spacing(6),
+    paddingBottom: theme.spacing(2),
+
+    "&.no-padding": {
+        paddingTop: 0,
+        paddingBottom: 0,
+      },
 }))
 
 export const CardSugestao = styled(Stack)(({ theme }) => ({

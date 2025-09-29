@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Autocomplete, AutocompleteRenderInputParams, Stack, TextField, Typography } from "@mui/material"
 import { InputDropdownItem, InputDropdownProps } from "./InputDropdown.types"
 import { estilos } from "./InputDropdown.styles"
@@ -116,6 +117,7 @@ export const Controlado = <
     control,
     name,
     retornarSomenteId,
+    retornarSomenteNome,
     ...inputDropdownNormalProps
 }: InputDropdownProps.ControladoProps<ItemOpcao, Valor, TFieldValues>) => {
     return (
@@ -127,8 +129,20 @@ export const Controlado = <
 
                 const valorAtual = (
                     Array.isArray(field.value)
-                        ? opcoes.filter((e) => field.value?.includes(e.id))
-                        : opcoes.find((e) => e.id === field.value)
+                        ? opcoes.filter((e) =>
+                              retornarSomenteId
+                                  ? field.value?.includes(e.id)
+                                  : retornarSomenteNome
+                                  ? field.value?.includes(e.nome)
+                                  : field.value?.some((v: any) => v.id === e.id)
+                          )
+                        : opcoes.find((e) =>
+                              retornarSomenteId
+                                  ? e.id === field.value
+                                  : retornarSomenteNome
+                                  ? e.nome === field.value
+                                  : e.id === (field.value as any)?.id
+                          )
                 ) as Valor
 
                 const handleOnChange = (e: Valor | null) => {
@@ -138,9 +152,13 @@ export const Controlado = <
                         (isMultiplo
                             ? retornarSomenteId
                                 ? e.map((e) => e.id)
+                                : retornarSomenteNome
+                                ? e.map((e) => e.nome)
                                 : e
                             : retornarSomenteId
                             ? e?.id
+                            : retornarSomenteNome
+                            ? e?.nome
                             : e) || null
 
                     field.onChange(novoValor)

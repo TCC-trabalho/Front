@@ -155,7 +155,7 @@ export const EditarProjeto = () => {
                 )}
                 <Stack
                     direction={"row"}
-                    gap={2}
+                    gap={1}
                 >
                     <Button
                         variante="ButtonOutlinedBlue"
