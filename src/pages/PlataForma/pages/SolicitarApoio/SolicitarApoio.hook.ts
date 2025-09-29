@@ -40,7 +40,7 @@ export const useSolicitarApoio = () => {
             projeto: data.projeto.nome,
             tipo_apoio: data.tipoApoio as Enum.TipoApoio,
             mensagem: data.mensagemApoio,
-            email_empresa: "trabalhotcc489@gmail.com",
+            email_empresa: empresa?.email || "",
         }
 
         const toastId = toast.loading("Enviando solicitação...")
