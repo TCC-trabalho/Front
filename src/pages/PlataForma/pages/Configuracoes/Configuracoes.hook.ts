@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import {
     useObterProjetoPorIdAluno,
     useObterProjetoPorIdOrientador,
@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form"
 
 export const useConfiguracoes = () => {
     const { user } = useUser()
+    const [open, setOpen] = useState(false)
 
     const idAluno = user.aluno?.id_aluno
     const idOrientador = user.orientador?.id_orientador
@@ -117,5 +118,7 @@ export const useConfiguracoes = () => {
         temProjetoSelecionado,
         valorExibido,
         isLoadingValor,
+        open,
+        setOpen,
     }
 }

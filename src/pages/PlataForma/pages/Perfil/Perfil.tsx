@@ -3,10 +3,12 @@ import { Avatar, Skeleton, Stack, Typography } from "@mui/material"
 import { Button } from "../../../../components/Button/Button"
 import { usePerfil } from "./Perfil.hook"
 import { FeedCard } from "../../../../components/FeedCard/FeedCard"
-import { Pen, Plus, Star } from "lucide-react"
+import { Pen, Plus, Settings, Star } from "lucide-react"
+import { EmptyState } from "../../../../components/EmptyState/EmptyState"
 
 export const Perfil = () => {
-    const { isFetching, feed, user, userId, obterFotoUser, obterFotoUserIsPending } = usePerfil()
+    const { isFetching, feed, user, userId, obterFotoUser, obterFotoUserIsPending, isEmpty } =
+        usePerfil()
 
     return (
         <Stack
@@ -183,9 +185,7 @@ export const Perfil = () => {
             </Stack>
 
             <Stack>
-                <Stack
-                    p={4}
-                >
+                <Stack p={4}>
                     {(Number(user.empresa?.qnt_projetos_patrocinados ?? 0) > 0 ||
                         Number(user.visitante?.qnt_projetos_patrocinados ?? 0) > 0 ||
                         Number(user.aluno?.qtn_projetos ?? 0) > 0 ||
@@ -202,32 +202,65 @@ export const Perfil = () => {
                         </Typography>
                     )}
                 </Stack>
-                <Stack
-                    sx={{
-                        display: {
-                            xs: "flex",
-                            lg: "grid",
-                        },
-                        alignItems: "center",
-                        gridTemplateColumns: "repeat(2, 1fr)",
-                        gap: 4,
-                    }}
-                >
-                    {(isFetching ? Array.from({ length: 6 }) : feed).map((item: any, index: number) => (
-                        <FeedCard
-                            key={index}
-                            imagemUrl={item?.foto || ""}
-                            titulo={item?.titulo || ""}
-                            area={item?.area || ""}
-                            organizacao={item?.organizacao || ""}
-                            integrantes={item?.integrantes || null}
-                            descricao={item?.descricao || ""}
-                            loading={isFetching}
-                            variante={"projeto"}
-                            to={`/plataforma-nexus/detalhes-projeto/${item?.id_projeto}`}
-                        />
-                    ))}
-                </Stack>
+                {isEmpty ? (
+                    <EmptyState
+                        icon={Settings}
+                        message={
+                            user.empresa
+                                ? "Nenhum projeto patrocinado até o momento."
+                                : user.visitante
+                                ? "Nenhum projeto apoiado até o momento."
+                                : "Nenhum projeto criado até o momento."
+                        }
+                        buttonText={
+                            user.empresa || user.visitante ? "Dar apoio a um projeto" : "Criar Projeto"
+                        }
+                        width={"100%"}
+                        height={{
+                            xs: 300,
+                            md: 500,
+                            lg: 550,
+                        }}
+                        button={{
+                            tamanho: "md",
+                            to:
+                                user.empresa || user.visitante
+                                    ? "/plataforma-nexus/projetos"
+                                    : "/plataforma-nexus/cadastrar-projeto",
+                            variante: "ButtonGrey",
+                            espacamento: 20,
+                        }}
+                    />
+                ) : (
+                    <Stack
+                        sx={{
+                            display: {
+                                xs: "flex",
+                                lg: "grid",
+                            },
+                            alignItems: "center",
+                            gridTemplateColumns: "repeat(2, 1fr)",
+                            gap: 4,
+                        }}
+                    >
+                        {(isFetching ? Array.from({ length: 6 }) : feed).map(
+                            (item: any, index: number) => (
+                                <FeedCard
+                                    key={index}
+                                    imagemUrl={item?.foto || ""}
+                                    titulo={item?.titulo || ""}
+                                    area={item?.area || ""}
+                                    organizacao={item?.organizacao || ""}
+                                    integrantes={item?.integrantes || null}
+                                    descricao={item?.descricao || ""}
+                                    loading={isFetching}
+                                    variante={"projeto"}
+                                    to={`/plataforma-nexus/detalhes-projeto/${item?.id_projeto}`}
+                                />
+                            )
+                        )}
+                    </Stack>
+                )}
             </Stack>
         </Stack>
     )

@@ -70,10 +70,13 @@ export const usePerfil = () => {
         feed = Array.isArray(d) ? d : Array.isArray(d?.projetos) ? d!.projetos! : []
     }
 
+    const isEmpty = feed.length === 0
+
     return {
         isFetching,
         feed,
         user,
+        isEmpty,
         userId,
         obterFotoUser,
         obterFotoUserIsPending,
