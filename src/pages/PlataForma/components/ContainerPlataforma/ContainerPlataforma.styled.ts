@@ -20,7 +20,15 @@ export const Content = styled(Stack)(({ theme }) => ({
     "&.no-padding": {
         paddingTop: 0,
         paddingBottom: 0,
-      },
+
+        [theme.breakpoints.down("md")]: {
+            paddingTop: theme.spacing(2),
+        },
+
+        [theme.breakpoints.down("sm")]: {
+            paddingTop: theme.spacing(6),
+        },
+    },
 }))
 
 export const CardSugestao = styled(Stack)(({ theme }) => ({
