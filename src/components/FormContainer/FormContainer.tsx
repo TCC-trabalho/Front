@@ -3,14 +3,22 @@ import { useState } from "react"
 import * as Styled from "./FormContainer.styled"
 import { FormContainerProps } from "./FormContainer.type"
 import { Button } from "../Button/Button"
+import { useSearchParams } from "react-router"
 
 export const FormContainer = ({ variante = "login", tabs = [], ...props }: FormContainerProps) => {
-    const [tabIndex, setTabIndex] = useState(0)
-    const selectedTab = tabs[tabIndex]
+    const [searchParams, setSearchParams] = useSearchParams()
+    const tabParam = searchParams.get("Tab")
+
+    const initialIndex = tabs.findIndex((tab) => tab.label.toLowerCase() === tabParam?.toLowerCase())
+
+    const [tabIndex, setTabIndex] = useState(initialIndex >= 0 ? initialIndex : 0)
 
     const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
         setTabIndex(newValue)
+        setSearchParams({ Tab: tabs[newValue].label })
     }
+
+    const selectedTab = tabs[tabIndex]
 
     return (
         <Styled.FormWrapper {...props}>
@@ -43,7 +51,7 @@ export const FormContainer = ({ variante = "login", tabs = [], ...props }: FormC
                     tamanho={"md"}
                     variante="ButtonLink"
                     sx={{ width: "auto" }}
-                    to={variante == "cadastro" ? "/login" : "/cadastro"}
+                    to={selectedTab.to}
                     viewTransition
                 >
                     {variante == "login" ? <>Criar minha conta</> : <>Já possui uma conta?</>}

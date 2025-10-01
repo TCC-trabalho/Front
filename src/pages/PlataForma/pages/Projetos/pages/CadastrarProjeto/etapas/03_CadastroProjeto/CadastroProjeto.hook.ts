@@ -95,6 +95,7 @@ export const useCadastroProjeto = () => {
         setOpenModal,
         isLoadingOrientadores,
         opcoes,
-        user
+        user,
+        idGrupo
     }
 }

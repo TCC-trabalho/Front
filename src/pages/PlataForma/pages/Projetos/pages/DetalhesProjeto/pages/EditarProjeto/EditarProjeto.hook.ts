@@ -60,7 +60,9 @@ export const useEditarProjeto = () => {
             const form = new FormData()
             form.append("_method", "PUT")
             form.append("titulo", v.titulo)
-            form.append("descricao", v.descricao)
+            if (v.descricao && v.descricao.trim() !== "") {
+                form.append("descricao", v.descricao)
+            }
             form.append("area", v.area)
             form.append("status", v.status)
             form.append("objetivo", v.objetivo ?? "")

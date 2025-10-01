@@ -128,7 +128,7 @@ export const EditarProjeto = () => {
                             control={control}
                             name="descricao"
                             tamanho="md"
-                            label="Descrição"
+                            label="Resumo"
                             multiline
                             rows={4}
                             disabled={atualizarProjetoLoading}

@@ -7,6 +7,7 @@ export interface FormTabOption {
     titulo: string
     subtitulo: string
     content: React.ReactNode
+    to: string
 }
 
 export interface FormContainerProps extends StackProps {

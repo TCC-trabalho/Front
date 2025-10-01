@@ -28,6 +28,7 @@ export const LoginPage = () => {
                                 icon: BookOpen,
                                 titulo: "Login do estudante",
                                 subtitulo: "Insira suas credenciais para acessar seu portal do aluno",
+                                to: "/cadastro?Tab=Aluno",
                                 content: <FormALuno />,
                             },
                             {
@@ -36,6 +37,7 @@ export const LoginPage = () => {
                                 titulo: "Login do orientador",
                                 subtitulo:
                                     "Insira suas credenciais para acessar seu portal do Orientador",
+                                to: "/cadastro?Tab=Professor",
                                 content: <FormOrientador />,
                             },
                             {
@@ -43,15 +45,18 @@ export const LoginPage = () => {
                                 icon: Building2,
                                 titulo: "Login da empresa",
                                 subtitulo: "Insira suas credenciais para acessar seu portal da Empresa",
+                                to: "/cadastro?Tab=Empresa",
                                 content: <FormEmpresa />,
                             },
                             {
                                 label: "Visitante",
                                 icon: HandHelping,
                                 titulo: "Login do visitante",
-                                subtitulo: "Insira suas credenciais para acessar seu portal do Visitante",
+                                subtitulo:
+                                    "Insira suas credenciais para acessar seu portal do Visitante",
+                                to: "/cadastro?Tab=Visitante",
                                 content: <FormVisitante />,
-                            }
+                            },
                         ]}
                     />
                 </Styled.FormBoxLogin>

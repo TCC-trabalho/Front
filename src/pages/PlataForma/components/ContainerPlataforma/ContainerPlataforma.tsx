@@ -249,7 +249,7 @@ export const ContainerPlataforma = () => {
                                           {truncateText(integrante.nome, 15)}
                                       </Typography>
                                       <Typography variant="body2">
-                                          {truncateText(integrante.email, 20)}
+                                          {truncateText(integrante.email, 18)}
                                       </Typography>
                                   </Stack>
                               </Stack>

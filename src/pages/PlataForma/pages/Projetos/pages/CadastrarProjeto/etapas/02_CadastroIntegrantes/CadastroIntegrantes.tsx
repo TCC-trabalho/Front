@@ -1,22 +1,24 @@
-import { Stack } from "@mui/material"
+import { Skeleton, Stack, Typography } from "@mui/material"
 import { ProgressHeader } from "../../../../../../../../components/ProgressHeader/ProgressHeader"
 import { Button } from "../../../../../../../../components/Button/Button"
-import { Input } from "../../../../../../../../components/Input/Input"
 import { useCadastroIntegrantes } from "./CadastroIntegrantes.hook"
-import { UserMinus } from "lucide-react"
+import { InputDropdown } from "../../../../../../../../components/InputDropdown"
+import { IntegranteCard } from "../../../../../../../../components/IntegranteCard/IntegranteCard"
 
 export const CadastroIntegrantes = () => {
     const {
-        idGrupo,
+        opcoesAlunos,
+        integrantesIds,
+        isAlunosPending,
         control,
+        user,
         onSubmit,
-        append,
-        remove,
-        fields,
-        desabilitarCampo,
-        ultimoEmailValido,
-        podeAvancar,
-        isPendingCadastrarIntegrantes,
+        isCadastrarPending,
+        integrantesData,
+        isIntegrantesPending,
+        handleExcluir,
+        isExcluirPending,
+        idGrupo,
     } = useCadastroIntegrantes()
 
     return (
@@ -31,44 +33,47 @@ export const CadastroIntegrantes = () => {
                 component="form"
                 gap={3}
                 p={3}
-                onSubmit={(e) => {
-                    e.preventDefault()
-                    onSubmit()
-                }}
+                onSubmit={onSubmit}
             >
-                {fields.map((field, index) => (
-                    <Stack
-                        key={field.id}
-                        sx={{
-                            display: "grid",
-                            gridTemplateColumns: "1fr auto",
-                            alignItems: "center",
-                            gap: 2,
-                        }}
-                    >
-                        <Input
-                            key={field.id}
-                            placeholder="Digite o e-mail do integrante"
-                            control={control}
-                            name={`emailIntegrante.${index}`}
-                            tamanho={"sm"}
-                            label={`E-mail do Integrante ${index + 1}`}
-                            sx={{ width: "100%" }}
-                            disabled={desabilitarCampo(index)}
-                        />
-                        {index > 0 && (
-                            <Button
-                                variante="ButtonOutlinedRed"
-                                tamanho="xl"
-                                somenteIcone
-                                icon={UserMinus}
-                                onClick={() => remove(index)}
-                                sx={{ height: 45, width: 45, mt: 2.5 }}
-                                disabled={desabilitarCampo(index)}
-                            />
-                        )}
+                <InputDropdown.Controlado
+                    control={control}
+                    name="aluno"
+                    opcoes={opcoesAlunos.alunos}
+                    renderizarLabel={(opcao) => opcao.nome}
+                    retornarSomenteNome
+                    isCarregandoDados={isAlunosPending}
+                    label="Selecione um integrante"
+                    placeholder="Selecione um integrante"
+                    deveDesabilitarOpcao={(opcao) =>
+                        opcao.id === user?.aluno?.id_aluno || integrantesIds.includes(opcao.id)
+                    }
+                    disabled={isCadastrarPending}
+                />
+
+                <Stack gap={1}>
+                    {(integrantesData?.length ?? 0) > 0 && <Typography>Integrantes:</Typography>}
+
+                    <Stack sx={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 1 }}>
+                        {isIntegrantesPending
+                            ? Array.from({ length: 3 }).map((_, index) => (
+                                  <Skeleton
+                                      key={index}
+                                      variant="rectangular"
+                                      height={80}
+                                      sx={{ borderRadius: 1 }}
+                                  />
+                              ))
+                            : integrantesData?.map((integrante) => (
+                                  <IntegranteCard
+                                      key={integrante.id_aluno}
+                                      nome={integrante.nome}
+                                      email={integrante.email}
+                                      OnExcluir={() => handleExcluir(integrante.id_aluno)}
+                                      disabledExcluir={isExcluirPending}
+                                  />
+                              ))}
                     </Stack>
-                ))}
+                </Stack>
 
                 <Stack
                     alignItems={"center"}
@@ -76,35 +81,26 @@ export const CadastroIntegrantes = () => {
                     gap={2}
                     justifyContent={"center"}
                 >
-                    <Button
-                        variante="ButtonOutlinedBlue"
-                        tamanho={"lg"}
-                        disabled={!ultimoEmailValido}
-                        onClick={() => append("")}
-                        type="button"
-                        espacamento={20}
-                    >
-                        Adicionar
-                    </Button>
-                    {podeAvancar ? (
+                    {(integrantesData?.length ?? 0) > 0 && (
                         <Button
                             tamanho={"lg"}
-                            to={`/plataforma-nexus/cadastrar-projeto/cadastro-projeto/${idGrupo}`}
+                            variante="ButtonBlue"
                             viewTransition
                             espacamento={20}
+                            disabled={isCadastrarPending}
+                            to={`/plataforma-nexus/cadastrar-projeto/cadastro-projeto/${idGrupo}`}
                         >
                             Avançar
                         </Button>
-                    ) : (
-                        <Button
-                            tamanho={"lg"}
-                            type="submit"
-                            disabled={isPendingCadastrarIntegrantes}
-                            espacamento={20}
-                        >
-                            Cadastrar
-                        </Button>
                     )}
+                    <Button
+                        tamanho={"lg"}
+                        type="submit"
+                        espacamento={20}
+                        loading={isCadastrarPending}
+                    >
+                        Cadastrar
+                    </Button>
                 </Stack>
             </Stack>
         </>

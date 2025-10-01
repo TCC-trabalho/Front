@@ -10,7 +10,7 @@ type FormValues = {
     senha?: string
     nome: string
     telefone: string
-    descricao: string | null
+    descricao: string
 }
 
 export const useEditarEmpresa = () => {
@@ -27,7 +27,7 @@ export const useEditarEmpresa = () => {
             senha: "",
             nome: "",
             telefone: "",
-            descricao: null,
+            descricao: "",
         },
     })
 
@@ -55,7 +55,9 @@ export const useEditarEmpresa = () => {
             const form = new FormData()
             form.append("_method", "PUT")
             form.append("nome", v.nome)
-            form.append("descricao", v.descricao ?? "")
+            if (v.descricao && v.descricao.trim() !== "") {
+                form.append("descricao", v.descricao)
+            }
             form.append("setor", v.setor)
             form.append("senha", v.senha ?? "")
             form.append("telefone", v.telefone)

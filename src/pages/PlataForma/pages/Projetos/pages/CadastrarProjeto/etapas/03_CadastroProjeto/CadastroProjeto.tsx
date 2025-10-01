@@ -17,6 +17,7 @@ export const CadastroProjeto = () => {
         opcoes,
         isLoadingOrientadores,
         user,
+        idGrupo,
     } = useCadastroProjeto()
 
     return (
@@ -97,6 +98,16 @@ export const CadastroProjeto = () => {
                     gap={2}
                     justifyContent={"center"}
                 >
+                    <Button
+                        variante="ButtonGrey"
+                        tamanho={"lg"}
+                        disabled={isPendingCadastrarProjeto}
+                        espacamento={20}
+                        to={`/plataforma-nexus/cadastrar-projeto/cadastro-integrantes/${idGrupo}`}
+                        viewTransition
+                    >
+                        Voltar
+                    </Button>
                     <Button
                         tamanho={"lg"}
                         onClick={onSubmit}

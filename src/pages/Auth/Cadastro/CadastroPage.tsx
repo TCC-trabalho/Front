@@ -28,6 +28,7 @@ export const CadastroPage = () => {
                                 icon: BookOpen,
                                 titulo: "Cadastro do estudante",
                                 subtitulo: "Faça sua conta e comece a navegar",
+                                to: "/login?Tab=Aluno",
                                 content: <FormALuno />,
                             },
                             {
@@ -35,6 +36,7 @@ export const CadastroPage = () => {
                                 icon: GraduationCap,
                                 titulo: "Cadastro do orientador",
                                 subtitulo: "Faça sua conta e comece a navegar",
+                                to: "/login?Tab=Professor",
                                 content: <FormOrientador />,
                             },
                             {
@@ -42,6 +44,7 @@ export const CadastroPage = () => {
                                 icon: Building2,
                                 titulo: "Cadastro da empresa",
                                 subtitulo: "Faça sua conta e comece a navegar",
+                                to: "/login?Tab=Empresa",
                                 content: <FormEmpresa />,
                             },
                             {
@@ -49,6 +52,7 @@ export const CadastroPage = () => {
                                 icon: HandHelping,
                                 titulo: "Cadastro do visitante",
                                 subtitulo: "Faça sua conta e comece a navegar",
+                                to: "/login?Tab=Visitante",
                                 content: <FormVisitante />,
                             },
                         ]}

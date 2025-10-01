@@ -1,3 +1,7 @@
+export enum GrupoQueryKeys {
+    ObterIntegrantes = "obterIntegrantes",
+}
+
 export type Grupo = {
     id?: string
     nome: string
@@ -7,7 +11,7 @@ export type Grupo = {
 
 export type Integrante = {
     id?: string
-    email: string[]
+    email: string
 }
 
 export type IntegranteCompleto = {
@@ -15,4 +19,21 @@ export type IntegranteCompleto = {
     nomeUsuario?: string
     nome: string
     email: string
+}
+
+export namespace ObterIntegrantes {
+    export type Request = {
+        idGrupo: number
+    }
+
+    export type Response = IntegranteCompleto[]
+}
+
+export namespace ExcluirIntegrante {
+    export type Request = {
+        idGrupo: number
+        idAluno: number
+    }
+
+    export type Response = { message: string }
 }

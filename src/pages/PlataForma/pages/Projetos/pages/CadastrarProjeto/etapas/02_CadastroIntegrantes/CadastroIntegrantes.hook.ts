@@ -1,111 +1,88 @@
-import { useForm, useFieldArray, FieldValues } from "react-hook-form"
+import { useMemo } from "react"
+import { useObterAlunos } from "../../../../../../../../api/controllers/aluno"
+import { useForm } from "react-hook-form"
+import { useUser } from "../../../../../../../../lib/hooks/useUser"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { validacaoIntegrantes } from "./CadastroIntegrantes.schemas"
-import { useEffect, useState } from "react"
+import {
+    useCadastrarIntegrantes,
+    useExcluirIntegrante,
+    useObterIntegrantes,
+} from "../../../../../../../../api/controllers/grupo"
 import { useParams } from "react-router"
-import { useCadastrarIntegrantes } from "../../../../../../../../api/controllers/grupo"
 import { toast } from "sonner"
-
-type FormData = FieldValues & {
-    emailIntegrante: string[]
-}
 
 export const useCadastroIntegrantes = () => {
     const { idGrupo } = useParams()
-    const idGrupoNumber = Number(idGrupo)
-    const [camposDesabilitados, setCamposDesabilitados] = useState<boolean[]>([])
+    const { user } = useUser()
 
-    const {
-        control,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm<FormData>({
+    const { control, handleSubmit, reset } = useForm({
         resolver: yupResolver(validacaoIntegrantes),
         defaultValues: {
-            emailIntegrante: [""],
+            aluno: undefined,
         },
     })
 
-    const { fields, append, remove } = useFieldArray<FormData>({
-        control,
-        name: "emailIntegrante",
+    const { data: alunosData, isPending: isAlunosPending } = useObterAlunos()
+    const { data: integrantesData, isPending: isIntegrantesPending } = useObterIntegrantes({
+        idGrupo: Number(idGrupo),
     })
 
-    const { mutateAsync: cadastrarIntegrantes, isPending: isPendingCadastrarIntegrantes } =
-        useCadastrarIntegrantes(idGrupoNumber)
+    const { mutateAsync: cadastrarIntegrantes, isPending: isCadastrarPending } = useCadastrarIntegrantes(
+        Number(idGrupo)
+    )
 
-    const emails = watch("emailIntegrante") || []
+    const { mutateAsync: excluirIntegrante, isPending: isExcluirPending } = useExcluirIntegrante()
 
-    const onSubmit = (data: FormData) => {
-        const emailsParaEnviar = data.emailIntegrante.filter((_, index) => !camposDesabilitados[index])
-
-        if (emailsParaEnviar.length === 0) return
-
-        cadastrarIntegrantes(
-            { email: emailsParaEnviar },
-            {
-                onSuccess: () => {
-                    toast.success("Integrantes cadastrados com sucesso!")
-                    setCamposDesabilitados((prev) =>
-                        prev.map((_, index) =>
-                            emailsParaEnviar.includes(data.emailIntegrante[index]) ? true : prev[index]
-                        )
-                    )
-                },
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                onError: (err: any) => {
-                    const message = err?.response?.data?.message || "Erro ao cadastrar integrante."
-                    toast.error(message)
-                },
-            }
-        )
+    const handleExcluir = async (idAluno: number) => {
+        if (!idGrupo) return
+        await excluirIntegrante({
+            idGrupo: Number(idGrupo),
+            idAluno,
+        })
     }
 
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const opcoesAlunos = useMemo(
+        () => ({
+            alunos:
+                alunosData?.map((aluno) => ({
+                    id: aluno.id_aluno,
+                    nome: aluno.email,
+                })) || [],
+        }),
+        [alunosData]
+    )
 
-    const ultimoEmailValido =
-        emails.length > 0 &&
-        regexEmail.test(emails[emails.length - 1]) &&
-        !errors.emailIntegrante?.[emails.length - 1]
+    const integrantesIds = useMemo(
+        () => integrantesData?.map((i) => i.id_aluno) ?? [],
+        [integrantesData]
+    )
 
-    useEffect(() => {
-        if (fields.length === 0) {
-            append("")
-        }
-    }, [append, fields])
-
-    useEffect(() => {
-        setCamposDesabilitados((prev) => {
-            const novos = [...prev]
-
-            // Se algum campo novo foi adicionado
-            if (fields.length > prev.length) {
-                const quantosNovos = fields.length - prev.length
-                for (let i = 0; i < quantosNovos; i++) {
-                    novos.push(false) // novo campo começa como habilitado
-                }
+    const onSubmit = handleSubmit(async (data) => {
+        try {
+            if (data.aluno) {
+                await cadastrarIntegrantes({ email: data.aluno })
+                toast.success("Integrante adicionado com sucesso!")
+                reset()
             }
-
-            return novos
-        })
-    }, [fields.length])
-
-    const desabilitarCampo = (index: number) => camposDesabilitados[index]
-    const podeAvancar = camposDesabilitados.every(Boolean)
+        } catch (error) {
+            toast.error("Não foi possível adicionar o integrante.")
+            console.error(error)
+        }
+    })
 
     return {
-        idGrupo,
+        opcoesAlunos,
+        integrantesIds,
+        isAlunosPending,
         control,
-        onSubmit: handleSubmit(onSubmit),
-        append,
-        remove,
-        fields,
-        emails,
-        desabilitarCampo,
-        setCamposDesabilitados,
-        ultimoEmailValido,
-        podeAvancar,
-        isPendingCadastrarIntegrantes,
+        user,
+        onSubmit,
+        isCadastrarPending,
+        isIntegrantesPending,
+        integrantesData,
+        handleExcluir,
+        isExcluirPending,
+        idGrupo,
     }
 }

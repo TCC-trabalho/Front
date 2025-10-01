@@ -9,6 +9,7 @@ import {
     LogOut,
     MenuIcon,
     MessageCircle,
+    Plus,
     Settings,
     UserRound,
 } from "lucide-react"
@@ -148,11 +149,12 @@ export const Menu = ({ variante, header, loading = false, ...props }: MenuProps)
                     !header[0]?.quatidadeProjetos && (
                         <Button
                             tamanho="sm"
-                            sx={{ width: "70%" }}
+                            icon={Plus}
                             to="/plataforma-nexus/cadastrar-projeto"
                             viewTransition
+                            espacamento={5}
                         >
-                            Cadastrar um projeto
+                            Criar um projeto
                         </Button>
                     )}
 
