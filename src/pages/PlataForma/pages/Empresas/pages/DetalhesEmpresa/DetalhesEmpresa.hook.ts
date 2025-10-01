@@ -5,7 +5,7 @@ import { useUser } from "../../../../../../lib/hooks/useUser"
 
 export const useDetalhesEmpresa = () => {
     const [modal, setModal] = useState(false)
-    const {user} = useUser()
+    const { user } = useUser()
 
     const { idEmpresa } = useParams()
 
@@ -13,12 +13,15 @@ export const useDetalhesEmpresa = () => {
 
     const feed = Array.isArray(empresa?.projetos_patrocinados) ? empresa!.projetos_patrocinados : []
 
+    const isEmpty = feed.length === 0
+
     return {
         isFetching: isPending,
         feed,
         empresa,
         modal,
         setModal,
-        user
+        user,
+        isEmpty,
     }
 }

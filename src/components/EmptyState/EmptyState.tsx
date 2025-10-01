@@ -2,7 +2,16 @@ import { Stack, Typography } from "@mui/material"
 import { Button } from "../Button/Button"
 import { EmptyStateProps } from "./EmptyState.types"
 
-export const EmptyState = ({ icon: Icon, message, buttonText, button, width, height }: EmptyStateProps) => {
+export const EmptyState = ({
+    icon: Icon,
+    message,
+    buttonText,
+    button,
+    width,
+    height,
+}: EmptyStateProps) => {
+    const { tamanho, ...buttonProps } = button || {}
+
     return (
         <>
             <Stack
@@ -20,7 +29,10 @@ export const EmptyState = ({ icon: Icon, message, buttonText, button, width, hei
                         color="#00000040"
                     />
                 )}
-                <Stack gap={2} alignItems="center">
+                <Stack
+                    gap={2}
+                    alignItems="center"
+                >
                     <Typography
                         variant="h5"
                         color="#00000040"
@@ -28,12 +40,14 @@ export const EmptyState = ({ icon: Icon, message, buttonText, button, width, hei
                     >
                         {message}
                     </Typography>
-                    <Button
-                        tamanho={button?.tamanho || "md"}
-                        {...button}
-                    >
-                        {buttonText}
-                    </Button>
+                    {button && (
+                        <Button
+                            {...buttonProps}
+                            tamanho={tamanho ?? "md"}
+                        >
+                            {buttonText}
+                        </Button>
+                    )}
                 </Stack>
             </Stack>
         </>

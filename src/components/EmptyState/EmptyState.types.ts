@@ -5,7 +5,7 @@ export interface EmptyStateProps {
     icon?: LucideIcon
     message: string;
     buttonText?: string;
-    button?: ButtonProp
+    button?: ButtonProp | null;
     width: number | string | object;
     height: number | string | object;
 }

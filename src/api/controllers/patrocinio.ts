@@ -10,7 +10,7 @@ import {
     QueryKeys,
     SolicitarApoio,
 } from "../models/patrocinio.types"
-import { QueryKeys as EmpresaKey } from "../models/empresa.types"
+import { EmpresaQueryKeys } from "../models/empresa.types"
 
 export const useObterPatrociniosPorProjetoAluno = (request: ObterPatrociniosPorProjetoAluno.Request) => {
     return useQuery({
@@ -79,11 +79,11 @@ export const usePatrocinar = () => {
             return response.data
         },
         onSuccess: () => {
-            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaKey.obterEmpresas] })
-            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaKey.obterEmpresaPorId] })
-            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaKey.obterEmpresaProjetos] })
+            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaQueryKeys.obterEmpresas] })
+            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaQueryKeys.obterEmpresaPorId] })
+            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaQueryKeys.obterEmpresaProjetos] })
             nexusQueryClient.invalidateQueries({
-                queryKey: [EmpresaKey.obterProjetosPatrocinadosPorEmpresa],
+                queryKey: [EmpresaQueryKeys.obterProjetosPatrocinadosPorEmpresa],
             })
         },
     })

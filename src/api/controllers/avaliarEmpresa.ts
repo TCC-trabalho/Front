@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query"
 import { AvaliarEmpresa } from "../models/avaliarEmpresa.types"
 import { api, nexusQueryClient } from "../../lib/config/axios"
-import { QueryKeys } from "../models/empresa.types"
+import { EmpresaQueryKeys } from "../models/empresa.types"
 
 export const useAvaliarEmpresa = () => {
     return useMutation({
@@ -13,9 +13,9 @@ export const useAvaliarEmpresa = () => {
             return response.data
         },
         onSuccess: () => {
-            nexusQueryClient.invalidateQueries({ queryKey: [QueryKeys.obterEmpresas] })
-            nexusQueryClient.invalidateQueries({ queryKey: [QueryKeys.obterEmpresaPorId] })
-            nexusQueryClient.invalidateQueries({ queryKey: [QueryKeys.obterEmpresaProjetos] })
+            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaQueryKeys.obterEmpresas] })
+            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaQueryKeys.obterEmpresaPorId] })
+            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaQueryKeys.obterEmpresaProjetos] })
         },
     })
 }

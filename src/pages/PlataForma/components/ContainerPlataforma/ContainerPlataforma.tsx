@@ -68,7 +68,7 @@ export const ContainerPlataforma = () => {
                 >
                     <Typography
                         variant="h4"
-                        sx={{ fontSize: { xs: 24, md: 34 } }}
+                        sx={{ fontSize: { xs: 16, sm: 24, md: 30 }, textAlign: "center" }}
                     >
                         {tituloPagina()}
                     </Typography>

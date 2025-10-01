@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Avatar, Skeleton, Stack, Typography } from "@mui/material"
-import { HandHelping, MessageCircleHeart, Star } from "lucide-react"
+import { HandHelping, MessageCircleHeart, Settings, Star } from "lucide-react"
 import { useDetalhesEmpresa } from "./DetalhesEmpresa.hook"
 import { FeedCard } from "../../../../../../components/FeedCard/FeedCard"
 import { Button } from "../../../../../../components/Button/Button"
 import { AvaliarEmpresa } from "./modais/AvaliarEmpresa/AvaliarEmpresa"
+import { EmptyState } from "../../../../../../components/EmptyState/EmptyState"
 
 export const DetalhesEmpresa = () => {
-    const { isFetching, feed, empresa, modal, setModal, user } = useDetalhesEmpresa()
+    const { isFetching, feed, empresa, modal, setModal, user, isEmpty } = useDetalhesEmpresa()
 
     return (
         <>
@@ -132,34 +133,49 @@ export const DetalhesEmpresa = () => {
                             </Typography>
                         )}
                     </Stack>
-                    <Stack
-                        sx={{
-                            display: {
-                                xs: "flex",
-                                lg: "grid",
-                            },
-                            alignItems: "center",
-                            gridTemplateColumns: "repeat(2, 1fr)",
-                            gap: 4,
-                        }}
-                    >
-                        {(isFetching ? Array.from({ length: 6 }) : feed).map(
-                            (item: any, index: number) => (
-                                <FeedCard
-                                    key={index}
-                                    imagemUrl={item?.foto || ""}
-                                    titulo={item?.titulo || ""}
-                                    area={item?.area || ""}
-                                    organizacao={item?.organizacao || ""}
-                                    integrantes={item?.integrantes || 0}
-                                    descricao={item?.descricao || ""}
-                                    loading={isFetching}
-                                    variante={"projeto"}
-                                    to={`/plataforma-nexus/detalhes-projeto/${item?.id_projeto}`}
-                                />
-                            )
-                        )}
-                    </Stack>
+                    {isEmpty ? (
+                        <EmptyState
+                            icon={Settings}
+                            message={"Nenhum projeto patrocinado até o momento."}
+                            buttonText={"Dar apoio a um projeto"}
+                            width={"100%"}
+                            button={null}
+                            height={{
+                                xs: 300,
+                                md: 500,
+                                lg: 550,
+                            }}
+                        />
+                    ) : (
+                        <Stack
+                            sx={{
+                                display: {
+                                    xs: "flex",
+                                    lg: "grid",
+                                },
+                                alignItems: "center",
+                                gridTemplateColumns: "repeat(2, 1fr)",
+                                gap: 4,
+                            }}
+                        >
+                            {(isFetching ? Array.from({ length: 6 }) : feed).map(
+                                (item: any, index: number) => (
+                                    <FeedCard
+                                        key={index}
+                                        imagemUrl={item?.foto || ""}
+                                        titulo={item?.titulo || ""}
+                                        area={item?.area || ""}
+                                        organizacao={item?.organizacao || ""}
+                                        integrantes={item?.integrantes || 0}
+                                        descricao={item?.descricao || ""}
+                                        loading={isFetching}
+                                        variante={"projeto"}
+                                        to={`/plataforma-nexus/detalhes-projeto/${item?.id_projeto}`}
+                                    />
+                                )
+                            )}
+                        </Stack>
+                    )}
                 </Stack>
             </Stack>
             <AvaliarEmpresa
