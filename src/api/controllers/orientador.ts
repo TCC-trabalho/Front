@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { Orientador, Querykeys } from "../models/orientador.types"
 import { api } from "../../lib/config/axios"
+import { Orientador, OrientadorQueryKeys } from "../models/orientador.types"
 
 export const useListagemOrientadores = () => {
     return useQuery({
-        queryKey: [Querykeys.LISTAGEM_ORIENTADORES],
+        queryKey: [OrientadorQueryKeys.LISTAGEM_ORIENTADORES],
         queryFn: async () => {
             const {data} = await api.get<Orientador.Response>("orientadores/emails")
             return data

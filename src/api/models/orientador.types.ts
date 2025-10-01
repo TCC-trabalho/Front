@@ -1,4 +1,4 @@
-export enum Querykeys {
+export enum OrientadorQueryKeys {
     LISTAGEM_ORIENTADORES = "LISTAGEM_ORIENTADORES",
 }
 

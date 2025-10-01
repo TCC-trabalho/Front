@@ -1,6 +1,6 @@
 import { Projeto } from "./projeto.type"
 
-export enum QueryKeys {
+export enum EmpresaQueryKeys {
     obterEmpresas = "obterEmpresas",
     obterEmpresaPorId = "obterEmpresaPorId",
     obterEmpresaProjetos = "obterEmpresasPorId",

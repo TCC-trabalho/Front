@@ -5,13 +5,13 @@ import {
     obterEmpresaProjetos,
     ObterEmpresas,
     ObterProjetosPatrocinadosPorEmpresa,
-    QueryKeys,
+    EmpresaQueryKeys,
 } from "../models/empresa.types"
 import { api, nexusQueryClient } from "../../lib/config/axios"
 
 export const useObterEmpresas = () => {
     return useQuery({
-        queryKey: [QueryKeys.obterEmpresas],
+        queryKey: [EmpresaQueryKeys.obterEmpresas],
         queryFn: async () => {
             const { data } = await api.get<ObterEmpresas.Response>("empresas")
             return data
@@ -22,7 +22,7 @@ export const useObterEmpresas = () => {
 export const useObterEmpresaPorId = (request: ObterEmpresaPorId.Request) => {
     return useQuery({
         enabled: !!request.id_empresa,
-        queryKey: [QueryKeys.obterEmpresaPorId, request.id_empresa],
+        queryKey: [EmpresaQueryKeys.obterEmpresaPorId, request.id_empresa],
         queryFn: async () => {
             const { data } = await api.get<ObterEmpresaPorId.Response>(`empresa/${request.id_empresa}`)
             return data
@@ -33,7 +33,7 @@ export const useObterEmpresaPorId = (request: ObterEmpresaPorId.Request) => {
 export const useObterEmpresasProjetos = (request: obterEmpresaProjetos.Request) => {
     return useQuery({
         enabled: !!request.id_empresa,
-        queryKey: [QueryKeys.obterEmpresaProjetos, request.id_empresa],
+        queryKey: [EmpresaQueryKeys.obterEmpresaProjetos, request.id_empresa],
         queryFn: async () => {
             const { data } = await api.get<obterEmpresaProjetos.Response>(
                 `empresas/${request.id_empresa}/projetos`
@@ -48,7 +48,7 @@ export const useObterProjetosPatrocinadosPorEmpresa = (
 ) => {
     return useQuery({
         enabled: !!request.id_empresa,
-        queryKey: [QueryKeys.obterProjetosPatrocinadosPorEmpresa, request.id_empresa],
+        queryKey: [EmpresaQueryKeys.obterProjetosPatrocinadosPorEmpresa, request.id_empresa],
         queryFn: async () => {
             const { data } = await api.get<ObterProjetosPatrocinadosPorEmpresa.Response>(
                 `empresas/${request.id_empresa}/projetos-patrocinados`
@@ -77,12 +77,12 @@ export const useAtualizarEmpresa = (id_empresa: number) => {
             }
         },
         onSuccess: () => {
-            nexusQueryClient.invalidateQueries({ queryKey: [QueryKeys.obterEmpresas] })
+            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaQueryKeys.obterEmpresas] })
             nexusQueryClient.invalidateQueries({
-                queryKey: [QueryKeys.obterEmpresaPorId, id_empresa],
+                queryKey: [EmpresaQueryKeys.obterEmpresaPorId, id_empresa],
             })
             nexusQueryClient.invalidateQueries({
-                queryKey: [QueryKeys.obterEmpresaProjetos, id_empresa],
+                queryKey: [EmpresaQueryKeys.obterEmpresaProjetos, id_empresa],
             })
         },
     })

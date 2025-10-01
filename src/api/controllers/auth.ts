@@ -1,6 +1,15 @@
 import { useMutation } from "@tanstack/react-query"
-import { CadastroAluno, CadastroEmpresa, CadastroProfessor, CadastroVisitante, LoginPayload } from "../models/auth.type"
-import { api } from "../../lib/config/axios"
+import {
+    CadastroAluno,
+    CadastroEmpresa,
+    CadastroProfessor,
+    CadastroVisitante,
+    LoginPayload,
+} from "../models/auth.type"
+import { api, nexusQueryClient } from "../../lib/config/axios"
+import { AlunoQueryKeys } from "../models/aluno.types"
+import { OrientadorQueryKeys } from "../models/orientador.types"
+import { EmpresaQueryKeys } from "../models/empresa.types"
 
 // Login da plataforma
 
@@ -21,6 +30,9 @@ export const useCadastroAluno = () => {
             const { data } = await api.post("alunos", request)
             return data
         },
+        onSuccess: () => {
+            nexusQueryClient.invalidateQueries({ queryKey: [AlunoQueryKeys.LISTAR_ALUNOS] })
+        },
     })
 }
 
@@ -30,6 +42,9 @@ export const useCadastroProfessor = () => {
             const { data } = await api.post("orientadores", request)
             return data
         },
+        onSuccess: () => {
+            nexusQueryClient.invalidateQueries({ queryKey: [OrientadorQueryKeys.LISTAGEM_ORIENTADORES] })
+        },
     })
 }
 
@@ -38,6 +53,9 @@ export const useCadastroEmpresa = () => {
         mutationFn: async (request: CadastroEmpresa) => {
             const { data } = await api.post("empresas", request)
             return data
+        },
+        onSuccess: () => {
+            nexusQueryClient.invalidateQueries({ queryKey: [EmpresaQueryKeys.obterEmpresas] })
         },
     })
 }
