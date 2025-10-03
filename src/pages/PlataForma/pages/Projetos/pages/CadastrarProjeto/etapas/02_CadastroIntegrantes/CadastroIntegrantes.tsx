@@ -69,7 +69,8 @@ export const CadastroIntegrantes = () => {
                                       nome={integrante.nome}
                                       email={integrante.email}
                                       OnExcluir={() => handleExcluir(integrante.id_aluno)}
-                                      disabledExcluir={isExcluirPending}
+                                      loadingExcluir={isExcluirPending}
+                                      disabledExcluir={user.aluno?.email === integrante.email}
                                   />
                               ))}
                     </Stack>

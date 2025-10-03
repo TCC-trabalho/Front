@@ -4,7 +4,7 @@ import { Button } from "../Button/Button"
 import { X } from "lucide-react"
 import { truncateText } from "../../lib/utils/truncateText"
 
-export const IntegranteCard = ({ nome, email, OnExcluir, disabledExcluir }: IntegranteCardProps) => {
+export const IntegranteCard = ({ nome, email, OnExcluir, disabledExcluir, loadingExcluir }: IntegranteCardProps) => {
     return (
         <Stack
             gap={1.5}
@@ -28,7 +28,8 @@ export const IntegranteCard = ({ nome, email, OnExcluir, disabledExcluir }: Inte
                     variante="ButtonLinkBlack"
                     tamanho="sm"
                     onClick={OnExcluir}
-                    loading={disabledExcluir}
+                    disabled={disabledExcluir}
+                    loading={loadingExcluir}
                     somenteIcone
                     icon={X}
                 />

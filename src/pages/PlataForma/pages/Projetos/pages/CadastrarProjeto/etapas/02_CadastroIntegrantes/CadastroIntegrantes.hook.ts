@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import { useObterAlunos } from "../../../../../../../../api/controllers/aluno"
 import { useForm } from "react-hook-form"
 import { useUser } from "../../../../../../../../lib/hooks/useUser"
@@ -70,6 +70,27 @@ export const useCadastroIntegrantes = () => {
             console.error(error)
         }
     })
+
+    useEffect(() => {
+        if (isIntegrantesPending) return
+
+        const adicionarAluno = async () => {
+
+            if (user?.aluno && user?.aluno?.email && integrantesData) {
+                const jaCadastrado = integrantesData.some((i) => i.email === user.aluno?.email)
+
+                if (!jaCadastrado) {
+                    try {
+                        await cadastrarIntegrantes({ email: user.aluno.email })
+                    } catch (error) {
+                        console.error(error)
+                    }
+                }
+            }
+        }
+
+        adicionarAluno()
+    }, [user, integrantesData, isIntegrantesPending, cadastrarIntegrantes])
 
     return {
         opcoesAlunos,
