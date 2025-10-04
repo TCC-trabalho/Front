@@ -13,7 +13,7 @@ export const useDetalhesEmpresa = () => {
 
     const feed = Array.isArray(empresa?.projetos_patrocinados) ? empresa!.projetos_patrocinados : []
 
-    const isEmpty = feed.length === 0
+    const isEmpty = feed.length === 0 && !isPending
 
     return {
         isFetching: isPending,

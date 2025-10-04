@@ -70,7 +70,7 @@ export const usePerfil = () => {
         feed = Array.isArray(d) ? d : Array.isArray(d?.projetos) ? d!.projetos! : []
     }
 
-    const isEmpty = feed.length === 0
+    const isEmpty = feed.length === 0 && !isFetching
 
     return {
         isFetching,
