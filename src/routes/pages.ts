@@ -13,6 +13,7 @@ import { CadastroGrupo } from "../pages/PlataForma/pages/Projetos/pages/Cadastra
 import { CadastroIntegrantes } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/02_CadastroIntegrantes/CadastroIntegrantes"
 import { CadastroProjeto } from "../pages/PlataForma/pages/Projetos/pages/CadastrarProjeto/etapas/03_CadastroProjeto/CadastroProjeto"
 import { DetalhesProjeto } from "../pages/PlataForma/pages/Projetos/pages/DetalhesProjeto/DetalhesProjeto"
+import { EditarGrupo } from "../pages/PlataForma/pages/Projetos/pages/DetalhesProjeto/pages/EditarGrupo/EditarGrupo"
 import { EditarProjeto } from "../pages/PlataForma/pages/Projetos/pages/DetalhesProjeto/pages/EditarProjeto/EditarProjeto"
 import { Projetos } from "../pages/PlataForma/pages/Projetos/Projetos"
 import { SolicitarApoio } from "../pages/PlataForma/pages/SolicitarApoio/SolicitarApoio"
@@ -33,6 +34,7 @@ export const Paginas = {
             Projetos,
             DetalhesProjeto,
             EditarProjeto,
+            EditarGrupo,
             SolicitarApoio,
             CadastrarProjeto: {
                 Etapas: {

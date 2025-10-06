@@ -23,6 +23,9 @@ export const ContainerPlataforma = () => {
         obterFotoUserIsPending,
         avatares,
         avataresIsPending,
+        idProjeto,
+        alunoEhIntegrante,
+        projetoEhDoOrientador,
     } = useContainerPlataforma()
 
     const { tituloPagina, exibirSugestao, exibirEquipe } = useControleExibicao()
@@ -254,6 +257,16 @@ export const ContainerPlataforma = () => {
                                   </Stack>
                               </Stack>
                           ))}
+                    {(alunoEhIntegrante || projetoEhDoOrientador) && (
+                        <Button
+                            tamanho="md"
+                            variante="ButtonBlue"
+                            to={`/plataforma-nexus/detalhes-projeto/${idProjeto}/editar-grupo`}
+                            viewTransition
+                        >
+                            Editar Equipe
+                        </Button>
+                    )}
                 </Styled.CardEquipe>
             )}
         </Styled.Container>

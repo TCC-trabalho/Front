@@ -7,13 +7,14 @@ export const useControleExibicao = () => {
 
     const tituloPagina = () => {
         if (path.includes("/projetos")) return "Projetos"
+        if (path.includes("/editar-perfil")) return "Editar Perfil"
+        if (path.includes("/editar-grupo")) return "Editar Grupo"
         if (path.includes("/editar")) return "Editar Perfil"
         if (path.includes("/empresas")) return "Empresas"
         if (path.includes("/apoiar-projeto/")) return "Apoio"
         if (path.includes("/solicitar-apoio")) return "Solicitar Apoio"
         if (path.includes("/chat")) return "Chat"
         if (path.includes("/meu-perfil")) return "Meu Perfil"
-        if (path.includes("/editar-perfil")) return "Editar Perfil"
         if (path.includes("/configuracoes")) return "Configurações da conta"
 
         return "Conectando ideias a oportunidades"
@@ -43,7 +44,7 @@ export const useControleExibicao = () => {
     ]
 
     const exibirSugestao = !ocultarRotas.some((rota) => path.includes(rota))
-    const exibirEquipe = path.includes("/detalhes-projeto/")
+    const exibirEquipe = path.includes("/detalhes-projeto/") && !path.includes("/editar-grupo")
     const ocultarDetalhesMenu = !ocultarDetalhes.some((rota) => path.includes(rota))
 
     return {

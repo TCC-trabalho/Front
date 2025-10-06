@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form"
 import { useUser } from "../../../../lib/hooks/useUser"
 import { useParams } from "react-router"
@@ -15,12 +16,22 @@ export const useContainerPlataforma = () => {
     const { data: obterProjetos, isPending: obterProjetosIsPending } = useObterProjetosLimit(4)
 
     const { data: obterFotoUser, isPending: obterFotoUserIsPending } = useObterFotoUser({
-        nomeUser: user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || user.visitante?.nomeUsuario || "",
+        nomeUser:
+            user.aluno?.nomeUsuario || user.orientador?.nomeUsuario || user.visitante?.nomeUsuario || "",
     })
 
     const { data: avatares, isPending: avataresIsPending } = useObterFotoIntegrantes(
         obterProjetoPorId?.grupo?.integrantes || []
     )
+
+    const alunoEhIntegrante =
+        user.aluno &&
+        obterProjetoPorId?.grupo?.integrantes?.some(
+            (integrante: any) => integrante.id_aluno === user.aluno?.id_aluno
+        )
+
+    const projetoEhDoOrientador =
+        user.orientador && obterProjetoPorId?.id_orientador === user.orientador.id_orientador
 
     return {
         obterProjetoPorId,
@@ -33,5 +44,8 @@ export const useContainerPlataforma = () => {
         avataresIsPending,
         control,
         user,
+        idProjeto,
+        alunoEhIntegrante,
+        projetoEhDoOrientador,
     }
 }

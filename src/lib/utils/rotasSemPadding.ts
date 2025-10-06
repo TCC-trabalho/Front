@@ -6,6 +6,7 @@ export const useRotasSemPadding = () => {
 
     const rotasSemPadding = [
         "/solicitar-apoio",
+        "/editar-grupo"
     ]
 
     return rotasSemPadding.some((rota) => path.includes(rota))

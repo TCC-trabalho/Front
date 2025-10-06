@@ -4,4 +4,5 @@ export interface IntegranteCardProps {
     OnExcluir: () => void;
     loadingExcluir?: boolean;
     disabledExcluir?: boolean;
+    variant?: "white" | "blue";
 }

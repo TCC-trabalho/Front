@@ -21,8 +21,13 @@ export const Content = styled(Stack)(({ theme }) => ({
         paddingTop: 0,
         paddingBottom: 0,
 
+        [theme.breakpoints.down("lg")]: {
+            paddingLeft: theme.spacing(20),
+        },
+
         [theme.breakpoints.down("md")]: {
             paddingTop: theme.spacing(2),
+            paddingLeft: theme.spacing(0),
         },
 
         [theme.breakpoints.down("sm")]: {
@@ -70,7 +75,6 @@ export const CardEquipe = styled(Stack)(({ theme }) => ({
     transform: "translateY(-50%)",
     zIndex: 1000,
     justifyContent: "center",
-    alignItems: "start",
     gap: theme.spacing(3),
 
     [theme.breakpoints.down("md")]: {
