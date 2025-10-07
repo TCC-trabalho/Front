@@ -1,5 +1,5 @@
 import { Chip, Skeleton, Stack, Typography } from "@mui/material"
-import { ChevronLeft, HandHeart, Pen, UsersRound } from "lucide-react"
+import { ChevronLeft, HandHeart, Pen, PiggyBank, UsersRound } from "lucide-react"
 import { useDetalhesProjeto } from "./DetalhesProjeto.hook"
 import { Button } from "../../../../../../components/Button/Button"
 
@@ -189,15 +189,31 @@ export const DetalhesProjeto = () => {
                         Voltar
                     </Button>
                     {projetoEhDoOrientador || alunoEhIntegrante ? (
-                        <Button
-                            tamanho="md"
-                            icon={Pen}
-                            to={`/plataforma-nexus/detalhes-projeto/${idProjeto}/editar`}
-                            viewTransition
-                            espacamento={20}
-                        >
-                            Editar
-                        </Button>
+                        <>
+                            <Button
+                                tamanho="md"
+                                icon={Pen}
+                                to={`/plataforma-nexus/detalhes-projeto/${idProjeto}/editar`}
+                                viewTransition
+                                espacamento={20}
+                            >
+                                Editar
+                            </Button>
+                            <Stack
+                                direction={"row"}
+                                justifyContent={"flex-end"}
+                                width={"100%"}
+                            >
+                                <Button
+                                    tamanho="md"
+                                    variante="ButtonBlue"
+                                    icon={PiggyBank}
+                                    espacamento={20}
+                                >
+                                    Tornar-se Gestor Financeiro
+                                </Button>
+                            </Stack>
+                        </>
                     ) : null}
 
                     {(tipoUser === "empresa" || tipoUser === "visitante") && (
