@@ -120,7 +120,7 @@ const routes = createBrowserRouter([
                                 element: <Paginas.Plataforma.EmpresasPage.EditarEmpresa />,
                             },
                             {
-                                path: "configuracoes",
+                                path: "configuracoes/status=:status?",
                                 element: <Paginas.Plataforma.Configuracoes />,
                             },
                         ],

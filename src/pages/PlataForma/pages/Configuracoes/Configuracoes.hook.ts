@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import {
     useObterProjetoPorIdAluno,
     useObterProjetoPorIdOrientador,
@@ -11,10 +11,14 @@ import {
     useObterValorTotalPatrocinioOrientador,
 } from "../../../../api/controllers/patrocinio"
 import { useForm } from "react-hook-form"
+import { useConectarConta, useObterStatusConta } from "../../../../api/controllers/mercadoPago"
+import { toast } from "sonner"
+import { useLocation } from "react-router"
 
 export const useConfiguracoes = () => {
     const { user } = useUser()
     const [open, setOpen] = useState(false)
+    const location = useLocation()
 
     const idAluno = user.aluno?.id_aluno
     const idOrientador = user.orientador?.id_orientador
@@ -109,6 +113,33 @@ export const useConfiguracoes = () => {
         isPendingTotalPatrocinioOrientador,
     ])
 
+    const { data: statusConta, isPending: isLoadingStatus } = useObterStatusConta({
+        id_usuario: idAluno || idOrientador || 0,
+        tipo_usuario: user.aluno?.tipoUser || user.orientador?.tipoUser || null,
+    })
+
+    const { mutateAsync: conectarConta, isPending: isLoadingConectar } = useConectarConta({
+        id_usuario: idAluno || idOrientador || 0,
+        tipo_usuario: user.aluno?.tipoUser || user.orientador?.tipoUser || null,
+    })
+
+    const handleConectarConta = async () => {
+        try {
+            const response = await conectarConta()
+            window.location.href = response.url
+        } catch {
+            toast.error("Erro ao conectar conta. Tente novamente.")
+        }
+    }
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search)
+        const status = params.get("status")
+        if (status === "success") {
+            toast.success("Conta vinculada com sucesso!")
+        }
+    }, [location.search])
+
     return {
         user,
         opcoes,
@@ -120,5 +151,9 @@ export const useConfiguracoes = () => {
         isLoadingValor,
         open,
         setOpen,
+        statusConta,
+        isLoadingStatus,
+        handleConectarConta,
+        isLoadingConectar,
     }
 }

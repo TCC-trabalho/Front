@@ -7,10 +7,12 @@ import { useApoiar, usePatrocinar } from "../../../../api/controllers/patrocinio
 import { useUser } from "../../../../lib/hooks/useUser"
 import { Enum } from "../../../../api/enum/enum"
 import { toast } from "sonner"
+import { useState } from "react"
 
 export const useApoiarProjeto = () => {
     const { idProjeto } = useParams()
     const { user } = useUser()
+    const [openModalPix, setOpenModalPix] = useState(false)
 
     const { data, isPending } = useObterProjetoPorId(Number(idProjeto))
     const { mutateAsync: patrocinar, isPending: isPatrocinarPending } = usePatrocinar()
@@ -49,7 +51,7 @@ export const useApoiarProjeto = () => {
                             (userData.qnt_projetos_patrocinados || 0) + 1
                         localStorage.setItem("usuarioLogado", JSON.stringify(userData))
                     }
-                    toast.success("Patrocínio registrado com sucesso!")
+                    setOpenModalPix(true)
                     reset()
                 },
                 onError: () => {
@@ -68,7 +70,7 @@ export const useApoiarProjeto = () => {
 
             await apoiar(payload, {
                 onSuccess: () => {
-                    toast.success("Apoio registrado com sucesso!")
+                    setOpenModalPix(true)
                     reset()
                 },
                 onError: () => {
@@ -78,11 +80,21 @@ export const useApoiarProjeto = () => {
         }
     })
 
+    const dataPagamento = {
+        id_usuario: user.empresa?.id_empresa || user.visitante?.id_visitante || 0,
+        valor: Number(control._formValues.valorApoio) || 0,
+        email: user.empresa?.email || user.visitante?.email || "",
+        nome: user.empresa?.nome || user.visitante?.nome || "",
+    }
+
     return {
         control,
         onSubmit,
         projeto: data,
         isPending,
         isPatrocinarPending: isPatrocinarPending || isApoiarPending,
+        openModalPix,
+        setOpenModalPix,
+        dataPagamento,
     }
 }

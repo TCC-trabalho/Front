@@ -4,6 +4,7 @@ import { ArrowRightLeft, BanknoteArrowDown, ChevronRight, Handshake } from "luci
 import { InputDropdown } from "../../../../components/InputDropdown"
 import { useConfiguracoes } from "./Configuracoes.hook"
 import { DeletarConta } from "./modais/DeletarConta/DeletarConta"
+import { format } from "date-fns"
 
 export const Configuracoes = () => {
     const {
@@ -16,6 +17,10 @@ export const Configuracoes = () => {
         isLoadingValor,
         open,
         setOpen,
+        statusConta,
+        isLoadingStatus,
+        handleConectarConta,
+        isLoadingConectar,
     } = useConfiguracoes()
 
     const formatarBR = (v: number) =>
@@ -122,10 +127,17 @@ export const Configuracoes = () => {
                         variant="h6"
                         color="#064B72"
                     >
-                        Vincular Conta Bancária
+                        {statusConta?.vinculado ? "Conta vinculada" : "Vincular Conta Bancária"}
                     </Typography>
 
-                    <Typography>Vincule sua conta Mercado Pago para receber pagamentos.</Typography>
+                    <Typography>
+                        {statusConta?.vinculado
+                            ? `Sua conta está vinculada desde ${format(
+                                  new Date(statusConta.data_vinculo!),
+                                  "dd/MM/yyyy"
+                              )}`
+                            : "Vincule sua conta Mercado Pago para receber pagamentos."}
+                    </Typography>
 
                     <Button
                         tamanho="md"
@@ -138,6 +150,9 @@ export const Configuracoes = () => {
                                 md: "25%",
                             },
                         }}
+                        onClick={handleConectarConta}
+                        loading={isLoadingStatus || isLoadingConectar}
+                        disabled={statusConta?.vinculado}
                     >
                         Vincular Conta
                     </Button>
