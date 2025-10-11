@@ -27,7 +27,7 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
 
     useEffect(() => {
         const gerarPagamento = async () => {
-            if (open && data?.id_usuario && data?.valor > 0) {
+            if (open && data?.id_projeto && data?.valor > 0) {
                 try {
                     const response = await criarPagamento(data)
                     if (response) {
@@ -50,15 +50,13 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
         >
             <Modal.Header
                 title="Pagar com Pix"
-                subtitle="Use o QR Code abaixo para realizar o pagamento"
-                onClose={onClose}
+                subtitle="Use o QR Code ou copie o código para realizar o pagamento"
                 Icon={HandCoins}
                 type="success"
             />
             <Stack
                 alignItems="center"
                 spacing={2}
-                p={3}
             >
                 {criandoPagamento && <CircularProgress color="primary" />}
 
@@ -67,16 +65,8 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
                         <img
                             src={`data:image/png;base64,${qrBase64}`}
                             alt="QR Code Pix"
-                            style={{ width: 220, height: 220 }}
+                            style={{ width: 200, height: 200 }}
                         />
-
-                        <Typography
-                            variant="body1"
-                            align="center"
-                        >
-                            Escaneie o QR Code acima ou copie o código abaixo:
-                        </Typography>
-
                         <Typography
                             variant="body2"
                             sx={{
@@ -85,7 +75,7 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
                                 borderRadius: 2,
                                 wordBreak: "break-all",
                                 textAlign: "center",
-                                width: "100%",
+                                width: "80%",
                                 fontFamily: "monospace",
                                 fontSize: 14,
                             }}
@@ -97,7 +87,7 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
             </Stack>
             <Modal.Actions ocuparEspacoVazio>
                 <Button
-                    variante="ButtonGrey"
+                    variante="ButtonBlue"
                     tamanho="md"
                     icon={Copy}
                     onClick={handleCopy}

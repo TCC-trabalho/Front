@@ -12,7 +12,14 @@ import { useState } from "react"
 export const useApoiarProjeto = () => {
     const { idProjeto } = useParams()
     const { user } = useUser()
+
     const [openModalPix, setOpenModalPix] = useState(false)
+    const [dataPagamento, setDataPagamento] = useState({
+        id_projeto: 0,
+        valor: 0,
+        email: "",
+        nome: "",
+    })
 
     const { data, isPending } = useObterProjetoPorId(Number(idProjeto))
     const { mutateAsync: patrocinar, isPending: isPatrocinarPending } = usePatrocinar()
@@ -32,13 +39,15 @@ export const useApoiarProjeto = () => {
     const onSubmit = handleSubmit(async (data) => {
         const isEmpresa = !!user?.empresa?.id_empresa
 
+        const valorApoio = Number(data.valorApoio)
+
         if (isEmpresa) {
             const payload = {
                 id_projeto: Number(idProjeto),
                 id_empresa: user?.empresa?.id_empresa || 0,
                 data_patrocinio: new Date().toISOString().slice(0, 19).replace("T", " "),
                 tipo_apoio: data.tipoApoio as Enum.TipoApoio,
-                valorPatrocinio: Number(data.valorApoio),
+                valorPatrocinio: Number((Number(data.valorApoio) * 0.95).toFixed(2)),
                 mensagem: data.mensagemApoio || "",
             }
 
@@ -51,6 +60,14 @@ export const useApoiarProjeto = () => {
                             (userData.qnt_projetos_patrocinados || 0) + 1
                         localStorage.setItem("usuarioLogado", JSON.stringify(userData))
                     }
+
+                    setDataPagamento({
+                        id_projeto: Number(idProjeto),
+                        valor: valorApoio,
+                        email: user?.empresa?.email || "",
+                        nome: user?.empresa?.nome || "",
+                    })
+
                     setOpenModalPix(true)
                     reset()
                 },
@@ -64,12 +81,18 @@ export const useApoiarProjeto = () => {
                 id_visitante: user?.visitante?.id_visitante || 0,
                 data_apoio: new Date().toISOString().slice(0, 19).replace("T", " "),
                 tipo_apoio: data.tipoApoio as Enum.TipoApoio,
-                valorApoio: Number(data.valorApoio),
+                valorApoio: Number((Number(data.valorApoio) * 0.95).toFixed(2)),
                 mensagem: data.mensagemApoio || "",
             }
 
             await apoiar(payload, {
                 onSuccess: () => {
+                    setDataPagamento({
+                        id_projeto: Number(idProjeto),
+                        valor: valorApoio,
+                        email: user?.visitante?.email || "",
+                        nome: user?.visitante?.nome || "",
+                    })
                     setOpenModalPix(true)
                     reset()
                 },
@@ -79,13 +102,6 @@ export const useApoiarProjeto = () => {
             })
         }
     })
-
-    const dataPagamento = {
-        id_usuario: user.empresa?.id_empresa || user.visitante?.id_visitante || 0,
-        valor: Number(control._formValues.valorApoio) || 0,
-        email: user.empresa?.email || user.visitante?.email || "",
-        nome: user.empresa?.nome || user.visitante?.nome || "",
-    }
 
     return {
         control,

@@ -1,6 +1,6 @@
 import { Card, Stack, Typography } from "@mui/material"
 import { Button } from "../../../../components/Button/Button"
-import { ArrowRightLeft, BanknoteArrowDown, ChevronRight, Handshake } from "lucide-react"
+import { ChevronRight, Handshake } from "lucide-react"
 import { InputDropdown } from "../../../../components/InputDropdown"
 import { useConfiguracoes } from "./Configuracoes.hook"
 import { DeletarConta } from "./modais/DeletarConta/DeletarConta"
@@ -8,7 +8,6 @@ import { format } from "date-fns"
 
 export const Configuracoes = () => {
     const {
-        user,
         opcoes,
         isFetching,
         control,
@@ -87,31 +86,6 @@ export const Configuracoes = () => {
                         />
                     </Stack>
 
-                    <Stack
-                        direction={"row"}
-                        gap={1.5}
-                    >
-                        <Button
-                            variante="ButtonGrey"
-                            tamanho="lg"
-                            icon={ArrowRightLeft}
-                            ladoIcon="direita"
-                            espacamento={15}
-                            disabled={user?.aluno ? true : false}
-                        >
-                            Transferir
-                        </Button>
-                        <Button
-                            variante="ButtonGrey"
-                            tamanho="lg"
-                            icon={BanknoteArrowDown}
-                            ladoIcon="direita"
-                            espacamento={15}
-                            disabled={user?.aluno ? true : false}
-                        >
-                            Sacar
-                        </Button>
-                    </Stack>
                 </Card>
 
                 <Stack

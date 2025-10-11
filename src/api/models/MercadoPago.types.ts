@@ -30,7 +30,7 @@ export namespace ConectarConta {
 
 export namespace CriarPagamento {
     export type Request = {
-        id_usuario: number;
+        id_projeto: number;
         valor: number;
         email: string;
         nome: string;

@@ -4,8 +4,16 @@ import { useDetalhesProjeto } from "./DetalhesProjeto.hook"
 import { Button } from "../../../../../../components/Button/Button"
 
 export const DetalhesProjeto = () => {
-    const { isFetching, detalhes, tipoUser, alunoEhIntegrante, projetoEhDoOrientador, idProjeto } =
-        useDetalhesProjeto()
+    const {
+        isFetching,
+        detalhes,
+        tipoUser,
+        alunoEhIntegrante,
+        projetoEhDoOrientador,
+        idProjeto,
+        handleVincularGestor,
+        isVincularGestorPending,
+    } = useDetalhesProjeto()
 
     return (
         <>
@@ -185,6 +193,7 @@ export const DetalhesProjeto = () => {
                         to={`/plataforma-nexus/projetos`}
                         viewTransition
                         espacamento={20}
+                        disabled={isVincularGestorPending}
                     >
                         Voltar
                     </Button>
@@ -196,6 +205,7 @@ export const DetalhesProjeto = () => {
                                 to={`/plataforma-nexus/detalhes-projeto/${idProjeto}/editar`}
                                 viewTransition
                                 espacamento={20}
+                                disabled={isFetching || isVincularGestorPending}
                             >
                                 Editar
                             </Button>
@@ -209,6 +219,8 @@ export const DetalhesProjeto = () => {
                                     variante="ButtonBlue"
                                     icon={PiggyBank}
                                     espacamento={20}
+                                    onClick={handleVincularGestor}
+                                    loading={isVincularGestorPending}
                                 >
                                     Tornar-se Gestor Financeiro
                                 </Button>

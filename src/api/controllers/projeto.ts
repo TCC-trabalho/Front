@@ -1,6 +1,11 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { api, nexusQueryClient } from "../../lib/config/axios"
-import { AtualizarProjeto, ListaProjetosResponse, Projeto } from "../models/projeto.type"
+import {
+    AtualizarProjeto,
+    ListaProjetosResponse,
+    Projeto,
+    VincularGestorFinanceiro,
+} from "../models/projeto.type"
 
 export const useObterProjetos = () => {
     return useQuery<Projeto[], Error>({
@@ -79,27 +84,43 @@ export const useCadastrarProjeto = () => {
 
 export const useAtualizarProjeto = (id: number) => {
     return useMutation({
-      mutationFn: async (request: FormData | AtualizarProjeto.Request) => {
-        const isForm = typeof FormData !== "undefined" && request instanceof FormData
-  
-        if (isForm) {
-          request.append('_method', 'PUT')
-          const { data } = await api.post(
-            `projetos/${id}`,
-            request,
-            { headers: { 'Content-Type': 'multipart/form-data' } }
-          )
-          return data
-        } else {
-          const { data } = await api.put(`projetos/${id}`, request)
-          return data
-        }
-      },
-      onSuccess: () => {
-        nexusQueryClient.invalidateQueries({ queryKey: ['projetos'] })
-        nexusQueryClient.invalidateQueries({ queryKey: ['projeto-por-orientador'] })
-        nexusQueryClient.invalidateQueries({ queryKey: ['projeto-por-aluno'] })
-        nexusQueryClient.invalidateQueries({ queryKey: ['projeto', id] })
-      },
+        mutationFn: async (request: FormData | AtualizarProjeto.Request) => {
+            const isForm = typeof FormData !== "undefined" && request instanceof FormData
+
+            if (isForm) {
+                request.append("_method", "PUT")
+                const { data } = await api.post(`projetos/${id}`, request, {
+                    headers: { "Content-Type": "multipart/form-data" },
+                })
+                return data
+            } else {
+                const { data } = await api.put(`projetos/${id}`, request)
+                return data
+            }
+        },
+        onSuccess: () => {
+            nexusQueryClient.invalidateQueries({ queryKey: ["projetos"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-orientador"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-aluno"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto", id] })
+        },
     })
-  }
+}
+
+export const useVincularGestorFinanceiro = () => {
+    return useMutation({
+        mutationFn: async (request: VincularGestorFinanceiro.Request) => {
+            const response = await api.put<VincularGestorFinanceiro.Response>(
+                `projetos/${request.id_projeto}/gestor`,
+                request
+            )
+            return response.data
+        },
+        onSuccess: () => {
+            nexusQueryClient.invalidateQueries({ queryKey: ["projetos"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-orientador"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto-por-aluno"] })
+            nexusQueryClient.invalidateQueries({ queryKey: ["projeto"] })
+        },
+    })
+}

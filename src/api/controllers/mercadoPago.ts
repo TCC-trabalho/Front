@@ -35,7 +35,7 @@ export const useCriarPagamento = () => {
     return useMutation({
         mutationFn: async (request: CriarPagamento.Request) => {
             const response = await api.post<CriarPagamento.Response>(
-                `pagamentos/pix/${request.id_usuario}`,
+                `pagamentos/pix/${request.id_projeto}`,
                 request
             )
             return response.data

@@ -1,6 +1,10 @@
-import { useObterProjetoPorId } from "../../../../../../api/controllers/projeto"
+import {
+    useObterProjetoPorId,
+    useVincularGestorFinanceiro,
+} from "../../../../../../api/controllers/projeto"
 import { useParams } from "react-router"
 import { useUser } from "../../../../../../lib/hooks/useUser"
+import { toast } from "sonner"
 
 export const useDetalhesProjeto = () => {
     const { idProjeto } = useParams()
@@ -27,6 +31,23 @@ export const useDetalhesProjeto = () => {
 
     const projetoEhDoOrientador = tipoUser === "orientador" && data?.id_orientador === idOrientador
 
+    const { mutateAsync: vincularGestor, isPending: isVincularGestorPending } =
+        useVincularGestorFinanceiro()
+
+    const handleVincularGestor = async () => {
+        if (!idProjeto) return
+        try {
+            await vincularGestor({
+                id_projeto: Number(idProjeto),
+                id_usuario: user.aluno?.id_aluno ?? user.orientador?.id_orientador ?? 0,
+                tipo_usuario: user.aluno?.tipoUser ?? user.orientador?.tipoUser ?? null,
+            })
+            toast.success("Vinculado como gestor financeiro com sucesso")
+        } catch {
+            toast.error("Erro ao vincular gestor financeiro")
+        }
+    }
+
     return {
         tipoUser,
         alunoEhIntegrante,
@@ -34,5 +55,7 @@ export const useDetalhesProjeto = () => {
         isFetching: isPending,
         detalhes: data,
         idProjeto,
+        handleVincularGestor,
+        isVincularGestorPending,
     }
 }
