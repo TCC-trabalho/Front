@@ -17,4 +17,10 @@ export namespace Enum {
         Equipamentos = "equipamentos",
         Capacitacao = "capacitacao",
     }
+
+    export enum StatusPagamento {
+        Aprovado = "approved",
+        Pendente = "pending",
+        Rejeitado = "rejected",
+    }
 }

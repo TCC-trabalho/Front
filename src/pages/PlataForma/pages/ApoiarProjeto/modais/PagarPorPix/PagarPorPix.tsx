@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Copy, HandCoins } from "lucide-react"
 import { Button } from "../../../../../../components/Button/Button"
 import { Modal } from "../../../../../../components/Modal"
-import { PagarPorPixProps } from "./PagarPorPix.types"
+import { PagarPorPixProps, Payment } from "./PagarPorPix.types"
 import { useCriarPagamento } from "../../../../../../api/controllers/mercadoPago"
 import { useEffect, useState } from "react"
 import { CircularProgress, Stack, Typography } from "@mui/material"
@@ -30,38 +29,24 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
     useEffect(() => {
         if (!open) return
 
-        console.log("🟢 Iniciando conexão com Pusher...")
-
         const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY!, {
             cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER!,
             forceTLS: true,
-            // 🔹 Adicione este log para diagnosticar erros de conexão
             enabledTransports: ["ws", "wss"],
-        })
-
-        // Loga erros de conexão se houver
-        pusher.connection.bind("error", (err: any) => {
-            console.error("❌ Erro na conexão Pusher:", err)
         })
 
         // Canal público "pagamentos"
         const channel = pusher.subscribe("pagamentos")
 
-        // Loga quando conectar
-        pusher.connection.bind("connected", () => {
-            console.log("✅ Conectado ao Pusher Cloud!")
-        })
-
         // Evento emitido pelo Laravel
-        channel.bind("status-atualizado", (data: any) => {
-            console.log("🔔 Evento recebido do Pusher:", data)
+        channel.bind("status-atualizado", (data: Payment.Response) => {
             const status = data?.payment?.status
 
             if (status === "approved") {
-                toast.success("Pagamento aprovado! ✅")
-                onClose() // fecha o modal
+                toast.success("Pagamento aprovado!")
+                onClose() 
             } else if (status === "rejected") {
-                toast.error("Pagamento rejeitado ❌")
+                toast.error("Pagamento rejeitado")
                 onClose()
             } else {
                 console.log("Status atual:", status)
@@ -72,7 +57,6 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
             channel.unbind_all()
             channel.unsubscribe()
             pusher.disconnect()
-            console.log("🔴 Desconectado do Pusher.")
         }
     }, [open, onClose])
 
