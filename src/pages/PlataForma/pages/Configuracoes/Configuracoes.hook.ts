@@ -13,12 +13,13 @@ import {
 import { useForm } from "react-hook-form"
 import { useConectarConta, useObterStatusConta } from "../../../../api/controllers/mercadoPago"
 import { toast } from "sonner"
-import { useParams } from "react-router"
+import { useSearchParams } from "react-router"
 
 export const useConfiguracoes = () => {
     const { user } = useUser()
     const [open, setOpen] = useState(false)
-    const { status } = useParams()
+    const [searchParams] = useSearchParams()
+    const status = searchParams.get("status")
 
     const idAluno = user.aluno?.id_aluno
     const idOrientador = user.orientador?.id_orientador
