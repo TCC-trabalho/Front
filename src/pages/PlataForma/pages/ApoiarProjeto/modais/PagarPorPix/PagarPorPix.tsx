@@ -11,6 +11,7 @@ import Pusher from "pusher-js"
 export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
     const { mutateAsync: criarPagamento, isPending: criandoPagamento } = useCriarPagamento()
     const [qrBase64, setQrBase64] = useState<string | null>(null)
+    const [disabledClose, setDisabledClose] = useState(true)
     const [qrText, setQrText] = useState<string | null>(null)
 
     const handleCopy = async () => {
@@ -42,14 +43,17 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
         channel.bind("status-atualizado", (data: Payment.Response) => {
             const status = data?.payment?.status
 
+            if (status) {
+                // libera o fechamento assim que houver qualquer mudança de status
+                setDisabledClose(false)
+            }
+
             if (status === "approved") {
                 toast.success("Pagamento aprovado!")
-                onClose() 
+                onClose()
             } else if (status === "rejected") {
                 toast.error("Pagamento rejeitado")
                 onClose()
-            } else {
-                console.log("Status atual:", status)
             }
         })
 
@@ -81,13 +85,17 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
     return (
         <Modal.Wrapper
             open={open}
-            onClose={onClose}
+            onClose={() => {}}
         >
             <Modal.Header
                 title="Pagar com Pix"
                 subtitle="Use o QR Code ou copie o código para realizar o pagamento"
                 Icon={HandCoins}
                 type="success"
+                onClose={() => {
+                    if (!disabledClose) onClose()
+                }}
+                disabledClose={disabledClose}
             />
             <Stack
                 alignItems="center"
