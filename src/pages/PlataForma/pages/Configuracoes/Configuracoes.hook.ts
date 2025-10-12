@@ -13,12 +13,12 @@ import {
 import { useForm } from "react-hook-form"
 import { useConectarConta, useObterStatusConta } from "../../../../api/controllers/mercadoPago"
 import { toast } from "sonner"
-import { useLocation } from "react-router"
+import { useParams } from "react-router"
 
 export const useConfiguracoes = () => {
     const { user } = useUser()
     const [open, setOpen] = useState(false)
-    const location = useLocation()
+    const { status } = useParams()
 
     const idAluno = user.aluno?.id_aluno
     const idOrientador = user.orientador?.id_orientador
@@ -133,12 +133,10 @@ export const useConfiguracoes = () => {
     }
 
     useEffect(() => {
-        const params = new URLSearchParams(location.search)
-        const status = params.get("status")
         if (status === "success") {
             toast.success("Conta vinculada com sucesso!")
         }
-    }, [location.search])
+    }, [status])
 
     return {
         user,
