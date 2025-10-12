@@ -33,7 +33,7 @@ export const ButtonVariants = styled(ButtonBase)<{
             opacity: 0.8,
         },
 
-        "&:disabled": {
+        "&:disabled, &.disabled": {
             opacity: 0.8,
             background: "grey !important",
             color: "white !important",

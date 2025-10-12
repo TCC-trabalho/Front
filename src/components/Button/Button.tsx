@@ -28,7 +28,7 @@ export const Button = ({
         <Component.ButtonVariants
             disabled={disabled || loading}
             LinkComponent={Link}
-            className={variante}
+            className={`${variante} ${disabled || loading ? "disabled" : ""}`}
             tamanho={tamanho}
             somenteIcone={somenteIcone}
             espacamento={espacamento || 0}

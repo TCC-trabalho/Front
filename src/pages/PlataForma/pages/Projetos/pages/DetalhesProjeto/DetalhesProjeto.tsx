@@ -235,6 +235,7 @@ export const DetalhesProjeto = () => {
                             to={`/plataforma-nexus/apoiar-projeto/${idProjeto}`}
                             viewTransition
                             espacamento={20}
+                            disabled={!detalhes?.id_gestor_financeiro || isFetching}
                         >
                             Apoiar
                         </Button>

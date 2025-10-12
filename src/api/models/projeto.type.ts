@@ -11,7 +11,6 @@ export type Projeto = {
     data_criacao: string
     objetivo: string | null
     justificativa: string | null
-    senha_acesso: string
     id_grupo: number
     grupo: {
         id_grupo: number
@@ -24,6 +23,8 @@ export type Projeto = {
     }
     id_orientador: number
     nome_orientador?: string
+    id_gestor_financeiro: number | null
+    tipo_gestor: Enum.TipoUsuario | null
     qnt_empresas_patrocinam: number
     status: string
 }

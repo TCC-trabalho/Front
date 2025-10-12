@@ -47,7 +47,7 @@ export const useApoiarProjeto = () => {
                 id_empresa: user?.empresa?.id_empresa || 0,
                 data_patrocinio: new Date().toISOString().slice(0, 19).replace("T", " "),
                 tipo_apoio: data.tipoApoio as Enum.TipoApoio,
-                valorPatrocinio: Number((Number(data.valorApoio) * 0.95).toFixed(2)),
+                valorPatrocinio: Number(data.valorApoio),
                 mensagem: data.mensagemApoio || "",
             }
 
@@ -81,7 +81,7 @@ export const useApoiarProjeto = () => {
                 id_visitante: user?.visitante?.id_visitante || 0,
                 data_apoio: new Date().toISOString().slice(0, 19).replace("T", " "),
                 tipo_apoio: data.tipoApoio as Enum.TipoApoio,
-                valorApoio: Number((Number(data.valorApoio) * 0.95).toFixed(2)),
+                valorApoio: Number(data.valorApoio),
                 mensagem: data.mensagemApoio || "",
             }
 
