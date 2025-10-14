@@ -68,9 +68,15 @@ export const Input = <TFieldValues extends FieldValues>({
                         <Styled.Input
                             {...defaultProps}
                             onChange={(e) => {
-                                const rawValue = e.target.value
-                                const masked = props.mask ? mask(rawValue, [props.mask]) : rawValue
-                                field.onChange(masked)
+                                let rawValue = e.target.value
+
+                                if (props.onlyOneDigit) {
+                                    rawValue = rawValue.replace(/[^0-9]/g, "").slice(0, 1)
+                                } else if (props.mask) {
+                                    rawValue = mask(rawValue, [props.mask])
+                                }
+
+                                field.onChange(rawValue)
                             }}
                             startAdornment={
                                 <InputAdornment position="start">

@@ -8,6 +8,7 @@ export interface FormTabOption {
     subtitulo: string
     content: React.ReactNode
     to: string
+    toRecuperarSenha?: string
 }
 
 export interface FormContainerProps extends StackProps {

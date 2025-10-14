@@ -32,7 +32,7 @@ export const useFormVisitante = () => {
             toast.success("Cadastro realizado com sucesso!", { id: toastId })
 
             reset()
-            navigate("/login")
+            navigate("/login?Tab=Visitante")
         } catch {
             toast.error("Erro ao cadastrar. Verifique os dados.", { id: toastId })
         }

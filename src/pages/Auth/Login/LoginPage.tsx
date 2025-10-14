@@ -29,6 +29,7 @@ export const LoginPage = () => {
                                 titulo: "Login do estudante",
                                 subtitulo: "Insira suas credenciais para acessar seu portal do aluno",
                                 to: "/cadastro?Tab=Aluno",
+                                toRecuperarSenha: "aluno",
                                 content: <FormALuno />,
                             },
                             {
@@ -38,6 +39,7 @@ export const LoginPage = () => {
                                 subtitulo:
                                     "Insira suas credenciais para acessar seu portal do Orientador",
                                 to: "/cadastro?Tab=Professor",
+                                toRecuperarSenha: "orientador",
                                 content: <FormOrientador />,
                             },
                             {
@@ -46,6 +48,7 @@ export const LoginPage = () => {
                                 titulo: "Login da empresa",
                                 subtitulo: "Insira suas credenciais para acessar seu portal da Empresa",
                                 to: "/cadastro?Tab=Empresa",
+                                toRecuperarSenha: "empresa",
                                 content: <FormEmpresa />,
                             },
                             {
@@ -55,6 +58,7 @@ export const LoginPage = () => {
                                 subtitulo:
                                     "Insira suas credenciais para acessar seu portal do Visitante",
                                 to: "/cadastro?Tab=Visitante",
+                                toRecuperarSenha: "visitante",
                                 content: <FormVisitante />,
                             },
                         ]}

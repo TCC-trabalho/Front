@@ -37,6 +37,10 @@ const routes = createBrowserRouter([
                         path: "cadastro",
                         element: <Paginas.Auth.CadastroPage />,
                     },
+                    {
+                        path: "recuperar-senha",
+                        element: <Paginas.RecuperarSenhaPage />,
+                    }
                 ],
             },
             {

@@ -21,8 +21,6 @@ export const useFormOrientador = () => {
             nome: valores.nome,
             nomeUsuario: valores.nomeUser,
             biografia: "",
-            cpf: valores.cpf.replace(/\D/g, ""),
-            rg: valores.rg.replace(/\D/g, ""),
             email: valores.email,
             telefone: valores.telefone.replace(/\D/g, ""),
             formacao: valores.formacao,
@@ -36,7 +34,7 @@ export const useFormOrientador = () => {
             toast.success("Cadastro realizado com sucesso!", { id: toastId })
 
             reset()
-            navigate("/login")
+            navigate("/login?Tab=Professor")
         } catch {
             toast.error("Erro ao cadastrar. Verifique os dados.", { id: toastId })
         }

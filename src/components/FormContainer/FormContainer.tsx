@@ -5,7 +5,11 @@ import { FormContainerProps } from "./FormContainer.type"
 import { Button } from "../Button/Button"
 import { useSearchParams } from "react-router"
 
-export const FormContainer = ({ variante = "login", tabs = [], ...props }: FormContainerProps) => {
+export const FormContainer = ({
+    variante = "login",
+    tabs = [],
+    ...props
+}: FormContainerProps) => {
     const [searchParams, setSearchParams] = useSearchParams()
     const tabParam = searchParams.get("Tab")
 
@@ -47,15 +51,33 @@ export const FormContainer = ({ variante = "login", tabs = [], ...props }: FormC
                 width={"80%"}
             >
                 {selectedTab?.content}
-                <Button
-                    tamanho={"md"}
-                    variante="ButtonLink"
-                    sx={{ width: "auto" }}
-                    to={selectedTab.to}
-                    viewTransition
+                <Stack
+                    direction="row"
+                    spacing={2}
+                    justifyContent={"center"}
                 >
-                    {variante == "login" ? <>Criar minha conta</> : <>Já possui uma conta?</>}
-                </Button>
+                    {variante == "login" && (
+                        <>
+                            <Button
+                                tamanho={"md"}
+                                variante="ButtonLink"
+                                to={`/recuperar-senha?User=${selectedTab.toRecuperarSenha}`}
+                                viewTransition
+                            >
+                                Esqueci minha senha
+                            </Button>
+                            <Typography variant="overline">-</Typography>
+                        </>
+                    )}
+                    <Button
+                        tamanho={"md"}
+                        variante="ButtonLink"
+                        to={selectedTab.to}
+                        viewTransition
+                    >
+                        {variante == "login" ? <>Criar minha conta</> : <>Já possui uma conta?</>}
+                    </Button>
+                </Stack>
             </Stack>
 
             <Typography

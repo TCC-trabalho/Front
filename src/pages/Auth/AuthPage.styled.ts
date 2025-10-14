@@ -6,15 +6,11 @@ export const Container = styled(Stack)(() => ({
 }))
 
 export const Content = styled(Stack)(({ theme }) => ({
-    minHeight: "90vh",
+    minHeight: "100vh",
     padding: "40px 30%",
     position: "relative",
     backgroundImage: "linear-gradient(#6B9EBD, #0C79B0)",
     overflow: "hidden",
-
-    [theme.breakpoints.down("xl")]: {
-        minHeight: "100vh",
-    },
 
     [theme.breakpoints.down("lg")]: {
         padding: "40px 25%",
@@ -54,6 +50,7 @@ export const FormBoxLogin = styled(Stack)(({ theme }) => ({
     [theme.breakpoints.down("xl")]: {
         width: "90%",
     },
+
 }))
 
 export const FormBoxCadastro = styled(Stack)(() => ({

@@ -34,7 +34,7 @@ export const useFormEmpresa = () => {
             toast.success("Cadastro da empresa realizado com sucesso!", { id: toastId })
 
             reset()
-            navigate("/login")
+            navigate("/login?Tab=Empresa")
         } catch {
             toast.error("Erro ao cadastrar. Verifique os dados.", { id: toastId })
         }

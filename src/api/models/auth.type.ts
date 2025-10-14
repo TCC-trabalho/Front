@@ -25,8 +25,6 @@ export type CadastroProfessor = {
     nome: string
     nomeUsuario: string
     biografia: string
-    cpf: string
-    rg: string
     email: string
     telefone: string
     formacao: string

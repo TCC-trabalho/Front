@@ -63,28 +63,6 @@ export const FormOrientador = () => {
                     fullWidth
                     disabled={isPending}
                 />
-
-                <Input
-                    placeholder="Digite seu CPF"
-                    control={control}
-                    name={"cpf"}
-                    tamanho={"sm"}
-                    label="CPF"
-                    mask="999.999.999-99"
-                    fullWidth
-                    disabled={isPending}
-                />
-
-                <Input
-                    placeholder="Digite seu RG"
-                    control={control}
-                    name={"rg"}
-                    tamanho={"sm"}
-                    label="RG"
-                    mask="99.999.999-9"
-                    fullWidth
-                    disabled={isPending}
-                />
             </Stack>
 
             <Input

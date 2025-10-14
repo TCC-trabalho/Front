@@ -51,7 +51,7 @@ export const useFormAluno = () => {
             toast.success("Cadastro realizado com sucesso!", { id: toastId })
 
             reset()
-            navigate("/login")
+            navigate("/login?Tab=Aluno")
         } catch {
             toast.error("Erro ao cadastrar. Verifique os dados.", { id: toastId })
         }

@@ -9,6 +9,7 @@ export interface InputProps<TFieldValues extends FieldValues>
     Icon?: LucideIcon
     label?: string
     mask?: string
+    onlyOneDigit?: boolean
 }
 
 export interface EstiloInput extends Omit<InputBaseProps, "error"> {
