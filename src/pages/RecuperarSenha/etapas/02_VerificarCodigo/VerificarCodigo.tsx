@@ -12,6 +12,8 @@ export const VerificarCodigo = () => {
         refs,
         digits,
         handleReenviarCodigo,
+        isReenviandoCodigo,
+        isValidandoCodigo,
     } = useVerificarCodigo()
 
     return (
@@ -32,6 +34,7 @@ export const VerificarCodigo = () => {
                         onChange={(e) => handleChange(i, e.target.value)}
                         onKeyDown={(e) => handleKey(e, i)}
                         onPaste={handlePaste}
+                        disabled={isReenviandoCodigo || isValidandoCodigo}
                         inputProps={{
                             inputMode: "numeric",
                             maxLength: 1,
@@ -58,6 +61,8 @@ export const VerificarCodigo = () => {
                     type="submit"
                     variante="ButtonBlue"
                     tamanho="md"
+                    disabled={isReenviandoCodigo}
+                    loading={isValidandoCodigo}
                 >
                     Verificar Código
                 </Button>
@@ -65,6 +70,8 @@ export const VerificarCodigo = () => {
                     tamanho="sm"
                     variante="ButtonLink"
                     onClick={handleReenviarCodigo}
+                    disabled={isValidandoCodigo}
+                    loading={isReenviandoCodigo}
                 >
                     Reenviar Código
                 </Button>

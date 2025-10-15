@@ -17,6 +17,18 @@ export const RecuperarSenhaPage = () => {
         return <VerificarEmail />
     }
 
+    const tituloStep = () => {
+        if (step.includes("VerificaCodigo")) return "Verificar Código"
+        if (step.includes("TrocarSenha")) return "Trocar Senha"
+        return "Verificar Email"
+    }
+
+    const descricaoStep = () => {
+        if (step.includes("VerificaCodigo")) return "Insira o código enviado para seu email"
+        if (step.includes("TrocarSenha")) return "Insira sua nova senha"
+        return "Insira seu email para receber o código de verificação"
+    }
+
     return (
         <Styled.Container>
             <Styled.Content>
@@ -31,8 +43,8 @@ export const RecuperarSenhaPage = () => {
             <Styled.FormBoxLogin>
                 <Component.FormWrapper>
                     <Stack className="FormHeader">
-                        <Typography variant="h4">Recuperar Senha</Typography>
-                        <Typography>Siga os passos para recuperar sua senha</Typography>
+                        <Typography variant="h4">{tituloStep()}</Typography>
+                        <Typography>{descricaoStep()}</Typography>
                     </Stack>
                     {renderStep()}
                 </Component.FormWrapper>

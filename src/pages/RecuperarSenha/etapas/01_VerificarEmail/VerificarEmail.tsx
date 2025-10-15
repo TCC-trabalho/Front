@@ -4,7 +4,7 @@ import { Button } from "../../../../components/Button/Button"
 import { useVerificarEmail } from "./VerificarEmail.hook"
 
 export const VerificarEmail = () => {
-    const { control, onSubmit } = useVerificarEmail()
+    const { control, onSubmit, isEnviandoCodigo } = useVerificarEmail()
 
     return (
         <>
@@ -19,6 +19,7 @@ export const VerificarEmail = () => {
                     label="E-mail"
                     name="email"
                     type="email"
+                    disabled={isEnviandoCodigo}
                     placeholder="Digite seu e-mail"
                     tamanho="md"
                 />
@@ -27,6 +28,7 @@ export const VerificarEmail = () => {
                     tamanho="md"
                     variante="ButtonBlue"
                     type="submit"
+                    loading={isEnviandoCodigo}
                 >
                     Enviar
                 </Button>

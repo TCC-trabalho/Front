@@ -3,9 +3,8 @@ import { Input } from "../../../../components/Input/Input"
 import { Button } from "../../../../components/Button/Button"
 import { useTrocarSenha } from "./TrocarSenha.hook"
 
-
 export const TrocarSenha = () => {
-    const { control, onSubmit } = useTrocarSenha()
+    const { control, onSubmit, isRedefinindoSenha } = useTrocarSenha()
 
     return (
         <Stack
@@ -20,6 +19,7 @@ export const TrocarSenha = () => {
                 label="Nova Senha"
                 type="password"
                 tamanho="md"
+                disabled={isRedefinindoSenha}
             />
             <Input
                 control={control}
@@ -27,12 +27,14 @@ export const TrocarSenha = () => {
                 type="password"
                 label="Confirmar Nova Senha"
                 tamanho="md"
+                disabled={isRedefinindoSenha}
             />
 
             <Button
                 tamanho="md"
                 variante="ButtonBlue"
                 type="submit"
+                loading={isRedefinindoSenha}
             >
                 Redefinir Senha
             </Button>

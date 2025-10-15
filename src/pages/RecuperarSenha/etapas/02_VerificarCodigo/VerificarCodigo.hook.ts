@@ -4,9 +4,10 @@ import { CodigoRecuperacaoSchema } from "../../RecuperarSenha.schema"
 import { useRef, useState } from "react"
 import { toast } from "sonner"
 import { useNavigate, useSearchParams } from "react-router"
+import { useEnviarCodigo, useValidarCodigo } from "../../../../api/controllers/recuperarSenha"
+import { Enum } from "../../../../api/enum/enum"
 
 export const useVerificarCodigo = () => {
-
     const [params] = useSearchParams()
     const tipoUser = params.get("User")
     const email = params.get("Email")
@@ -22,7 +23,6 @@ export const useVerificarCodigo = () => {
         resolver: yupResolver(CodigoRecuperacaoSchema),
         defaultValues: { codigo: "" },
     })
-
 
     const refs = useRef<HTMLInputElement[]>([])
     const [digits, setDigits] = useState(Array(4).fill(""))
@@ -63,13 +63,19 @@ export const useVerificarCodigo = () => {
         refs.current[Math.min(text.length - 1, 3)]?.focus()
     }
 
-    const onSubmit = handleSubmit((data) => {
-        console.log(data)
-        navigate(`/recuperar-senha?step=TrocarSenha&User=${tipoUser}&Email=${email}`)
+    const { mutateAsync: reenviarCodigo, isPending: isReenviandoCodigo } = useEnviarCodigo()
+
+    const { mutateAsync: validarCodigo, isPending: isValidandoCodigo } = useValidarCodigo()
+
+    const onSubmit = handleSubmit(async (data) => {
+        await validarCodigo({ codigo: data.codigo, email: email! })
+        navigate(
+            `/recuperar-senha?step=TrocarSenha&User=${tipoUser}&Email=${email}&Codigo=${data.codigo}`
+        )
     })
 
-    const handleReenviarCodigo = () => {
-        console.log("reenviar codigo")
+    const handleReenviarCodigo = async () => {
+        await reenviarCodigo({ email: email!, tipo_user: tipoUser as Enum.TipoUsuario })
         toast.success("Código reenviado com sucesso!")
     }
 
@@ -82,5 +88,7 @@ export const useVerificarCodigo = () => {
         refs,
         digits,
         handleReenviarCodigo,
+        isReenviandoCodigo,
+        isValidandoCodigo,
     }
 }
