@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Copy, HandCoins } from "lucide-react"
 import { Button } from "../../../../../../components/Button/Button"
 import { Modal } from "../../../../../../components/Modal"
@@ -73,8 +74,14 @@ export const PagarPorPix = ({ open, onClose, data }: PagarPorPixProps) => {
                         setQrBase64(response.qr_base64)
                         setQrText(response.qr_text)
                     }
-                } catch {
-                    toast.error("Erro ao gerar pagamento PIX:")
+                } catch (err: any) {
+                    // tenta extrair mensagem da API
+                    const msg =
+                        err?.response?.data?.erro ||
+                        err?.response?.data?.message ||
+                        "Falha ao gerar pagamento PIX."
+                    toast.error(msg)
+                    onClose() // fecha o modal
                 }
             }
         }
