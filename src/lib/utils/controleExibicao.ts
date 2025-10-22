@@ -16,6 +16,7 @@ export const useControleExibicao = () => {
         if (path.includes("/chat")) return "Chat"
         if (path.includes("/meu-perfil")) return "Meu Perfil"
         if (path.includes("/configuracoes")) return "Configurações da conta"
+        if (path.includes("/termos-de-uso")) return "Termos de Uso"
 
         return "Conectando ideias a oportunidades"
     }
@@ -32,6 +33,7 @@ export const useControleExibicao = () => {
         "/detalhes-empresa/",
         "/configuracoes",
         "/solicitar-apoio",
+        "/termos-de-uso",
     ]
 
     const ocultarDetalhes = [
@@ -41,6 +43,7 @@ export const useControleExibicao = () => {
         "/editar-empresa/",
         "/apoiar-projeto/",
         "/solicitar-apoio",
+        "/termos-de-uso",
     ]
 
     const exibirSugestao = !ocultarRotas.some((rota) => path.includes(rota))

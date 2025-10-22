@@ -183,8 +183,8 @@ export const DetalhesProjeto = () => {
                     )
                 })}
                 <Stack
-                    direction={"row"}
-                    gap={1}
+                    direction={{ xs: "column", md: "row" }}
+                    gap={{ xs: 2, md: 0 }}
                 >
                     <Button
                         variante="ButtonOutlinedBlue"
@@ -210,7 +210,7 @@ export const DetalhesProjeto = () => {
                                 Editar
                             </Button>
                             <Stack
-                                direction={"row"}
+                                direction={{ xs: "column", md: "row" }}
                                 justifyContent={"flex-end"}
                                 width={"100%"}
                             >

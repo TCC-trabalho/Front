@@ -17,6 +17,7 @@ import { EditarGrupo } from "../pages/PlataForma/pages/Projetos/pages/DetalhesPr
 import { EditarProjeto } from "../pages/PlataForma/pages/Projetos/pages/DetalhesProjeto/pages/EditarProjeto/EditarProjeto"
 import { Projetos } from "../pages/PlataForma/pages/Projetos/Projetos"
 import { SolicitarApoio } from "../pages/PlataForma/pages/SolicitarApoio/SolicitarApoio"
+import { TermosDeUso } from "../pages/PlataForma/pages/TermosDeUso/TermosDeUso"
 import { RecuperarSenhaPage } from "../pages/RecuperarSenha/RecuperarSenha"
 import { TelaEmManutencao } from "../pages/TelaEmManutencao/TelaEmManutencao"
 import { TelaErro } from "../pages/TelaErro/TelaErro"
@@ -32,6 +33,7 @@ export const Paginas = {
     },
     RecuperarSenhaPage,
     Plataforma: {
+        TermosDeUso,
         ProjetosPage: { 
             Projetos,
             DetalhesProjeto,

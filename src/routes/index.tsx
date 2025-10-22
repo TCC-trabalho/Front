@@ -127,6 +127,10 @@ const routes = createBrowserRouter([
                                 path: "configuracoes",
                                 element: <Paginas.Plataforma.Configuracoes />,
                             },
+                            {
+                                path: "termos-de-uso",
+                                element: <Paginas.Plataforma.TermosDeUso />,
+                            },
                         ],
                     },
                     {

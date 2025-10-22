@@ -85,8 +85,61 @@ export const Configuracoes = () => {
                             retornarSomenteId
                         />
                     </Stack>
-
                 </Card>
+
+                <Stack
+                    gap={2}
+                    sx={{
+                        bgcolor: "#fff",
+                        p: 2,
+                        borderRadius: 1,
+                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                    }}
+                >
+                    <Stack gap={1}>
+                        <Typography
+                            variant="h6"
+                            color="#064B72"
+                        >
+                            {statusConta?.vinculado ? "Conta vinculada" : "Vincular Conta Bancária"}
+                        </Typography>
+
+                        <Typography>
+                            {statusConta?.vinculado
+                                ? `Sua conta está vinculada desde ${format(
+                                      new Date(statusConta.data_vinculo!),
+                                      "dd/MM/yyyy"
+                                  )}`
+                                : "Vincule sua conta Mercado Pago para receber pagamentos."}
+                        </Typography>
+
+                        <Button
+                            tamanho="md"
+                            variante="ButtonBlue"
+                            ladoIcon="direita"
+                            icon={Handshake}
+                            sx={{
+                                width: {
+                                    xs: "100%",
+                                    md: "35%",
+                                },
+                            }}
+                            onClick={handleConectarConta}
+                            loading={isLoadingStatus || isLoadingConectar}
+                        >
+                            {statusConta?.vinculado ? "Reevincular Conta" : "Vincular Conta"}
+                        </Button>
+                    </Stack>
+
+                    <Stack gap={1}>
+                        <Typography sx={{ fontWeight: "bold" }}>NOTA</Typography>
+                        <Typography>
+                            Você precisa habilitar sua conta Mercado Pago para gerar QR Codes para
+                            receber os apoios. Ative o recurso de vendas com QR no app Mercado Pago → Seu
+                            Negócio → Cobrar com QR Code, e depois faça/refaça a vinculação.
+                        </Typography>
+                    </Stack>
+                </Stack>
 
                 <Stack
                     gap={1.5}
@@ -99,36 +152,27 @@ export const Configuracoes = () => {
                 >
                     <Typography
                         variant="h6"
-                        color="#064B72"
+                        color="#000"
                     >
-                        {statusConta?.vinculado ? "Conta vinculada" : "Vincular Conta Bancária"}
+                        Termos de Uso
                     </Typography>
 
-                    <Typography>
-                        {statusConta?.vinculado
-                            ? `Sua conta está vinculada desde ${format(
-                                  new Date(statusConta.data_vinculo!),
-                                  "dd/MM/yyyy"
-                              )}`
-                            : "Vincule sua conta Mercado Pago para receber pagamentos."}
+                    <Typography color="grey">
+                        Leia os termos de uso antes de qualquer ação.
                     </Typography>
 
                     <Button
                         tamanho="md"
-                        variante="ButtonBlue"
-                        ladoIcon="direita"
-                        icon={Handshake}
+                        variante="ButtonGrey"
                         sx={{
                             width: {
                                 xs: "100%",
                                 md: "25%",
                             },
                         }}
-                        onClick={handleConectarConta}
-                        loading={isLoadingStatus || isLoadingConectar}
-                        disabled={statusConta?.vinculado}
+                        to="/plataforma-nexus/termos-de-uso"
                     >
-                        Vincular Conta
+                        Ler termos de uso
                     </Button>
                 </Stack>
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
     useObterProjetoPorId,
     useVincularGestorFinanceiro,
@@ -26,7 +27,6 @@ export const useDetalhesProjeto = () => {
 
     const alunoEhIntegrante =
         tipoUser === "aluno" &&
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         data?.grupo?.integrantes?.some((integrante: any) => integrante.id_aluno === idAluno)
 
     const projetoEhDoOrientador = tipoUser === "orientador" && data?.id_orientador === idOrientador
@@ -43,8 +43,12 @@ export const useDetalhesProjeto = () => {
                 tipo_usuario: user.aluno?.tipoUser ?? user.orientador?.tipoUser ?? null,
             })
             toast.success("Vinculado como gestor financeiro com sucesso")
-        } catch {
-            toast.error("Erro ao vincular gestor financeiro")
+        } catch (err: any) {
+            const msg =
+                err?.response?.data?.erro ||
+                err?.response?.data?.message ||
+                "Erro ao vincular gestor financeiro"
+            toast.error(msg)
         }
     }
 
