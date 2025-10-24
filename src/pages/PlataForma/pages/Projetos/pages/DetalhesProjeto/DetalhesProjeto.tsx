@@ -184,7 +184,7 @@ export const DetalhesProjeto = () => {
                 })}
                 <Stack
                     direction={{ xs: "column", md: "row" }}
-                    gap={{ xs: 2, md: 0 }}
+                    gap={{ xs: 2, md: 2 }}
                 >
                     <Button
                         variante="ButtonOutlinedBlue"
